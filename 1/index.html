@@ -19,7 +19,7 @@
   <script>
     // Current page data
     var mkdocs_page_name = "1 Intro a Python";
-    var mkdocs_page_input_path = "intro_python.md";
+    var mkdocs_page_input_path = "1.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -301,35 +301,35 @@
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../trabajando_data/">2 Trabajando con Data</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../2/">2 Trabajando con Data</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../org_programa/">3 Organización de un Programa</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../3/">3 Organización de un Programa</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../clases_y_objetos/">4 Clases y Objetos</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../4/">4 Clases y Objetos</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../adentro_del_objeto/">5 Adentro de un objeto</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../5/">5 Adentro de un objeto</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../generadores/">6 Generadores</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../6/">6 Generadores</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../temas_avanzados/">7 Temas avanzados</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../7/">7 Temas avanzados</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../prueba_y_depuracion/">8 Prueba y Depuración</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../8/">8 Prueba y Depuración</a>
                     </li>
                 </ul>
                 <ul>
-                    <li class="toctree-l1"><a class="reference internal" href="../paquetes/">9 Paquetes</a>
+                    <li class="toctree-l1"><a class="reference internal" href="../9/">9 Paquetes</a>
                     </li>
                 </ul>
       </div>
@@ -504,7 +504,7 @@ print('hola mundo')
 <p>Puede crear estos archivos con su editor de texto favorito.</p>
 <h3 id="124-ejecutando-programas">1.2.4: Ejecutando programas</h3>
 <p>Para ejecutar un programa, ejecútelo en la terminal con el comando python. Por ejemplo, en la línea de comandos Unix:</p>
-<pre><code class="language-sh">$ python hola.py
+<pre><code class="language-shell">$ python hola.py
 hola mundo
 $
 </code></pre>
@@ -538,7 +538,7 @@ print('Número de facturas', num_billetes)
 print('Altura final', num_billetes * billete_grosor)
 </code></pre>
 <p>Cuando lo ejecuta, obtiene el siguiente resultado:</p>
-<pre><code class="language-sh">$ python3 sears.py
+<pre><code class="language-shell">$ python3 sears.py
 1 1 0.00011
 2 2 0.00022
 3 4 0.00044
@@ -592,7 +592,7 @@ altura2 = 442 # válido
 <p>Las variables no necesitan declararse con el tipo de valor. El tipo está asociado con el valor del lado derecho, no con el nombre de la variable.</p>
 <pre><code class="language-python">altura = 442            # Un número entero
 altura = 442.0          # Punto flotante
-height = 'Muy alto'  # Una cadena
+height = 'Muy alto'     # Una cadena
 </code></pre>
 <p>Python se escribe dinámicamente. El "tipo" percibido de una variable puede cambiar a medida que se ejecuta un programa en función del valor actual que se le asigna.</p>
 <h3 id="1210-casos-sensitivos">1.2.10: Casos Sensitivos</h3>
@@ -617,7 +617,7 @@ print('Numero de dias', dia)
 <p>Las declaraciones con sangría debajo del <code>while</code> se ejecutarán siempre que la expresión posterior al <code>while</code> sea verdadera / cierta.</p>
 <h3 id="1212-sangrias-las-de-texto-no-las-de-vino">1.2.12: Sangrías (las de texto, no las de vino)</h3>
 <p>La sangría se usa para denotar grupos de declaraciones que van juntas. Considere el ejemplo anterior:</p>
-<pre><code class="language-py">while num_billetes * billete_grosor &lt; sears_altura:
+<pre><code class="language-python">while num_billetes * billete_grosor &lt; sears_altura:
     print(dia, num_billetes, num_billetes * billete_grosor)
     dia = dia + 1
     num_billetes = num_billetes * 2
@@ -625,7 +625,7 @@ print('Numero de dias', dia)
 print('Numero de dias', dia)
 </code></pre>
 <p>La sangría agrupa las siguientes declaraciones juntas como las operaciones que se repiten:</p>
-<pre><code class="language-py">    print(dia, num_billetes, num_billetes * billete_grosor)
+<pre><code class="language-python">    print(dia, num_billetes, num_billetes * billete_grosor)
     dia = dia + 1
     num_billetes = num_billetes * 2
 </code></pre>
@@ -637,20 +637,20 @@ print('Numero de dias', dia)
 <li>Utilice un editor compatible con Python.</li>
 </ul>
 <p>El único requisito de Python es que la sangría dentro del mismo bloque sea consistente. Por ejemplo, esto es un error:</p>
-<pre><code class="language-py">while num_billetes * billete_grosor &lt; sears_altura:
+<pre><code class="language-python">while num_billetes * billete_grosor &lt; sears_altura:
     print(dia, num_billetes, num_billetes * billete_grosor)
         dia = dia + 1  # error
     num_billetes = num_billetes * 2
 </code></pre>
 <h3 id="1213-condicionales">1.2.13: Condicionales</h3>
 <p>La instrucción if se usa para ejecutar un condicional:</p>
-<pre><code class="language-py">if a &gt; b:
+<pre><code class="language-python">if a &gt; b:
     print('Computadora dice no')
 else:
     print('Computadora dice si')
 </code></pre>
 <p>Puede verificar múltiples condiciones agregando verificaciones adicionales usando elif.</p>
-<pre><code class="language-py">if a &gt; b:
+<pre><code class="language-python">if a &gt; b:
     print('Computadora dice no')
 elif a == b:
     print('Computadora dice si')
@@ -659,40 +659,40 @@ else:
 </code></pre>
 <h3 id="1214-imprimiendo">1.2.14: Imprimiendo</h3>
 <p>La función de impresión produce una sola línea de texto con los valores pasados.</p>
-<pre><code class="language-py">print('¡Hola mundo!') # Imprime el texto '¡Hola mundo!'
+<pre><code class="language-python">print('¡Hola mundo!') # Imprime el texto '¡Hola mundo!'
 </code></pre>
 <p>Puede utilizar variables. El texto impreso será el valor de la variable, no el nombre.</p>
-<pre><code class="language-py">x = 100
+<pre><code class="language-python">x = 100
 print(x) # Imprime el texto '100'
 </code></pre>
 <p>Si pasa más de un valor para imprimir, están separados por espacios.</p>
-<pre><code class="language-py">nombre = 'Jake'
+<pre><code class="language-python">nombre = 'Jake'
 print('Mi nombre es', nombre) # Imprime el texto 'Mi nombre es Jake'
 </code></pre>
-<p>print () siempre pone una nueva línea al final.</p>
-<pre><code class="language-py">print('Hola')
+<p><code>print()</code> siempre pone una nueva línea al final.</p>
+<pre><code class="language-python">print('Hola')
 print('Mi nombre es', 'Jake')
 </code></pre>
 <p>Esto imprime:</p>
-<p><code>sh
+<p><code>shell
 Hola
 Mi nombre es Jake</code></p>
 <p>La nueva línea adicional se puede suprimir:</p>
-<pre><code class="language-py">print('Hola', end = '')
+<pre><code class="language-python">print('Hola', end = '')
 print('Mi nombre es', 'Jake')
 </code></pre>
 <p>Este código ahora se imprimirá:</p>
-<pre><code class="language-sh">Hola mi nombre es Jake
+<pre><code class="language-shell">Hola mi nombre es Jake
 </code></pre>
 <h3 id="1215-input-dato-de-entrada-de-usuario">1.2.15: Input (dato de entrada) de usuario</h3>
 <p>Para leer una línea de entrada de usuario escrita, use la función <code>input()</code>:</p>
-<pre><code class="language-py">nombre = input('Ingrese su nombre:')
+<pre><code class="language-python">nombre = input('Ingrese su nombre:')
 print('Tu nombre es', nombre)
 </code></pre>
 <p><code>input</code> imprime un mensaje al usuario y devuelve su respuesta. Esto es útil para programas pequeños, ejercicios de aprendizaje o depuración simple. No se usa mucho para programas reales.</p>
 <h3 id="1216-la-declaracion-pass">1.2.16: La declaración "pass"</h3>
 <p>Sometimes you need to specify an empty code block. The keyword pass is used for it.</p>
-<pre><code>if a &gt; b:
+<pre><code class="language-python">if a &gt; b:
     pass
 else:
     print('Computer says false')
@@ -703,7 +703,7 @@ else:
 <h4 id="ejercicio-15-el-rebote">Ejercicio 1.5: El rebote</h4>
 <p>Una pelota de goma se deja caer desde una altura de 100 metros y cada vez que golpea el suelo, rebota hasta 3/5 de la altura a la que cayó. Escriba un programa <code>bounce.py</code> que imprima una tabla que muestre la altura de los primeros 10 rebotes.</p>
 <p>Su programa debería crear una tabla que se parezca a esto:</p>
-<pre><code>1 60,0
+<pre><code class="language-shell">1 60,0
 2 36,0
 3 21.599999999999998
 4 12.959999999999999
@@ -715,7 +715,7 @@ else:
 10 0.6046617599999998
 </code></pre>
 <p><em>Nota: Puede limpiar un poco la salida si usa la función <code>round()</code>. Intente usarlo para redondear la salida a 4 dígitos.</em></p>
-<pre><code class="language-sh">1 60,0
+<pre><code class="language-shell">1 60,0
 2 36,0
 3 21,6
 4 12,96
@@ -728,7 +728,7 @@ else:
 </code></pre>
 <h4 id="ejercicio-16-depuracion">Ejercicio 1.6: Depuración</h4>
 <p>El siguiente fragmento de código contiene código del problema de la torre Sears. También tiene un error.</p>
-<pre><code class="language-py">billete_grosor = 0.11 * 0.001 # Metros (0.11 mm)
+<pre><code class="language-python">billete_grosor = 0.11 * 0.001 # Metros (0.11 mm)
 sears_altura = 442 # Altura (metros)
 num_billetes = 1
 dia = 1
@@ -743,7 +743,7 @@ print ('Número de facturas', num_billetes)
 print ('Altura final', num_billetes * billete_grosor)
 </code></pre>
 <p>Copie y pegue el código que aparece arriba en un nuevo programa llamado <code>sears.py</code>. Cuando ejecute el código, obtendrá un mensaje de error que hace que el programa se bloquee de esta manera:</p>
-<pre><code class="language-sh">Traceback (most recent call last):
+<pre><code class="language-shell">Traceback (most recent call last):
   File &quot;sears.py&quot;, line 10, in &lt;module&gt;
     day = dias + 1
 NameError: name 'dias' is not defined
@@ -780,12 +780,12 @@ if d == 0:
 <li>Pero no escriba código como ese. Sería extraño. *</li>
 </ul>
 <h4 id="133-enteros-int">1.3.3: Enteros (int)</h4>
-<p>Valores firmados de tamaño y base arbitrarios:</p>
+<p>Valores firmados de tamaño y base arbitraria:</p>
 <pre><code class="language-python">a = 37
 b = -299392993727716627377128481812241231
 c = 0x7fa8      # Hexadecimal
 d = 0o253       # Octal
-e = 0b10001111  # Binary
+e = 0b10001111  # Binario
 </code></pre>
 <p>Operaciones comunes:</p>
 <pre><code>x + y      Suma
@@ -878,7 +878,7 @@ b = float(x)  # Convierte x a coma flotante
 <h3 id="137-ejercicios">1.3.7: Ejercicios</h3>
 <p>Recordatorio: Estos ejercicios asumen que está trabajando en el directorio <code>/Work</code>. Busque el archivo <code>mortgage.py</code>.</p>
 <h4 id="ejercicio-17-la-hipoteca-de-dave">Ejercicio 1.7: La hipoteca de Dave</h4>
-<p>Dave ha decidido sacar una hipoteca de tasa fija a 30 años de $ 500,000 con el comercio de hipotecas, inversiones en acciones y Bitcoin de Guido corporación. La tasa de interés es del 5% y el pago mensual es $ 2684,11.</p>
+<p>Dave ha decidido sacar una hipoteca de tasa fija a 30 años de <code>$500,000</code> con el comercio de hipotecas, inversiones en acciones y Bitcoin de Guido corporación. La tasa de interés es del 5% y el pago mensual es <code>$2684,11</code>.</p>
 <p>Aquí hay un programa que calcula la cantidad total que Dave tendrá para pagar durante la vida de la hipoteca:</p>
 <pre><code class="language-python"># mortgage.py
 
@@ -895,9 +895,9 @@ print('Total pagado', total_pagado)
 </code></pre>
 <p>Ingrese a este programa y ejecútelo. Debería obtener una respuesta de "966,279.6".</p>
 <h4 id="ejercicio-18-pagos-adicionales">Ejercicio 1.8: Pagos adicionales</h4>
-<p>Suponga que Dave paga $1000 adicionales al mes durante los primeros 12 meses de la hipoteca.</p>
+<p>Suponga que Dave paga <code>$1000</code> adicionales al mes durante los primeros 12 meses de la hipoteca.</p>
 <p>Modifique el programa para incorporar este pago adicional y haga que imprima el monto total pagado junto con la cantidad de meses requeridos.</p>
-<p>Cuando ejecute el nuevo programa, debería informar un pago total de "929,965.62" durante 342 meses.</p>
+<p>Cuando ejecute el nuevo programa, debería informar un pago total de <code>929,965.62</code> durante 342 meses.</p>
 <h4 id="ejercicio-19-hacer-una-calculadora-de-pago-adicional">Ejercicio 1.9: Hacer una calculadora de pago adicional</h4>
 <p>Modifique el programa para que la información de pago adicional pueda manejarse de manera más general.</p>
 <p>Hágalo de modo que el usuario pueda configurar estas variables:</p>
@@ -926,7 +926,7 @@ Meses 310
 <h4 id="ejercicio-111-bono">Ejercicio 1.11: Bono</h4>
 <p>Mientras lo hace, corrija el programa para corregir el pago en exceso que se produjo en el último mes.</p>
 <h4 id="ejercicio-112-un-misterio">Ejercicio 1.12: Un misterio</h4>
-<p><code>int ()</code> y <code>float ()</code> se pueden usar para convertir números.</p>
+<p><code>int()</code> y <code>float()</code> se pueden usar para convertir números.</p>
 <p>Por ejemplo:</p>
 <pre><code class="language-python">&gt;&gt;&gt; int(&quot;123&quot;)
 123
@@ -1231,7 +1231,7 @@ esta:</p>
 &gt;&gt;&gt; s.&lt;tab key&gt;
 &gt;&gt;&gt;
 </code></pre>
-<p>Si presionar tab no hace nada, puede volver al función incorporada <code>dir ()</code>. Por ejemplo:</p>
+<p>Si presionar tab no hace nada, puede volver al función incorporada <code>dir()</code>. Por ejemplo:</p>
 <pre><code class="language-python">&gt;&gt;&gt; s = 'hello'
 &gt;&gt;&gt; dir(s)
 ['__add__', '__class__', '__contains__', ..., 'find', 'format',
@@ -1242,7 +1242,7 @@ esta:</p>
 'title', 'translate', 'upper', 'zfill']
 &gt;&gt;&gt;
 </code></pre>
-<p><code>dir ()</code> produce una lista de todas las operaciones que pueden aparecer después de <code>(.)</code>. Utilice el comando <code>help ()</code> para obtener más información sobre una operación específica:</p>
+<p><code>dir()</code> produce una lista de todas las operaciones que pueden aparecer después de <code>(.)</code>. Utilice el comando <code>help()</code> para obtener más información sobre una operación específica:</p>
 <pre><code class="language-python">&gt;&gt;&gt; help(s.upper)
 Help on built-in function upper:
 
@@ -1475,7 +1475,7 @@ True
 ['YHOO', 'RHT', 'HPQ', 'GOOG', 'AIG', 'AAPL', 'AA']
 &gt;&gt;&gt;
 </code></pre>
-<p>Note: Sorting a list modifies its contents 'in-place'.  That is, the elements of the list are shuffled around, but no new list is created as a result.</p>
+<p>Nota: ordenar una lista modifica su contenido "en el lugar". Es decir, los elementos de la lista se mezclan, pero no se crea una nueva lista como resultado.</p>
 <h4 id="124-ajuntando-todo-nuevamente">1.24: Ajuntando todo nuevamente</h4>
 <p>¿Quiere tomar una lista de cadenas y unirlas en una sola cadena?
 Utilice el método <code>join ()</code> de cadenas como esta (nota: esto se ve gracioso al principio).</p>
@@ -1842,7 +1842,7 @@ bash %
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="../trabajando_data/" class="btn btn-neutral float-right" title="2 Trabajando con Data">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../2/" class="btn btn-neutral float-right" title="2 Trabajando con Data">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
         <a href="../faq/" class="btn btn-neutral" title="Preguntas"><span class="icon icon-circle-arrow-left"></span> Previous</a>
@@ -1874,7 +1874,7 @@ bash %
         <span><a href="../faq/" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="../trabajando_data/" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="../2/" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
