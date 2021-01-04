@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>2 Trabajando con Data - Python Práctico</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
+
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "2 Trabajando con Data";
+    var mkdocs_page_input_path = "trabajando_data.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python Práctico</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Sobre el curso</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../temario/">Temario</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../faq/">Preguntas</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../intro_python/">1 Intro a Python</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">2 Trabajando con Data</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#21-tipos-y-estructuras-de-datos">2.1 Tipos y estructuras de datos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#211-tipos-primitivos">2.1.1 Tipos primitivos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#212-tipos-primitivos">2.1.2: Tipos primitivos</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#213-el-tipo-none">2.1.3: El tipo None</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#214-estructuras-de-data">2.1.4: Estructuras de data</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#215-tuplas">2.1.5: Tuplas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#216-desempaque-de-tuplas">2.1.6: Desempaque de Tuplas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2176-tuplas-vs-listas">2.1.76 Tuplas vs Listas</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#218-diccionarios">2.1.8 Diccionarios</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#219-operaciones-comunes">2.1.9 Operaciones comunes</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2110-porque-diccionarios">2.1.10 ¿Porqué diccionarios?</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2111-diccionarios">2.1.11 Diccionarios</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#2112-ejercicios">2.1.12 Ejercicios</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-22-diccionarios-como-estructura-de-datos">Ejercicio 2.2: Diccionarios como estructura de datos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-23-otras-operaciones-adicionales">Ejercicio 2.3: Otras operaciones adicionales</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#22-contenedores">2.2 Contenedores</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#221-panorama">2.2.1: Panorama</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#122-listas-como-un-contenedor">1.2.2: Listas como un Contenedor</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#123-construccion-de-una-lista">1.2.3: Construcción de una lista</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#124-diccionarios-como-contenedores">1.2.4: Diccionarios como contenedores</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#125-construccion-de-un-diccionario">1.2.5: Construcción de un diccionario</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#126-busquedas-de-diccionario">1.2.6: Búsquedas de diccionario</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#127-claves-compuestas">1.2.7: Claves compuestas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#128-variables">1.2.8: Variables</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#129-conjuntos-sets">1.2.9: Conjuntos (Sets)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1210-ejercicios">1.2.10: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-24-una-lista-de-tuplas">Ejercicio 2.4: Una lista de tuplas</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-25-lista-de-diccionarios">Ejercicio 2.5: Lista de diccionarios</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-26-diccionarios-como-contenedor">Ejercicio 2.6: Diccionarios como contenedor</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-28-descubre-si-te-puedes-jubilar">Ejercicio 2.8: Descubre si te puedes jubilar</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#23-salida-formateada">2.3 Salida formateada</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#231-formateo-de-cadena">2.3.1: Formateo de cadena</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#232-codigos-de-formato">2.3.2: Códigos de formato</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#233-formateo-de-diccionarios">2.3.3: Formateo de diccionarios</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#234-el-metodo-format">2.3.4: El método format()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#235-formateo-al-estilo-c">2.3.5: Formateo al estilo C</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#236-ejercicios">2.3.6: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-28-como-formatear-numeros">Ejercicio 2.8: Como formatear numeros</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-29-coleccionando-data">Ejercicio 2.9: Coleccionando data</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-210-imprimiendo-una-tabla-formateada">Ejercicio 2.10: Imprimiendo una tabla formateada</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-211-agregando-algunos-encabezados">Ejercicio 2.11: Agregando algunos encabezados</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-212-un-reto">Ejercicio 2.12: Un reto</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#24-secuencias">2.4 Secuencias</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#241-tipos-de-secuencias">2.4.1: Tipos de secuencias</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#242-rebanar">2.4.2: Rebanar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#243-rebanar-y-reasignar">2.4.3: Rebanar y reasignar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#244-secuencia-de-reducciones">2.4.4: Secuencia de reducciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#245-iteracion-sobre-una-secuencia">2.4.5: Iteracion sobre una secuencia</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#246-la-declaracion-break">2.4.6: La declaración break</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#247-la-declaracion-continue">2.4.7: La declaración continue</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#248-ciclando-sobre-enteros">2.4.8: Ciclando sobre enteros</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#249-la-funcion-enumerate">2.4.9: La función enumerate()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2410-for-y-tuplas">2.4.10: For y tuplas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2411-la-funcion-zip">2.4.11: La función zip()</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2412-ejercicios">2.4.12: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-213-contar">Ejercicio 2.13: Contar</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-214-mas-operaciones-sobre-secuencias">Ejercicio 2.14: Mas operaciones sobre secuencias</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-215-un-ejemplo-practico-de-enumerate">Ejercicio 2.15: Un ejemplo práctico de enumerate()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-216-usando-la-funcion-zip">Ejercicio 2.16: Usando la función zip()</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-217-invirtiendo-un-diccionario">Ejercicio 2.17: Invirtiendo un diccionario</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#25-el-modulo-collections">2.5 El modulo collections</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#251-ejemplo-contando-cosas">2.5.1: Ejemplo: contando cosas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#252-contadores">2.5.2: Contadores</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#253-ejemplo-asignaciones-uno-muchos">2.5.3: Ejemplo: asignaciones uno-muchos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#254-ejemplo-guardando-un-historial">2.5.4: Ejemplo: guardando un historial</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#255-ejercicios">2.5.5: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#219-tabulacion-con-contadores">2.19: Tabulación con contadores</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#comentario-el-modulo-collections">Comentario: el modulo collections</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#26-list-comprehensions">2.6 List comprehensions</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#261-creando-nuevas-listas">2.6.1: Creando nuevas listas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#262-filtrar">2.6.2: Filtrar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#263-casos-de-uso">2.6.3: Casos de uso</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#264-sintaxis-general">2.6.4: Sintaxis general</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#265-digresion-historica">2.6.5: Digresión histórica</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#266-ejercicios">2.6.6: Ejercicios</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#219-list-comprehensions">2.19: List comprehensions</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#220-reducciones-de-secuencia">2.20: Reducciones de secuencia</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#221-consulta-de-datos">2.21: Consulta de datos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#222-extraccion-de-datos">2.22: Extracción de datos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#223-extraccion-de-datos-desde-archivos-csv">2.23: Extracción de datos desde archivos CSV</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#comentario">Comentario</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#27-el-modelo-objeto">2.7 El modelo Objeto</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#271-asignacion">2.7.1: Asignacion</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#272-ejemplo-de-asignacion">2.7.2: Ejemplo de asignacion</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#273-reasignacion-de-valores">2.7.3: Reasignacion de valores</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#274-algunos-peligros">2.7.4: Algunos peligros</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#275-identidad-y-referencias">2.7.5: Identidad y referencias</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#276-copias-superficiales">2.7.6: Copias superficiales</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#229-copias-profundas">2.29: Copias profundas</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#230-nombres-valores-tipos">2.30: Nombres, valores, tipos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#231-verificacion-de-tipo">2.31: Verificación de tipo</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#232-todo-es-un-objeto">2.32: Todo es un objeto</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#233-ejercicios">2.33: Ejercicios</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-224-data-de-primera-clase">Ejercicio 2.24: Data de primera-clase</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-225-creando-diccionarios">Ejercicio 2.25: Creando diccionarios</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-226-el-horizonte">Ejercicio 2.26: El horizonte</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    </ul>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../org_programa/">3 Organización de un Programa</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../clases_y_objetos/">4 Clases y Objetos</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../adentro_del_objeto/">5 Adentro de un objeto</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../generadores/">6 Generadores</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../temas_avanzados/">7 Temas avanzados</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../prueba_y_depuracion/">8 Prueba y Depuración</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../paquetes/">9 Paquetes</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python Práctico</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
+    
+      
+    
+    <li>2 Trabajando con Data</li>
+    <li class="wy-breadcrumbs-aside">
+      
+    </li>
+  </ul>
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
+              
+                <h1 id="2-trabajando-con-data">2. Trabajando con data</h1>
+<p>Conoceremos las estructuras de datos de fundamental importancia en Python: tuples, lists, sets y dictionaries. Presentaremos algunos patrones comunes para el manejo de datos y discutiremos el modelo de objetos en Python.</p>
+<h2 id="21-tipos-y-estructuras-de-datos">2.1 Tipos y estructuras de datos</h2>
+<h2 id="211-tipos-primitivos">2.1.1 Tipos primitivos</h2>
+<h2 id="212-tipos-primitivos">2.1.2: Tipos primitivos</h2>
+<h2 id="213-el-tipo-none">2.1.3: El tipo None</h2>
+<h2 id="214-estructuras-de-data">2.1.4: Estructuras de data</h2>
+<h2 id="215-tuplas">2.1.5: Tuplas</h2>
+<h2 id="216-desempaque-de-tuplas">2.1.6: Desempaque de Tuplas</h2>
+<h2 id="2176-tuplas-vs-listas">2.1.76 Tuplas vs Listas</h2>
+<h2 id="218-diccionarios">2.1.8 Diccionarios</h2>
+<h2 id="219-operaciones-comunes">2.1.9 Operaciones comunes</h2>
+<h2 id="2110-porque-diccionarios">2.1.10 ¿Porqué diccionarios?</h2>
+<h2 id="2111-diccionarios">2.1.11 Diccionarios</h2>
+<h2 id="2112-ejercicios">2.1.12 Ejercicios</h2>
+<h3 id="ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</h3>
+<h3 id="ejercicio-22-diccionarios-como-estructura-de-datos">Ejercicio 2.2: Diccionarios como estructura de datos</h3>
+<h3 id="ejercicio-23-otras-operaciones-adicionales">Ejercicio 2.3: Otras operaciones adicionales</h3>
+<h2 id="22-contenedores">2.2 Contenedores</h2>
+<h3 id="221-panorama">2.2.1: Panorama</h3>
+<h3 id="122-listas-como-un-contenedor">1.2.2: Listas como un Contenedor</h3>
+<h3 id="123-construccion-de-una-lista">1.2.3: Construcción de una lista</h3>
+<h3 id="124-diccionarios-como-contenedores">1.2.4: Diccionarios como contenedores</h3>
+<h3 id="125-construccion-de-un-diccionario">1.2.5: Construcción de un diccionario</h3>
+<h3 id="126-busquedas-de-diccionario">1.2.6: Búsquedas de diccionario</h3>
+<h3 id="127-claves-compuestas">1.2.7: Claves compuestas</h3>
+<h3 id="128-variables">1.2.8: Variables</h3>
+<h3 id="129-conjuntos-sets">1.2.9: Conjuntos (Sets)</h3>
+<h3 id="1210-ejercicios">1.2.10: Ejercicios</h3>
+<h4 id="ejercicio-24-una-lista-de-tuplas">Ejercicio 2.4: Una lista de tuplas</h4>
+<h4 id="ejercicio-25-lista-de-diccionarios">Ejercicio 2.5: Lista de diccionarios</h4>
+<h4 id="ejercicio-26-diccionarios-como-contenedor">Ejercicio 2.6: Diccionarios como contenedor</h4>
+<h4 id="ejercicio-28-descubre-si-te-puedes-jubilar">Ejercicio 2.8: Descubre si te puedes jubilar</h4>
+<h2 id="23-salida-formateada">2.3 Salida formateada</h2>
+<h3 id="231-formateo-de-cadena">2.3.1: Formateo de cadena</h3>
+<h3 id="232-codigos-de-formato">2.3.2: Códigos de formato</h3>
+<h3 id="233-formateo-de-diccionarios">2.3.3: Formateo de diccionarios</h3>
+<h3 id="234-el-metodo-format">2.3.4: El método format()</h3>
+<h3 id="235-formateo-al-estilo-c">2.3.5: Formateo al estilo C</h3>
+<h3 id="236-ejercicios">2.3.6: Ejercicios</h3>
+<h4 id="ejercicio-28-como-formatear-numeros">Ejercicio 2.8: Como formatear numeros</h4>
+<h4 id="ejercicio-29-coleccionando-data">Ejercicio 2.9: Coleccionando data</h4>
+<h4 id="ejercicio-210-imprimiendo-una-tabla-formateada">Ejercicio 2.10: Imprimiendo una tabla formateada</h4>
+<h4 id="ejercicio-211-agregando-algunos-encabezados">Ejercicio 2.11: Agregando algunos encabezados</h4>
+<h4 id="ejercicio-212-un-reto">Ejercicio 2.12: Un reto</h4>
+<hr />
+<h2 id="24-secuencias">2.4 Secuencias</h2>
+<h3 id="241-tipos-de-secuencias">2.4.1: Tipos de secuencias</h3>
+<h3 id="242-rebanar">2.4.2: Rebanar</h3>
+<h3 id="243-rebanar-y-reasignar">2.4.3: Rebanar y reasignar</h3>
+<h3 id="244-secuencia-de-reducciones">2.4.4: Secuencia de reducciones</h3>
+<h3 id="245-iteracion-sobre-una-secuencia">2.4.5: Iteracion sobre una secuencia</h3>
+<h3 id="246-la-declaracion-break">2.4.6: La declaración break</h3>
+<h3 id="247-la-declaracion-continue">2.4.7: La declaración continue</h3>
+<h3 id="248-ciclando-sobre-enteros">2.4.8: Ciclando sobre enteros</h3>
+<h3 id="249-la-funcion-enumerate">2.4.9: La función enumerate()</h3>
+<h3 id="2410-for-y-tuplas">2.4.10: For y tuplas</h3>
+<h3 id="2411-la-funcion-zip">2.4.11: La función zip()</h3>
+<h3 id="2412-ejercicios">2.4.12: Ejercicios</h3>
+<h4 id="ejercicio-213-contar">Ejercicio 2.13: Contar</h4>
+<h4 id="ejercicio-214-mas-operaciones-sobre-secuencias">Ejercicio 2.14: Mas operaciones sobre secuencias</h4>
+<h4 id="ejercicio-215-un-ejemplo-practico-de-enumerate">Ejercicio 2.15: Un ejemplo práctico de enumerate()</h4>
+<h4 id="ejercicio-216-usando-la-funcion-zip">Ejercicio 2.16: Usando la función zip()</h4>
+<h4 id="ejercicio-217-invirtiendo-un-diccionario">Ejercicio 2.17: Invirtiendo un diccionario</h4>
+<h2 id="25-el-modulo-collections">2.5 El modulo collections</h2>
+<h3 id="251-ejemplo-contando-cosas">2.5.1: Ejemplo: contando cosas</h3>
+<h3 id="252-contadores">2.5.2: Contadores</h3>
+<h3 id="253-ejemplo-asignaciones-uno-muchos">2.5.3: Ejemplo: asignaciones uno-muchos</h3>
+<h3 id="254-ejemplo-guardando-un-historial">2.5.4: Ejemplo: guardando un historial</h3>
+<h3 id="255-ejercicios">2.5.5: Ejercicios</h3>
+<h4 id="219-tabulacion-con-contadores">2.19: Tabulación con contadores</h4>
+<h4 id="comentario-el-modulo-collections">Comentario: el modulo collections</h4>
+<h2 id="26-list-comprehensions">2.6 List comprehensions</h2>
+<h3 id="261-creando-nuevas-listas">2.6.1: Creando nuevas listas</h3>
+<h3 id="262-filtrar">2.6.2: Filtrar</h3>
+<h3 id="263-casos-de-uso">2.6.3: Casos de uso</h3>
+<h3 id="264-sintaxis-general">2.6.4: Sintaxis general</h3>
+<h4 id="265-digresion-historica">2.6.5: Digresión histórica</h4>
+<h4 id="266-ejercicios">2.6.6: Ejercicios</h4>
+<h4 id="219-list-comprehensions">2.19: List comprehensions</h4>
+<h4 id="220-reducciones-de-secuencia">2.20: Reducciones de secuencia</h4>
+<h4 id="221-consulta-de-datos">2.21: Consulta de datos</h4>
+<h4 id="222-extraccion-de-datos">2.22: Extracción de datos</h4>
+<h4 id="223-extraccion-de-datos-desde-archivos-csv">2.23: Extracción de datos desde archivos CSV</h4>
+<h4 id="comentario">Comentario</h4>
+<h2 id="27-el-modelo-objeto">2.7 El modelo Objeto</h2>
+<h3 id="271-asignacion">2.7.1: Asignacion</h3>
+<h3 id="272-ejemplo-de-asignacion">2.7.2: Ejemplo de asignacion</h3>
+<h3 id="273-reasignacion-de-valores">2.7.3: Reasignacion de valores</h3>
+<h3 id="274-algunos-peligros">2.7.4: Algunos peligros</h3>
+<h3 id="275-identidad-y-referencias">2.7.5: Identidad y referencias</h3>
+<h3 id="276-copias-superficiales">2.7.6: Copias superficiales</h3>
+<h4 id="229-copias-profundas">2.29: Copias profundas</h4>
+<h4 id="230-nombres-valores-tipos">2.30: Nombres, valores, tipos</h4>
+<h4 id="231-verificacion-de-tipo">2.31: Verificación de tipo</h4>
+<h4 id="232-todo-es-un-objeto">2.32: Todo es un objeto</h4>
+<h4 id="233-ejercicios">2.33: Ejercicios</h4>
+<h4 id="ejercicio-224-data-de-primera-clase">Ejercicio 2.24: Data de primera-clase</h4>
+<h4 id="ejercicio-225-creando-diccionarios">Ejercicio 2.25: Creando diccionarios</h4>
+<h4 id="ejercicio-226-el-horizonte">Ejercicio 2.26: El horizonte</h4>
+              
+            </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../org_programa/" class="btn btn-neutral float-right" title="3 Organización de un Programa">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../intro_python/" class="btn btn-neutral" title="1 Intro a Python"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+      
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+      
+      
+        <span><a href="../intro_python/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../org_programa/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
