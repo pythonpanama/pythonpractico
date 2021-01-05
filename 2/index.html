@@ -926,17 +926,199 @@ False
 <h4 id="ejercicio-27-descubra-se-puede-jubilar">Ejercicio 2.7: Descubra se puede jubilar</h4>
 <p>Complete este trabajo agregando algunas declaraciones adicionales a su programa <code>report.py</code> que calculen ganancias / pérdidas. Estas declaraciones deben tomar la lista de acciones del ejercicio 2.5 y el diccionario de precios del ejercicio 2.6 y calcular el valor actual de la cartera junto con la ganancia / pérdida.</p>
 <h2 id="23-salida-formateada">2.3 Salida formateada</h2>
+<p>Esta sección es una pequeña digresión, pero cuando trabaja con datos, a menudo desea producir resultados estructurados (tablas, etc.). Por ejemplo:</p>
+<pre><code>      Name      Shares        Price
+----------  ----------  -----------
+        AA         100        32.20
+       IBM          50        91.10
+       CAT         150        83.44
+      MSFT         200        51.23
+        GE          95        40.37
+      MSFT          50        65.10
+       IBM         100        70.44
+</code></pre>
 <h3 id="231-formateo-de-cadena">2.3.1: Formateo de cadena</h3>
+<p>Una forma de formatear cadenas en Python 3.6+ es con f-strings.</p>
+<pre><code class="language-python">&gt;&gt;&gt; name = 'IBM'
+&gt;&gt;&gt; shares = 100
+&gt;&gt;&gt; price = 91.1
+&gt;&gt;&gt; f'{name:&gt;10s} {shares:&gt;10d} {price:&gt;10.2f}'
+' IBM 100 91.10'
+&gt;&gt;&gt;
+</code></pre>
+<p>La pieza <code>{expression:format}</code> se reemplaza.</p>
+<p>Se usa comúnmente con print.</p>
+<pre><code class="language-python">print(f'{name:&gt;10s} {shares:&gt;10d} {price:&gt;10.2f}')
+</code></pre>
 <h3 id="232-codigos-de-formato">2.3.2: Códigos de formato</h3>
+<p>Códigos de formato (después de que el :interior de la {}) son similares a C printf(). Los códigos comunes incluyen:</p>
+<pre><code>d       Decimal integer
+b       Binary integer
+x       Hexadecimal integer
+f       Float as [-]m.dddddd
+e       Float as [-]m.dddddde+-xx
+g       Float, but selective use of E notation
+s       String
+c       Character (from integer)
+</code></pre>
+<p>Los modificadores comunes ajustan el ancho del campo y la precisión decimal. Esta es una lista parcial:</p>
+<pre><code>:&gt;10d   Integer right aligned in 10-character field
+:&lt;10d   Integer left aligned in 10-character field
+:^10d   Integer centered in 10-character field
+:0.2f   Float with 2 digit precision
+</code></pre>
 <h3 id="233-formateo-de-diccionarios">2.3.3: Formateo de diccionarios</h3>
+<p>Puede utilizar el format_map()método para aplicar formato de cadena a un diccionario de valores:</p>
+<pre><code>&gt;&gt;&gt; s = {
+    'name': 'IBM',
+    'shares': 100,
+    'price': 91.1
+}
+&gt;&gt;&gt; '{name:&gt;10s} {shares:10d} {price:10.2f}'.format_map(s)
+' IBM 100 91.10'
+&gt;&gt;&gt;
+</code></pre>
+<p>Utiliza los mismos códigos que f-stringspero toma los valores del diccionario suministrado.</p>
 <h3 id="234-el-metodo-format">2.3.4: El método format()</h3>
+<p>Existe un método format()que puede aplicar formato a argumentos o argumentos de palabras clave.</p>
+<pre><code class="language-python">&gt;&gt;&gt; '{name:&gt;10s} {shares:10d} {price:10.2f}'.format(name='IBM', shares=100, price=91.1)
+' IBM 100 91.10'
+&gt;&gt;&gt; '{:10s} {:10d} {:10.2f}'.format('IBM', 100, 91.1)
+' IBM 100 91.10'
+&gt;&gt;&gt;
+</code></pre>
+<p>Francamente, format()es un poco prolijo. Prefiero las cuerdas f.</p>
 <h3 id="235-formateo-al-estilo-c">2.3.5: Formateo al estilo C</h3>
+<p>También puede utilizar el operador de formato <code>%</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; 'The value is %d' % 3
+'The value is 3'
+&gt;&gt;&gt; '%5d %-5d %10d' % (3,4,5)
+' 3 4 5'
+&gt;&gt;&gt; '%0.2f' % (3.1415926,)
+'3.14'
+</code></pre>
+<p>Esto requiere un solo elemento o una tupla a la derecha. Códigos de formato son el modelo de la C <code>printf()</code> también.</p>
+<p>Nota: Este es el único formato disponible en cadenas de bytes.</p>
+<pre><code class="language-python">&gt;&gt;&gt; b'%s has %n messages' % (b'Dave', 37)
+b'Dave has 37 messages'
+&gt;&gt;&gt;
+</code></pre>
 <h3 id="236-ejercicios">2.3.6: Ejercicios</h3>
 <h4 id="ejercicio-28-como-formatear-numeros">Ejercicio 2.8: Como formatear numeros</h4>
+<p>Un problema común al imprimir números es especificar el número de decimales. Una forma de solucionar este problema es usar f-strings. Prueba estos ejemplos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; value = 42863.1
+&gt;&gt;&gt; print(value)
+42863.1
+&gt;&gt;&gt; print(f'{value:0.4f}')
+42863.1000
+&gt;&gt;&gt; print(f'{value:&gt;16.2f}')
+        42863.10
+&gt;&gt;&gt; print(f'{value:&lt;16.2f}')
+42863.10
+&gt;&gt;&gt; print(f'{value:*&gt;16,.2f}')
+*******42,863.10
+&gt;&gt;&gt;
+</code></pre>
+<p>La documentación completa sobre los códigos de formato utilizados para las cadenas f se puede encontrar aquí . El formateo también se realiza a veces utilizando el operador <code>%</code> de cadenas.</p>
+<pre><code class="language-python">&gt;&gt;&gt; print('%0.4f' % value)
+42863.1000
+&gt;&gt;&gt; print('%16.2f' % value)
+        42863.10
+&gt;&gt;&gt;
+</code></pre>
+<p>La documentación sobre varios códigos utilizados con %se puede encontrar aquí.</p>
+<p>Aunque se usa comúnmente con print, el formato de cadena no está ligado a la impresión. Si desea guardar una cadena formateada. Simplemente asígnelo a una variable.</p>
+<pre><code class="language-python">&gt;&gt;&gt; f = '%0.4f' % value
+&gt;&gt;&gt; f
+'42863.1000'
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-29-coleccionando-data">Ejercicio 2.9: Coleccionando data</h4>
+<p>En el ejercicio 2.7, escribió un programa llamado report.pyque calculó la ganancia / pérdida de una cartera de acciones. En este ejercicio, comenzará a modificarlo para producir una tabla como esta:</p>
+<pre><code class="language-python">      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+</code></pre>
+<p>En este informe, "Precio" es el precio actual de la acción de la acción y "Cambio" es el cambio en el precio de la acción desde el precio de compra inicial.</p>
+<p>Para generar el informe anterior, primero querrá recopilar todos los datos que se muestran en la tabla. Escriba una función <code>make_report()</code> que tome una lista de existencias y un diccionario de precios como entrada y devuelva una lista de tuplas que contenga las filas de la tabla anterior.</p>
+<p>Agregue esta función a su report.pyarchivo. Así es como debería funcionar si lo prueba de forma interactiva:</p>
+<pre><code class="language-python">&gt;&gt;&gt; portfolio = read_portfolio('Data/portfolio.csv')
+&gt;&gt;&gt; prices = read_prices('Data/prices.csv')
+&gt;&gt;&gt; report = make_report(portfolio, prices)
+&gt;&gt;&gt; for r in report:
+        print(r)
+
+('AA', 100, 9.22, -22.980000000000004)
+('IBM', 50, 106.28, 15.180000000000007)
+('CAT', 150, 35.46, -47.98)
+('MSFT', 200, 20.89, -30.339999999999996)
+('GE', 95, 13.48, -26.889999999999997)
+...
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-210-imprimiendo-una-tabla-formateada">Ejercicio 2.10: Imprimiendo una tabla formateada</h4>
+<p>Rehaga el bucle for del ejercicio 2.9, pero cambie la instrucción print para formatear las tuplas.</p>
+<pre><code class="language-python">&gt;&gt;&gt; for r in report:
+        print('%10s %10d %10.2f %10.2f' % r)
+
+          AA        100       9.22     -22.98
+         IBM         50     106.28      15.18
+         CAT        150      35.46     -47.98
+        MSFT        200      20.89     -30.34
+...
+&gt;&gt;&gt;
+</code></pre>
+<p>También puede expandir los valores y usar f-strings. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; for name, shares, price, change in report:
+        print(f'{name:&gt;10s} {shares:&gt;10d} {price:&gt;10.2f} {change:&gt;10.2f}')
+
+          AA        100       9.22     -22.98
+         IBM         50     106.28      15.18
+         CAT        150      35.46     -47.98
+        MSFT        200      20.89     -30.34
+...
+&gt;&gt;&gt;
+</code></pre>
+<p>Tome las declaraciones anteriores y agréguelas a su report.pyprograma. Haga que su programa tome la salida de la función <code>make_report()</code> e imprima una tabla bien formateada como se muestra.</p>
 <h4 id="ejercicio-211-agregando-algunos-encabezados">Ejercicio 2.11: Agregando algunos encabezados</h4>
+<p>Suponga que tiene una tupla de nombres de encabezado como este:</p>
+<pre><code class="language-python">headers = ('Name', 'Shares', 'Price', 'Change')
+</code></pre>
+<p>Agregue código a su programa que toma la tupla de encabezados anterior y crea una cadena donde cada nombre de encabezado está alineado a la derecha en un campo de 10 caracteres de ancho y cada campo está separado por un solo espacio.</p>
+<pre><code class="language-python">' Name Shares Price Change'
+</code></pre>
+<p>Escriba código que tome los encabezados y cree la cadena de separación entre los encabezados y los datos que siguen. Esta cadena es solo un grupo de caracteres "-" debajo de cada nombre de campo. Por ejemplo:</p>
+<pre><code class="language-python">'---------- ---------- ---------- -----------'
+</code></pre>
+<p>Cuando haya terminado, su programa debería producir la tabla que se muestra en la parte superior de este ejercicio.</p>
+<pre><code>      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+</code></pre>
 <h4 id="ejercicio-212-un-reto">Ejercicio 2.12: Un reto</h4>
+<p>¿Cómo modificaría su código para que el precio incluya el símbolo de moneda ($) y la salida se vea así:</p>
+<pre><code>      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100      $9.22     -22.98
+       IBM         50    $106.28      15.18
+       CAT        150     $35.46     -47.98
+      MSFT        200     $20.89     -30.34
+        GE         95     $13.48     -26.89
+      MSFT         50     $20.89     -44.21
+       IBM        100    $106.28      35.84
+</code></pre>
 <hr />
 <h2 id="24-secuencias">2.4 Secuencias</h2>
 <h3 id="241-tipos-de-secuencias">2.4.1: Tipos de secuencias</h3>
