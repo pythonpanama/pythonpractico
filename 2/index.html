@@ -90,12 +90,14 @@
     <li class="toctree-l3"><a class="reference internal" href="#219-porque-diccionarios">2.1.9 ¿Porqué diccionarios?</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#2110-ejercicios">2.1.10 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</a>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-22-diccionarios-como-estructura-de-datos">Ejercicio 2.2: Diccionarios como estructura de datos</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-22-diccionarios-como-estructura-de-datos">Ejercicio 2.2: Diccionarios como estructura de datos</a>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-23-otras-operaciones-adicionales">Ejercicio 2.3: Otras operaciones adicionales</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-23-otras-operaciones-adicionales">Ejercicio 2.3: Otras operaciones adicionales</a>
+        </ul>
     </li>
         </ul>
     </li>
@@ -488,7 +490,7 @@ TypeError: can't multiply sequence by non-int of type 'str'
 <p>Para hacer más, normalmente desea interpretar los datos sin procesar de alguna manera
 y convertirlo en un tipo de objeto más útil para que pueda trabajar
 con él más tarde. Dos opciones simples son tuplas o diccionarios.</p>
-<h3 id="ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</h3>
+<h4 id="ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</h4>
 <p>En el indicador interactivo, cree la siguiente tupla que represente la fila anterior, pero con las columnas numéricas convertidas a los números adecuados:</p>
 <pre><code class="language-python">&gt;&gt;&gt; t = (row[0], int(row[1]), float(row[2]))
 &gt;&gt;&gt; t
@@ -539,7 +541,7 @@ TypeError: 'tuple' object does not support item assignment
 ('AA', 150, 32.2)
 &gt;&gt;&gt;
 </code></pre>
-<h3 id="ejercicio-22-diccionarios-como-estructura-de-datos">Ejercicio 2.2: Diccionarios como estructura de datos</h3>
+<h4 id="ejercicio-22-diccionarios-como-estructura-de-datos">Ejercicio 2.2: Diccionarios como estructura de datos</h4>
 <p>Una alternativa a una tupla es crear un diccionario.</p>
 <pre><code class="language-python">&gt;&gt;&gt; d = {
         'name' : row[0],
@@ -569,7 +571,7 @@ TypeError: 'tuple' object does not support item assignment
 {'name': 'AA', 'shares': 75, 'price':32.2, 'date': (6, 11, 2007), 'account': 12345}
 &gt;&gt;&gt;
 </code></pre>
-<h3 id="ejercicio-23-otras-operaciones-adicionales">Ejercicio 2.3: Otras operaciones adicionales</h3>
+<h4 id="ejercicio-23-otras-operaciones-adicionales">Ejercicio 2.3: Otras operaciones adicionales</h4>
 <p>Si convierte un diccionario en una lista, obtendrá todas sus claves:</p>
 <pre><code class="language-python">&gt;&gt;&gt; list(d)
 ['name', 'shares', 'price', 'date', 'account']
@@ -676,9 +678,7 @@ with open('Data/portfolio.csv', 'rt') as f:
 </code></pre>
 <h3 id="224-diccionarios-como-contenedores">2.2.4: Diccionarios como contenedores</h3>
 <p>Los diccionarios son útiles si desea búsquedas aleatorias rápidas (por nombre de clave). Por ejemplo, un diccionario de precios de acciones:</p>
-<pre><code class="language-python">
-
-prices = {
+<pre><code class="language-python">prices = {
    'GOOG': 513.25,
    'CAT': 87.22,
    'IBM': 93.37,
@@ -686,9 +686,7 @@ prices = {
 }
 </code></pre>
 <p>Aquí hay algunas búsquedas simples:</p>
-<pre><code class="language-python">
-
-&gt;&gt;&gt; prices['IBM']
+<pre><code class="language-python">&gt;&gt;&gt; prices['IBM']
 93.37
 &gt;&gt;&gt; prices['GOOG']
 513.25
