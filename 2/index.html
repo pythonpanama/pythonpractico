@@ -69,31 +69,27 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">2 Trabajando con Data</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#21-tipos-y-estructuras-de-datos">2.1 Tipos y estructuras de datos</a>
+    <li class="toctree-l2"><a class="reference internal" href="#21-tipos-y-estructuras-de-data">2.1 Tipos y estructuras de data</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#211-tipos-primitivos">2.1.1 Tipos primitivos</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#212-tipos-primitivos">2.1.2: Tipos primitivos</a>
+    <li class="toctree-l3"><a class="reference internal" href="#212-tipo-none">2.1.2 Tipo None</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#213-el-tipo-none">2.1.3: El tipo None</a>
+    <li class="toctree-l3"><a class="reference internal" href="#213-estructuras-de-data">2.1.3: Estructuras de data</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#214-estructuras-de-data">2.1.4: Estructuras de data</a>
+    <li class="toctree-l3"><a class="reference internal" href="#214-tuplas">2.1.4: Tuplas</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#215-tuplas">2.1.5: Tuplas</a>
+    <li class="toctree-l3"><a class="reference internal" href="#215-desempaque-de-tuplas">2.1.5: Desempaque de Tuplas</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#216-desempaque-de-tuplas">2.1.6: Desempaque de Tuplas</a>
+    <li class="toctree-l3"><a class="reference internal" href="#216-tuplas-vs-listas">2.1.6 Tuplas vs Listas</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2176-tuplas-vs-listas">2.1.76 Tuplas vs Listas</a>
+    <li class="toctree-l3"><a class="reference internal" href="#217-diccionarios">2.1.7 Diccionarios</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#218-diccionarios">2.1.8 Diccionarios</a>
+    <li class="toctree-l3"><a class="reference internal" href="#218-operaciones-comunes">2.1.8 Operaciones comunes</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#219-operaciones-comunes">2.1.9 Operaciones comunes</a>
+    <li class="toctree-l3"><a class="reference internal" href="#219-porque-diccionarios">2.1.9 ¿Porqué diccionarios?</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2110-porque-diccionarios">2.1.10 ¿Porqué diccionarios?</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2111-diccionarios">2.1.11 Diccionarios</a>
-    </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2112-ejercicios">2.1.12 Ejercicios</a>
+    <li class="toctree-l3"><a class="reference internal" href="#2110-ejercicios">2.1.10 Ejercicios</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</a>
     </li>
@@ -358,22 +354,286 @@
               
                 <h1 id="2-trabajando-con-data">2. Trabajando con data</h1>
 <p>Conoceremos las estructuras de datos de fundamental importancia en Python: tuples, lists, sets y dictionaries. Presentaremos algunos patrones comunes para el manejo de datos y discutiremos el modelo de objetos en Python.</p>
-<h2 id="21-tipos-y-estructuras-de-datos">2.1 Tipos y estructuras de datos</h2>
+<h2 id="21-tipos-y-estructuras-de-data">2.1 Tipos y estructuras de data</h2>
+<p>Esta sección presenta estructuras de datos en forma de tuplas y diccionarios.</p>
 <h3 id="211-tipos-primitivos">2.1.1 Tipos primitivos</h3>
-<h3 id="212-tipos-primitivos">2.1.2: Tipos primitivos</h3>
-<h3 id="213-el-tipo-none">2.1.3: El tipo None</h3>
-<h3 id="214-estructuras-de-data">2.1.4: Estructuras de data</h3>
-<h3 id="215-tuplas">2.1.5: Tuplas</h3>
-<h3 id="216-desempaque-de-tuplas">2.1.6: Desempaque de Tuplas</h3>
-<h3 id="2176-tuplas-vs-listas">2.1.76 Tuplas vs Listas</h3>
-<h3 id="218-diccionarios">2.1.8 Diccionarios</h3>
-<h3 id="219-operaciones-comunes">2.1.9 Operaciones comunes</h3>
-<h3 id="2110-porque-diccionarios">2.1.10 ¿Porqué diccionarios?</h3>
-<h3 id="2111-diccionarios">2.1.11 Diccionarios</h3>
-<h3 id="2112-ejercicios">2.1.12 Ejercicios</h3>
+<p>Python tiene algunos tipos primitivos de datos:</p>
+<ul>
+<li>Enteros</li>
+<li>Números de punto flotante</li>
+<li>Cadenas (texto)</li>
+</ul>
+<p>Aprendimos sobre esto en la introducción.</p>
+<h3 id="212-tipo-none">2.1.2 Tipo <code>None</code></h3>
+<pre><code class="language-python">email_address = None
+</code></pre>
+<p><code>None</code> se utiliza a menudo como marcador de posición para un valor opcional o faltante. Eso se evalúa como "Falso" en condicionales.</p>
+<pre><code class="language-python">if email_address:
+    send_email(email_address, msg)
+</code></pre>
+<h3 id="213-estructuras-de-data">2.1.3: Estructuras de data</h3>
+<p>Los programas reales tienen datos más complejos. Por ejemplo, información sobre una participación en acciones:</p>
+<pre><code class="language-code">100 acciones de GOOG a $490.10
+</code></pre>
+<p>Este es un "objeto" con tres partes:</p>
+<ul>
+<li>Nombre o símbolo de la acción ("GOOG", una cadena)</li>
+<li>Número de acciones (100, un número entero)</li>
+<li>Precio (490,10 un punto flotante)</li>
+</ul>
+<h3 id="214-tuplas">2.1.4: Tuplas</h3>
+<p>Una tupla es una colección de valores agrupados.</p>
+<p>Ejemplo:</p>
+<pre><code class="language-python">s = ('GOOG', 100, 490.1)
+</code></pre>
+<p>A veces el <code>()</code> es omitido.</p>
+<pre><code class="language-python">s = 'GOOG', 100, 490.1'
+</code></pre>
+<p>Casos especiales (0-tupla, 1-tupla).</p>
+<pre><code class="language-python">t = ()            # Una tupla vacía
+w = ('GOOG', )    # Una tupla de 1-item
+</code></pre>
+<p>Las tuplas se utilizan a menudo para representar registros o estructuras <em>simples</em>. Normalmente, es un único <em>objeto</em> de varias partes.</p>
+<p>Una buena analogía: <em>Una tupla es como una sola fila en una tabla de base de datos.</em></p>
+<p>El contenido de la tupla está ordenado (como una matriz).</p>
+<pre><code class="language-python">s = ('GOOG', 100, 490.1)
+name = s[0]                 # 'GOOG'
+shares = s[1]               # 100
+price = s[2]                # 490.1
+</code></pre>
+<p>Sin embargo, el contenido no se puede modificar.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s[1] = 75
+TypeError: object does not support item assignment
+</code></pre>
+<p>Sin embargo, puede crear una nueva tupla basada en una tupla actual.</p>
+<pre><code class="language-python">s = (s[0], 75, s[2])
+</code></pre>
+<p>Las tuplas tienen más que ver con empaquetar elementos relacionados en una sola <em>entidad</em>,
+que con cualquier otra cosa.</p>
+<pre><code class="language-python">s = ('GOOG', 100, 490.1)
+</code></pre>
+<p>Por tanto, la tupla es fácil de pasar a otras partes de un programa como un solo objeto.</p>
+<h3 id="215-desempaque-de-tuplas">2.1.5: Desempaque de Tuplas</h3>
+<p>Para usar la tupla en otro lugar, puede desempaquetar sus partes en variables.</p>
+<pre><code class="language-python">name, shares, price = s
+print('Cost', shares * price)
+</code></pre>
+<p>The number of variables on the left must match the tuple structure.</p>
+<pre><code class="language-python">name, shares = s     # ERROR
+Traceback (most recent call last):
+...
+ValueError: too many values to unpack
+</code></pre>
+<h3 id="216-tuplas-vs-listas">2.1.6 Tuplas vs Listas</h3>
+<p>Tuples look like read-only lists. However, tuples are most often used
+for a <em>single item</em> consisting of multiple parts.  Lists are usually a
+collection of distinct items, usually all of the same type.</p>
+<pre><code class="language-python">record = ('GOOG', 100, 490.1)       # Una tupla que representa un registro en una cartera
+
+symbols = [ 'GOOG', 'AAPL', 'IBM' ]  # Una lista que representa tres símbolos de acciones
+</code></pre>
+<h3 id="217-diccionarios">2.1.7 Diccionarios</h3>
+<p>Un diccionario es la asignación de claves a valores. A veces también se le llama una tabla hash o matriz asociativa. Las claves sirven como índices para acceder a los valores.</p>
+<pre><code class="language-python">s = {
+    'name': 'GOOG',
+    'shares': 100,
+    'price': 490.1
+}
+</code></pre>
+<h3 id="218-operaciones-comunes">2.1.8 Operaciones comunes</h3>
+<p>To get values from a dictionary use the key names.</p>
+<pre><code class="language-python">&gt;&gt;&gt; print(s['name'], s['shares'])
+GOOG 100
+&gt;&gt;&gt; s['price']
+490.10
+&gt;&gt;&gt;
+</code></pre>
+<p>Para agregar o modificar valores, asigne usando los nombres de las claves.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s['shares'] = 75
+&gt;&gt;&gt; s['date'] = '6/6/2007'
+&gt;&gt;&gt;
+</code></pre>
+<p>Para eliminar un valor, use la instrucción <code>del</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; del s['date']
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="219-porque-diccionarios">2.1.9 ¿Porqué diccionarios?</h3>
+<p>Los diccionarios son útiles cuando hay * muchos * valores diferentes y esos valores
+puede ser modificado o manipulado. Los diccionarios hacen que su código sea más legible.</p>
+<pre><code class="language-python">s['price']
+# vs
+s[2]
+</code></pre>
+<h3 id="2110-ejercicios">2.1.10 Ejercicios</h3>
+<p>En los últimos ejercicios, escribió un programa que lee un archivo de datos <code>Data/portfolio.csv</code>.
+Usando el módulo <code>csv</code>, es fácil leer el archivo fila por fila.</p>
+<pre><code class="language-python">&gt;&gt;&gt; import csv
+&gt;&gt;&gt; f = open('Data/portfolio.csv')
+&gt;&gt;&gt; rows = csv.reader(f)
+&gt;&gt;&gt; next(rows)
+['name', 'shares', 'price']
+&gt;&gt;&gt; row = next(rows)
+&gt;&gt;&gt; row
+['AA', '100', '32.20']
+&gt;&gt;&gt;
+</code></pre>
+<p>Aunque leer el archivo es fácil, a menudo querrá hacer más con el datos que leerlos.
+Por ejemplo, tal vez desee almacenarlo y comience a realizar algunos cálculos sobre él. Desafortunadamente, una "fila" sin procesar de datos no le da suficiente para trabajar.
+Por ejemplo, incluso un el cálculo matemático simple no funciona:</p>
+<pre><code class="language-python">&gt;&gt;&gt; row = ['AA', '100', '32.20']
+&gt;&gt;&gt; cost = row[1] * row[2]
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: can't multiply sequence by non-int of type 'str'
+&gt;&gt;&gt;
+</code></pre>
+<p>Para hacer más, normalmente desea interpretar los datos sin procesar de alguna manera
+y convertirlo en un tipo de objeto más útil para que pueda trabajar
+con él más tarde. Dos opciones simples son tuplas o diccionarios.</p>
 <h3 id="ejercicio-21-tuplas">Ejercicio 2.1: Tuplas</h3>
+<p>En el indicador interactivo, cree la siguiente tupla que represente la fila anterior, pero con las columnas numéricas convertidas a los números adecuados:</p>
+<pre><code class="language-python">&gt;&gt;&gt; t = (row[0], int(row[1]), float(row[2]))
+&gt;&gt;&gt; t
+('AA', 100, 32.2)
+&gt;&gt;&gt;
+</code></pre>
+<p>Con esto, ahora puede calcular el costo total multiplicando las acciones y el precio:</p>
+<pre><code class="language-python">&gt;&gt;&gt; cost = t[1] * t[2]
+&gt;&gt;&gt; cost
+3220.0000000000005
+&gt;&gt;&gt;
+</code></pre>
+<p>¿Las matemáticas están rotas en Python? ¿Cuál es el problema con la respuesta de
+3220.0000000000005?</p>
+<p>Este es un artefacto del hardware de punto flotante en su computadora que solo puede representar decimales con precisión en Base-2, no en Base-10. Incluso para cálculos simples que involucran decimales en base 10, se introducen pequeños errores. Esto es normal, aunque quizás un poco sorprendente si no lo ha visto antes.</p>
+<p>Esto sucede en todos los lenguajes de programación que utilizan decimales de punto flotante, pero a menudo se oculta al imprimir. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; print(f'{cost:0.2f}')
+3220.00
+&gt;&gt;&gt;
+</code></pre>
+<p>Las tuplas son de solo lectura. Verifique esto intentando cambiar el número de acciones a 75.</p>
+<pre><code class="language-python">&gt;&gt;&gt; t[1] = 75
+Traceback (most recent call last):
+    File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: 'tuple' object does not support item assignment
+&gt;&gt;&gt;
+</code></pre>
+<p>Aunque no puede cambiar el contenido de la tupla, siempre puede crear una tupla completamente nueva que reemplace a la anterior.</p>
+<pre><code class="language-python">&gt;&gt;&gt; t = (t[0], 75, t[2])
+&gt;&gt;&gt; t
+('AA', 75, 32.2)
+&gt;&gt;&gt;
+</code></pre>
+<p>Siempre que reasigne un nombre de variable existente como este, el valor anterior se descarta. Aunque la asignación anterior puede parecer que está modificando la tupla, en realidad está creando una nueva tupla y desechando la anterior.</p>
+<p>Las tuplas se utilizan a menudo para empaquetar y descomprimir valores en variables. Intente lo siguiente:</p>
+<pre><code class="language-python">&gt;&gt;&gt; name, shares, price = t
+&gt;&gt;&gt; name
+'AA'
+&gt;&gt;&gt; shares
+75
+&gt;&gt;&gt; price
+32.2
+&gt;&gt;&gt;
+</code></pre>
+<p>Tome las variables anteriores y vuelva a empaquetarlas en una tupla</p>
+<pre><code class="language-python">&gt;&gt;&gt; t = (name, 2*shares, price)
+&gt;&gt;&gt; t
+('AA', 150, 32.2)
+&gt;&gt;&gt;
+</code></pre>
 <h3 id="ejercicio-22-diccionarios-como-estructura-de-datos">Ejercicio 2.2: Diccionarios como estructura de datos</h3>
+<p>Una alternativa a una tupla es crear un diccionario.</p>
+<pre><code class="language-python">&gt;&gt;&gt; d = {
+        'name' : row[0],
+        'shares' : int(row[1]),
+        'price'  : float(row[2])
+    }
+&gt;&gt;&gt; d
+{'name': 'AA', 'shares': 100, 'price': 32.2 }
+&gt;&gt;&gt;
+</code></pre>
+<p>Calcule el costo total de esta participación:</p>
+<pre><code class="language-python">&gt;&gt;&gt; cost = d['shares'] * d['price']
+&gt;&gt;&gt; cost
+3220.0000000000005
+&gt;&gt;&gt;
+</code></pre>
+<p>Compare este ejemplo con el mismo cálculo que involucra tuplas anterior. Cambie el número de acciones a 75.</p>
+<pre><code class="language-python">&gt;&gt;&gt; d['shares'] = 75
+&gt;&gt;&gt; d
+{'name': 'AA', 'shares': 75, 'price': 32.2 }
+&gt;&gt;&gt;
+</code></pre>
+<p>A diferencia de las tuplas, los diccionarios se pueden modificar libremente. Agrega algunos atributos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; d['date'] = (6, 11, 2007)
+&gt;&gt;&gt; d['account'] = 12345
+&gt;&gt;&gt; d
+{'name': 'AA', 'shares': 75, 'price':32.2, 'date': (6, 11, 2007), 'account': 12345}
+&gt;&gt;&gt;
+</code></pre>
 <h3 id="ejercicio-23-otras-operaciones-adicionales">Ejercicio 2.3: Otras operaciones adicionales</h3>
+<p>Si convierte un diccionario en una lista, obtendrá todas sus claves:</p>
+<pre><code class="language-python">&gt;&gt;&gt; list(d)
+['name', 'shares', 'price', 'date', 'account']
+&gt;&gt;&gt;
+</code></pre>
+<p>De manera similar, si usa la fordeclaración para iterar en un diccionario, obtendrá las claves:</p>
+<pre><code class="language-python">&gt;&gt;&gt; for k in d:
+        print('k =', k)
+
+k = name
+k = shares
+k = price
+k = date
+k = account
+&gt;&gt;&gt;
+</code></pre>
+<p>Pruebe esta variante que realiza una búsqueda al mismo tiempo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; for k in d:
+        print(k, '=', d[k])
+
+name = AA
+shares = 75
+price = 32.2
+date = (6, 11, 2007)
+account = 12345
+&gt;&gt;&gt;
+</code></pre>
+<p>También puede obtener todas las claves utilizando el método <code>keys()</code>:</p>
+<pre><code class="language-python">&gt;&gt;&gt; keys = d.keys()
+&gt;&gt;&gt; keys
+dict_keys(['name', 'shares', 'price', 'date', 'account'])
+&gt;&gt;&gt;
+</code></pre>
+<p>keys()es un poco inusual porque devuelve un dict_keysobjeto especial .</p>
+<p>Se trata de una superposición del diccionario original que siempre le proporciona las claves actuales, incluso si el diccionario cambia. Por ejemplo, intente esto:</p>
+<pre><code class="language-python">&gt;&gt;&gt; del d['account']
+&gt;&gt;&gt; keys
+dict_keys(['name', 'shares', 'price', 'date'])
+&gt;&gt;&gt;
+</code></pre>
+<p>Observe cuidadosamente que 'account'desapareció keysaunque no volvió a llamar d.keys().</p>
+<p>Una forma más elegante de trabajar con claves y valores juntos es utilizar el items()método. Esto te da (key, value)tuplas:</p>
+<pre><code class="language-python">&gt;&gt;&gt; items = d.items()
+&gt;&gt;&gt; items
+dict_items([('name', 'AA'), ('shares', 75), ('price', 32.2), ('date', (6, 11, 2007))])
+&gt;&gt;&gt; for k, v in d.items():
+        print(k, '=', v)
+
+name = AA
+shares = 75
+price = 32.2
+date = (6, 11, 2007)
+&gt;&gt;&gt;
+</code></pre>
+<p>Si tiene tuplas como items, puede crear un diccionario usando la dict()función. Intentalo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; items
+dict_items([('name', 'AA'), ('shares', 75), ('price', 32.2), ('date', (6, 11, 2007))])
+&gt;&gt;&gt; d = dict(items)
+&gt;&gt;&gt; d
+{'name': 'AA', 'shares': 75, 'price':32.2, 'date': (6, 11, 2007)}
+&gt;&gt;&gt;
+</code></pre>
 <h2 id="22-contenedores">2.2 Contenedores</h2>
 <h3 id="221-panorama">2.2.1: Panorama</h3>
 <h3 id="122-listas-como-un-contenedor">1.2.2: Listas como un Contenedor</h3>
