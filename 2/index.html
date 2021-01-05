@@ -103,21 +103,21 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#221-vision-general">2.2.1: Visión General</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#122-listas-como-un-contenedor">1.2.2: Listas como un Contenedor</a>
+    <li class="toctree-l3"><a class="reference internal" href="#222-listas-como-un-contenedor">2.2.2: Listas como un Contenedor</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#123-construccion-de-una-lista">1.2.3: Construcción de una lista</a>
+    <li class="toctree-l3"><a class="reference internal" href="#223-construccion-de-una-lista">2.2.3: Construcción de una lista</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#124-diccionarios-como-contenedores">1.2.4: Diccionarios como contenedores</a>
+    <li class="toctree-l3"><a class="reference internal" href="#224-diccionarios-como-contenedores">2.2.4: Diccionarios como contenedores</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#125-construccion-de-un-diccionario">1.2.5: Construcción de un diccionario</a>
+    <li class="toctree-l3"><a class="reference internal" href="#225-construccion-de-un-diccionario">2.2.5: Construcción de un diccionario</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#126-busquedas-de-diccionario">1.2.6: Búsquedas de diccionario</a>
+    <li class="toctree-l3"><a class="reference internal" href="#226-busquedas-de-diccionario">2.2.6: Búsquedas de diccionario</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#127-claves-compuestas">1.2.7: Claves compuestas</a>
+    <li class="toctree-l3"><a class="reference internal" href="#227-claves-compuestas">2.2.7: Claves compuestas</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#128-conjuntos-sets">1.2.8: Conjuntos (Sets)</a>
+    <li class="toctree-l3"><a class="reference internal" href="#228-conjuntos-sets">2.2.8: Conjuntos (Sets)</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#129-ejercicios">1.2.9: Ejercicios</a>
+    <li class="toctree-l3"><a class="reference internal" href="#229-ejercicios">2.2.9: Ejercicios</a>
         <ul>
     <li class="toctree-l4"><a class="reference internal" href="#ejercicio-24-una-lista-de-tuplas">Ejercicio 2.4: Una lista de tuplas</a>
     </li>
@@ -645,7 +645,7 @@ dict_items([('name', 'AA'), ('shares', 75), ('price', 32.2), ('date', (6, 11, 20
 <li>Diccionarios. Datos desordenados.</li>
 <li>Conjuntos. Colección desordenada de artículos únicos.*</li>
 </ul>
-<h3 id="122-listas-como-un-contenedor">1.2.2: Listas como un Contenedor</h3>
+<h3 id="222-listas-como-un-contenedor">2.2.2: Listas como un Contenedor</h3>
 <p>Utilice una lista cuando sea importante el orden de los datos. Recuerde que las listas pueden contener cualquier tipo de objeto. Por ejemplo, una lista de tuplas.</p>
 <pre><code class="language-python">portfolio = [
     ('GOOG', 100, 490.1),
@@ -656,7 +656,7 @@ dict_items([('name', 'AA'), ('shares', 75), ('price', 32.2), ('date', (6, 11, 20
 portfolio[0]            # ('GOOG', 100, 490.1)
 portfolio[2]            # ('CAT', 150, 83.44)
 </code></pre>
-<h3 id="123-construccion-de-una-lista">1.2.3: Construcción de una lista</h3>
+<h3 id="223-construccion-de-una-lista">2.2.3: Construcción de una lista</h3>
 <p>Construyendo una lista desde cero.</p>
 <pre><code class="language-python">records = []  # Initial empty list
 
@@ -674,7 +674,7 @@ with open('Data/portfolio.csv', 'rt') as f:
         row = line.split(',')
         records.append((row[0], int(row[1]), float(row[2])))
 </code></pre>
-<h3 id="124-diccionarios-como-contenedores">1.2.4: Diccionarios como contenedores</h3>
+<h3 id="224-diccionarios-como-contenedores">2.2.4: Diccionarios como contenedores</h3>
 <p>Los diccionarios son útiles si desea búsquedas aleatorias rápidas (por nombre de clave). Por ejemplo, un diccionario de precios de acciones:</p>
 <pre><code class="language-python">
 
@@ -694,7 +694,7 @@ prices = {
 513.25
 &gt;&gt;&gt;
 </code></pre>
-<h3 id="125-construccion-de-un-diccionario">1.2.5: Construcción de un diccionario</h3>
+<h3 id="225-construccion-de-un-diccionario">2.2.5: Construcción de un diccionario</h3>
 <p>Ejemplo de construcción de un dictado desde cero.</p>
 <pre><code class="language-python">prices = {} # Initial empty dict
 # Insert new items prices['GOOG'] = 513.25
@@ -709,7 +709,7 @@ with open('Data/prices.csv', 'rt') as f:
         prices[row[0]] = float(row[1])
 </code></pre>
 <p>Nota: Si prueba esto en el Data/prices.csvarchivo, encontrará que casi funciona; hay una línea en blanco al final que hace que se bloquee. Necesitará encontrar alguna forma de modificar el código para tener en cuenta eso (vea el ejercicio 2.6).</p>
-<h3 id="126-busquedas-de-diccionario">1.2.6: Búsquedas de diccionario</h3>
+<h3 id="226-busquedas-de-diccionario">2.2.6: Búsquedas de diccionario</h3>
 <p>Puede probar la existencia de una clave.</p>
 <pre><code class="language-python">if key in d:
     # YES else:
@@ -724,7 +724,7 @@ with open('Data/prices.csv', 'rt') as f:
 0.0
 &gt;&gt;&gt;
 </code></pre>
-<h3 id="127-claves-compuestas">1.2.7: Claves compuestas</h3>
+<h3 id="227-claves-compuestas">2.2.7: Claves compuestas</h3>
 <p>Casi cualquier tipo de valor se puede utilizar como clave de diccionario en Python. Una clave de diccionario debe ser de un tipo que sea inmutable. Por ejemplo, tuplas:</p>
 <pre><code class="language-python">holidays = {
   (1, 1) : 'New Years',
@@ -738,7 +738,7 @@ with open('Data/prices.csv', 'rt') as f:
 &gt;&gt;&gt;
 </code></pre>
 <p>Ni una lista, un conjunto ni otro diccionario pueden servir como clave de diccionario, porque las listas y los diccionarios son mutables.</p>
-<h3 id="128-conjuntos-sets">1.2.8: Conjuntos (Sets)</h3>
+<h3 id="228-conjuntos-sets">2.2.8: Conjuntos (Sets)</h3>
 <p>Los conjuntos son una colección de elementos únicos desordenados.</p>
 <pre><code class="language-python">tech_stocks = { 'IBM','AAPL','MSFT' }
 # alternativamente: tech_stocks = set(['IBM', 'AAPL', 'MSFT'])
@@ -766,7 +766,7 @@ s1 | s2                 # Set union
 s1 &amp; s2                 # Set intersection
 s1 - s2                 # Set difference
 </code></pre>
-<h3 id="129-ejercicios">1.2.9: Ejercicios</h3>
+<h3 id="229-ejercicios">2.2.9: Ejercicios</h3>
 <p>En estos ejercicios, comenzará a crear uno de los programas principales que se utilizarán durante el resto de este curso. Haga su trabajo en el archivo <code>Work/report.py</code>.</p>
 <h4 id="ejercicio-24-una-lista-de-tuplas">Ejercicio 2.4: Una lista de tuplas</h4>
 <p>El archivo Data/portfolio.csvcontiene una lista de acciones en una cartera. En el ejercicio 1.30 , escribió una función portfolio_cost(filename)que leyó este archivo y realizó un cálculo simple.</p>
