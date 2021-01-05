@@ -1,2012 +1,375 @@
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  
+  
+  <link rel="shortcut icon" href="../img/favicon.ico">
+  <title>1 Intro a Python - Python Práctico</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700" />
 
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      
-      
-      
-      
-      <link rel="shortcut icon" href="../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.1.2, mkdocs-material-6.2.3">
-    
-    
-      
-        <title>1 Intro a Python - Python Práctico</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/main.3b61ea93.min.css">
-      
-        
-        <link rel="stylesheet" href="../assets/stylesheets/palette.39b8e14a.min.css">
-        
-      
-    
-    
-    
-      
-        
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,400i,700%7CRoboto+Mono&display=fallback">
-        <style>body,input{font-family:"Roboto",-apple-system,BlinkMacSystemFont,Helvetica,Arial,sans-serif}code,kbd,pre{font-family:"Roboto Mono",SFMono-Regular,Consolas,Menlo,monospace}</style>
-      
-    
-    
-    
-    
-      
-    
-    
-  </head>
+  <link rel="stylesheet" href="../css/theme.css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css" />
   
+  <script>
+    // Current page data
+    var mkdocs_page_name = "1 Intro a Python";
+    var mkdocs_page_input_path = "1.md";
+    var mkdocs_page_url = null;
+  </script>
   
-    
-    
-    
-    
-    
-    <body dir="ltr" data-md-color-scheme="" data-md-color-primary="none" data-md-color-accent="none">
-      
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/python.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/shell.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/bash.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
   
-    
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" for="__drawer"></label>
-    <div data-md-component="skip">
-      
-        
-        <a href="#1-intro-a-python" class="md-skip">
-          Skip to content
-        </a>
-      
-    </div>
-    <div data-md-component="announce">
-      
-    </div>
-    
-      
+</head>
 
-<header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid" aria-label="Header">
-    <a href=".." title="Python Práctico" class="md-header-nav__button md-logo" aria-label="Python Práctico">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
+<body class="wy-body-for-nav" role="document">
 
-    </a>
-    <label class="md-header-nav__button md-icon" for="__drawer">
-      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3V6m0 5h18v2H3v-2m0 5h18v2H3v-2z"/></svg>
-    </label>
-    <div class="md-header-nav__title" data-md-component="header-title">
-      <div class="md-header-nav__ellipsis">
-        <div class="md-header-nav__topic">
-          <span class="md-ellipsis">
-            Python Práctico
-          </span>
-        </div>
-        <div class="md-header-nav__topic">
-          <span class="md-ellipsis">
-            
-              1 Intro a Python
-            
-          </span>
-        </div>
-      </div>
-    </div>
+  <div class="wy-grid-for-nav">
+
     
-      <label class="md-header-nav__button md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-      </label>
-      
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" data-md-state="active" required>
-      <label class="md-search__icon md-icon" for="__search">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0116 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.516 6.516 0 019.5 16 6.5 6.5 0 013 9.5 6.5 6.5 0 019.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5z"/></svg>
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-      </label>
-      <button type="reset" class="md-search__icon md-icon" aria-label="Clear" data-md-component="search-reset" tabindex="-1">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12 19 6.41z"/></svg>
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="search-result">
-          <div class="md-search-result__meta">
-            Initializing search
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+        <a href=".." class="icon icon-home"> Python Práctico</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
 </div>
-    
-    
-  </nav>
-</header>
-    
-    <div class="md-container" data-md-component="container">
-      
-      
-        
-      
-      <main class="md-main" data-md-component="main">
-        <div class="md-main__inner md-grid">
-          
-            
-              
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
+      </div>
 
-
-
-
-<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
-  <label class="md-nav__title" for="__drawer">
-    <a href=".." title="Python Práctico" class="md-nav__button md-logo" aria-label="Python Práctico">
-      
-  
-  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 003-3 3 3 0 00-3-3 3 3 0 00-3 3 3 3 0 003 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54z"/></svg>
-
-    </a>
-    Python Práctico
-  </label>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href=".." class="md-nav__link">
-      Sobre el curso
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../temario/" class="md-nav__link">
-      Temario
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../faq/" class="md-nav__link">
-      Preguntas
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-nav__toggle md-toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        1 Intro a Python
-        <span class="md-nav__icon md-icon"></span>
-      </label>
-    
-    <a href="./" class="md-nav__link md-nav__link--active">
-      1 Intro a Python
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#11-introduciendo-python" class="md-nav__link">
-    1.1 Introduciendo Python
-  </a>
-  
-    <nav class="md-nav" aria-label="1.1 Introduciendo Python">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#111-que-es-python" class="md-nav__link">
-    1.1.1: Qué es Python?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#112-donde-consigo-python" class="md-nav__link">
-    1.1.2: Donde consigo Python?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#113-porque-fue-creado" class="md-nav__link">
-    1.1.3: Porqué fue creado?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#114-donde-esta-python-en-mi-maquina" class="md-nav__link">
-    1.1.4: Dónde está Python en mi Maquina?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#115-ejercicios" class="md-nav__link">
-    1.1.5: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.1.5: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-11-utilizando-python-como-calculadora" class="md-nav__link">
-    Ejercicio 1.1: Utilizando Python como Calculadora
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-12-consiguiendo-ayuda" class="md-nav__link">
-    Ejercicio 1.2: Consiguiendo ayuda
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-13-copiar-y-pegar" class="md-nav__link">
-    Ejercicio 1.3: Copiar y pegar
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-14-donde-esta-mi-bus" class="md-nav__link">
-    Ejercicio 1.4: Donde esta mi bus?
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-un-primer-programa" class="md-nav__link">
-    1.2 Un primer programa
-  </a>
-  
-    <nav class="md-nav" aria-label="1.2 Un primer programa">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#121-ejecutando-python" class="md-nav__link">
-    1.2.1: Ejecutando Python
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#122-modo-interactivo" class="md-nav__link">
-    1.2.2: Modo interactivo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#123-creando-programas" class="md-nav__link">
-    1.2.3: Creando programas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#124-ejecutando-programas" class="md-nav__link">
-    1.2.4: Ejecutando programas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#125-un-ejemplo" class="md-nav__link">
-    1.2.5: Un ejemplo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#126-declaraciones" class="md-nav__link">
-    1.2.6: Declaraciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#127-comentarios" class="md-nav__link">
-    1.2.7: Comentarios
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#128-variables" class="md-nav__link">
-    1.2.8: Variables
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#129-tipos" class="md-nav__link">
-    1.2.9: Tipos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1210-casos-sensitivos" class="md-nav__link">
-    1.2.10: Casos Sensitivos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1211-ciclar" class="md-nav__link">
-    1.2.11: Ciclar
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1212-sangrias-las-de-texto-no-las-de-vino" class="md-nav__link">
-    1.2.12: Sangrías (las de texto, no las de vino)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sangrias-mejores-practicas" class="md-nav__link">
-    Sangrías - Mejores prácticas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1213-condicionales" class="md-nav__link">
-    1.2.13: Condicionales
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1214-imprimiendo" class="md-nav__link">
-    1.2.14: Imprimiendo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1215-input-dato-de-entrada-de-usuario" class="md-nav__link">
-    1.2.15: Input (dato de entrada) de usuario
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1216-la-declaracion-pass" class="md-nav__link">
-    1.2.16: La declaración "pass"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1217-ejercicios" class="md-nav__link">
-    1.2.17: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.2.17: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-15-el-rebote" class="md-nav__link">
-    Ejercicio 1.5: El rebote
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-16-depuracion" class="md-nav__link">
-    Ejercicio 1.6: Depuración
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#13-numeros" class="md-nav__link">
-    1.3 Números
-  </a>
-  
-    <nav class="md-nav" aria-label="1.3 Números">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#131-tipos-de-numeros" class="md-nav__link">
-    1.3.1: Tipos de numeros
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#132-booleanos-bool" class="md-nav__link">
-    1.3.2: Booleanos (bool)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#133-enteros-int" class="md-nav__link">
-    1.3.3: Enteros (int)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#134-punto-flotante-float" class="md-nav__link">
-    1.3.4: Punto flotante (float)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#135-comparaciones" class="md-nav__link">
-    1.3.5: Comparaciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#136-convirtiendo-numeros" class="md-nav__link">
-    1.3.6: Convirtiendo numeros
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#137-ejercicios" class="md-nav__link">
-    1.3.7: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.3.7: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-17-la-hipoteca-de-dave" class="md-nav__link">
-    Ejercicio 1.7: La hipoteca de Dave
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-18-pagos-adicionales" class="md-nav__link">
-    Ejercicio 1.8: Pagos adicionales
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-19-hacer-una-calculadora-de-pago-adicional" class="md-nav__link">
-    Ejercicio 1.9: Hacer una calculadora de pago adicional
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-110-crear-una-tabla" class="md-nav__link">
-    Ejercicio 1.10: Crear una tabla
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-111-bono" class="md-nav__link">
-    Ejercicio 1.11: Bono
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-112-un-misterio" class="md-nav__link">
-    Ejercicio 1.12: Un misterio
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#14-cadenas" class="md-nav__link">
-    1.4 Cadenas
-  </a>
-  
-    <nav class="md-nav" aria-label="1.4 Cadenas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#141-representando-texto-literal" class="md-nav__link">
-    1.4.1: Representando texto literal
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#142-codigo-de-escape-de-cadenas" class="md-nav__link">
-    1.4.2: Código de escape de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#143-representacion-de-cadenas" class="md-nav__link">
-    1.4.3: Representación de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#144-indexacion-de-cadenas" class="md-nav__link">
-    1.4.4: Indexación de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#145-operaciones-de-cadena" class="md-nav__link">
-    1.4.5: Operaciones de cadena
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#146-metodos-de-cadena" class="md-nav__link">
-    1.4.6: Metodos de cadena
-  </a>
-  
-    <nav class="md-nav" aria-label="1.4.6: Metodos de cadena">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#otros-metodos-de-cadena" class="md-nav__link">
-    Otros metodos de cadena
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#147-mutabilidad-de-cadenas" class="md-nav__link">
-    1.4.7: Mutabilidad de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#148-conversiones-de-cadena" class="md-nav__link">
-    1.4.8: Conversiones de cadena
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#149-cadenas-byte" class="md-nav__link">
-    1.4.9: Cadenas byte
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1410-cadenas-crudas" class="md-nav__link">
-    1.4.10: Cadenas crudas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1411-cadenas-f" class="md-nav__link">
-    1.4.11: Cadenas f
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1412-ejercicios" class="md-nav__link">
-    1.4.12: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.4.12: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-113-extraccion-de-caracteres-individuales-y-subcadenas" class="md-nav__link">
-    Ejercicio 1.13: Extracción de caracteres individuales y subcadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-114-concatenacion-de-caracteres" class="md-nav__link">
-    Ejercicio 1.14: Concatenación de caracteres
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-115-pruebas-de-membresia" class="md-nav__link">
-    Ejercicio 1.15: Pruebas de membresía
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-116-metodos-de-cadenas" class="md-nav__link">
-    Ejercicio 1.16: Métodos de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-117-f-strings" class="md-nav__link">
-    Ejercicio 1.17: f-strings
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-118-expresiones-regulares" class="md-nav__link">
-    Ejercicio 1.18: Expresiones regulares
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#algunos-comentarios" class="md-nav__link">
-    Algunos comentarios
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-listas" class="md-nav__link">
-    1.5 Listas
-  </a>
-  
-    <nav class="md-nav" aria-label="1.5 Listas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#151-creando-una-lista" class="md-nav__link">
-    1.5.1: Creando una lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#152-operaciones-de-lista" class="md-nav__link">
-    1.5.2: Operaciones de lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#153-iteracion-de-lista-y-busqueda" class="md-nav__link">
-    1.5.3: Iteracion de lista y búsqueda
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#154-remocion-en-lista" class="md-nav__link">
-    1.5.4: Remoción en lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#155-ordenar-una-lista" class="md-nav__link">
-    1.5.5: Ordenar una lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#156-listas-y-matematicas" class="md-nav__link">
-    1.5.6: Listas y matemáticas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#157-ejercicios" class="md-nav__link">
-    1.5.7: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.5.7: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#119-extraccion-y-reasignacion-de-elementos" class="md-nav__link">
-    1.19: Extracción y reasignación de elementos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#120-ciclando-sobre-una-lista" class="md-nav__link">
-    1.20: Ciclando sobre una lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#121-pruebas-de-pertenencia" class="md-nav__link">
-    1.21: Pruebas de pertenencia
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#122-anadiendo-insertando-y-borrando-elementos" class="md-nav__link">
-    1.22: Añadiendo, insertando y borrando elementos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#123-ordernando" class="md-nav__link">
-    1.23: Ordernando
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#124-ajuntando-todo-nuevamente" class="md-nav__link">
-    1.24: Ajuntando todo nuevamente
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#125-listas-de-cualquier-cosa" class="md-nav__link">
-    1.25: Listas de cualquier cosa
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#16-archivos" class="md-nav__link">
-    1.6 Archivos
-  </a>
-  
-    <nav class="md-nav" aria-label="1.6 Archivos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#161-io-de-un-archivo-entrada-salida" class="md-nav__link">
-    1.6.1: I/O de un Archivo (entrada / salida)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#162-patrones-comunes-de-lectura-de-archivos" class="md-nav__link">
-    1.6.2: Patrones comunes de lectura de archivos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#163-patrones-comunes-de-escritura-de-archivos" class="md-nav__link">
-    1.6.3: Patrones comunes de escritura de archivos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#164-ejercicios" class="md-nav__link">
-    1.6.4: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.6.4: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#126-prerequisitos" class="md-nav__link">
-    1.26: Prerequisitos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#127-leyendo-de-un-archivo" class="md-nav__link">
-    1.27: Leyendo de un archivo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#128-otro-tipo-de-archivos" class="md-nav__link">
-    1.28: Otro tipo de "archivos"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#algunos-comentarios_1" class="md-nav__link">
-    Algunos comentarios
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#17-funciones" class="md-nav__link">
-    1.7 Funciones
-  </a>
-  
-    <nav class="md-nav" aria-label="1.7 Funciones">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#171-funciones-personalizadas" class="md-nav__link">
-    1.7.1: Funciones personalizadas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#172-funciones-de-biblioteca" class="md-nav__link">
-    1.7.2: Funciones de biblioteca
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#173-errores-y-excepciones" class="md-nav__link">
-    1.7.3: Errores y excepciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#174-atrapando-y-gestionando-excepciones" class="md-nav__link">
-    1.7.4: Atrapando y gestionando excepciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#175-generando-excepciones" class="md-nav__link">
-    1.7.5: Generando excepciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#176-ejercicios" class="md-nav__link">
-    1.7.6: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.7.6: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#129-definiendo-una-funcion" class="md-nav__link">
-    1.29: Definiendo una función
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#130-convirtiendo-una-secuencia-de-comandos-en-una-funcion" class="md-nav__link">
-    1.30: Convirtiendo una secuencia de comandos en una función
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#131-administracion-de-errores" class="md-nav__link">
-    1.31: Administración de errores
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#132-usando-una-funcion-de-biblioteca-local" class="md-nav__link">
-    1.32: Usando una función de biblioteca local
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#133-leyendo-desde-la-linea-de-comando" class="md-nav__link">
-    1.33: Leyendo desde la línea de comando
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="..">Sobre el curso</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../temario/">Temario</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../faq/">Preguntas</a>
+                    </li>
+                </ul>
+                <ul class="current">
+                    <li class="toctree-l1 current"><a class="reference internal current" href="./">1 Intro a Python</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#11-introduciendo-python">1.1 Introduciendo Python</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#111-que-es-python">1.1.1: Qué es Python?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#112-donde-consigo-python">1.1.2: Donde consigo Python?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#113-porque-fue-creado">1.1.3: Porqué fue creado?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#114-donde-esta-python-en-mi-maquina">1.1.4: Dónde está Python en mi Maquina?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#115-ejercicios">1.1.5: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-11-utilizando-python-como-calculadora">Ejercicio 1.1: Utilizando Python como Calculadora</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-12-consiguiendo-ayuda">Ejercicio 1.2: Consiguiendo ayuda</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-13-copiar-y-pegar">Ejercicio 1.3: Copiar y pegar</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-14-donde-esta-mi-bus">Ejercicio 1.4: Donde esta mi bus?</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#12-un-primer-programa">1.2 Un primer programa</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#121-ejecutando-python">1.2.1: Ejecutando Python</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#122-modo-interactivo">1.2.2: Modo interactivo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#123-creando-programas">1.2.3: Creando programas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#124-ejecutando-programas">1.2.4: Ejecutando programas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#125-un-ejemplo">1.2.5: Un ejemplo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#126-declaraciones">1.2.6: Declaraciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#127-comentarios">1.2.7: Comentarios</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#128-variables">1.2.8: Variables</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#129-tipos">1.2.9: Tipos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1210-casos-sensitivos">1.2.10: Casos Sensitivos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1211-ciclar">1.2.11: Ciclar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1212-sangrias-las-de-texto-no-las-de-vino">1.2.12: Sangrías (las de texto, no las de vino)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#sangrias-mejores-practicas">Sangrías - Mejores prácticas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1213-condicionales">1.2.13: Condicionales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1214-imprimiendo">1.2.14: Imprimiendo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1215-input-dato-de-entrada-de-usuario">1.2.15: Input (dato de entrada) de usuario</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1216-la-declaracion-pass">1.2.16: La declaración "pass"</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1217-ejercicios">1.2.17: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-15-el-rebote">Ejercicio 1.5: El rebote</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-16-depuracion">Ejercicio 1.6: Depuración</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#13-numeros">1.3 Números</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#131-tipos-de-numeros">1.3.1: Tipos de numeros</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#132-booleanos-bool">1.3.2: Booleanos (bool)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#133-enteros-int">1.3.3: Enteros (int)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#134-punto-flotante-float">1.3.4: Punto flotante (float)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#135-comparaciones">1.3.5: Comparaciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#136-convirtiendo-numeros">1.3.6: Convirtiendo numeros</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#137-ejercicios">1.3.7: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-17-la-hipoteca-de-dave">Ejercicio 1.7: La hipoteca de Dave</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-18-pagos-adicionales">Ejercicio 1.8: Pagos adicionales</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-19-hacer-una-calculadora-de-pago-adicional">Ejercicio 1.9: Hacer una calculadora de pago adicional</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-110-crear-una-tabla">Ejercicio 1.10: Crear una tabla</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-111-bono">Ejercicio 1.11: Bono</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-112-un-misterio">Ejercicio 1.12: Un misterio</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#14-cadenas">1.4 Cadenas</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#141-representando-texto-literal">1.4.1: Representando texto literal</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#142-codigo-de-escape-de-cadenas">1.4.2: Código de escape de cadenas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#143-representacion-de-cadenas">1.4.3: Representación de cadenas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#144-indexacion-de-cadenas">1.4.4: Indexación de cadenas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#145-operaciones-de-cadena">1.4.5: Operaciones de cadena</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#146-metodos-de-cadena">1.4.6: Metodos de cadena</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#otros-metodos-de-cadena">Otros metodos de cadena</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#147-mutabilidad-de-cadenas">1.4.7: Mutabilidad de cadenas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#148-conversiones-de-cadena">1.4.8: Conversiones de cadena</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#149-cadenas-byte">1.4.9: Cadenas byte</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1410-cadenas-crudas">1.4.10: Cadenas crudas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1411-cadenas-f">1.4.11: Cadenas f</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#1412-ejercicios">1.4.12: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-113-extraccion-de-caracteres-individuales-y-subcadenas">Ejercicio 1.13: Extracción de caracteres individuales y subcadenas</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-114-concatenacion-de-caracteres">Ejercicio 1.14: Concatenación de caracteres</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-115-pruebas-de-membresia">Ejercicio 1.15: Pruebas de membresía</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-116-metodos-de-cadenas">Ejercicio 1.16: Métodos de cadenas</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-117-f-strings">Ejercicio 1.17: f-strings</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-118-expresiones-regulares">Ejercicio 1.18: Expresiones regulares</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#algunos-comentarios">Algunos comentarios</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#15-listas">1.5 Listas</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#151-creando-una-lista">1.5.1: Creando una lista</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#152-operaciones-de-lista">1.5.2: Operaciones de lista</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#153-iteracion-de-lista-y-busqueda">1.5.3: Iteracion de lista y búsqueda</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#154-remocion-en-lista">1.5.4: Remoción en lista</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#155-ordenar-una-lista">1.5.5: Ordenar una lista</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#156-listas-y-matematicas">1.5.6: Listas y matemáticas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#157-ejercicios">1.5.7: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#119-extraccion-y-reasignacion-de-elementos">1.19: Extracción y reasignación de elementos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#120-ciclando-sobre-una-lista">1.20: Ciclando sobre una lista</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#121-pruebas-de-pertenencia">1.21: Pruebas de pertenencia</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#122-anadiendo-insertando-y-borrando-elementos">1.22: Añadiendo, insertando y borrando elementos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#123-ordernando">1.23: Ordernando</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#124-ajuntando-todo-nuevamente">1.24: Ajuntando todo nuevamente</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#125-listas-de-cualquier-cosa">1.25: Listas de cualquier cosa</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#16-archivos">1.6 Archivos</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#161-io-de-un-archivo-entrada-salida">1.6.1: I/O de un Archivo (entrada / salida)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#162-patrones-comunes-de-lectura-de-archivos">1.6.2: Patrones comunes de lectura de archivos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#163-patrones-comunes-de-escritura-de-archivos">1.6.3: Patrones comunes de escritura de archivos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#164-ejercicios">1.6.4: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#126-prerequisitos">1.26: Prerequisitos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#127-leyendo-de-un-archivo">1.27: Leyendo de un archivo</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#128-otro-tipo-de-archivos">1.28: Otro tipo de "archivos"</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#algunos-comentarios_1">Algunos comentarios</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#17-funciones">1.7 Funciones</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#171-funciones-personalizadas">1.7.1: Funciones personalizadas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#172-funciones-de-biblioteca">1.7.2: Funciones de biblioteca</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#173-errores-y-excepciones">1.7.3: Errores y excepciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#174-atrapando-y-gestionando-excepciones">1.7.4: Atrapando y gestionando excepciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#175-generando-excepciones">1.7.5: Generando excepciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#176-ejercicios">1.7.6: Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#129-definiendo-una-funcion">1.29: Definiendo una función</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#130-convirtiendo-una-secuencia-de-comandos-en-una-funcion">1.30: Convirtiendo una secuencia de comandos en una función</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#131-administracion-de-errores">1.31: Administración de errores</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#132-usando-una-funcion-de-biblioteca-local">1.32: Usando una función de biblioteca local</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#133-leyendo-desde-la-linea-de-comando">1.33: Leyendo desde la línea de comando</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
-  
-</nav>
-    
-  </li>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../2/">2 Trabajando con Data</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../3/">3 Organización de un Programa</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../4/">4 Clases y Objetos</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../5/">5 Entrañas del Objeto</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../6/">6 Generadores</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../7/">7 Temas avanzados</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../8/">8 Prueba y Depuración</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../9/">9 Paquetes</a>
+                    </li>
+                </ul>
+                <ul>
+                    <li class="toctree-l1"><a class="reference internal" href="../licencia/">Licencia</a>
+                    </li>
+                </ul>
+      </div>
+    </div>
+    </nav>
 
-    
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
       
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="..">Python Práctico</a>
+      </nav>
+
       
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../2/" class="md-nav__link">
-      2 Trabajando con Data
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../3/" class="md-nav__link">
-      3 Organización de un Programa
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../4/" class="md-nav__link">
-      4 Clases y Objetos
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../5/" class="md-nav__link">
-      5 Entrañas del Objeto
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../6/" class="md-nav__link">
-      6 Generadores
-    </a>
-  </li>
-
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="..">Docs</a> &raquo;</li>
     
       
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../7/" class="md-nav__link">
-      7 Temas avanzados
-    </a>
-  </li>
-
     
+    <li>1 Intro a Python</li>
+    <li class="wy-breadcrumbs-aside">
       
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../8/" class="md-nav__link">
-      8 Prueba y Depuración
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../9/" class="md-nav__link">
-      9 Paquetes
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-
-  <li class="md-nav__item">
-    <a href="../licencia/" class="md-nav__link">
-      Licencia
-    </a>
-  </li>
-
-    
+    </li>
   </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
+  
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc" >
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    
-<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">
-      <span class="md-nav__icon md-icon"></span>
-      Table of contents
-    </label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#11-introduciendo-python" class="md-nav__link">
-    1.1 Introduciendo Python
-  </a>
-  
-    <nav class="md-nav" aria-label="1.1 Introduciendo Python">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#111-que-es-python" class="md-nav__link">
-    1.1.1: Qué es Python?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#112-donde-consigo-python" class="md-nav__link">
-    1.1.2: Donde consigo Python?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#113-porque-fue-creado" class="md-nav__link">
-    1.1.3: Porqué fue creado?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#114-donde-esta-python-en-mi-maquina" class="md-nav__link">
-    1.1.4: Dónde está Python en mi Maquina?
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#115-ejercicios" class="md-nav__link">
-    1.1.5: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.1.5: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-11-utilizando-python-como-calculadora" class="md-nav__link">
-    Ejercicio 1.1: Utilizando Python como Calculadora
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-12-consiguiendo-ayuda" class="md-nav__link">
-    Ejercicio 1.2: Consiguiendo ayuda
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-13-copiar-y-pegar" class="md-nav__link">
-    Ejercicio 1.3: Copiar y pegar
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-14-donde-esta-mi-bus" class="md-nav__link">
-    Ejercicio 1.4: Donde esta mi bus?
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#12-un-primer-programa" class="md-nav__link">
-    1.2 Un primer programa
-  </a>
-  
-    <nav class="md-nav" aria-label="1.2 Un primer programa">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#121-ejecutando-python" class="md-nav__link">
-    1.2.1: Ejecutando Python
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#122-modo-interactivo" class="md-nav__link">
-    1.2.2: Modo interactivo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#123-creando-programas" class="md-nav__link">
-    1.2.3: Creando programas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#124-ejecutando-programas" class="md-nav__link">
-    1.2.4: Ejecutando programas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#125-un-ejemplo" class="md-nav__link">
-    1.2.5: Un ejemplo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#126-declaraciones" class="md-nav__link">
-    1.2.6: Declaraciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#127-comentarios" class="md-nav__link">
-    1.2.7: Comentarios
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#128-variables" class="md-nav__link">
-    1.2.8: Variables
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#129-tipos" class="md-nav__link">
-    1.2.9: Tipos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1210-casos-sensitivos" class="md-nav__link">
-    1.2.10: Casos Sensitivos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1211-ciclar" class="md-nav__link">
-    1.2.11: Ciclar
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1212-sangrias-las-de-texto-no-las-de-vino" class="md-nav__link">
-    1.2.12: Sangrías (las de texto, no las de vino)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#sangrias-mejores-practicas" class="md-nav__link">
-    Sangrías - Mejores prácticas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1213-condicionales" class="md-nav__link">
-    1.2.13: Condicionales
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1214-imprimiendo" class="md-nav__link">
-    1.2.14: Imprimiendo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1215-input-dato-de-entrada-de-usuario" class="md-nav__link">
-    1.2.15: Input (dato de entrada) de usuario
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1216-la-declaracion-pass" class="md-nav__link">
-    1.2.16: La declaración "pass"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1217-ejercicios" class="md-nav__link">
-    1.2.17: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.2.17: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-15-el-rebote" class="md-nav__link">
-    Ejercicio 1.5: El rebote
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-16-depuracion" class="md-nav__link">
-    Ejercicio 1.6: Depuración
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#13-numeros" class="md-nav__link">
-    1.3 Números
-  </a>
-  
-    <nav class="md-nav" aria-label="1.3 Números">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#131-tipos-de-numeros" class="md-nav__link">
-    1.3.1: Tipos de numeros
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#132-booleanos-bool" class="md-nav__link">
-    1.3.2: Booleanos (bool)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#133-enteros-int" class="md-nav__link">
-    1.3.3: Enteros (int)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#134-punto-flotante-float" class="md-nav__link">
-    1.3.4: Punto flotante (float)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#135-comparaciones" class="md-nav__link">
-    1.3.5: Comparaciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#136-convirtiendo-numeros" class="md-nav__link">
-    1.3.6: Convirtiendo numeros
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#137-ejercicios" class="md-nav__link">
-    1.3.7: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.3.7: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-17-la-hipoteca-de-dave" class="md-nav__link">
-    Ejercicio 1.7: La hipoteca de Dave
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-18-pagos-adicionales" class="md-nav__link">
-    Ejercicio 1.8: Pagos adicionales
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-19-hacer-una-calculadora-de-pago-adicional" class="md-nav__link">
-    Ejercicio 1.9: Hacer una calculadora de pago adicional
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-110-crear-una-tabla" class="md-nav__link">
-    Ejercicio 1.10: Crear una tabla
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-111-bono" class="md-nav__link">
-    Ejercicio 1.11: Bono
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-112-un-misterio" class="md-nav__link">
-    Ejercicio 1.12: Un misterio
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#14-cadenas" class="md-nav__link">
-    1.4 Cadenas
-  </a>
-  
-    <nav class="md-nav" aria-label="1.4 Cadenas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#141-representando-texto-literal" class="md-nav__link">
-    1.4.1: Representando texto literal
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#142-codigo-de-escape-de-cadenas" class="md-nav__link">
-    1.4.2: Código de escape de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#143-representacion-de-cadenas" class="md-nav__link">
-    1.4.3: Representación de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#144-indexacion-de-cadenas" class="md-nav__link">
-    1.4.4: Indexación de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#145-operaciones-de-cadena" class="md-nav__link">
-    1.4.5: Operaciones de cadena
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#146-metodos-de-cadena" class="md-nav__link">
-    1.4.6: Metodos de cadena
-  </a>
-  
-    <nav class="md-nav" aria-label="1.4.6: Metodos de cadena">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#otros-metodos-de-cadena" class="md-nav__link">
-    Otros metodos de cadena
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#147-mutabilidad-de-cadenas" class="md-nav__link">
-    1.4.7: Mutabilidad de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#148-conversiones-de-cadena" class="md-nav__link">
-    1.4.8: Conversiones de cadena
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#149-cadenas-byte" class="md-nav__link">
-    1.4.9: Cadenas byte
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1410-cadenas-crudas" class="md-nav__link">
-    1.4.10: Cadenas crudas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1411-cadenas-f" class="md-nav__link">
-    1.4.11: Cadenas f
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#1412-ejercicios" class="md-nav__link">
-    1.4.12: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.4.12: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-113-extraccion-de-caracteres-individuales-y-subcadenas" class="md-nav__link">
-    Ejercicio 1.13: Extracción de caracteres individuales y subcadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-114-concatenacion-de-caracteres" class="md-nav__link">
-    Ejercicio 1.14: Concatenación de caracteres
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-115-pruebas-de-membresia" class="md-nav__link">
-    Ejercicio 1.15: Pruebas de membresía
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-116-metodos-de-cadenas" class="md-nav__link">
-    Ejercicio 1.16: Métodos de cadenas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-117-f-strings" class="md-nav__link">
-    Ejercicio 1.17: f-strings
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ejercicio-118-expresiones-regulares" class="md-nav__link">
-    Ejercicio 1.18: Expresiones regulares
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#algunos-comentarios" class="md-nav__link">
-    Algunos comentarios
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#15-listas" class="md-nav__link">
-    1.5 Listas
-  </a>
-  
-    <nav class="md-nav" aria-label="1.5 Listas">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#151-creando-una-lista" class="md-nav__link">
-    1.5.1: Creando una lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#152-operaciones-de-lista" class="md-nav__link">
-    1.5.2: Operaciones de lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#153-iteracion-de-lista-y-busqueda" class="md-nav__link">
-    1.5.3: Iteracion de lista y búsqueda
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#154-remocion-en-lista" class="md-nav__link">
-    1.5.4: Remoción en lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#155-ordenar-una-lista" class="md-nav__link">
-    1.5.5: Ordenar una lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#156-listas-y-matematicas" class="md-nav__link">
-    1.5.6: Listas y matemáticas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#157-ejercicios" class="md-nav__link">
-    1.5.7: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.5.7: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#119-extraccion-y-reasignacion-de-elementos" class="md-nav__link">
-    1.19: Extracción y reasignación de elementos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#120-ciclando-sobre-una-lista" class="md-nav__link">
-    1.20: Ciclando sobre una lista
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#121-pruebas-de-pertenencia" class="md-nav__link">
-    1.21: Pruebas de pertenencia
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#122-anadiendo-insertando-y-borrando-elementos" class="md-nav__link">
-    1.22: Añadiendo, insertando y borrando elementos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#123-ordernando" class="md-nav__link">
-    1.23: Ordernando
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#124-ajuntando-todo-nuevamente" class="md-nav__link">
-    1.24: Ajuntando todo nuevamente
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#125-listas-de-cualquier-cosa" class="md-nav__link">
-    1.25: Listas de cualquier cosa
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#16-archivos" class="md-nav__link">
-    1.6 Archivos
-  </a>
-  
-    <nav class="md-nav" aria-label="1.6 Archivos">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#161-io-de-un-archivo-entrada-salida" class="md-nav__link">
-    1.6.1: I/O de un Archivo (entrada / salida)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#162-patrones-comunes-de-lectura-de-archivos" class="md-nav__link">
-    1.6.2: Patrones comunes de lectura de archivos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#163-patrones-comunes-de-escritura-de-archivos" class="md-nav__link">
-    1.6.3: Patrones comunes de escritura de archivos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#164-ejercicios" class="md-nav__link">
-    1.6.4: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.6.4: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#126-prerequisitos" class="md-nav__link">
-    1.26: Prerequisitos
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#127-leyendo-de-un-archivo" class="md-nav__link">
-    1.27: Leyendo de un archivo
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#128-otro-tipo-de-archivos" class="md-nav__link">
-    1.28: Otro tipo de "archivos"
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#algunos-comentarios_1" class="md-nav__link">
-    Algunos comentarios
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#17-funciones" class="md-nav__link">
-    1.7 Funciones
-  </a>
-  
-    <nav class="md-nav" aria-label="1.7 Funciones">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#171-funciones-personalizadas" class="md-nav__link">
-    1.7.1: Funciones personalizadas
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#172-funciones-de-biblioteca" class="md-nav__link">
-    1.7.2: Funciones de biblioteca
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#173-errores-y-excepciones" class="md-nav__link">
-    1.7.3: Errores y excepciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#174-atrapando-y-gestionando-excepciones" class="md-nav__link">
-    1.7.4: Atrapando y gestionando excepciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#175-generando-excepciones" class="md-nav__link">
-    1.7.5: Generando excepciones
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#176-ejercicios" class="md-nav__link">
-    1.7.6: Ejercicios
-  </a>
-  
-    <nav class="md-nav" aria-label="1.7.6: Ejercicios">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#129-definiendo-una-funcion" class="md-nav__link">
-    1.29: Definiendo una función
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#130-convirtiendo-una-secuencia-de-comandos-en-una-funcion" class="md-nav__link">
-    1.30: Convirtiendo una secuencia de comandos en una función
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#131-administracion-de-errores" class="md-nav__link">
-    1.31: Administración de errores
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#132-usando-una-funcion-de-biblioteca-local" class="md-nav__link">
-    1.32: Usando una función de biblioteca local
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#133-leyendo-desde-la-linea-de-comando" class="md-nav__link">
-    1.33: Leyendo desde la línea de comando
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-    </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-          
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
-              
-                
-                
                 <h1 id="1-intro-a-python">1. Intro a Python</h1>
 <h2 id="11-introduciendo-python">1.1 Introduciendo Python</h2>
 <p>El objetivo de este capítulo es introducir las bases de Python. Iniciaremos desde cero y aprenderemos a editar, ejecutar, y depurar programas. Además, escribiremos una secuencia de comandos que lee data en un archivo CSV y ejecuta un cálculo.</p>
@@ -3478,85 +1841,57 @@ print('Total costo:', costo)
 Total cost: 44671.15
 bash %
 </code></pre>
-                
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid" aria-label="Footer">
-        
-          <a href="../faq/" class="md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11h12z"/></svg>
-            </div>
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Preguntas
-              </div>
-            </div>
-          </a>
-        
-        
-          <a href="../2/" class="md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-footer-nav__title">
-              <div class="md-ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                2 Trabajando con Data
-              </div>
-            </div>
-            <div class="md-footer-nav__button md-icon">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11H4z"/></svg>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-        Made with
-        <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
-          Material for MkDocs
-        </a>
-      </div>
+        <a href="../2/" class="btn btn-neutral float-right" title="2 Trabajando con Data">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="../faq/" class="btn btn-neutral" title="Preguntas"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
   </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../assets/javascripts/vendor.08c56446.min.js"></script>
-      <script src="../assets/javascripts/bundle.6ced434e.min.js"></script><script id="__lang" type="application/json">{"clipboard.copy": "Copy to clipboard", "clipboard.copied": "Copied to clipboard", "search.config.lang": "en", "search.config.pipeline": "trimmer, stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.placeholder": "Type to start searching", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.term.missing": "Missing"}</script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>
-        app = initialize({
-          base: "..",
-          features: [],
-          search: Object.assign({
-            worker: "../assets/javascripts/worker/search.8c7e0a7e.min.js"
-          }, typeof search !== "undefined" && search)
-        })
-      </script>
       
-    
-  </body>
+        <span><a href="../faq/" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="../2/" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
 </html>
