@@ -241,7 +241,7 @@
     </li>
         </ul>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#27-el-modelo-objeto">2.7 El modelo Objeto</a>
+    <li class="toctree-l2"><a class="reference internal" href="#27-objetos">2.7 Objetos</a>
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#271-asignacion">2.7.1: Asignacion</a>
     </li>
@@ -251,20 +251,22 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#274-algunos-peligros">2.7.4: Algunos peligros</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#275-identidad-y-referencias">2.7.5: Identidad y referencias</a>
+    <li class="toctree-l3"><a class="reference internal" href="#275-identidad-y-referencia">2.7.5: Identidad y referencia</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#276-copias-superficiales">2.7.6: Copias superficiales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#_1"></a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#279-copias-profundas">2.7.9: Copias profundas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2710-nombres-valores-tipos">2.7.10: Nombres, valores, tipos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2711-verificacion-de-tipo">2.7.11: Verificación de tipo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#2712-todo-es-un-objeto">2.7.12: Todo es un objeto</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#233-ejercicios">2.33: Ejercicios</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#229-copias-profundas">2.29: Copias profundas</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#230-nombres-valores-tipos">2.30: Nombres, valores, tipos</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#231-verificacion-de-tipo">2.31: Verificación de tipo</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#232-todo-es-un-objeto">2.32: Todo es un objeto</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#233-ejercicios">2.33: Ejercicios</a>
-    </li>
     <li class="toctree-l4"><a class="reference internal" href="#ejercicio-224-data-de-primera-clase">Ejercicio 2.24: Data de primera-clase</a>
     </li>
     <li class="toctree-l4"><a class="reference internal" href="#ejercicio-225-creando-diccionarios">Ejercicio 2.25: Creando diccionarios</a>
@@ -1755,21 +1757,277 @@ a = { x^2 | x ∈ s, x &gt; 0 }         # Math
 <h4 id="comentario">Comentario</h4>
 <p>Las listas por comprensión se utilizan comúnmente en Python como un medio eficaz para transformar, filtrar o recopilar datos. Debido a la sintaxis, no querrá exagerar; intente que la comprensión de cada lista sea lo más simple posible. Está bien dividir las cosas en varios pasos. Por ejemplo, no está claro si le gustaría dar ese último ejemplo a sus compañeros de trabajo desprevenidos.</p>
 <p>Dicho esto, saber cómo manipular datos rápidamente es una habilidad increíblemente útil. Existen numerosas situaciones en las que es posible que deba resolver algún  tipo de problema único que involucre la importación, exportación,  extracción de datos, etc. Convertirse en un maestro gurú de la comprensión de listas puede reducir  sustancialmente el tiempo dedicado a idear una solución. Además, no se olvide del <code>collections</code> módulo.</p>
-<h2 id="27-el-modelo-objeto">2.7 El modelo Objeto</h2>
+<h2 id="27-objetos">2.7 Objetos</h2>
+<p>Esta sección presenta más detalles sobre el modelo de objetos internos de Python y analiza algunos asuntos relacionados con la administración de  memoria, la copia y la verificación de tipos.</p>
 <h3 id="271-asignacion">2.7.1: Asignacion</h3>
+<p>Muchas operaciones en Python están relacionadas con la <em>asignación</em> o el <em>almacenamiento de</em> valores.</p>
+<pre><code class="language-python">a = value         # Asignación a una variable 
+s[n] = value      # Asignación a una lista 
+s.append(value)   # Agregando a una lista 
+d['key'] = value  # Agregando a un diccionario
+</code></pre>
+<p><em>Una advertencia: las operaciones de asignación </em><em>nunca hacen una copia</em><em> del valor asignado.</em> Todas las asignaciones son simplemente copias de referencia (o copias de puntero si lo prefiere).</p>
 <h3 id="272-ejemplo-de-asignacion">2.7.2: Ejemplo de asignacion</h3>
+<p>Considere este fragmento de código.</p>
+<pre><code class="language-python">a = [1,2,3]
+b = a
+c = [a,b]
+</code></pre>
+<p>Una imagen de las operaciones de memoria subyacentes. En este ejemplo, solo hay un objeto de lista <code>[1,2,3]</code>, pero hay cuatro referencias diferentes a él.</p>
+<p><img alt="Referencias" src="https://dabeaz-course.github.io/practical-python/Notes/02_Working_with_data/references.png" /></p>
+<p>Esto significa que la modificación de un valor afecta a <em>todas las</em> referencias.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a.append(999)
+&gt;&gt;&gt; a
+[1,2,3,999]
+&gt;&gt;&gt; b
+[1,2,3,999]
+&gt;&gt;&gt; c
+[[1,2,3,999], [1,2,3,999]]
+&gt;&gt;&gt;
+</code></pre>
+<p>Observe cómo un cambio en la lista original aparece en todas partes (¡ay!). Esto se debe a que nunca se hicieron copias. Todo apunta a lo mismo.</p>
 <h3 id="273-reasignacion-de-valores">2.7.3: Reasignacion de valores</h3>
+<p>La reasignación de un valor <em>nunca</em> sobrescribe la memoria utilizada por el valor anterior.</p>
+<pre><code class="language-python">a = [1,2,3]
+b = a
+a = [4,5,6]
+
+print(a)      # [4, 5, 6] 
+print(b)      # [1, 2, 3] Tiene el valor original 
+</code></pre>
+<p>Recuerde: las <strong>variables son nombres, no ubicaciones de memoria.</strong></p>
 <h3 id="274-algunos-peligros">2.7.4: Algunos peligros</h3>
-<h3 id="275-identidad-y-referencias">2.7.5: Identidad y referencias</h3>
+<p>Si no sabe acerca de este intercambio, se disparará en el pie en algún momento. Escenario típico. Modifica algunos datos pensando que es su propia copia privada y accidentalmente corrompe algunos datos en alguna otra parte del programa.</p>
+<p><em>Comentario: Esta es una de las razones por las que los tipos de datos primitivos  (int, float, string) son inmutables (solo lectura).</em></p>
+<h3 id="275-identidad-y-referencia">2.7.5: Identidad y referencia</h3>
+<p>Utilice el operador <code>is</code> para comprobar si dos valores son exactamente el mismo objeto.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; b = a
+&gt;&gt;&gt; a is b
+True
+&gt;&gt;&gt;
+</code></pre>
+<p><code>is</code>compara la identidad del objeto (un número entero). La identidad se puede obtener utilizando <code>id()</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; id(a)
+3588944
+&gt;&gt;&gt; id(b)
+3588944
+&gt;&gt;&gt;
+</code></pre>
+<p>Nota: Casi siempre es mejor utilizar <code>==</code> para comparar objetos. El comportamiento de <code>is</code> suele ser inesperado:</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3]
+&gt;&gt;&gt; b = a
+&gt;&gt;&gt; c = [1,2,3]
+&gt;&gt;&gt; a is b
+True
+&gt;&gt;&gt; a is c
+False
+&gt;&gt;&gt; a == c # hmm... ¿por qué?
+True
+&gt;&gt;&gt;
+</code></pre>
 <h3 id="276-copias-superficiales">2.7.6: Copias superficiales</h3>
-<h4 id="229-copias-profundas">2.29: Copias profundas</h4>
-<h4 id="230-nombres-valores-tipos">2.30: Nombres, valores, tipos</h4>
-<h4 id="231-verificacion-de-tipo">2.31: Verificación de tipo</h4>
-<h4 id="232-todo-es-un-objeto">2.32: Todo es un objeto</h4>
-<h4 id="233-ejercicios">2.33: Ejercicios</h4>
+<p>Las listas y los dictados tienen métodos para copiar.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [2,3,[100,101],4]
+&gt;&gt;&gt; b = list(a) # Make a copy &gt;&gt;&gt; a is b
+False
+</code></pre>
+<p>Es una lista nueva, pero los elementos de la lista se comparten.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a[2].append(102)
+&gt;&gt;&gt; b[2]
+[100,101,102]
+&gt;&gt;&gt;
+&gt;&gt;&gt; a[2] is b[2]
+True
+&gt;&gt;&gt;
+</code></pre>
+<p>Por ejemplo, <code>[100, 101, 102]</code>se comparte la lista interna . Esto se conoce como copia superficial. Aquí tienes una foto.</p>
+<p><img alt="Copia superficial" src="https://dabeaz-course.github.io/practical-python/Notes/02_Working_with_data/shallow.png" /></p>
+<h3 id="_1"></h3>
+<h3 id="279-copias-profundas">2.7.9: Copias profundas</h3>
+<p>A veces es necesario hacer una copia de un objeto y todos los objetos que contiene. Puede utilizar el módulo <code>copy</code>para esto:</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [2,3,[100,101],4]
+&gt;&gt;&gt; import copy
+&gt;&gt;&gt; b = copy.deepcopy(a)
+&gt;&gt;&gt; a[2].append(102)
+&gt;&gt;&gt; b[2]
+[100,101]
+&gt;&gt;&gt; a[2] is b[2]
+False
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="2710-nombres-valores-tipos">2.7.10: Nombres, valores, tipos</h3>
+<p>Los nombres de las variables no tienen <em>tipo</em> . Es solo un nombre. Sin embargo, los valores <em>no</em> tienen un tipo subyacente.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 42
+&gt;&gt;&gt; b = 'Hello World'
+&gt;&gt;&gt; type(a)
+&lt;type 'int'&gt;
+&gt;&gt;&gt; type(b)
+&lt;type 'str'&gt;
+</code></pre>
+<p><code>type()</code> te dirá qué es. El nombre del tipo se usa generalmente como una función que crea o convierte un valor a ese tipo.</p>
+<h3 id="2711-verificacion-de-tipo">2.7.11: Verificación de tipo</h3>
+<p>Cómo saber si un objeto es de un tipo específico.</p>
+<pre><code class="language-python">if isinstance(a, list):
+    print('a is a list')
+</code></pre>
+<p>Comprobando uno de los muchos tipos posibles.</p>
+<pre><code class="language-python">if isinstance(a, (list,tuple)):
+    print('a is a list or tuple')
+</code></pre>
+<p><em>Precaución: No se exceda con la verificación de tipos. Puede conducir a una complejidad de código excesiva. Por lo general, solo lo haría si al hacerlo evitaría errores comunes cometidos por otros que usan su código.</em></p>
+<h3 id="2712-todo-es-un-objeto">2.7.12: Todo es un objeto</h3>
+<p>Los números, cadenas, listas, funciones, excepciones, clases, instancias, etc. son todos objetos. Significa que todos los objetos que se pueden nombrar pueden pasarse como datos,  colocarse en contenedores, etc., sin ninguna restricción. No hay tipos <em>especiales</em> de objetos. A veces se dice que todos los objetos son de "primera clase".</p>
+<p>Un simple ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import math
+&gt;&gt;&gt; items = [abs, math, ValueError ]
+&gt;&gt;&gt; items
+[&lt;built-in function abs&gt;,
+  &lt;module 'math' (builtin)&gt;,
+  &lt;type 'exceptions.ValueError'&gt;]
+&gt;&gt;&gt; items[0](-45)
+45
+&gt;&gt;&gt; items[1].sqrt(2)
+1.4142135623730951
+&gt;&gt;&gt; try:
+        x = int('not a number')
+    except items[2]:
+        print('Failed!')
+Failed!
+&gt;&gt;&gt;
+</code></pre>
+<p>Aquí <code>items</code>hay una lista que contiene una función, un módulo y una excepción. Puede utilizar directamente los elementos de la lista en lugar de los nombres originales:</p>
+<pre><code class="language-python">items[0](-45)       # abs 
+items[1].sqrt(2)    # math 
+except items[2]:    # ValueError 
+</code></pre>
+<p>Un gran poder conlleva responsabilidad. El hecho de que pueda hacer eso no significa que deba hacerlo.</p>
+<h3 id="233-ejercicios">2.33: Ejercicios</h3>
+<p>En este conjunto de ejercicios, analizamos parte del poder que proviene de los objetos de primera clase.</p>
 <h4 id="ejercicio-224-data-de-primera-clase">Ejercicio 2.24: Data de primera-clase</h4>
+<p>En el archivo <code>Data/portfolio.csv</code>, leemos datos organizados como columnas que se ven así:</p>
+<pre><code class="language-csv">name,shares,price
+&quot;AA&quot;,100,32.20
+&quot;IBM&quot;,50,91.10
+...
+</code></pre>
+<p>En el código anterior, usábamos el <code>csv</code>módulo para leer el archivo, pero aún teníamos que realizar conversiones de tipo manuales. Por ejemplo:</p>
+<pre><code class="language-python">for row in rows:
+    name   = row[0]
+    shares = int(row[1])
+    price  = float(row[2])
+</code></pre>
+<p>Este tipo de conversión también se puede realizar de una manera más inteligente utilizando algunas operaciones básicas de lista.</p>
+<p>Haga una lista de Python que contenga los nombres de las funciones de  conversión que usaría para convertir cada columna en el tipo apropiado:</p>
+<pre><code class="language-python">&gt;&gt;&gt; types = [str, int, float]
+&gt;&gt;&gt;
+</code></pre>
+<p>La razón por la que incluso puede crear esta lista es que todo en Python es de <em>primera clase</em> . Entonces, si desea tener una lista de funciones, está bien. Los elementos de la lista que ha creado son funciones para convertir un valor <code>x</code>en un tipo determinado (por ejemplo, <code>str(x)</code>, <code>int(x)</code>, <code>float(x)</code>).</p>
+<p>Ahora, lea una fila de datos del archivo anterior:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import csv
+&gt;&gt;&gt; f = open('Data/portfolio.csv')
+&gt;&gt;&gt; rows = csv.reader(f)
+&gt;&gt;&gt; headers = next(rows)
+&gt;&gt;&gt; row = next(rows)
+&gt;&gt;&gt; row
+['AA', '100', '32.20']
+&gt;&gt;&gt;
+</code></pre>
+<p>Como se señaló, esta fila no es suficiente para hacer cálculos porque los tipos son incorrectos. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; row[1] * row[2]
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: can't multiply sequence by non-int of type 'str' &gt;&gt;&gt; 
+</code></pre>
+<p>Sin embargo, tal vez los datos se puedan emparejar con los tipos que especificó en <code>types</code>. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; types[1]
+&lt;type 'int'&gt;
+&gt;&gt;&gt; row[1]
+'100'
+&gt;&gt;&gt;
+</code></pre>
+<p>Intente convertir uno de los valores:</p>
+<pre><code class="language-python">&gt;&gt;&gt; types[1](row[1])     # Same as int(row[1]) 100
+&gt;&gt;&gt;
+</code></pre>
+<p>Intente convertir un valor diferente:</p>
+<pre><code class="language-python">&gt;&gt;&gt; types[2](row[2])     # Same as float(row[2]) 32.2
+&gt;&gt;&gt;
+</code></pre>
+<p>Pruebe el cálculo con valores convertidos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; types[1](row[1])*types[2](row[2])
+3220.0000000000005
+&gt;&gt;&gt;
+</code></pre>
+<p>Comprima los tipos de columna con los campos y observe el resultado:</p>
+<pre><code class="language-python">&gt;&gt;&gt; r = list(zip(types, row))
+&gt;&gt;&gt; r
+[(&lt;type 'str'&gt;, 'AA'), (&lt;type 'int'&gt;, '100'), (&lt;type 'float'&gt;,'32.20')]
+&gt;&gt;&gt;
+</code></pre>
+<p>Notará que esto ha emparejado una conversión de tipo con un valor. Por ejemplo, <code>int</code> se empareja con el valor <code>'100'</code>.</p>
+<p>La lista comprimida es útil si desea realizar conversiones en todos los valores, uno tras otro. Prueba esto:</p>
+<pre><code class="language-python">&gt;&gt;&gt; converted = []
+&gt;&gt;&gt; for func, val in zip(types, row):
+          converted.append(func(val))
+...
+&gt;&gt;&gt; converted
+['AA', 100, 32.2]
+&gt;&gt;&gt; converted[1] * converted[2]
+3220.0000000000005
+&gt;&gt;&gt;
+</code></pre>
+<p>Asegúrese de comprender lo que sucede en el código anterior. En el bucle, la <code>func</code> variable es una de las funciones de conversión de tipo (por ejemplo, <code>str</code>, <code>int</code>, etc.) y la <code>val</code> variable es uno de los valores como <code>'AA'</code>, <code>'100'</code>. La expresión <code>func(val)</code>está convirtiendo un valor (algo así como un tipo de conversión).</p>
+<p>El código anterior se puede comprimir en una sola lista comprensiva.</p>
+<pre><code class="language-python">&gt;&gt;&gt; converted = [func(val) for func, val in zip(types, row)]
+&gt;&gt;&gt; converted
+['AA', 100, 32.2]
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-225-creando-diccionarios">Ejercicio 2.25: Creando diccionarios</h4>
+<p>¿Recuerda cómo la función <code>dict()</code> puede hacer fácilmente un diccionario si tiene una secuencia de nombres y valores clave? Hagamos un diccionario a partir de los encabezados de las columnas:</p>
+<pre><code class="language-python">&gt;&gt;&gt; headers
+['name', 'shares', 'price']
+&gt;&gt;&gt; converted
+['AA', 100, 32.2]
+&gt;&gt;&gt; dict(zip(headers, converted))
+{'price': 32.2, 'name': 'AA', 'shares': 100}
+&gt;&gt;&gt;
+</code></pre>
+<p>Por supuesto, si está en su lista de comprensión fu, puede hacer toda la  conversión en un solo paso usando un dict-comprehension:</p>
+<pre><code class="language-python">&gt;&gt;&gt; { name: func(val) for name, func, val in zip(headers, types, row) }
+{'price': 32.2, 'name': 'AA', 'shares': 100}
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-226-el-horizonte">Ejercicio 2.26: El horizonte</h4>
+<p>Con las técnicas de este ejercicio, podría escribir declaraciones que  conviertan fácilmente campos de casi cualquier archivo de datos  orientado a columnas en un diccionario de Python.</p>
+<p>Solo para ilustrar, suponga que lee datos de un archivo de datos diferente como este:</p>
+<pre><code class="language-python">&gt;&gt;&gt; f = open('Data/dowstocks.csv')
+&gt;&gt;&gt; rows = csv.reader(f)
+&gt;&gt;&gt; headers = next(rows)
+&gt;&gt;&gt; row = next(rows)
+&gt;&gt;&gt; headers
+['name', 'price', 'date', 'time', 'change', 'open', 'high', 'low', 'volume']
+&gt;&gt;&gt; row
+['AA', '39.48', '6/11/2007', '9:36am', '-0.18', '39.67', '39.69', '39.45', '181800']
+&gt;&gt;&gt;
+</code></pre>
+<p>Convirtamos los campos usando un truco similar:</p>
+<pre><code class="language-python">&gt;&gt;&gt; types = [str, float, str, str, float, float, float, float, int]
+&gt;&gt;&gt; converted = [func(val) for func, val in zip(types, row)]
+&gt;&gt;&gt; record = dict(zip(headers, converted))
+&gt;&gt;&gt; record
+{'volume': 181800, 'name': 'AA', 'price': 39.48, 'high': 39.69,
+'low': 39.45, 'time': '9:36am', 'date': '6/11/2007', 'open': 39.67,
+'change': -0.18}
+&gt;&gt;&gt; record['name']
+'AA'
+&gt;&gt;&gt; record['price']
+39.48
+&gt;&gt;&gt;
+</code></pre>
+<p>Bonificación: ¿Cómo modificaría este ejemplo para analizar adicionalmente la entrada  <code>date</code> en una tupla como <code>(6, 11, 2007)</code>?</p>
+<p>Dedique algún tiempo a reflexionar sobre lo que ha hecho en este ejercicio. Revisaremos estas ideas un poco más tarde.</p>
               
             </div>
           </div>
