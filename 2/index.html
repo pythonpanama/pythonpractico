@@ -209,15 +209,15 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#253-ejemplo-asignaciones-uno-muchos">2.5.3: Ejemplo: asignaciones uno-muchos</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#254-ejemplo-guardando-un-historial">2.5.4: Ejemplo: guardando un historial</a>
+    <li class="toctree-l3"><a class="reference internal" href="#254-ejemplo-un-historial">2.5.4: Ejemplo: un historial</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#255-ejercicios">2.5.5: Ejercicios</a>
         <ul>
-    <li class="toctree-l4"><a class="reference internal" href="#219-tabulacion-con-contadores">2.19: Tabulación con contadores</a>
-    </li>
-    <li class="toctree-l4"><a class="reference internal" href="#comentario-el-modulo-collections">Comentario: el modulo collections</a>
+    <li class="toctree-l4"><a class="reference internal" href="#218-tabulacion-con-contadores">2.18: Tabulación con contadores</a>
     </li>
         </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#256-comentario-el-modulo-collections">2.5.6: Comentario: el modulo collections</a>
     </li>
         </ul>
     </li>
@@ -1167,9 +1167,9 @@ TypeError: can only concatenate tuple (not &quot;list&quot;) to tuple
 <p>Cortar significa tomar una subsecuencia de una secuencia. La sintaxis es <code>s[start:end]</code>. Donde <code>start</code>y <code>end</code>son los índices de la subsecuencia que desea.</p>
 <pre><code class="language-python">a = [0,1,2,3,4,5,6,7,8]
 
-a[2:5]    # [2,3,4] 
-a[-5:]    # [4,5,6,7,8] 
-a[:3]     # [0,1,2] 
+a[2:5]    # [2,3,4]
+a[-5:]    # [4,5,6,7,8]
+a[:3]     # [0,1,2]
 </code></pre>
 <ul>
 <li>Índices <code>start</code>y <code>end</code>deben ser números enteros.</li>
@@ -1214,7 +1214,7 @@ del a[2:4]                # [0,1,4,5,6,7,8]
 &gt;&gt;&gt;
 </code></pre>
 <p>En cada iteración del ciclo, obtienes un nuevo elemento con el que trabajar. Este nuevo valor se coloca en la variable de iteración. En este ejemplo, la variable de iteración es <code>x</code>:</p>
-<pre><code class="language-python">for x in s:         # `x` es una variable de iteración 
+<pre><code class="language-python">for x in s:         # `x` es una variable de iteración
     ...declaraciones
 </code></pre>
 <p>En cada iteración, el valor anterior de la variable de iteración se sobrescribe (si lo hubiera). Una vez finalizado el ciclo, la variable retiene el último valor.</p>
@@ -1240,13 +1240,13 @@ declaraciones
 <h3 id="248-ciclando-sobre-enteros">2.4.8: Ciclando sobre enteros</h3>
 <p>Si necesita contar, use <code>range()</code>.</p>
 <pre><code class="language-python">for i in range(100):
-    # i = 0,1,...,99 
+    # i = 0,1,...,99
 </code></pre>
 <p>La sintaxis es <code>range([start,] end [,step])</code></p>
 <pre><code class="language-python">for i in range(100):
     # i = 0,1,...,99 for j in range(10,20):
     # j = 10,11,..., 19 for k in range(10,50,2):
-    # k = 10,12,...,48     # Note como cuenta en pasos de 2, no 1. 
+    # k = 10,12,...,48     # Note como cuenta en pasos de 2, no 1.
 </code></pre>
 <ul>
 <li>El valor final nunca se incluye. Refleja el comportamiento de los cortes.</li>
@@ -1258,9 +1258,9 @@ declaraciones
 <p>La <code>enumerate</code> función agrega un valor de contador adicional a la iteración.</p>
 <pre><code class="language-python">names = ['Elwood', 'Jake', 'Curtis']
 for i, name in enumerate(names):
-    # Cicla con i = 0, name = 'Elwood'     
-    # i = 1, name = 'Jake'     
-    # i = 2, name = 'Curtis' 
+    # Cicla con i = 0, name = 'Elwood'
+    # i = 1, name = 'Jake'
+    # i = 2, name = 'Curtis'
 </code></pre>
 <p>La forma general es <code>enumerate(sequence [, start = 0])</code>. <code>start</code> es opcional. Un buen ejemplo de uso <code>enumerate()</code> es el seguimiento de los números de línea mientras se lee un archivo:</p>
 <pre><code class="language-python">with open(filename) as f:
@@ -1280,10 +1280,10 @@ for x in s:
   (1, 4),(10, 40),(23, 14),(5, 6),(7, 8)
 ]
 for x, y in points:
-    # Cicla con x = 1, y = 4     
-    # x = 10, y = 40     
-    # x = 23, y = 14     
-    # ... 
+    # Cicla con x = 1, y = 4
+    # x = 10, y = 40
+    # x = 23, y = 14
+    # ...
 </code></pre>
 <p>Cuando se utilizan varias variables, cada tupla se <em>descompone</em> en un conjunto de variables de iteración. El número de variables debe coincidir con el número de elementos de cada tupla.</p>
 <h3 id="2411-la-funcion-zip">2.4.11: La función <code>zip()</code></h3>
@@ -1291,7 +1291,7 @@ for x, y in points:
 <pre><code class="language-python">columns = ['name', 'shares', 'price']
 values = ['GOOG', 100, 490.1 ]
 pairs = zip(columns, values)
-# ('name','GOOG'), ('shares',100), ('price',490.1) 
+# ('name','GOOG'), ('shares',100), ('price',490.1)
 </code></pre>
 <p>Para obtener el resultado, debes iterar. Puede utilizar varias variables para descomprimir las tuplas como se mostró anteriormente.</p>
 <pre><code class="language-python">for column, value in pairs:
@@ -1303,7 +1303,7 @@ pairs = zip(columns, values)
 <h3 id="2412-ejercicios">2.4.12: Ejercicios</h3>
 <h4 id="ejercicio-213-contar">Ejercicio 2.13: Contar</h4>
 <p>Pruebe algunos ejemplos básicos de conteo:</p>
-<pre><code class="language-python">&gt;&gt;&gt; for n in range(10):            # Cuenta 0 ... 9         
+<pre><code class="language-python">&gt;&gt;&gt; for n in range(10):            # Cuenta 0 ... 9
         print(n, end=' ')
 
 0 1 2 3 4 5 6 7 8 9
@@ -1311,7 +1311,7 @@ pairs = zip(columns, values)
         print(n, end=' ')
 
 10 9 8 7 6 5 4 3 2 1
-&gt;&gt;&gt; for n in range(0,10,2):        # Cuenta 0, 2, ... 8         
+&gt;&gt;&gt; for n in range(0,10,2):        # Cuenta 0, 2, ... 8
         print(n, end=' ')
 
 0 2 4 6 8
@@ -1395,7 +1395,7 @@ for rowno, row in enumerate(rows, start=1):
 </code></pre>
 <p>Esta transformación es uno de los trucos más útiles que debe conocer al procesar muchos archivos de datos. Por ejemplo, suponga que desea que el <code>pcost.py</code> programa funcione con varios archivos de entrada, pero sin tener en cuenta el  número de columna real donde aparecen el nombre, las acciones y el  precio.</p>
 <p>Modifique la <code>portfolio_cost()</code> función <code>pcost.py</code> para que se vea así:</p>
-<pre><code class="language-python"># pcost.py 
+<pre><code class="language-python"># pcost.py
 def portfolio_cost(filename):
     ...
         for rowno, row in enumerate(rows, start=1):
@@ -1404,7 +1404,7 @@ def portfolio_cost(filename):
                 nshares = int(record['shares'])
                 price = float(record['price'])
                 total_cost += nshares * price
-            except ValueError:  # Esto atrapa errores de conversión a int() y float()   
+            except ValueError:  # Esto atrapa errores de conversión a int() y float()
                 print(f'Fila {rowno}: Mala fila: {row}')
         ...
 </code></pre>
@@ -1473,14 +1473,112 @@ dict_items([('GOOG', 490.1), ('AA', 23.45), ('IBM', 91.1), ('MSFT', 34.23)])
 [(1, 'x'), (2, 'y'), (3, 'z')]
 &gt;&gt;&gt;
 </code></pre>
-<h2 id="25-el-modulo-collections">2.5 El modulo collections</h2>
+<h2 id="25-el-modulo-collections">2.5 El modulo <code>collections</code></h2>
+<p>El <code>collections</code> módulo proporciona una serie de objetos útiles para el manejo de datos. Esta parte presenta brevemente algunas de estas características.</p>
 <h3 id="251-ejemplo-contando-cosas">2.5.1: Ejemplo: contando cosas</h3>
+<p>Digamos que desea tabular el total de acciones de cada acción.</p>
+<pre><code class="language-python">portfolio = [
+    ('GOOG', 100, 490.1),
+    ('IBM', 50, 91.1),
+    ('CAT', 150, 83.44),
+    ('IBM', 100, 45.23),
+    ('GOOG', 75, 572.45),
+    ('AA', 50, 23.15)
+]
+</code></pre>
+<p>Hay dos <code>IBM</code> entradas y dos <code>GOOG</code> entradas en esta lista. Las acciones deben combinarse de alguna manera.</p>
 <h3 id="252-contadores">2.5.2: Contadores</h3>
+<p>Solución: utilice un <code>Counter</code>.</p>
+<pre><code class="language-python">from collections import Counter
+total_shares = Counter()
+for name, shares, price in portfolio:
+    total_shares[name] += shares
+
+total_shares['IBM']     # 150 
+</code></pre>
 <h3 id="253-ejemplo-asignaciones-uno-muchos">2.5.3: Ejemplo: asignaciones uno-muchos</h3>
-<h3 id="254-ejemplo-guardando-un-historial">2.5.4: Ejemplo: guardando un historial</h3>
+<p>Problema: desea asignar una clave a varios valores.</p>
+<pre><code class="language-python">portfolio = [
+    ('GOOG', 100, 490.1),
+    ('IBM', 50, 91.1),
+    ('CAT', 150, 83.44),
+    ('IBM', 100, 45.23),
+    ('GOOG', 75, 572.45),
+    ('AA', 50, 23.15)
+]
+</code></pre>
+<p>Como en el ejemplo anterior, la clave <code>IBM</code>debería tener dos tuplas diferentes en su lugar.</p>
+<p>Solución: utilice un <code>defaultdict</code>.</p>
+<pre><code class="language-python">from collections import defaultdict
+holdings = defaultdict(list)
+for name, shares, price in portfolio:
+    holdings[name].append((shares, price))
+holdings['IBM'] # [ (50, 91.1), (100, 45.23) ] 
+</code></pre>
+<p>El <code>defaultdict</code>asegura que cada vez que acceda a una clave obtenga un valor predeterminado.</p>
+<h3 id="254-ejemplo-un-historial">2.5.4: Ejemplo: un historial</h3>
+<p>Problema: queremos un historial de las últimas N cosas. Solución: utilice un <code>deque</code>.</p>
+<pre><code class="language-python">from collections import deque
+
+history = deque(maxlen=N)
+with open(filename) as f:
+    for line in f:
+        history.append(line)
+        ...
+</code></pre>
 <h3 id="255-ejercicios">2.5.5: Ejercicios</h3>
-<h4 id="219-tabulacion-con-contadores">2.19: Tabulación con contadores</h4>
-<h4 id="comentario-el-modulo-collections">Comentario: el modulo collections</h4>
+<p>El <code>collections</code>módulo puede ser uno de los módulos de biblioteca más útiles para tratar tipos de problemas de manejo de datos con fines especiales, como la  tabulación y la indexación.</p>
+<p>En este ejercicio, veremos algunos ejemplos simples. Comience ejecutando su <code>report.py</code> programa para que tenga la cartera de acciones cargada en el modo interactivo.</p>
+<pre><code class="language-bash">bash % python3 -i report.py
+</code></pre>
+<h4 id="218-tabulacion-con-contadores">2.18: Tabulación con contadores</h4>
+<p>Suponga que desea tabular el número total de acciones de cada acción. Esto es fácil de usar <code>Counter</code>objetos. Intentalo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; portfolio = read_portfolio('Data/portfolio.csv')
+&gt;&gt;&gt; from collections import Counter
+&gt;&gt;&gt; holdings = Counter()
+&gt;&gt;&gt; for s in portfolio:
+        holdings[s['name']] += s['shares']
+
+&gt;&gt;&gt; holdings
+Counter({'MSFT': 250, 'IBM': 150, 'CAT': 150, 'AA': 100, 'GE': 95})
+&gt;&gt;&gt;
+</code></pre>
+<p>Observe cuidadosamente cómo las múltiples entradas para <code>MSFT</code>y <code>IBM</code>en <code>portfolio</code>se combinan en una sola entrada aquí.</p>
+<p>Puede usar un contador como un diccionario para recuperar valores individuales:</p>
+<pre><code class="language-python">&gt;&gt;&gt; holdings['IBM']
+150
+&gt;&gt;&gt; holdings['MSFT']
+250
+&gt;&gt;&gt;
+</code></pre>
+<p>Si desea clasificar los valores, haga esto:</p>
+<pre><code class="language-python">&gt;&gt;&gt; # Get three most held stocks &gt;&gt;&gt; holdings.most_common(3)
+[('MSFT', 250), ('IBM', 150), ('CAT', 150)]
+&gt;&gt;&gt;
+</code></pre>
+<p>Tomemos otra cartera de acciones y creemos un nuevo contador:</p>
+<pre><code class="language-python">&gt;&gt;&gt; portfolio2 = read_portfolio('Data/portfolio2.csv')
+&gt;&gt;&gt; holdings2 = Counter()
+&gt;&gt;&gt; for s in portfolio2:
+          holdings2[s['name']] += s['shares']
+
+&gt;&gt;&gt; holdings2
+Counter({'HPQ': 250, 'GE': 125, 'AA': 50, 'MSFT': 25})
+&gt;&gt;&gt;
+</code></pre>
+<p>Finalmente, combinemos todas las existencias haciendo una operación simple:</p>
+<pre><code class="language-python">&gt;&gt;&gt; holdings
+Counter({'MSFT': 250, 'IBM': 150, 'CAT': 150, 'AA': 100, 'GE': 95})
+&gt;&gt;&gt; holdings2
+Counter({'HPQ': 250, 'GE': 125, 'AA': 50, 'MSFT': 25})
+&gt;&gt;&gt; combined = holdings + holdings2
+&gt;&gt;&gt; combined
+Counter({'MSFT': 275, 'HPQ': 250, 'GE': 220, 'AA': 150, 'IBM': 150, 'CAT': 150})
+&gt;&gt;&gt;
+</code></pre>
+<p>Esto es solo una pequeña muestra de lo que ofrecen los contadores. Sin embargo, si alguna vez necesita tabular valores, debería considerar usar uno.</p>
+<h3 id="256-comentario-el-modulo-collections">2.5.6: Comentario: el modulo collections</h3>
+<p>El módulo  <code>collections</code> es uno de los módulos de biblioteca más útiles de todo Python. De hecho, podríamos hacer un tutorial extenso sobre eso. Sin embargo, hacerlo ahora también sería una distracción. Por ahora, ponga <code>collections</code>su lista de lecturas a la hora de dormir para más tarde.</p>
 <h2 id="26-list-comprehensions">2.6 List comprehensions</h2>
 <h3 id="261-creando-nuevas-listas">2.6.1: Creando nuevas listas</h3>
 <h3 id="262-filtrar">2.6.2: Filtrar</h3>
