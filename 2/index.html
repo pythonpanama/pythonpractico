@@ -165,9 +165,9 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#241-tipos-de-secuencias">2.4.1: Tipos de secuencias</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#242-rebanar">2.4.2: Rebanar</a>
+    <li class="toctree-l3"><a class="reference internal" href="#242-cortar">2.4.2: Cortar</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#243-rebanar-y-reasignar">2.4.3: Rebanar y reasignar</a>
+    <li class="toctree-l3"><a class="reference internal" href="#243-reasignacion-de-cortes">2.4.3: Reasignación de cortes</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#244-secuencia-de-reducciones">2.4.4: Secuencia de reducciones</a>
     </li>
@@ -181,7 +181,7 @@
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#249-la-funcion-enumerate">2.4.9: La función enumerate()</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#2410-for-y-tuplas">2.4.10: For y tuplas</a>
+    <li class="toctree-l3"><a class="reference internal" href="#2410-for-y-tuplas">2.4.10: for y tuplas</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#2411-la-funcion-zip">2.4.11: La función zip()</a>
     </li>
@@ -714,7 +714,8 @@ with open('Data/prices.csv', 'rt') as f:
     # NO
 </code></pre>
 <p>Puede buscar un valor que podría no existir y proporcionar un valor predeterminado en caso de que no exista.</p>
-<p>name = d.get(key, default)</p>
+<pre><code class="language-python">name = d.get(key, default)
+</code></pre>
 <p>Un ejemplo:</p>
 <pre><code class="language-python">&gt;&gt;&gt; prices.get('IBM', 0.0)
 93.37
@@ -1120,22 +1121,358 @@ b'Dave has 37 messages'
 <hr />
 <h2 id="24-secuencias">2.4 Secuencias</h2>
 <h3 id="241-tipos-de-secuencias">2.4.1: Tipos de secuencias</h3>
-<h3 id="242-rebanar">2.4.2: Rebanar</h3>
-<h3 id="243-rebanar-y-reasignar">2.4.3: Rebanar y reasignar</h3>
+<p>Python tiene tres tipos de datos de <em>secuencia</em> .</p>
+<ul>
+<li>Cuerda: <code>'Hello'</code>. Una cadena es una secuencia de caracteres.</li>
+<li>Lista: <code>[1, 4, 5]</code>.</li>
+<li>Tupla: <code>('GOOG', 100, 490.1)</code>.</li>
+</ul>
+<p>Todas las secuencias están ordenadas, indexadas por números enteros y tienen una longitud.</p>
+<pre><code class="language-python">a = 'Hello'               # String
+b = [1, 4, 5]             # List
+c = ('GOOG', 100, 490.1)  # Tuple
+
+# Indexed order
+a[0]                      # 'H'
+b[-1]                     # 5
+c[1]                      # 100
+
+# Length of sequence
+len(a)                    # 5
+len(b)                    # 3
+len(c)                    # 3
+</code></pre>
+<p>Las secuencias pueden ser replicados: <code>s * n</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = 'Hello'
+&gt;&gt;&gt; a * 3
+'HelloHelloHello'
+&gt;&gt;&gt; b = [1, 2, 3]
+&gt;&gt;&gt; b * 2
+[1, 2, 3, 1, 2, 3]
+&gt;&gt;&gt;
+</code></pre>
+<p>Secuencias del mismo tipo pueden ser concatenados: <code>s + t</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = (1, 2, 3)
+&gt;&gt;&gt; b = (4, 5)
+&gt;&gt;&gt; a + b
+(1, 2, 3, 4, 5)
+&gt;&gt;&gt;
+&gt;&gt;&gt; c = [1, 5]
+&gt;&gt;&gt; a + c
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: can only concatenate tuple (not &quot;list&quot;) to tuple
+</code></pre>
+<h3 id="242-cortar">2.4.2: Cortar</h3>
+<p>Cortar significa tomar una subsecuencia de una secuencia. La sintaxis es <code>s[start:end]</code>. Donde <code>start</code>y <code>end</code>son los índices de la subsecuencia que desea.</p>
+<pre><code class="language-python">a = [0,1,2,3,4,5,6,7,8]
+
+a[2:5]    # [2,3,4] 
+a[-5:]    # [4,5,6,7,8] 
+a[:3]     # [0,1,2] 
+</code></pre>
+<ul>
+<li>Índices <code>start</code>y <code>end</code>deben ser números enteros.</li>
+<li>Las rebanadas <em>no</em> incluyen el valor final. Es como un intervalo medio abierto de matemáticas.</li>
+<li>Si se omiten los índices, por defecto van al principio o al final de la lista.</li>
+</ul>
+<h3 id="243-reasignacion-de-cortes">2.4.3: Reasignación de cortes</h3>
+<p>En las listas, los sectores se pueden reasignar y eliminar.</p>
+<pre><code class="language-python"># Reasginación
+a = [0,1,2,3,4,5,6,7,8]
+a[2:4] = [10,11,12]       # [0,1,10,11,12,4,5,6,7,8]
+</code></pre>
+<p><strong>Nota: No es necesario que el segmento reasignado tenga la misma longitud.</strong></p>
+<pre><code class="language-python"># Remoción
+a = [0,1,2,3,4,5,6,7,8]
+del a[2:4]                # [0,1,4,5,6,7,8]
+</code></pre>
 <h3 id="244-secuencia-de-reducciones">2.4.4: Secuencia de reducciones</h3>
+<p>Existen algunas funciones comunes para reducir una secuencia a un solo valor.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = [1, 2, 3, 4]
+&gt;&gt;&gt; sum(s)
+10
+&gt;&gt;&gt; min(s)
+1
+&gt;&gt;&gt; max(s)
+4
+&gt;&gt;&gt; t = ['Hello', 'World']
+&gt;&gt;&gt; max(t)
+'World'
+&gt;&gt;&gt;
+</code></pre>
 <h3 id="245-iteracion-sobre-una-secuencia">2.4.5: Iteracion sobre una secuencia</h3>
+<p>El bucle for itera sobre los elementos en una secuencia.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = [1, 4, 9, 16]
+&gt;&gt;&gt; for i in s:
+...     print(i)
+...
+1
+4
+9
+16
+&gt;&gt;&gt;
+</code></pre>
+<p>En cada iteración del ciclo, obtienes un nuevo elemento con el que trabajar. Este nuevo valor se coloca en la variable de iteración. En este ejemplo, la variable de iteración es <code>x</code>:</p>
+<pre><code class="language-python">for x in s:         # `x` es una variable de iteración 
+    ...declaraciones
+</code></pre>
+<p>En cada iteración, el valor anterior de la variable de iteración se sobrescribe (si lo hubiera). Una vez finalizado el ciclo, la variable retiene el último valor.</p>
 <h3 id="246-la-declaracion-break">2.4.6: La declaración break</h3>
+<p>Puede usar la <code>break</code>declaración para salir de un ciclo antes de tiempo.</p>
+<pre><code class="language-python">for name in namelist:
+    if name == 'Jake':
+        break
+    ...
+    ...
+declaraciones
+</code></pre>
+<p>Cuando la <code>break</code> instrucción se ejecuta, sale del ciclo y pasa al siguiente <code>statements</code>. La declaración <code>break</code>solo se aplica al bucle más interno. Si este bucle está dentro de otro bucle, no romperá el bucle exterior.</p>
 <h3 id="247-la-declaracion-continue">2.4.7: La declaración continue</h3>
+<p>Para omitir un elemento y pasar al siguiente, use la <code>continue</code>declaración.</p>
+<pre><code class="language-python">for line in lines:
+    if line == '\n':    # Skip blank lines
+        continue
+    # More statements
+    ...
+</code></pre>
+<p>Esto es útil cuando el elemento actual no es de interés o debe ignorarse en el procesamiento.</p>
 <h3 id="248-ciclando-sobre-enteros">2.4.8: Ciclando sobre enteros</h3>
-<h3 id="249-la-funcion-enumerate">2.4.9: La función enumerate()</h3>
-<h3 id="2410-for-y-tuplas">2.4.10: For y tuplas</h3>
-<h3 id="2411-la-funcion-zip">2.4.11: La función zip()</h3>
+<p>Si necesita contar, use <code>range()</code>.</p>
+<pre><code class="language-python">for i in range(100):
+    # i = 0,1,...,99 
+</code></pre>
+<p>La sintaxis es <code>range([start,] end [,step])</code></p>
+<pre><code class="language-python">for i in range(100):
+    # i = 0,1,...,99 for j in range(10,20):
+    # j = 10,11,..., 19 for k in range(10,50,2):
+    # k = 10,12,...,48     # Note como cuenta en pasos de 2, no 1. 
+</code></pre>
+<ul>
+<li>El valor final nunca se incluye. Refleja el comportamiento de los cortes.</li>
+<li><code>start</code> es opcional. Por defecto <code>0</code>.</li>
+<li><code>step</code> es opcional. Por defecto <code>1</code>.</li>
+<li><code>range()</code> calcula los valores según sea necesario. En realidad, no almacena una gran variedad de números.</li>
+</ul>
+<h3 id="249-la-funcion-enumerate">2.4.9: La función <code>enumerate()</code></h3>
+<p>La <code>enumerate</code> función agrega un valor de contador adicional a la iteración.</p>
+<pre><code class="language-python">names = ['Elwood', 'Jake', 'Curtis']
+for i, name in enumerate(names):
+    # Cicla con i = 0, name = 'Elwood'     
+    # i = 1, name = 'Jake'     
+    # i = 2, name = 'Curtis' 
+</code></pre>
+<p>La forma general es <code>enumerate(sequence [, start = 0])</code>. <code>start</code> es opcional. Un buen ejemplo de uso <code>enumerate()</code> es el seguimiento de los números de línea mientras se lee un archivo:</p>
+<pre><code class="language-python">with open(filename) as f:
+    for lineno, line in enumerate(f, start=1):
+        ...
+</code></pre>
+<p>Al final, <code>enumerate</code> es solo un buen atajo para:</p>
+<pre><code class="language-python">i = 0
+for x in s:
+    statements
+    i += 1
+</code></pre>
+<p>Usar <code>enumerate</code> es escribir menos y se ejecuta un poco más rápido.</p>
+<h3 id="2410-for-y-tuplas">2.4.10: <code>for</code> y tuplas</h3>
+<p>Puede iterar con múltiples variables de iteración.</p>
+<pre><code class="language-python">points = [
+  (1, 4),(10, 40),(23, 14),(5, 6),(7, 8)
+]
+for x, y in points:
+    # Cicla con x = 1, y = 4     
+    # x = 10, y = 40     
+    # x = 23, y = 14     
+    # ... 
+</code></pre>
+<p>Cuando se utilizan varias variables, cada tupla se <em>descompone</em> en un conjunto de variables de iteración. El número de variables debe coincidir con el número de elementos de cada tupla.</p>
+<h3 id="2411-la-funcion-zip">2.4.11: La función <code>zip()</code></h3>
+<p>La <code>zip</code>función toma múltiples secuencias y crea un iterador que las combina.</p>
+<pre><code class="language-python">columns = ['name', 'shares', 'price']
+values = ['GOOG', 100, 490.1 ]
+pairs = zip(columns, values)
+# ('name','GOOG'), ('shares',100), ('price',490.1) 
+</code></pre>
+<p>Para obtener el resultado, debes iterar. Puede utilizar varias variables para descomprimir las tuplas como se mostró anteriormente.</p>
+<pre><code class="language-python">for column, value in pairs:
+    ...
+</code></pre>
+<p>Un uso común de <code>zip</code>es crear pares clave / valor para construir diccionarios.</p>
+<pre><code class="language-python">d = dict(zip(columns, values))
+</code></pre>
 <h3 id="2412-ejercicios">2.4.12: Ejercicios</h3>
 <h4 id="ejercicio-213-contar">Ejercicio 2.13: Contar</h4>
+<p>Pruebe algunos ejemplos básicos de conteo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; for n in range(10):            # Cuenta 0 ... 9         
+        print(n, end=' ')
+
+0 1 2 3 4 5 6 7 8 9
+&gt;&gt;&gt; for n in range(10,0,-1):       # Cuenta 10 ... 1
+        print(n, end=' ')
+
+10 9 8 7 6 5 4 3 2 1
+&gt;&gt;&gt; for n in range(0,10,2):        # Cuenta 0, 2, ... 8         
+        print(n, end=' ')
+
+0 2 4 6 8
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-214-mas-operaciones-sobre-secuencias">Ejercicio 2.14: Mas operaciones sobre secuencias</h4>
+<p>Experimente interactivamente con algunas de las operaciones de reducción de secuencia.</p>
+<pre><code class="language-python">&gt;&gt;&gt; data = [4, 9, 1, 25, 16, 100, 49]
+&gt;&gt;&gt; min(data)
+1
+&gt;&gt;&gt; max(data)
+100
+&gt;&gt;&gt; sum(data)
+204
+&gt;&gt;&gt;
+</code></pre>
+<p>Intente recorrer los datos.</p>
+<pre><code>&gt;&gt;&gt; for x in data:
+        print(x)
+
+4
+9
+...
+&gt;&gt;&gt; for n, x in enumerate(data):
+        print(n, x)
+
+0 4
+1 9
+2 1
+...
+&gt;&gt;
+</code></pre>
+<p>A veces, los principiantes usan la <code>for</code> instrucción, <code>len()</code> y <code>range()</code> en algún tipo de fragmento de código horrible que parece surgido de las profundidades de un programa C oxidado.</p>
+<pre><code class="language-python">&gt;&gt;&gt; for n in range(len(data)):
+        print(data[n])
+
+4
+9
+1
+...
+&gt;&gt;&gt;
+</code></pre>
+<p>¡No hagas eso! Leerlo no solo hace sangrar los ojos de todos, es ineficiente con la memoria y funciona mucho más lento. Simplemente use un <code>for</code> bucle normal si desea iterar sobre los datos. Úselo <code>enumerate()</code> si necesita el índice por alguna razón.</p>
 <h4 id="ejercicio-215-un-ejemplo-practico-de-enumerate">Ejercicio 2.15: Un ejemplo práctico de enumerate()</h4>
-<h4 id="ejercicio-216-usando-la-funcion-zip">Ejercicio 2.16: Usando la función zip()</h4>
+<p>Recuerde que el archivo <code>Data/missing.csv</code> contiene datos para una cartera de acciones, pero tiene algunas filas con datos faltantes. Usando <code>enumerate()</code>, modifique su <code>pcost.py</code> programa para que imprima un número de línea con el mensaje de advertencia cuando encuentre una entrada incorrecta.</p>
+<pre><code class="language-python">&gt;&gt;&gt; cost = portfolio_cost('Data/missing.csv')
+Row 4: Couldn't convert: ['MSFT', '', '51.23'] Row 7: Couldn't convert: ['IBM', '', '70.44']
+&gt;&gt;&gt;
+</code></pre>
+<p>Para hacer esto, necesitará cambiar algunas partes de su código.</p>
+<pre><code class="language-python">...
+for rowno, row in enumerate(rows, start=1):
+    try:
+        ...
+    except ValueError:
+        print(f'Fila {rowno}: Mala fila: {row}')
+</code></pre>
+<h4 id="ejercicio-216-usando-la-funcion-zip">Ejercicio 2.16: Usando la función <code>zip()</code></h4>
+<p>En el archivo <code>Data/portfolio.csv</code>, la primera línea contiene encabezados de columna. En todo el código anterior, los hemos estado descartando.</p>
+<pre><code class="language-python">&gt;&gt;&gt; f = open('Data/portfolio.csv')
+&gt;&gt;&gt; rows = csv.reader(f)
+&gt;&gt;&gt; headers = next(rows)
+&gt;&gt;&gt; headers
+['name', 'shares', 'price']
+&gt;&gt;&gt;
+</code></pre>
+<p>Sin embargo, ¿qué pasaría si pudieras usar los encabezados para algo útil? Aquí es donde la <code>zip()</code>función entra en escena. Primero intente esto para emparejar los encabezados del archivo con una fila de datos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; row = next(rows)
+&gt;&gt;&gt; row
+['AA', '100', '32.20']
+&gt;&gt;&gt; list(zip(headers, row))
+[ ('name', 'AA'), ('shares', '100'), ('price', '32.20') ]
+&gt;&gt;&gt;
+</code></pre>
+<p>Observe cómo se <code>zip()</code> emparejaron los encabezados de columna con los valores de columna. Hemos utilizado <code>list()</code> aquí para convertir el resultado en una lista para que pueda verlo. Normalmente, <code>zip()</code> crea un iterador que debe consumir un bucle for.</p>
+<p>Este emparejamiento es un paso intermedio para crear un diccionario. Ahora prueba esto:</p>
+<pre><code class="language-python">&gt;&gt;&gt; record = dict(zip(headers, row))
+&gt;&gt;&gt; record
+{'price': '32.20', 'name': 'AA', 'shares': '100'}
+&gt;&gt;&gt;
+</code></pre>
+<p>Esta transformación es uno de los trucos más útiles que debe conocer al procesar muchos archivos de datos. Por ejemplo, suponga que desea que el <code>pcost.py</code> programa funcione con varios archivos de entrada, pero sin tener en cuenta el  número de columna real donde aparecen el nombre, las acciones y el  precio.</p>
+<p>Modifique la <code>portfolio_cost()</code> función <code>pcost.py</code> para que se vea así:</p>
+<pre><code class="language-python"># pcost.py 
+def portfolio_cost(filename):
+    ...
+        for rowno, row in enumerate(rows, start=1):
+            record = dict(zip(headers, row))
+            try:
+                nshares = int(record['shares'])
+                price = float(record['price'])
+                total_cost += nshares * price
+            except ValueError:  # Esto atrapa errores de conversión a int() y float()   
+                print(f'Fila {rowno}: Mala fila: {row}')
+        ...
+</code></pre>
+<p>Ahora, pruebe su función en un archivo de datos completamente diferente <code>Data/portfoliodate.csv</code>que se ve así:</p>
+<pre><code class="language-csv">name,date,time,shares,price
+&quot;AA&quot;,&quot;6/11/2007&quot;,&quot;9:50am&quot;,100,32.20
+&quot;IBM&quot;,&quot;5/13/2007&quot;,&quot;4:20pm&quot;,50,91.10
+&quot;CAT&quot;,&quot;9/23/2006&quot;,&quot;1:30pm&quot;,150,83.44
+&quot;MSFT&quot;,&quot;5/17/2007&quot;,&quot;10:30am&quot;,200,51.23
+&quot;GE&quot;,&quot;2/1/2006&quot;,&quot;10:45am&quot;,95,40.37
+&quot;MSFT&quot;,&quot;10/31/2006&quot;,&quot;12:05pm&quot;,50,65.10
+&quot;IBM&quot;,&quot;7/9/2006&quot;,&quot;3:15pm&quot;,100,70.44
+</code></pre>
+<pre><code class="language-python">&gt;&gt;&gt; portfolio_cost('Data/portfoliodate.csv')
+44671.15
+&gt;&gt;&gt;
+</code></pre>
+<p>Si lo hizo bien, verá que su programa aún funciona a pesar de que el  archivo de datos tiene un formato de columna completamente diferente al  anterior. ¡Eso es genial!</p>
+<p>El cambio realizado aquí es sutil, pero significativo. En lugar de <code>portfolio_cost()</code>estar codificado para leer un solo formato de archivo fijo, la nueva versión  lee cualquier archivo CSV y selecciona los valores de interés. Siempre que el archivo tenga las columnas requeridas, el código funcionará.</p>
+<p>Modifique el <code>report.py</code>programa que escribió en la Sección 2.3 para que utilice la misma técnica para seleccionar encabezados de columna.</p>
+<p>Intente ejecutar el <code>report.py</code>programa en el <code>Data/portfoliodate.csv</code>archivo y vea que produce la misma respuesta que antes.</p>
 <h4 id="ejercicio-217-invirtiendo-un-diccionario">Ejercicio 2.17: Invirtiendo un diccionario</h4>
+<p>Un diccionario asigna claves a valores. Por ejemplo, un diccionario de precios de acciones.</p>
+<pre><code class="language-python">&gt;&gt;&gt; prices = {
+        'GOOG': 490.1,
+        'AA': 23.45,
+        'IBM': 91.1,
+        'MSFT': 34.23
+    }
+&gt;&gt;&gt;
+</code></pre>
+<p>Si usa el método <code>items()</code>, puede obtener pares  <code>(key,value)</code>:</p>
+<pre><code class="language-python">&gt;&gt;&gt; prices.items()
+dict_items([('GOOG', 490.1), ('AA', 23.45), ('IBM', 91.1), ('MSFT', 34.23)])
+&gt;&gt;&gt;
+</code></pre>
+<p>Sin embargo, ¿qué pasaría si quisiera obtener una lista de pares  <code>(value, key)</code>? <em>Sugerencia: use <code>zip()</code>.</em></p>
+<pre><code class="language-python">&gt;&gt;&gt; pricelist = list(zip(prices.values(),prices.keys()))
+&gt;&gt;&gt; pricelist
+[(490.1, 'GOOG'), (23.45, 'AA'), (91.1, 'IBM'), (34.23, 'MSFT')]
+&gt;&gt;&gt;
+</code></pre>
+<p>¿Por qué harías esto? Por un lado, le permite realizar ciertos tipos de procesamiento de datos en los datos del diccionario.</p>
+<pre><code class="language-python">&gt;&gt;&gt; min(pricelist)
+(23.45, 'AA')
+&gt;&gt;&gt; max(pricelist)
+(490.1, 'GOOG')
+&gt;&gt;&gt; sorted(pricelist)
+[(23.45, 'AA'), (34.23, 'MSFT'), (91.1, 'IBM'), (490.1, 'GOOG')]
+&gt;&gt;&gt;
+</code></pre>
+<p>Esto también ilustra una característica importante de las tuplas. Cuando se usan en comparaciones, las tuplas se comparan elemento por elemento comenzando con el primer elemento. Similar a cómo se comparan las cadenas carácter por carácter.</p>
+<p><code>zip()</code> se utiliza a menudo en situaciones como esta en las que necesita emparejar datos de diferentes lugares. Por ejemplo, emparejar los nombres de las columnas con los valores de las  columnas para crear un diccionario de valores con nombre.</p>
+<p>Tenga en cuenta que <code>zip()</code> no se limita a pares. Por ejemplo, puede usarlo con cualquier número de listas de entrada:</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 4]
+&gt;&gt;&gt; b = ['w', 'x', 'y', 'z']
+&gt;&gt;&gt; c = [0.2, 0.4, 0.6, 0.8]
+&gt;&gt;&gt; list(zip(a, b, c))
+[(1, 'w', 0.2), (2, 'x', 0.4), (3, 'y', 0.6), (4, 'z', 0.8))]
+&gt;&gt;&gt;
+</code></pre>
+<p>Además, tenga en cuenta que  <code>zip()</code> se detiene una vez que se agota la secuencia de entrada más corta.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1, 2, 3, 4, 5, 6]
+&gt;&gt;&gt; b = ['x', 'y', 'z']
+&gt;&gt;&gt; list(zip(a,b))
+[(1, 'x'), (2, 'y'), (3, 'z')]
+&gt;&gt;&gt;
+</code></pre>
 <h2 id="25-el-modulo-collections">2.5 El modulo collections</h2>
 <h3 id="251-ejemplo-contando-cosas">2.5.1: Ejemplo: contando cosas</h3>
 <h3 id="252-contadores">2.5.2: Contadores</h3>
