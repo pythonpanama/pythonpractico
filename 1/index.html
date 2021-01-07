@@ -508,7 +508,7 @@ hello world
 </code></pre>
 <p>Esto solo es cierto en el modo interactivo. Nunca uses <code>_</code> en un programa.</p>
 <h3 id="123-creando-programas">1.2.3: Creando programas</h3>
-<p>Los programas se colocan en archivos .py.</p>
+<p>Los programas se colocan en archivos <code>.py</code>.</p>
 <pre><code class="language-python"># hola.py
 print('hola mundo')
 </code></pre>
@@ -1582,13 +1582,8 @@ Thus, the preferred approach is to use the <code>with</code> statement like this
 <h3 id="164-ejercicios">1.6.4: Ejercicios</h3>
 <p>Estos ejercicios dependen de un archivo <code>Data/portfolio.csv</code>. El archivo
 contiene una lista de líneas con información sobre una cartera de acciones.
-Se supone que está trabajando en el archivo <code>./Work/</code> directorio. Si no está seguro, puede averiguar dónde Python se está ejecutando haciendo esto:</p>
+Se supone que está trabajando en el archivo <code>./Work/</code> directorio.</p>
 <p><em>Nota: si desea hacer esta sección online, hemos puesto a disposición un editor, consola Python y terminal Linux en <a href="https://repl.it/@pythonpanama/archivos#ejercicios.md">repl.it</a>. De lo contrario, tendrá que ejecutar instrucciones en su ordenador</em></p>
-<pre><code class="language-python">&gt;&gt;&gt; import os
-&gt;&gt;&gt; os.getcwd()
-'/Users/beazley/Desktop/practical-python/Work' # Su salida será diferente
-&gt;&gt;&gt;
-</code></pre>
 <h4 id="126-prerequisitos">1.26: Prerequisitos</h4>
 <p>Primero, intente leer todo el archivo a la vez en una cadena grande:</p>
 <pre><code class="language-python">&gt;&gt;&gt; with open('Data/portfolio.csv', 'rt') as f:
