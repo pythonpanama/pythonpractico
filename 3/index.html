@@ -77,6 +77,40 @@
                 <ul class="current">
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">3 Organización de un Programa</a>
     <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#31-scripting">3.1 Scripting</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#311-que-es-un-guion-script">3.1.1 ¿Qué es un guión / script?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#312-un-problema">3.1.2 Un problema</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#313-definiendo-cosas">3.1.3 Definiendo cosas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#314-definicion-de-funciones">3.1.4 Definición de funciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#315-que-es-una-funcion">3.1.5 ¿Qué es una función?</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#316-definicion-de-funcion">3.1.6 Definición de función</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#317-estilo-de-abajo-hacia-arriba">3.1.7 Estilo de abajo hacia arriba</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#318-diseno-de-funciones">3.1.8 Diseño de funciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#319-documentacion-en-cadenas">3.1.9 Documentación en cadenas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3110-tipo-de-anotaciones">3.1.10 Tipo de anotaciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3111-ejercicios">3.1.11 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-31-estructurar-un-programa-como-una-coleccion-de-funciones">Ejercicio 3.1: Estructurar un programa como una colección de funciones</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-32-creacion-de-una-funcion-de-nivel-superior-para-la-ejecucion-del-programa">Ejercicio 3.2: Creación de una función de nivel superior para la ejecución del programa</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#comentario">Comentario</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -140,9 +174,183 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="organizacion-de-un-programa">Organización de un Programa</h1>
+                <h1 id="3-organizacion-de-un-programa">3. Organización de un Programa</h1>
 <p>En este modulo nos empapamos de más detalles sobre la composición de funciones, el manejo de errores y la introducción de modulos. Al final seremos capaces de escribir programas que son subdivididos en funciones esparcidas en varios archivos. Veremos algunas plantillas de código que les será útil para la creación de programas.</p>
 <p><em>Nota: estaremos publicando el contenido de este módulo a más tardar el 18 de enero.</em></p>
+<h2 id="31-scripting">3.1 Scripting</h2>
+<p>En esta parte, veremos más de cerca la práctica de escribir scripts en Python.</p>
+<h3 id="311-que-es-un-guion-script">3.1.1 ¿Qué es un guión / script?</h3>
+<p>Un script es un programa que ejecuta una serie de declaraciones y se detiene.</p>
+<pre><code class="language-python"># programa.py 
+declaracion1
+declaracion2
+declaracion3
+...
+</code></pre>
+<p>Hasta ahora, vale destacar que hemos estado escribiendo <em>scripts</em>.</p>
+<h3 id="312-un-problema">3.1.2 Un problema</h3>
+<p>Si escribe un script útil, crecerá en características y funcionalidad. Es posible que desee aplicarlo a otros problemas relacionados. Con el tiempo, podría convertirse en una aplicación crítica. Sin embargo, podría convertirse en un gran enredado si no tiene cuidado. Entonces, es importante tener algún tipo de organización.</p>
+<h3 id="313-definiendo-cosas">3.1.3 Definiendo cosas</h3>
+<p>Los nombres siempre deben definirse antes de que se utilicen más tarde.</p>
+<pre><code class="language-python">def square(x):
+    return x*x
+
+a = 42
+b = a + 2     # requiere que `a` esté definida 
+z = square(b) # require que `square` y `b` esten definidas 
+</code></pre>
+<p>El orden es importante. Casi siempre colocas las definiciones de variables y funciones cerca de la parte superior.</p>
+<h3 id="314-definicion-de-funciones">3.1.4 Definición de funciones</h3>
+<p>Es una buena idea poner todo el código relacionado con una sola tarea en un solo lugar. Para esto, haga uso de una función.</p>
+<pre><code class="language-python">def read_prices(filename):
+    prices = {}
+    with open(filename) as f:
+        f_csv = csv.reader(f)
+        for row in f_csv:
+            prices[row[0]] = float(row[1])
+    return prices
+</code></pre>
+<p>Una función también simplifica las operaciones repetidas.</p>
+<pre><code class="language-python">oldprices = read_prices('oldprices.csv')
+newprices = read_prices('newprices.csv')
+</code></pre>
+<h3 id="315-que-es-una-funcion">3.1.5 ¿Qué es una función?</h3>
+<p>Una función es una secuencia de declaraciones con nombre.</p>
+<pre><code class="language-python">def funcname(args):
+  declaracion
+  declaracion
+  ...
+  return result
+</code></pre>
+<p>Cualquier declaración de Python se puede utilizar dentro.</p>
+<pre><code class="language-python">def foo():
+    import math
+    print(math.sqrt(2))
+    help(math)
+</code></pre>
+<p>No hay declaraciones <em>especiales</em> en Python (lo que hace que sea fácil de recordar).</p>
+<h3 id="316-definicion-de-funcion">3.1.6 Definición de función</h3>
+<p>Las funciones se pueden definir en cualquier orden.</p>
+<pre><code class="language-python">def foo(x):
+    bar(x)
+
+def bar(x):
+    declaracion
+
+# OR 
+def bar(x):
+    declaracion
+
+def foo(x):
+    bar(x)
+</code></pre>
+<p>Las funciones solo deben definirse antes de ser utilizadas (o llamadas) durante la ejecución del programa.</p>
+<pre><code class="language-python">foo(3)        # foo debió haber estado definida 
+</code></pre>
+<p>Estilísticamente, probablemente sea más común ver las funciones definidas de abajo hacia arriba.</p>
+<h3 id="317-estilo-de-abajo-hacia-arriba">3.1.7 Estilo de abajo hacia arriba</h3>
+<p>Las funciones se tratan como bloques de construcción. Los bloques más pequeños / simples van primero.</p>
+<pre><code class="language-python"># myprogram.py def foo(x):
+    ...
+
+def bar(x):
+    ...
+    foo(x)          # Definida anteriormente
+    ...
+
+def spam(x):
+    ...
+    bar(x)          # Definida anteriormente
+    ...
+
+spam(42)            # Código que utiliza las funciones esta definido anteriormente 
+</code></pre>
+<p>Las funciones posteriores se basan en funciones anteriores. Nuevamente, esto es solo una cuestión de estilo. Lo único que importa en el programa anterior es que la llamada <code>spam(42)</code> sea ​​la última.</p>
+<h3 id="318-diseno-de-funciones">3.1.8 Diseño de funciones</h3>
+<p>Idealmente, las funciones deberían ser una caja negra . Solo deben operar con entradas pasadas y evitar variables globales y efectos secundarios misteriosos. Sus principales objetivos: <strong>modularidad</strong> y <strong>previsibilidad</strong>.</p>
+<h3 id="319-documentacion-en-cadenas">3.1.9 Documentación en cadenas</h3>
+<p>La documentación en cadenas, comunmente conocida en inglés como <em>doc strings</em>, es una buena práctica que incluye un breve resumen de una oración de lo que hace la función. Si se necesita más información, se incluye un breve ejemplo de uso junto con una descripción más detallada de los argumentos. Las mismas se escriben inmediatamente después del nombre de la función y alimentan a <code>help()</code>, el IDE (ambiente integrado de desarrollo) y otras herramientas.</p>
+<pre><code class="language-python">def read_prices(filename):
+    ''' Read prices from a CSV file of name,price data '''
+    prices = {}
+    with open(filename) as f:
+        f_csv = csv.reader(f)
+        for row in f_csv:
+            prices[row[0]] = float(row[1])
+    return prices
+</code></pre>
+<h3 id="3110-tipo-de-anotaciones">3.1.10 Tipo de anotaciones</h3>
+<p>También puede agregar sugerencias de tipo opcionales a las definiciones de funciones.</p>
+<pre><code class="language-python">def read_prices(filename: str) -&gt; dict:
+    '''Lee precios de un archivo CSV file de nombre, precio, y data'''
+    prices = {}
+    with open(filename) as f:
+        f_csv = csv.reader(f)
+        for row in f_csv:
+            prices[row[0]] = float(row[1])
+    return prices
+</code></pre>
+<p>Las sugerencias no hacen nada operativamente. Son puramente informativos. Sin embargo, pueden ser utilizados por IDE, verificadores de código y otras herramientas para hacer más.</p>
+<h3 id="3111-ejercicios">3.1.11 Ejercicios</h3>
+<p>En la sección 2, escribió un programa llamado report.pyque imprimía un informe que mostraba el rendimiento de una cartera de acciones. Este programa constaba de algunas funciones. Por ejemplo:</p>
+<pre><code class="language-python"># report.py 
+import csv
+
+def read_portfolio(filename):
+    '''Lee un archivo de cartera de acciones en una lista de diccionarios con la clave siendo nombre, acciones y precio.'''
+    portfolio = []
+    with open(filename) as f:
+        rows = csv.reader(f)
+        headers = next(rows)
+
+        for row in rows:
+            record = dict(zip(headers, row))
+            stock = {
+                'name' : record['name'],
+                'shares' : int(record['shares']),
+                'price' : float(record['price'])
+            }
+            portfolio.append(stock)
+    return portfolio
+...
+</code></pre>
+<p>Sin embargo, también hubo partes del programa que solo realizaron una serie de cálculos con guión. Este código apareció cerca del final del programa. Por ejemplo:</p>
+<pre><code class="language-python">...
+
+# Salida/output del reporte
+headers = ('Name', 'Shares', 'Price', 'Change')
+print('%10s %10s %10s %10s'  % headers)
+print(('-' * 10 + ' ') * len(headers))
+for row in report:
+    print('%10s %10d %10.2f %10.2f' % row)
+...
+</code></pre>
+<p>En este ejercicio, tomaremos el programa anterior y lo organizaremos con un poco más de fuerza en torno al uso de funciones.</p>
+<h4 id="ejercicio-31-estructurar-un-programa-como-una-coleccion-de-funciones">Ejercicio 3.1: Estructurar un programa como una colección de funciones</h4>
+<p>Modifique su programa <code>report.py</code> para que todas las operaciones principales, incluyendo los cálculos y la salida, se lleven a cabo mediante una colección de funciones. </p>
+<p>Específicamente:</p>
+<ul>
+<li>Cree una función <code>print_report(report)</code> que imprima el informe.</li>
+<li>Cambie la última parte del programa para que no sea más que una serie de llamadas a funciones y ningún otro cálculo.</li>
+</ul>
+<h4 id="ejercicio-32-creacion-de-una-funcion-de-nivel-superior-para-la-ejecucion-del-programa">Ejercicio 3.2: Creación de una función de nivel superior para la ejecución del programa</h4>
+<p>Tome la última parte de su programa y empaquelo en una sola función <code>portfolio_report(portfolio_filename, prices_filename)</code>. Haga que la función funcione para que la siguiente llamada de función cree el informe como antes:</p>
+<p><code>portfolio_report('Data/portfolio.csv', 'Data/prices.csv')</code></p>
+<p>En esta versión final, su programa no será más que una serie de definiciones de funciones seguidas de una única llamada de función <code>portfolio_report()</code> final al (que ejecuta todos los pasos involucrados en el programa).</p>
+<p>Al convertir su programa en una sola función, es fácil ejecutarlo en diferentes entradas. Por ejemplo, pruebe estas declaraciones de forma interactiva después de ejecutar su programa:</p>
+<pre><code class="language-python">&gt;&gt;&gt; portfolio_report('Data/portfolio2.csv', 'Data/prices.csv')
+&gt;&gt;&gt; # mire la salida de la linea anterior
+&gt;&gt;&gt; files = ['Data/portfolio.csv', 'Data/portfolio2.csv']
+&gt;&gt;&gt; for name in files:
+        print(f'{name:-^43s}')
+        portfolio_report(name, 'Data/prices.csv')
+        print()
+
+&gt;&gt;&gt; # mire del ciclo anterior
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="comentario">Comentario</h3>
+<p>Python hace que sea muy fácil escribir código de <em>scripting</em> relativamente no estructurado en el que solo tiene un archivo con una secuencia de declaraciones. En el panorama general, casi siempre es mejor utilizar funciones cuando pueda. En algún momento, ese <em>script</em> crecerá y deseará tener un poco más de organización. Además, un hecho poco conocido es que Python se ejecuta un poco más rápido si usa funciones.</p>
               
             </div>
           </div>
