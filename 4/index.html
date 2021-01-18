@@ -173,6 +173,16 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#44-definicion-de-excepciones">4.4 Definición de excepciones</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicios">Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-411-definicion-de-una-excepcion-personalizada">Ejercicio 4.11: Definición de una excepción personalizada</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -1155,6 +1165,41 @@ debería funcionar:</p>
         GE         95      40.37
       MSFT         50       65.1
        IBM        100      70.44
+&gt;&gt;&gt;
+</code></pre>
+<h2 id="44-definicion-de-excepciones">4.4 Definición de excepciones</h2>
+<p>Las excepciones definidas por el usuario se definen por clases.</p>
+<pre><code class="language-python">class NetworkError(Exception):
+    pass
+</code></pre>
+<p><strong>Las excepciones siempre heredan de</strong> <code>Exception</code>.</p>
+<p>Usualmente suelen ser clases vacías. Haga uso de pass para el cuerpo.</p>
+<p>También puede hacer una jerarquía de sus excepciones.</p>
+<pre><code class="language-python">class AuthenticationError(NetworkError):
+     pass
+
+class ProtocolError(NetworkError):
+    pass
+</code></pre>
+<h3 id="ejercicios">Ejercicios</h3>
+<h4 id="ejercicio-411-definicion-de-una-excepcion-personalizada">Ejercicio 4.11: Definición de una excepción personalizada</h4>
+<p>A menudo, es una buena práctica que las bibliotecas definan sus 
+propias excepciones.</p>
+<p>Esto hace que sea más fácil distinguir entre las excepciones de 
+Python generadas en respuesta a errores de programación comunes 
+frente a las excepciones generadas intencionalmente por una 
+biblioteca para señalar un problema de uso específico.</p>
+<p>Modifique la función <code>create_formatter()</code> del último ejercicio para 
+que genere una excepción <code>FormatError</code> personalizada cuando el usuario 
+proporcione un nombre de formato incorrecto.</p>
+<p>Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; from tableformat import create_formatter
+&gt;&gt;&gt; formatter = create_formatter('xls')
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+  File &quot;tableformat.py&quot;, line 71, in create_formatter
+    raise FormatError('Unknown table format %s' % name)
+FormatError: Unknown table format xls
 &gt;&gt;&gt;
 </code></pre>
               
