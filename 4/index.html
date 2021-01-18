@@ -147,6 +147,32 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#43-metodos-especiales">4.3 Métodos especiales</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#431-introduccion">4.3.1 Introducción</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#432-metodos-especiales-para-conversiones-de-cadenas">4.3.2 Métodos especiales para conversiones de cadenas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#433-metodos-especiales-para-matematicas">4.3.3 Métodos especiales para matemáticas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#434-metodos-especiales-para-acceder-a-los-elementos">4.3.4 Métodos especiales para acceder a los elementos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#435-invocacion-de-metodo">4.3.5 Invocación de método</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#436-metodos-vinculados">4.3.6 Métodos vinculados</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#437-acceso-a-atributos">4.3.7 Acceso a atributos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#438-ejercicios">4.3.8 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-49-mejor-resultado-para-imprimir-objetos">Ejercicio 4.9: Mejor resultado para imprimir objetos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-410-un-ejemplo-de-uso-de-getattr">Ejercicio 4.10: un ejemplo de uso de getattr()</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -910,6 +936,227 @@ debería buscar libros sobre el tema de los patrones de diseño
 (aunque comprender lo que sucedió en este ejercicio lo llevará 
 bastante lejos en términos de usar objetos de una manera 
 práctica e útil).</p>
+<h2 id="43-metodos-especiales">4.3 Métodos especiales</h2>
+<p>Varias partes del comportamiento de Python se pueden personalizar a 
+través de métodos especiales o llamados "mágicos". Esta sección 
+presenta esa idea. Además, se analizan el acceso a atributos 
+dinámicos y los métodos vinculados.</p>
+<h3 id="431-introduccion">4.3.1 Introducción</h3>
+<p>Las clases pueden definir métodos especiales. Estos tienen un 
+significado especial para el intérprete de Python. Siempre van 
+precedidos y seguidos de <code>__</code>. Por ejemplo <code>__init__</code>.</p>
+<pre><code class="language-python">class Stock(object):
+    def __init__(self):
+        ...
+    def __repr__(self):
+        ...
+</code></pre>
+<p>Hay docenas de métodos especiales, pero solo veremos algunos ejemplos 
+específicos.</p>
+<h3 id="432-metodos-especiales-para-conversiones-de-cadenas">4.3.2 Métodos especiales para conversiones de cadenas</h3>
+<p>Los objetos tienen dos representaciones de cadenas.</p>
+<pre><code class="language-python">&gt;&gt;&gt; from datetime import date
+&gt;&gt;&gt; d = date(2012, 12, 21)
+&gt;&gt;&gt; print(d)
+2012-12-21
+&gt;&gt;&gt; d
+datetime.date(2012, 12, 21)
+&gt;&gt;&gt;
+</code></pre>
+<p>La función <code>str()</code> se usa para crear una buena salida imprimible:</p>
+<pre><code class="language-python">&gt;&gt;&gt; str(d)
+'2012-12-21'
+&gt;&gt;&gt;
+</code></pre>
+<p>La función <code>repr()</code> se utiliza para crear una representación más 
+detallada para los programadores.</p>
+<pre><code class="language-python">&gt;&gt;&gt; repr(d)
+'datetime.date(2012, 12, 21)'
+&gt;&gt;&gt;
+</code></pre>
+<p>Esas funciones <code>str()</code> y <code>repr()</code> usan un par de métodos especiales 
+en la clase para producir la cadena que se mostrará.</p>
+<pre><code class="language-python">class Date(object):
+    def __init__(self, year, month, day):
+        self.year = year
+        self.month = month
+        self.day = day
+
+    # Utilicelo con `str()`     
+    def __str__(self):
+        return f'{self.year}-{self.month}-{self.day}'
+
+    # Utilicelo con `repr()`     
+    def __repr__(self):
+        return f'Date({self.year},{self.month},{self.day})'
+</code></pre>
+<p><em>Nota: La convención para <strong>repr</strong>()es devolver una cadena que, 
+cuando se alimenta eval(), recreará el objeto subyacente. Si esto no 
+es posible, se utiliza en su lugar algún tipo de representación 
+fácilmente legible.</em></p>
+<h3 id="433-metodos-especiales-para-matematicas">4.3.3 Métodos especiales para matemáticas</h3>
+<p>Los operadores matemáticos implican llamadas a los siguientes métodos.</p>
+<pre><code class="language-python">a + b       a.__add__(b)
+a - b       a.__sub__(b)
+a * b       a.__mul__(b)
+a / b       a.__truediv__(b)
+a // b      a.__floordiv__(b)
+a % b       a.__mod__(b)
+a &lt;&lt; b      a.__lshift__(b)
+a &gt;&gt; b      a.__rshift__(b)
+a &amp; b       a.__and__(b)
+a | b       a.__or__(b)
+a ^ b       a.__xor__(b)
+a ** b      a.__pow__(b)
+-a          a.__neg__()
+~a          a.__invert__()
+abs(a)      a.__abs__()
+</code></pre>
+<h3 id="434-metodos-especiales-para-acceder-a-los-elementos">4.3.4 Métodos especiales para acceder a los elementos</h3>
+<p>Estos son los métodos para implementar contenedores.</p>
+<pre><code class="language-python">len(x)      x.__len__()
+x[a]        x.__getitem__(a)
+x[a] = v    x.__setitem__(a,v)
+del x[a]    x.__delitem__(a)
+</code></pre>
+<p>Puedes usarlos en tus clases.</p>
+<pre><code class="language-python">class Sequence:
+    def __len__(self):
+        ...
+    def __getitem__(self,a):
+        ...
+    def __setitem__(self,a,v):
+        ...
+    def __delitem__(self,a):
+        ...
+</code></pre>
+<h3 id="435-invocacion-de-metodo">4.3.5 Invocación de método</h3>
+<p>Invocar un método es un proceso de dos pasos.</p>
+<ul>
+<li>Búsqueda: el .operador</li>
+<li>Llamada de método: el operador <code>()</code></li>
+</ul>
+<pre><code class="language-python">&gt;&gt;&gt; s = Stock('GOOG',100,490.10)
+&gt;&gt;&gt; c = s.cost  # Lookup &gt;&gt;&gt; c
+&lt;bound method Stock.cost of &lt;Stock object at 0x590d0&gt;&gt;
+&gt;&gt;&gt; c()         # Method call 49010.0
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="436-metodos-vinculados">4.3.6 Métodos vinculados</h3>
+<p>Un método que aún no ha sido invocado por el operador de llamada de 
+función <code>()</code> se conoce como método vinculado. Opera en la instancia 
+donde se originó.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = Stock('GOOG', 100, 490.10)
+&gt;&gt;&gt; s
+&lt;Stock object at 0x590d0&gt;
+&gt;&gt;&gt; c = s.cost
+&gt;&gt;&gt; c
+&lt;bound method Stock.cost of &lt;Stock object at 0x590d0&gt;&gt;
+&gt;&gt;&gt; c()
+49010.0
+&gt;&gt;&gt;
+</code></pre>
+<p>Los métodos vinculados son a menudo una fuente de errores no evidentes 
+por descuido. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = Stock('GOOG', 100, 490.10)
+&gt;&gt;&gt; print('Cost : %0.2f' % s.cost)
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: float argument required
+&gt;&gt;&gt;
+</code></pre>
+<p>O comportamiento tortuoso que es difícil de depurar.</p>
+<pre><code class="language-python">f = open(filename, 'w')
+...
+f.close     # Oops. `f` todavía abierto. 
+</code></pre>
+<p>En ambos casos, el error se debe a que se olvidó de incluir los 
+paréntesis finales. Por ejemplo, <code>s.cost()</code> o <code>f.close()</code>.</p>
+<h3 id="437-acceso-a-atributos">4.3.7 Acceso a atributos</h3>
+<p>Existe una forma alternativa de acceder, manipular y gestionar 
+atributos.</p>
+<pre><code class="language-python">getattr(obj, 'name')          # Igual a obj.name 
+setattr(obj, 'name', value)   # Igual a obj.name = value 
+delattr(obj, 'name')          # Igual a del obj.name 
+hasattr(obj, 'name')          # Comprueba si el atributo existe 
+</code></pre>
+<p>Ejemplo:</p>
+<pre><code class="language-python">if hasattr(obj, 'x'):
+    x = getattr(obj, 'x'):
+else:
+    x = None
+</code></pre>
+<p>Nota: <code>getattr()</code> también tiene un valor predeterminado útil <code>*arg</code>.</p>
+<pre><code class="language-python">x = getattr(obj, 'x', None)
+</code></pre>
+<h3 id="438-ejercicios">4.3.8 Ejercicios</h3>
+<h4 id="ejercicio-49-mejor-resultado-para-imprimir-objetos">Ejercicio 4.9: Mejor resultado para imprimir objetos</h4>
+<p>Modifique el objeto <code>Stock</code> que definió <code>stock.py</code> para que el 
+método <code>__repr__()</code> produzca una salida más útil. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; goog = Stock('GOOG', 100, 490.1)
+&gt;&gt;&gt; goog
+Stock('GOOG', 100, 490.1)
+&gt;&gt;&gt;
+</code></pre>
+<p>Vea lo que sucede cuando lee una cartera de acciones y vea la lista 
+resultante después de haber realizado estos cambios. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import report
+&gt;&gt;&gt; portfolio = report.read_portfolio('Data/portfolio.csv')
+&gt;&gt;&gt; portfolio
+... see what the output is ...
+&gt;&gt;&gt;
+</code></pre>
+<h4 id="ejercicio-410-un-ejemplo-de-uso-de-getattr">Ejercicio 4.10: un ejemplo de uso de <code>getattr()</code></h4>
+<p><code>getattr()</code> es un mecanismo alternativo para leer atributos. 
+Se puede usar para escribir código extremadamente flexible. 
+Para empezar, prueba este ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import stock
+&gt;&gt;&gt; s = stock.Stock('GOOG', 100, 490.1)
+&gt;&gt;&gt; columns = ['name', 'shares']
+&gt;&gt;&gt; for colname in columns:
+        print(colname, '=', getattr(s, colname))
+
+name = GOOG
+shares = 100
+&gt;&gt;&gt;
+</code></pre>
+<p>Observe con atención que los datos de salida están determinados por 
+completo por los nombres de los atributos enumerados en la variable 
+<code>columns</code>.</p>
+<p>En el archivo <code>tableformat.py</code>, tome esta idea y amplíela en una 
+función generalizada print_table()que imprima una tabla que muestra 
+los atributos especificados por el usuario de una lista de objetos 
+arbitrarios. Al igual que con la función <code>print_report()</code> anterior, 
+<code>print_table()</code> también debería aceptar una instancia de 
+<code>TableFormatter</code>  para controlar el formato de salida. Así es como 
+debería funcionar:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import report
+&gt;&gt;&gt; portfolio = report.read_portfolio('Data/portfolio.csv')
+&gt;&gt;&gt; from tableformat import create_formatter, print_table
+&gt;&gt;&gt; formatter = create_formatter('txt')
+&gt;&gt;&gt; print_table(portfolio, ['name','shares'], formatter)
+      name     shares
+---------- ----------
+        AA        100
+       IBM         50
+       CAT        150
+      MSFT        200
+        GE         95
+      MSFT         50
+       IBM        100
+
+&gt;&gt;&gt; print_table(portfolio, ['name','shares','price'], formatter)
+      name     shares      price
+---------- ---------- ----------
+        AA        100       32.2
+       IBM         50       91.1
+       CAT        150      83.44
+      MSFT        200      51.23
+        GE         95      40.37
+      MSFT         50       65.1
+       IBM        100      70.44
+&gt;&gt;&gt;
+</code></pre>
               
             </div>
           </div>
