@@ -111,6 +111,52 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#32-mas-sobre-funciones">3.2 Más sobre funciones</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#321-llamar-a-una-funcion">3.2.1 Llamar a una función</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#322-argumentos-predeterminados">3.2.2 Argumentos predeterminados</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#323-prefiera-argumentos-de-palabras-clave-vs-argumentos-opcionales">3.2.3 Prefiera argumentos de palabras clave vs argumentos opcionales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#324-mejores-practicas-de-diseno">3.2.4 Mejores prácticas de diseño</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#325-devolucion-de-valores">3.2.5 Devolución de valores</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#326-multiples-valores-de-retorno">3.2.6 Múltiples valores de retorno</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#327-alcance-variable">3.2.7 Alcance variable</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#328-variables-locales">3.2.8 Variables locales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#329-variables-globales">3.2.9 Variables globales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3210-modificar-variables-globales">3.2.10 Modificar variables globales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3211-transferencia-de-argumentos">3.2.11 Transferencia de argumentos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3212-reasignacion-vs-modificacion">3.2.12 Reasignación vs modificación</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3213-ejercicios">3.2.13 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-33-lectura-de-archivos-csv">Ejercicio 3.3: lectura de archivos CSV</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-34-creacion-de-un-selector-de-columnas">Ejercicio 3.4: Creación de un selector de columnas</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-35-realizacion-de-conversion-de-tipos">Ejercicio 3.5: Realización de conversión de tipos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-36-trabajar-sin-encabezados">Ejercicio 3.6: Trabajar sin encabezados</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-37-elegir-un-delimitador-de-columna-diferente">Ejercicio 3.7: elegir un delimitador de columna diferente</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#comentario_1">Comentario</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -351,6 +397,307 @@ for row in report:
 </code></pre>
 <h3 id="comentario">Comentario</h3>
 <p>Python hace que sea muy fácil escribir código de <em>scripting</em> relativamente no estructurado en el que solo tiene un archivo con una secuencia de declaraciones. En el panorama general, casi siempre es mejor utilizar funciones cuando pueda. En algún momento, ese <em>script</em> crecerá y deseará tener un poco más de organización. Además, un hecho poco conocido es que Python se ejecuta un poco más rápido si usa funciones.</p>
+<h2 id="32-mas-sobre-funciones">3.2 Más sobre funciones</h2>
+<p>Aunque las funciones se introdujeron antes, se proporcionaron muy pocos detalles sobre cómo funcionan realmente a un nivel más profundo. Esta sección tiene como objetivo llenar algunos vacíos y discutir asuntos como convenciones de llamadas, reglas de alcance y más.</p>
+<h3 id="321-llamar-a-una-funcion">3.2.1 Llamar a una función</h3>
+<p>Considere esta función:</p>
+<pre><code class="language-python">def read_prices(filename, debug):
+    ...
+</code></pre>
+<p>Puede llamar a la función con argumentos posicionales:</p>
+<pre><code class="language-python">prices = read_prices('prices.csv', True)
+</code></pre>
+<p>O puede llamar a la función con argumentos de palabras clave:</p>
+<pre><code class="language-python">prices = read_prices(filename='prices.csv', debug=True)
+</code></pre>
+<h3 id="322-argumentos-predeterminados">3.2.2 Argumentos predeterminados</h3>
+<p>A veces quieres que un argumento sea opcional. Si es así, asigne un valor predeterminado en la definición de función.</p>
+<pre><code class="language-python">def read_prices(filename, debug=False):
+    ...
+</code></pre>
+<p>Si se asigna un valor predeterminado, el argumento es opcional en las llamadas a funciones.</p>
+<pre><code class="language-python">d = read_prices('prices.csv')
+e = read_prices('prices.dat', True)
+</code></pre>
+<p><em>Nota: Los argumentos con valores predeterminados deben aparecer al final de la lista de argumentos (todos los argumentos no opcionales van primero).</em></p>
+<h3 id="323-prefiera-argumentos-de-palabras-clave-vs-argumentos-opcionales">3.2.3 Prefiera argumentos de palabras clave vs argumentos opcionales</h3>
+<p>Compare y contraste estos dos estilos de llamadas diferentes:</p>
+<pre><code class="language-python">parse_data(data, False, True) # ????? 
+parse_data(data, ignore_errors=True)
+parse_data(data, debug=True)
+parse_data(data, debug=True, ignore_errors=True)
+</code></pre>
+<p>En la mayoría de los casos, los argumentos de palabras clave mejoran la claridad del código, especialmente para argumentos que sirven como indicadores o que están relacionados con características opcionales.</p>
+<h3 id="324-mejores-practicas-de-diseno">3.2.4 Mejores prácticas de diseño</h3>
+<p>Siempre proporcione nombres cortos pero significativos a los argumentos de las funciones.</p>
+<p>Alguien que use una función puede querer usar el estilo de llamada de palabras clave.</p>
+<pre><code class="language-python">d = read_prices('prices.csv', debug=True)
+</code></pre>
+<p>Las herramientas de desarrollo de Python mostrarán los nombres en las funciones de ayuda y la documentación.</p>
+<h3 id="325-devolucion-de-valores">3.2.5 Devolución de valores</h3>
+<p>La declaración <code>return</code> devuelve un valor</p>
+<pre><code class="language-python">def square(x):
+    return x * x
+</code></pre>
+<p>Si no se proporciona ningún valor de retorno o el <code>return</code> falta, se devuelve <code>None</code>.</p>
+<pre><code class="language-python">def bar(x):
+    ...declaraciones
+    return
+
+a = bar(4)      # a = None 
+
+# Oe
+def foo(x):
+    ...declaraciones  # Sin `return` 
+
+b = foo(4)      # b = None 
+</code></pre>
+<h3 id="326-multiples-valores-de-retorno">3.2.6 Múltiples valores de retorno</h3>
+<p>Las funciones solo pueden devolver un valor. Sin embargo, una función puede devolver varios valores devolviéndolos en una tupla.</p>
+<pre><code class="language-python">def divide(a,b):
+    q = a // b      # Cociente     
+    r = a % b       # Remanente     
+    return q, r     # Retorna una tuple 
+</code></pre>
+<p>Ejemplo de uso:</p>
+<pre><code class="language-python">x, y = divide(37,5) # x = 7, y = 2 
+x = divide(37, 5)   # x = (7, 2) 
+</code></pre>
+<h3 id="327-alcance-variable">3.2.7 Alcance variable</h3>
+<p>Los programas asignan valores a las variables.</p>
+<pre><code class="language-python">x = value # variable Global  
+def foo():
+    y = value # variable Local  
+</code></pre>
+<p>Las asignaciones de variables ocurren fuera y dentro de las definiciones de funciones. Las variables definidas en el exterior son "globales". Las variables dentro de una función son "locales".</p>
+<h3 id="328-variables-locales">3.2.8 Variables locales</h3>
+<p>Las variables asignadas dentro de las funciones son privadas.</p>
+<pre><code class="language-python">def read_portfolio(filename):
+    portfolio = []
+    for line in open(filename):
+        fields = line.split(',')
+        s = (fields[0], int(fields[1]), float(fields[2]))
+        portfolio.append(s)
+    return portfolio
+</code></pre>
+<p>En este ejemplo, <code>filename</code>, <code>portfolio</code>, <code>line</code>, <code>fields</code> y <code>s</code> son variables locales. Esas variables no se conservan ni se puede acceder a ellas después de la llamada a la función.</p>
+<pre><code class="language-shell">&gt;&gt;&gt; stocks = read_portfolio('portfolio.csv')
+&gt;&gt;&gt; fields
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in ?
+NameError: name 'fields' is not defined
+&gt;&gt;&gt;
+</code></pre>
+<p>Los locales tampoco pueden entrar en conflicto con las variables que se encuentran en otros lugares.</p>
+<h3 id="329-variables-globales">3.2.9 Variables globales</h3>
+<p>Las funciones pueden acceder libremente a los valores de globales definidos en el mismo archivo.</p>
+<pre><code class="language-python">name = 'Dave'
+
+def greeting():
+    print('Hello', name)  # Usando `name` variable global
+</code></pre>
+<p>Sin embargo, las funciones no pueden modificar los globales:</p>
+<pre><code class="language-python">name = 'Dave'
+
+def spam():
+  name = 'Guido'
+
+spam()
+print(name) # prints 'Dave' 
+</code></pre>
+<p><em>Recuerde: todas las asignaciones en funciones son locales.</em></p>
+<h3 id="3210-modificar-variables-globales">3.2.10 Modificar variables globales</h3>
+<p>Si debe modificar una variable global, debe declararla como tal.</p>
+<pre><code class="language-python">name = 'Dave'
+
+def spam():
+    global name
+    name = 'Guido' # Changes the global name above 
+</code></pre>
+<p>La declaración <code>global</code> debe aparecer antes de su uso y la variable correspondiente debe existir en el mismo archivo que la función. Habiendo visto esto, sepa que se considera de mala forma. De hecho, trate de evitarlo <code>global</code> completo si puede. Si necesita una función para modificar algún tipo de estado fuera de la función, es mejor usar una clase en su lugar (más sobre esto más adelante).</p>
+<h3 id="3211-transferencia-de-argumentos">3.2.11 Transferencia de argumentos</h3>
+<p>Cuando llama a una función, las variables de argumento son nombres que hacen referencia a los valores pasados. Estos valores NO son copias (consulte la sección 2.7). Si se pasan tipos de datos mutables (por ejemplo, listas, diccionarios), se pueden modificar en el lugar.</p>
+<pre><code class="language-python">def foo(items):
+    items.append(42)    # Modifica el objeto de entrada 
+
+a = [1, 2, 3]
+foo(a)
+print(a)                # [1, 2, 3, 42] 
+</code></pre>
+<p><em>Punto clave: las funciones no reciben una copia de los argumentos de entrada.</em></p>
+<h3 id="3212-reasignacion-vs-modificacion">3.2.12 Reasignación vs modificación</h3>
+<p>Asegúrese de comprender la sutil diferencia entre modificar un valor y reasignar un nombre de variable.</p>
+<pre><code class="language-python">def foo(items):
+    items.append(42)    # Modifica el objeto de entrada  
+
+a = [1, 2, 3]
+foo(a)
+print(a)                # [1, 2, 3, 42] 
+
+# VS 
+def bar(items):
+    items = [4,5,6]    # Reasigna variable local `items` a otro objeto 
+
+b = [1, 2, 3]
+bar(b)
+print(b)                # [1, 2, 3] 
+</code></pre>
+<p><em>Recordatorio: la asignación de variables nunca sobrescribe la memoria. El nombre simplemente está vinculado a un nuevo valor.</em></p>
+<h3 id="3213-ejercicios">3.2.13 Ejercicios</h3>
+<p>Este conjunto de ejercicios le permite implementar lo que es, quizás, la parte más poderosa y difícil del curso. Hay muchos pasos y muchos conceptos de ejercicios anteriores que se juntan todos a la vez. La solución final es solo de unas 25 líneas de código, pero tómese su tiempo y asegúrese de comprender cada parte.</p>
+<p>Una parte central de su programa <code>report.py</code> se centra en la lectura de archivos CSV. Por ejemplo, la función <code>read_portfolio()</code> lee un archivo que contiene filas de datos de cartera y la función <code>read_prices()</code> lee un archivo que contiene filas de datos de precios. En ambas funciones, hay muchas partes "complicadas" de bajo nivel y características similares. Por ejemplo, ambos abren un archivo y lo envuelven con el módulo <code>csv</code> y ambos convierten varios campos en nuevos tipos.</p>
+<p>Si estuvieses haciendo mucho análisis de archivos, probablemente queras limpiar algo de esto y hacerlo más general. Ese es nuestro objetivo.</p>
+<p>Comience este ejercicio abriendo un archivo llamado <code>fileparse.py</code>. Aquí es donde estaremos haciendo nuestro trabajo.</p>
+<h4 id="ejercicio-33-lectura-de-archivos-csv">Ejercicio 3.3: lectura de archivos CSV</h4>
+<p>Para empezar, centrémonos en el problema de leer un archivo CSV en una lista de diccionarios. En el archivo <code>fileparse.py</code>, defina una función que se vea así:</p>
+<pre><code class="language-python"># fileparse.py 
+import csv
+
+def parse_csv(filename):
+    ''' Convierte un archivo CSV a una lista de registro '''
+    with open(filename) as f:
+        rows = csv.reader(f)
+
+        headers = next(rows)  # Lee la primera fila con el encabezado
+        records = []
+        for row in rows:
+            if not row:    # Omite filas sin data                 
+                continue
+            record = dict(zip(headers, row))
+            records.append(record)
+
+    return records
+</code></pre>
+<p>Esta función lee un archivo CSV en una lista de diccionarios mientras oculta los detalles de la apertura del archivo, lo envuelve con el módulo <code>csv</code>, ignora las líneas en blanco, etc.</p>
+<p>Pruébelo:</p>
+<p>Sugerencia: <code>$ python3 -i fileparse.py</code>.</p>
+<pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.csv')
+&gt;&gt;&gt; portfolio
+[{'price': '32.20', 'name': 'AA', 'shares': '100'}, {'price': '91.10', 'name': 'IBM', 'shares': '50'}, {'price': '83.44', 'name': 'CAT', 'shares': '150'}, {'price': '51.23', 'name': 'MSFT', 'shares': '200'}, {'price': '40.37', 'name': 'GE', 'shares': '95'}, {'price': '65.10', 'name': 'MSFT', 'shares': '50'}, {'price': '70.44', 'name': 'IBM', 'shares': '100'}]
+&gt;&gt;&gt;
+</code></pre>
+<p>Esto es bueno, excepto que no puede hacer ningún tipo de cálculo útil con los datos porque todo está representado como una cadena. Arreglaremos esto en breve, pero sigamos mejorandolo.</p>
+<h3 id="ejercicio-34-creacion-de-un-selector-de-columnas">Ejercicio 3.4: Creación de un selector de columnas</h3>
+<p>En muchos casos, solo le interesan las columnas seleccionadas de un archivo CSV, no todos los datos. Modifique la función <code>parse_csv()</code> para que, opcionalmente, permita que las columnas especificadas por el usuario se seleccionen de la siguiente manera:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; # Lea toda la data 
+&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.csv')
+&gt;&gt;&gt; portfolio
+[{'price': '32.20', 'name': 'AA', 'shares': '100'}, {'price': '91.10', 'name': 'IBM', 'shares': '50'}, {'price': '83.44', 'name': 'CAT', 'shares': '150'}, {'price': '51.23', 'name': 'MSFT', 'shares': '200'}, {'price': '40.37', 'name': 'GE', 'shares': '95'}, {'price': '65.10', 'name': 'MSFT', 'shares': '50'}, {'price': '70.44', 'name': 'IBM', 'shares': '100'}]
+
+&gt;&gt;&gt; # Read only some of the data &gt;&gt;&gt; shares_held = parse_csv('Data/portfolio.csv', select=['name','shares'])
+&gt;&gt;&gt; shares_held
+[{'name': 'AA', 'shares': '100'}, {'name': 'IBM', 'shares': '50'}, {'name': 'CAT', 'shares': '150'}, {'name': 'MSFT', 'shares': '200'}, {'name': 'GE', 'shares': '95'}, {'name': 'MSFT', 'shares': '50'}, {'name': 'IBM', 'shares': '100'}]
+&gt;&gt;&gt;
+</code></pre>
+<p>En el ejercicio 2.23 se dio un ejemplo de selector de columnas. Sin embargo, aquí hay una forma de hacerlo:</p>
+<pre><code class="language-python"># fileparse.py 
+import csv
+
+def parse_csv(filename, select=None):
+    ''' Convierte un archivo CSV file a una lista de registros '''
+    with open(filename) as f:
+        rows = csv.reader(f)
+
+        # Read the file headers         
+        headers = next(rows)
+
+        # Si se proporcionó un selector de columna, busque los índices de las columnas especificadas.
+        # También reduzca el conjunto de encabezados utilizados para los diccionarios resultantes   
+        if select:
+            indices = [headers.index(colname) for colname in select]
+            headers = select
+        else:
+            indices = []
+
+        records = []
+        for row in rows:
+            if not row:    # Omitir filas sin data                
+                continue
+            # Filtrar la fila si se seleccionaron columnas específicas          
+            if indices:
+                row = [ row[index] for index in indices ]
+
+            # Crear diccionario           
+            record = dict(zip(headers, row))
+            records.append(record)
+
+    return records
+</code></pre>
+<p>Hay una serie de partes complicadas en esta parte. Probablemente lo más importante es el mapeo de las columnas seleccionadas a los índices de filas. Por ejemplo, suponga que el archivo de entrada tiene los siguientes encabezados:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; headers = ['name', 'date', 'time', 'shares', 'price']
+&gt;&gt;&gt;
+</code></pre>
+<p>Ahora, suponga que las columnas seleccionadas fueran las siguientes:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; select = ['name', 'shares']
+&gt;&gt;&gt;
+</code></pre>
+<p>Para realizar la selección adecuada, debe asignar los nombres de las columnas seleccionadas a los índices de las columnas en el archivo. Eso es lo que está haciendo este paso:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; indices = [headers.index(colname) for colname in select]
+&gt;&gt;&gt; indices
+[0, 3]
+&gt;&gt;&gt;
+</code></pre>
+<p>En otras palabras, "nombre" es la columna <code>0</code> y "recursos compartidos" es la columna <code>3</code>. Cuando lee una fila de datos del archivo, los índices se utilizan para filtrarla:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; row = ['AA', '6/11/2007', '9:50am', '100', '32.20' ]
+&gt;&gt;&gt; row = [ row[index] for index in indices ]
+&gt;&gt;&gt; row
+['AA', '100']
+&gt;&gt;&gt;
+</code></pre>
+<h4 id="ejercicio-35-realizacion-de-conversion-de-tipos">Ejercicio 3.5: Realización de conversión de tipos</h4>
+<p>Modifique la función <code>parse_csv()</code> para que, opcionalmente, permita que se apliquen conversiones de tipo a los datos devueltos. Por ejemplo:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.csv', types=[str, int, float])
+&gt;&gt;&gt; portfolio
+[{'price': 32.2, 'name': 'AA', 'shares': 100}, {'price': 91.1, 'name': 'IBM', 'shares': 50}, {'price': 83.44, 'name': 'CAT', 'shares': 150}, {'price': 51.23, 'name': 'MSFT', 'shares': 200}, {'price': 40.37, 'name': 'GE', 'shares': 95}, {'price': 65.1, 'name': 'MSFT', 'shares': 50}, {'price': 70.44, 'name': 'IBM', 'shares': 100}]
+
+&gt;&gt;&gt; shares_held = parse_csv('Data/portfolio.csv', select=['name', 'shares'], types=[str, int])
+&gt;&gt;&gt; shares_held
+[{'name': 'AA', 'shares': 100}, {'name': 'IBM', 'shares': 50}, {'name': 'CAT', 'shares': 150}, {'name': 'MSFT', 'shares': 200}, {'name': 'GE', 'shares': 95}, {'name': 'MSFT', 'shares': 50}, {'name': 'IBM', 'shares': 100}]
+&gt;&gt;&gt;
+</code></pre>
+<p>Ya exploró esto en el ejercicio 2.24. Deberá insertar el siguiente fragmento de código en su solución:</p>
+<pre><code class="language-python">...
+if types:
+    row = [func(val) for func, val in zip(types, row) ]
+...
+</code></pre>
+<h4 id="ejercicio-36-trabajar-sin-encabezados">Ejercicio 3.6: Trabajar sin encabezados</h4>
+<p>Algunos archivos CSV no incluyen información de encabezado. Por ejemplo, el archivo se prices.csvve así:</p>
+<pre><code class="language-csv">&quot;AA&quot;,9.22
+&quot;AXP&quot;,24.85
+&quot;BA&quot;,44.85
+&quot;BAC&quot;,11.27
+...
+</code></pre>
+<p>Modifique la <code>parse_csv()</code> función para que pueda trabajar con dichos archivos creando una lista de tuplas. Por ejemplo:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; prices = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
+&gt;&gt;&gt; prices
+[('AA', 9.22), ('AXP', 24.85), ('BA', 44.85), ('BAC', 11.27), ('C', 3.72), ('CAT', 35.46), ('CVX', 66.67), ('DD', 28.47), ('DIS', 24.22), ('GE', 13.48), ('GM', 0.75), ('HD', 23.16), ('HPQ', 34.35), ('IBM', 106.28), ('INTC', 15.72), ('JNJ', 55.16), ('JPM', 36.9), ('KFT', 26.11), ('KO', 49.16), ('MCD', 58.99), ('MMM', 57.1), ('MRK', 27.58), ('MSFT', 20.89), ('PFE', 15.19), ('PG', 51.94), ('T', 24.79), ('UTX', 52.61), ('VZ', 29.26), ('WMT', 49.74), ('XOM', 69.35)]
+&gt;&gt;&gt;
+</code></pre>
+<p>Para realizar este cambio, deberá modificar el código para que la primera línea de datos no se interprete como una línea de encabezado. Además, deberá asegurarse de no crear diccionarios, ya que ya no hay nombres de columna para usar como claves.</p>
+<h3 id="ejercicio-37-elegir-un-delimitador-de-columna-diferente">Ejercicio 3.7: elegir un delimitador de columna diferente</h3>
+<p>Aunque los archivos CSV son bastante comunes, también es posible que encuentre un archivo que use un separador de columna diferente, como una sangría (tab) o un espacio. Por ejemplo, el archivo se Data/portfolio.datve así:</p>
+<pre><code class="language-csv">name shares price
+&quot;AA&quot; 100 32.20
+&quot;IBM&quot; 50 91.10
+&quot;CAT&quot; 150 83.44
+&quot;MSFT&quot; 200 51.23
+&quot;GE&quot; 95 40.37
+&quot;MSFT&quot; 50 65.10
+&quot;IBM&quot; 100 70.44
+</code></pre>
+<p>La función <code>csv.reader()</code> permite dar un delimitador de columna diferente de la siguiente manera:</p>
+<p>rows = csv.reader(f, delimiter=' ')</p>
+<p>Modifique su función <code>parse_csv()</code> para que también permita cambiar el delimitador.</p>
+<p>Por ejemplo:</p>
+<pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.dat', types=[str, int, float], delimiter=' ')
+&gt;&gt;&gt; portfolio
+[{'price': '32.20', 'name': 'AA', 'shares': '100'}, {'price': '91.10', 'name': 'IBM', 'shares': '50'}, {'price': '83.44', 'name': 'CAT', 'shares': '150'}, {'price': '51.23', 'name': 'MSFT', 'shares': '200'}, {'price': '40.37', 'name': 'GE', 'shares': '95'}, {'price': '65.10', 'name': 'MSFT', 'shares': '50'}, {'price': '70.44', 'name': 'IBM', 'shares': '100'}]
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="comentario_1">Comentario</h3>
+<p>Si ha llegado hasta aquí, ha creado una agradable función de biblioteca que es realmente útil. Puede usarla para analizar archivos CSV arbitrarios, seleccionar columnas de interés, realizar conversiones de tipos, sin tener que preocuparse demasiado por el funcionamiento interno de los archivos o el csvmódulo.</p>
               
             </div>
           </div>
