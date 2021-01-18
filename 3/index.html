@@ -269,6 +269,24 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#36-discusion-del-diseno">3.6 Discusión del diseño</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#361-nombres-de-archivo-versus-iterables">3.6.1 Nombres de archivo versus iterables</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#362-idea-profunda-duck-typing">3.6.2  Idea profunda: "Duck Typing"</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#363-mejores-practicas-de-diseno-de-bibliotecas">3.6.3 Mejores prácticas de diseño de bibliotecas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#364-ejercicio">3.6.4 Ejercicio</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-317-de-nombres-de-archivo-a-objetos-similares-a-archivos">Ejercicio 3.17: De nombres de archivo a objetos similares a archivos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-318-arreglar-funciones-existentes">Ejercicio 3.18: Arreglar funciones existentes</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -333,8 +351,11 @@
             <div class="section">
               
                 <h1 id="3-organizacion-de-un-programa">3. Organización de un Programa</h1>
-<p>En este modulo nos empapamos de más detalles sobre la composición de funciones, el manejo de errores y la introducción de modulos. Al final seremos capaces de escribir programas que son subdivididos en funciones esparcidas en varios archivos. Veremos algunas plantillas de código que les será útil para la creación de programas.</p>
-<p><em>Nota: estaremos publicando el contenido de este módulo a más tardar el 18 de enero.</em></p>
+<p>En este modulo nos empapamos de más detalles sobre la composición de funciones, 
+el manejo de errores y la introducción de modulos. Al final seremos capaces de 
+escribir programas que son subdivididos en funciones esparcidas en varios 
+archivos. Veremos algunas plantillas de código que les será útil para la 
+creación de programas.</p>
 <h2 id="31-scripting">3.1 Scripting</h2>
 <p>En esta parte, veremos más de cerca la práctica de escribir scripts en Python.</p>
 <h3 id="311-que-es-un-guion-script">3.1.1 ¿Qué es un guión / script?</h3>
@@ -347,7 +368,11 @@ declaracion3
 </code></pre>
 <p>Hasta ahora, vale destacar que hemos estado escribiendo <em>scripts</em>.</p>
 <h3 id="312-un-problema">3.1.2 Un problema</h3>
-<p>Si escribe un script útil, crecerá en características y funcionalidad. Es posible que desee aplicarlo a otros problemas relacionados. Con el tiempo, podría convertirse en una aplicación crítica. Sin embargo, podría convertirse en un gran enredado si no tiene cuidado. Entonces, es importante tener algún tipo de organización.</p>
+<p>Si escribe un script útil, crecerá en características y funcionalidad. Es 
+posible que desee aplicarlo a otros problemas relacionados. Con el tiempo, 
+podría convertirse en una aplicación crítica. Sin embargo, podría convertirse 
+en un gran enredado si no tiene cuidado. Entonces, es importante tener algún 
+tipo de organización.</p>
 <h3 id="313-definiendo-cosas">3.1.3 Definiendo cosas</h3>
 <p>Los nombres siempre deben definirse antes de que se utilicen más tarde.</p>
 <pre><code class="language-python">def square(x):
@@ -357,9 +382,11 @@ a = 42
 b = a + 2     # requiere que `a` esté definida 
 z = square(b) # require que `square` y `b` esten definidas 
 </code></pre>
-<p>El orden es importante. Casi siempre colocas las definiciones de variables y funciones cerca de la parte superior.</p>
+<p>El orden es importante. Casi siempre colocas las definiciones de variables y 
+funciones cerca de la parte superior.</p>
 <h3 id="314-definicion-de-funciones">3.1.4 Definición de funciones</h3>
-<p>Es una buena idea poner todo el código relacionado con una sola tarea en un solo lugar. Para esto, haga uso de una función.</p>
+<p>Es una buena idea poner todo el código relacionado con una sola tarea en un 
+solo lugar. Para esto, haga uso de una función.</p>
 <pre><code class="language-python">def read_prices(filename):
     prices = {}
     with open(filename) as f:
@@ -386,7 +413,8 @@ newprices = read_prices('newprices.csv')
     print(math.sqrt(2))
     help(math)
 </code></pre>
-<p>No hay declaraciones <em>especiales</em> en Python (lo que hace que sea fácil de recordar).</p>
+<p>No hay declaraciones <em>especiales</em> en Python (lo que hace que sea fácil de 
+recordar).</p>
 <h3 id="316-definicion-de-funcion">3.1.6 Definición de función</h3>
 <p>Las funciones se pueden definir en cualquier orden.</p>
 <pre><code class="language-python">def foo(x):
@@ -402,12 +430,15 @@ def bar(x):
 def foo(x):
     bar(x)
 </code></pre>
-<p>Las funciones solo deben definirse antes de ser utilizadas (o llamadas) durante la ejecución del programa.</p>
+<p>Las funciones solo deben definirse antes de ser utilizadas (o llamadas) durante 
+la ejecución del programa.</p>
 <pre><code class="language-python">foo(3)        # foo debió haber estado definida 
 </code></pre>
-<p>Estilísticamente, probablemente sea más común ver las funciones definidas de abajo hacia arriba.</p>
+<p>Estilísticamente, probablemente sea más común ver las funciones definidas de 
+abajo hacia arriba.</p>
 <h3 id="317-estilo-de-abajo-hacia-arriba">3.1.7 Estilo de abajo hacia arriba</h3>
-<p>Las funciones se tratan como bloques de construcción. Los bloques más pequeños / simples van primero.</p>
+<p>Las funciones se tratan como bloques de construcción. Los bloques más pequeños 
+/ simples van primero.</p>
 <pre><code class="language-python"># myprogram.py 
 def foo(x):
     ...
@@ -424,11 +455,20 @@ def spam(x):
 
 spam(42)            # Código que utiliza las funciones esta definido anteriormente 
 </code></pre>
-<p>Las funciones posteriores se basan en funciones anteriores. Nuevamente, esto es solo una cuestión de estilo. Lo único que importa en el programa anterior es que la llamada <code>spam(42)</code> sea ​​la última.</p>
+<p>Las funciones posteriores se basan en funciones anteriores. Nuevamente, esto es 
+solo una cuestión de estilo. Lo único que importa en el programa anterior es 
+que la llamada <code>spam(42)</code> sea ​​la última.</p>
 <h3 id="318-diseno-de-funciones">3.1.8 Diseño de funciones</h3>
-<p>Idealmente, las funciones deberían ser una caja negra . Solo deben operar con entradas pasadas y evitar variables globales y efectos secundarios misteriosos. Sus principales objetivos: <strong>modularidad</strong> y <strong>previsibilidad</strong>.</p>
+<p>Idealmente, las funciones deberían ser una caja negra . Solo deben operar con 
+entradas pasadas y evitar variables globales y efectos secundarios misteriosos. 
+Sus principales objetivos: <strong>modularidad</strong> y <strong>previsibilidad</strong>.</p>
 <h3 id="319-documentacion-en-cadenas">3.1.9 Documentación en cadenas</h3>
-<p>La documentación en cadenas, comunmente conocida en inglés como <em>doc strings</em>, es una buena práctica que incluye un breve resumen de una oración de lo que hace la función. Si se necesita más información, se incluye un breve ejemplo de uso junto con una descripción más detallada de los argumentos. Las mismas se escriben inmediatamente después del nombre de la función y alimentan a <code>help()</code>, el IDE (ambiente integrado de desarrollo) y otras herramientas.</p>
+<p>La documentación en cadenas, comunmente conocida en inglés como <em>doc strings</em>, 
+es una buena práctica que incluye un breve resumen de una oración de lo que 
+hace la función. Si se necesita más información, se incluye un breve ejemplo de
+uso junto con una descripción más detallada de los argumentos. Las mismas se 
+escriben inmediatamente después del nombre de la función y alimentan a 
+<code>help()</code>, el IDE (ambiente integrado de desarrollo) y otras herramientas.</p>
 <pre><code class="language-python">def read_prices(filename):
     '''Lee precios de un archivo CSV file de nombre, precio, y data'''
     prices = {}
@@ -439,7 +479,8 @@ spam(42)            # Código que utiliza las funciones esta definido anteriorme
     return prices
 </code></pre>
 <h3 id="3110-tipo-de-anotaciones">3.1.10 Tipo de anotaciones</h3>
-<p>También puede agregar sugerencias de tipo opcionales a las definiciones de funciones.</p>
+<p>También puede agregar sugerencias de tipo opcionales a las definiciones de 
+funciones.</p>
 <pre><code class="language-python">def read_prices(filename: str) -&gt; dict:
     '''Lee precios de un archivo CSV file de nombre, precio, y data'''
     prices = {}
@@ -449,9 +490,13 @@ spam(42)            # Código que utiliza las funciones esta definido anteriorme
             prices[row[0]] = float(row[1])
     return prices
 </code></pre>
-<p>Las sugerencias no hacen nada operativamente. Son puramente informativos. Sin embargo, pueden ser utilizados por IDE, verificadores de código y otras herramientas para hacer más.</p>
+<p>Las sugerencias no hacen nada operativamente. Son puramente informativos. Sin 
+embargo, pueden ser utilizados por IDE, verificadores de código y otras 
+herramientas para hacer más.</p>
 <h3 id="3111-ejercicios">3.1.11 Ejercicios</h3>
-<p>En la sección 2, escribió un programa llamado report.pyque imprimía un informe que mostraba el rendimiento de una cartera de acciones. Este programa constaba de algunas funciones. Por ejemplo:</p>
+<p>En la sección 2, escribió un programa llamado report.pyque imprimía un informe 
+que mostraba el rendimiento de una cartera de acciones. Este programa constaba 
+de algunas funciones. Por ejemplo:</p>
 <pre><code class="language-python"># report.py 
 import csv
 
@@ -487,19 +532,29 @@ for row in report:
     print('%10s %10d %10.2f %10.2f' % row)
 ...
 </code></pre>
-<p>En este ejercicio, tomaremos el programa anterior y lo organizaremos con un poco más de fuerza en torno al uso de funciones.</p>
+<p>En este ejercicio, tomaremos el programa anterior y lo organizaremos con un 
+poco más de fuerza en torno al uso de funciones.</p>
 <h4 id="ejercicio-31-estructurar-un-programa-como-una-coleccion-de-funciones">Ejercicio 3.1: Estructurar un programa como una colección de funciones</h4>
-<p>Modifique su programa <code>report.py</code> para que todas las operaciones principales, incluyendo los cálculos y la salida, se lleven a cabo mediante una colección de funciones. </p>
+<p>Modifique su programa <code>report.py</code> para que todas las operaciones principales, 
+incluyendo los cálculos y la salida, se lleven a cabo mediante una colección 
+de funciones. </p>
 <p>Específicamente:</p>
 <ul>
 <li>Cree una función <code>print_report(report)</code> que imprima el informe.</li>
-<li>Cambie la última parte del programa para que no sea más que una serie de llamadas a funciones y ningún otro cálculo.</li>
+<li>Cambie la última parte del programa para que no sea más que una serie de 
+llamadas a funciones y ningún otro cálculo.</li>
 </ul>
 <h4 id="ejercicio-32-creacion-de-una-funcion-de-nivel-superior-para-la-ejecucion-del-programa">Ejercicio 3.2: Creación de una función de nivel superior para la ejecución del programa</h4>
-<p>Tome la última parte de su programa y empaquelo en una sola función <code>portfolio_report(portfolio_filename, prices_filename)</code>. Haga que la función funcione para que la siguiente llamada de función cree el informe como antes:</p>
+<p>Tome la última parte de su programa y empaquelo en una sola función 
+<code>portfolio_report(portfolio_filename, prices_filename)</code>. Haga que la función 
+funcione para que la siguiente llamada de función cree el informe como antes:</p>
 <p><code>portfolio_report('Data/portfolio.csv', 'Data/prices.csv')</code></p>
-<p>En esta versión final, su programa no será más que una serie de definiciones de funciones seguidas de una única llamada de función <code>portfolio_report()</code> final al (que ejecuta todos los pasos involucrados en el programa).</p>
-<p>Al convertir su programa en una sola función, es fácil ejecutarlo en diferentes entradas. Por ejemplo, pruebe estas declaraciones de forma interactiva después de ejecutar su programa:</p>
+<p>En esta versión final, su programa no será más que una serie de definiciones de 
+funciones seguidas de una única llamada de función <code>portfolio_report()</code> final 
+al (que ejecuta todos los pasos involucrados en el programa).</p>
+<p>Al convertir su programa en una sola función, es fácil ejecutarlo en diferentes 
+entradas. Por ejemplo, pruebe estas declaraciones de forma interactiva después 
+de ejecutar su programa:</p>
 <pre><code class="language-python">&gt;&gt;&gt; portfolio_report('Data/portfolio2.csv', 'Data/prices.csv')
 &gt;&gt;&gt; # mire la salida de la linea anterior
 &gt;&gt;&gt; files = ['Data/portfolio.csv', 'Data/portfolio2.csv']
@@ -512,9 +567,17 @@ for row in report:
 &gt;&gt;&gt;
 </code></pre>
 <h3 id="comentario">Comentario</h3>
-<p>Python hace que sea muy fácil escribir código de <em>scripting</em> relativamente no estructurado en el que solo tiene un archivo con una secuencia de declaraciones. En el panorama general, casi siempre es mejor utilizar funciones cuando pueda. En algún momento, ese <em>script</em> crecerá y deseará tener un poco más de organización. Además, un hecho poco conocido es que Python se ejecuta un poco más rápido si usa funciones.</p>
+<p>Python hace que sea muy fácil escribir código de <em>scripting</em> relativamente no 
+estructurado en el que solo tiene un archivo con una secuencia de 
+declaraciones. En el panorama general, casi siempre es mejor utilizar funciones 
+cuando pueda. En algún momento, ese <em>script</em> crecerá y deseará tener un poco 
+más de organización. Además, un hecho poco conocido es que Python se ejecuta un 
+poco más rápido si usa funciones.</p>
 <h2 id="32-mas-sobre-funciones">3.2 Más sobre funciones</h2>
-<p>Aunque las funciones se introdujeron antes, se proporcionaron muy pocos detalles sobre cómo funcionan realmente a un nivel más profundo. Esta sección tiene como objetivo llenar algunos vacíos y discutir asuntos como convenciones de llamadas, reglas de alcance y más.</p>
+<p>Aunque las funciones se introdujeron antes, se proporcionaron muy pocos 
+detalles sobre cómo funcionan realmente a un nivel más profundo. 
+Esta sección tiene como objetivo llenar algunos vacíos y discutir asuntos como 
+convenciones de llamadas, reglas de alcance y más.</p>
 <h3 id="321-llamar-a-una-funcion">3.2.1 Llamar a una función</h3>
 <p>Considere esta función:</p>
 <pre><code class="language-python">def read_prices(filename, debug):
@@ -527,15 +590,18 @@ for row in report:
 <pre><code class="language-python">prices = read_prices(filename='prices.csv', debug=True)
 </code></pre>
 <h3 id="322-argumentos-predeterminados">3.2.2 Argumentos predeterminados</h3>
-<p>A veces quieres que un argumento sea opcional. Si es así, asigne un valor predeterminado en la definición de función.</p>
+<p>A veces quieres que un argumento sea opcional. Si es así, asigne un valor 
+predeterminado en la definición de función.</p>
 <pre><code class="language-python">def read_prices(filename, debug=False):
     ...
 </code></pre>
-<p>Si se asigna un valor predeterminado, el argumento es opcional en las llamadas a funciones.</p>
+<p>Si se asigna un valor predeterminado, el argumento es opcional en las llamadas 
+a funciones.</p>
 <pre><code class="language-python">d = read_prices('prices.csv')
 e = read_prices('prices.dat', True)
 </code></pre>
-<p><em>Nota: Los argumentos con valores predeterminados deben aparecer al final de la lista de argumentos (todos los argumentos no opcionales van primero).</em></p>
+<p><em>Nota: Los argumentos con valores predeterminados deben aparecer al final de la 
+lista de argumentos (todos los argumentos no opcionales van primero).</em></p>
 <h3 id="323-prefiera-argumentos-de-palabras-clave-vs-argumentos-opcionales">3.2.3 Prefiera argumentos de palabras clave vs argumentos opcionales</h3>
 <p>Compare y contraste estos dos estilos de llamadas diferentes:</p>
 <pre><code class="language-python">parse_data(data, False, True) # ????? 
@@ -543,19 +609,25 @@ parse_data(data, ignore_errors=True)
 parse_data(data, debug=True)
 parse_data(data, debug=True, ignore_errors=True)
 </code></pre>
-<p>En la mayoría de los casos, los argumentos de palabras clave mejoran la claridad del código, especialmente para argumentos que sirven como indicadores o que están relacionados con características opcionales.</p>
+<p>En la mayoría de los casos, los argumentos de palabras clave mejoran la 
+claridad del código, especialmente para argumentos que sirven como indicadores 
+o que están relacionados con características opcionales.</p>
 <h3 id="324-mejores-practicas-de-diseno">3.2.4 Mejores prácticas de diseño</h3>
-<p>Siempre proporcione nombres cortos pero significativos a los argumentos de las funciones.</p>
-<p>Alguien que use una función puede querer usar el estilo de llamada de palabras clave.</p>
+<p>Siempre proporcione nombres cortos pero significativos a los argumentos de las 
+funciones.</p>
+<p>Alguien que use una función puede querer usar el estilo de llamada de palabras 
+clave.</p>
 <pre><code class="language-python">d = read_prices('prices.csv', debug=True)
 </code></pre>
-<p>Las herramientas de desarrollo de Python mostrarán los nombres en las funciones de ayuda y la documentación.</p>
+<p>Las herramientas de desarrollo de Python mostrarán los nombres en las funciones 
+de ayuda y la documentación.</p>
 <h3 id="325-devolucion-de-valores">3.2.5 Devolución de valores</h3>
 <p>La declaración <code>return</code> devuelve un valor</p>
 <pre><code class="language-python">def square(x):
     return x * x
 </code></pre>
-<p>Si no se proporciona ningún valor de retorno o el <code>return</code> falta, se devuelve <code>None</code>.</p>
+<p>Si no se proporciona ningún valor de retorno o el <code>return</code> falta, se devuelve 
+<code>None</code>.</p>
 <pre><code class="language-python">def bar(x):
     ...declaraciones
     return
@@ -569,7 +641,8 @@ def foo(x):
 b = foo(4)      # b = None 
 </code></pre>
 <h3 id="326-multiples-valores-de-retorno">3.2.6 Múltiples valores de retorno</h3>
-<p>Las funciones solo pueden devolver un valor. Sin embargo, una función puede devolver varios valores devolviéndolos en una tupla.</p>
+<p>Las funciones solo pueden devolver un valor. Sin embargo, una función puede 
+devolver varios valores devolviéndolos en una tupla.</p>
 <pre><code class="language-python">def divide(a,b):
     q = a // b      # Cociente     
     r = a % b       # Remanente     
@@ -585,7 +658,9 @@ x = divide(37, 5)   # x = (7, 2)
 def foo():
     y = value # variable Local  
 </code></pre>
-<p>Las asignaciones de variables ocurren fuera y dentro de las definiciones de funciones. Las variables definidas en el exterior son "globales". Las variables dentro de una función son "locales".</p>
+<p>Las asignaciones de variables ocurren fuera y dentro de las definiciones de 
+funciones. Las variables definidas en el exterior son "globales". Las variables 
+dentro de una función son "locales".</p>
 <h3 id="328-variables-locales">3.2.8 Variables locales</h3>
 <p>Las variables asignadas dentro de las funciones son privadas.</p>
 <pre><code class="language-python">def read_portfolio(filename):
@@ -596,7 +671,9 @@ def foo():
         portfolio.append(s)
     return portfolio
 </code></pre>
-<p>En este ejemplo, <code>filename</code>, <code>portfolio</code>, <code>line</code>, <code>fields</code> y <code>s</code> son variables locales. Esas variables no se conservan ni se puede acceder a ellas después de la llamada a la función.</p>
+<p>En este ejemplo, <code>filename</code>, <code>portfolio</code>, <code>line</code>, <code>fields</code> y <code>s</code> son variables 
+locales. Esas variables no se conservan ni se puede acceder a ellas después de 
+la llamada a la función.</p>
 <pre><code class="language-shell">&gt;&gt;&gt; stocks = read_portfolio('portfolio.csv')
 &gt;&gt;&gt; fields
 Traceback (most recent call last):
@@ -604,9 +681,11 @@ File &quot;&lt;stdin&gt;&quot;, line 1, in ?
 NameError: name 'fields' is not defined
 &gt;&gt;&gt;
 </code></pre>
-<p>Los locales tampoco pueden entrar en conflicto con las variables que se encuentran en otros lugares.</p>
+<p>Los locales tampoco pueden entrar en conflicto con las variables que se 
+encuentran en otros lugares.</p>
 <h3 id="329-variables-globales">3.2.9 Variables globales</h3>
-<p>Las funciones pueden acceder libremente a los valores de globales definidos en el mismo archivo.</p>
+<p>Las funciones pueden acceder libremente a los valores de globales definidos en 
+el mismo archivo.</p>
 <pre><code class="language-python">name = 'Dave'
 
 def greeting():
@@ -630,9 +709,17 @@ def spam():
     global name
     name = 'Guido' # cambia el nombre global anterior
 </code></pre>
-<p>La declaración <code>global</code> debe aparecer antes de su uso y la variable correspondiente debe existir en el mismo archivo que la función. Habiendo visto esto, sepa que se considera de mala forma. De hecho, trate de evitarlo <code>global</code> completo si puede. Si necesita una función para modificar algún tipo de estado fuera de la función, es mejor usar una clase en su lugar (más sobre esto más adelante).</p>
+<p>La declaración <code>global</code> debe aparecer antes de su uso y la variable 
+correspondiente debe existir en el mismo archivo que la función. Habiendo 
+visto esto, sepa que se considera de mala forma. De hecho, trate de evitarlo 
+<code>global</code> completo si puede. Si necesita una función para modificar algún tipo 
+de estado fuera de la función, es mejor usar una clase en su lugar (más sobre 
+esto más adelante).</p>
 <h3 id="3211-transferencia-de-argumentos">3.2.11 Transferencia de argumentos</h3>
-<p>Cuando llama a una función, las variables de argumento son nombres que hacen referencia a los valores pasados. Estos valores NO son copias (consulte la sección 2.7). Si se pasan tipos de datos mutables (por ejemplo, listas, diccionarios), se pueden modificar en el lugar.</p>
+<p>Cuando llama a una función, las variables de argumento son nombres que hacen 
+referencia a los valores pasados. Estos valores NO son copias (consulte la 
+sección 2.7). Si se pasan tipos de datos mutables (por ejemplo, listas, 
+diccionarios), se pueden modificar en el lugar.</p>
 <pre><code class="language-python">def foo(items):
     items.append(42)    # Modifica el objeto de entrada 
 
@@ -642,7 +729,8 @@ print(a)                # [1, 2, 3, 42]
 </code></pre>
 <p><em>Punto clave: las funciones no reciben una copia de los argumentos de entrada.</em></p>
 <h3 id="3212-reasignacion-vs-modificacion">3.2.12 Reasignación vs modificación</h3>
-<p>Asegúrese de comprender la sutil diferencia entre modificar un valor y reasignar un nombre de variable.</p>
+<p>Asegúrese de comprender la sutil diferencia entre modificar un valor y 
+reasignar un nombre de variable.</p>
 <pre><code class="language-python">def foo(items):
     items.append(42)    # Modifica el objeto de entrada  
 
@@ -658,14 +746,28 @@ b = [1, 2, 3]
 bar(b)
 print(b)                # [1, 2, 3] 
 </code></pre>
-<p><em>Recordatorio: la asignación de variables nunca sobrescribe la memoria. El nombre simplemente está vinculado a un nuevo valor.</em></p>
+<p><em>Recordatorio: la asignación de variables nunca sobrescribe la memoria. El 
+nombre simplemente está vinculado a un nuevo valor.</em></p>
 <h3 id="3213-ejercicios">3.2.13 Ejercicios</h3>
-<p>Este conjunto de ejercicios le permite implementar lo que es, quizás, la parte más poderosa y difícil del curso. Hay muchos pasos y muchos conceptos de ejercicios anteriores que se juntan todos a la vez. La solución final es solo de unas 25 líneas de código, pero tómese su tiempo y asegúrese de comprender cada parte.</p>
-<p>Una parte central de su programa <code>report.py</code> se centra en la lectura de archivos CSV. Por ejemplo, la función <code>read_portfolio()</code> lee un archivo que contiene filas de datos de cartera y la función <code>read_prices()</code> lee un archivo que contiene filas de datos de precios. En ambas funciones, hay muchas partes "complicadas" de bajo nivel y características similares. Por ejemplo, ambos abren un archivo y lo envuelven con el módulo <code>csv</code> y ambos convierten varios campos en nuevos tipos.</p>
-<p>Si estuvieses haciendo mucho análisis de archivos, probablemente queras limpiar algo de esto y hacerlo más general. Ese es nuestro objetivo.</p>
-<p>Comience este ejercicio abriendo un archivo llamado <code>fileparse.py</code>. Aquí es donde estaremos haciendo nuestro trabajo.</p>
+<p>Este conjunto de ejercicios le permite implementar lo que es, quizás, la 
+parte más poderosa y difícil del curso. Hay muchos pasos y muchos conceptos de 
+ejercicios anteriores que se juntan todos a la vez. La solución final es solo 
+de unas 25 líneas de código, pero tómese su tiempo y asegúrese de comprender 
+cada parte.</p>
+<p>Una parte central de su programa <code>report.py</code> se centra en la lectura de 
+archivos CSV. Por ejemplo, la función <code>read_portfolio()</code> lee un archivo que 
+contiene filas de datos de cartera y la función <code>read_prices()</code> lee un archivo 
+que contiene filas de datos de precios. En ambas funciones, hay muchas partes 
+"complicadas" de bajo nivel y características similares. Por ejemplo, ambos 
+abren un archivo y lo envuelven con el módulo <code>csv</code> y ambos convierten varios 
+campos en nuevos tipos.</p>
+<p>Si estuvieses haciendo mucho análisis de archivos, probablemente queras limpiar 
+algo de esto y hacerlo más general. Ese es nuestro objetivo.</p>
+<p>Comience este ejercicio abriendo un archivo llamado <code>fileparse.py</code>. Aquí es 
+donde estaremos haciendo nuestro trabajo.</p>
 <h4 id="ejercicio-33-lectura-de-archivos-csv">Ejercicio 3.3: lectura de archivos CSV</h4>
-<p>Para empezar, centrémonos en el problema de leer un archivo CSV en una lista de diccionarios. En el archivo <code>fileparse.py</code>, defina una función que se vea así:</p>
+<p>Para empezar, centrémonos en el problema de leer un archivo CSV en una lista de 
+diccionarios. En el archivo <code>fileparse.py</code>, defina una función que se vea así:</p>
 <pre><code class="language-python"># fileparse.py 
 import csv
 
@@ -684,7 +786,9 @@ def parse_csv(filename):
 
     return records
 </code></pre>
-<p>Esta función lee un archivo CSV en una lista de diccionarios mientras oculta los detalles de la apertura del archivo, lo envuelve con el módulo <code>csv</code>, ignora las líneas en blanco, etc.</p>
+<p>Esta función lee un archivo CSV en una lista de diccionarios mientras oculta 
+los detalles de la apertura del archivo, lo envuelve con el módulo <code>csv</code>, 
+ignora las líneas en blanco, etc.</p>
 <p>Pruébelo:</p>
 <p>Sugerencia: <code>$ python3 -i fileparse.py</code>.</p>
 <pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.csv')
@@ -692,9 +796,14 @@ def parse_csv(filename):
 [{'price': '32.20', 'name': 'AA', 'shares': '100'}, {'price': '91.10', 'name': 'IBM', 'shares': '50'}, {'price': '83.44', 'name': 'CAT', 'shares': '150'}, {'price': '51.23', 'name': 'MSFT', 'shares': '200'}, {'price': '40.37', 'name': 'GE', 'shares': '95'}, {'price': '65.10', 'name': 'MSFT', 'shares': '50'}, {'price': '70.44', 'name': 'IBM', 'shares': '100'}]
 &gt;&gt;&gt;
 </code></pre>
-<p>Esto es bueno, excepto que no puede hacer ningún tipo de cálculo útil con los datos porque todo está representado como una cadena. Arreglaremos esto en breve, pero sigamos mejorandolo.</p>
+<p>Esto es bueno, excepto que no puede hacer ningún tipo de cálculo útil con los 
+datos porque todo está representado como una cadena. Arreglaremos esto en 
+breve, pero sigamos mejorandolo.</p>
 <h3 id="ejercicio-34-creacion-de-un-selector-de-columnas">Ejercicio 3.4: Creación de un selector de columnas</h3>
-<p>En muchos casos, solo le interesan las columnas seleccionadas de un archivo CSV, no todos los datos. Modifique la función <code>parse_csv()</code> para que, opcionalmente, permita que las columnas especificadas por el usuario se seleccionen de la siguiente manera:</p>
+<p>En muchos casos, solo le interesan las columnas seleccionadas de un archivo 
+CSV, no todos los datos. Modifique la función <code>parse_csv()</code> para que, 
+opcionalmente, permita que las columnas especificadas por el usuario se 
+seleccionen de la siguiente manera:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; # Lea toda la data 
 &gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.csv')
 &gt;&gt;&gt; portfolio
@@ -706,7 +815,8 @@ def parse_csv(filename):
 [{'name': 'AA', 'shares': '100'}, {'name': 'IBM', 'shares': '50'}, {'name': 'CAT', 'shares': '150'}, {'name': 'MSFT', 'shares': '200'}, {'name': 'GE', 'shares': '95'}, {'name': 'MSFT', 'shares': '50'}, {'name': 'IBM', 'shares': '100'}]
 &gt;&gt;&gt;
 </code></pre>
-<p>En el ejercicio 2.23 se dio un ejemplo de selector de columnas. Sin embargo, aquí hay una forma de hacerlo:</p>
+<p>En el ejercicio 2.23 se dio un ejemplo de selector de columnas. Sin embargo, 
+aquí hay una forma de hacerlo:</p>
 <pre><code class="language-python"># fileparse.py 
 import csv
 
@@ -718,7 +828,8 @@ def parse_csv(filename, select=None):
         # Read the file headers         
         headers = next(rows)
 
-        # Si se proporcionó un selector de columna, busque los índices de las columnas especificadas.
+        # Si se proporcionó un selector de columna, busque los índices de las 
+        # columnas especificadas.
         # También reduzca el conjunto de encabezados utilizados para los diccionarios resultantes   
         if select:
             indices = [headers.index(colname) for colname in select]
@@ -740,7 +851,9 @@ def parse_csv(filename, select=None):
 
     return records
 </code></pre>
-<p>Hay una serie de partes complicadas en esta parte. Probablemente lo más importante es el mapeo de las columnas seleccionadas a los índices de filas. Por ejemplo, suponga que el archivo de entrada tiene los siguientes encabezados:</p>
+<p>Hay una serie de partes complicadas en esta parte. Probablemente lo más 
+importante es el mapeo de las columnas seleccionadas a los índices de filas. 
+Por ejemplo, suponga que el archivo de entrada tiene los siguientes encabezados:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; headers = ['name', 'date', 'time', 'shares', 'price']
 &gt;&gt;&gt;
 </code></pre>
@@ -748,13 +861,17 @@ def parse_csv(filename, select=None):
 <pre><code class="language-shell">&gt;&gt;&gt; select = ['name', 'shares']
 &gt;&gt;&gt;
 </code></pre>
-<p>Para realizar la selección adecuada, debe asignar los nombres de las columnas seleccionadas a los índices de las columnas en el archivo. Eso es lo que está haciendo este paso:</p>
+<p>Para realizar la selección adecuada, debe asignar los nombres de las columnas 
+seleccionadas a los índices de las columnas en el archivo. Eso es lo que está 
+haciendo este paso:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; indices = [headers.index(colname) for colname in select]
 &gt;&gt;&gt; indices
 [0, 3]
 &gt;&gt;&gt;
 </code></pre>
-<p>En otras palabras, "nombre" es la columna <code>0</code> y "recursos compartidos" es la columna <code>3</code>. Cuando lee una fila de datos del archivo, los índices se utilizan para filtrarla:</p>
+<p>En otras palabras, "nombre" es la columna <code>0</code> y "recursos compartidos" es la 
+columna <code>3</code>. Cuando lee una fila de datos del archivo, los índices se utilizan 
+para filtrarla:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; row = ['AA', '6/11/2007', '9:50am', '100', '32.20' ]
 &gt;&gt;&gt; row = [ row[index] for index in indices ]
 &gt;&gt;&gt; row
@@ -762,7 +879,8 @@ def parse_csv(filename, select=None):
 &gt;&gt;&gt;
 </code></pre>
 <h4 id="ejercicio-35-realizacion-de-conversion-de-tipos">Ejercicio 3.5: Realización de conversión de tipos</h4>
-<p>Modifique la función <code>parse_csv()</code> para que, opcionalmente, permita que se apliquen conversiones de tipo a los datos devueltos. Por ejemplo:</p>
+<p>Modifique la función <code>parse_csv()</code> para que, opcionalmente, permita que se 
+apliquen conversiones de tipo a los datos devueltos. Por ejemplo:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.csv', types=[str, int, float])
 &gt;&gt;&gt; portfolio
 [{'price': 32.2, 'name': 'AA', 'shares': 100}, {'price': 91.1, 'name': 'IBM', 'shares': 50}, {'price': 83.44, 'name': 'CAT', 'shares': 150}, {'price': 51.23, 'name': 'MSFT', 'shares': 200}, {'price': 40.37, 'name': 'GE', 'shares': 95}, {'price': 65.1, 'name': 'MSFT', 'shares': 50}, {'price': 70.44, 'name': 'IBM', 'shares': 100}]
@@ -772,29 +890,37 @@ def parse_csv(filename, select=None):
 [{'name': 'AA', 'shares': 100}, {'name': 'IBM', 'shares': 50}, {'name': 'CAT', 'shares': 150}, {'name': 'MSFT', 'shares': 200}, {'name': 'GE', 'shares': 95}, {'name': 'MSFT', 'shares': 50}, {'name': 'IBM', 'shares': 100}]
 &gt;&gt;&gt;
 </code></pre>
-<p>Ya exploró esto en el ejercicio 2.24. Deberá insertar el siguiente fragmento de código en su solución:</p>
+<p>Ya exploró esto en el ejercicio 2.24. Deberá insertar el siguiente fragmento de 
+código en su solución:</p>
 <pre><code class="language-python">...
 if types:
     row = [func(val) for func, val in zip(types, row) ]
 ...
 </code></pre>
 <h4 id="ejercicio-36-trabajar-sin-encabezados">Ejercicio 3.6: Trabajar sin encabezados</h4>
-<p>Algunos archivos CSV no incluyen información de encabezado. Por ejemplo, el archivo se prices.csvve así:</p>
+<p>Algunos archivos CSV no incluyen información de encabezado. Por ejemplo, el 
+archivo se prices.csvve así:</p>
 <pre><code class="language-csv">&quot;AA&quot;,9.22
 &quot;AXP&quot;,24.85
 &quot;BA&quot;,44.85
 &quot;BAC&quot;,11.27
 ...
 </code></pre>
-<p>Modifique la <code>parse_csv()</code> función para que pueda trabajar con dichos archivos creando una lista de tuplas. Por ejemplo:</p>
+<p>Modifique la <code>parse_csv()</code> función para que pueda trabajar con dichos archivos 
+creando una lista de tuplas. Por ejemplo:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; prices = parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
 &gt;&gt;&gt; prices
 [('AA', 9.22), ('AXP', 24.85), ('BA', 44.85), ('BAC', 11.27), ('C', 3.72), ('CAT', 35.46), ('CVX', 66.67), ('DD', 28.47), ('DIS', 24.22), ('GE', 13.48), ('GM', 0.75), ('HD', 23.16), ('HPQ', 34.35), ('IBM', 106.28), ('INTC', 15.72), ('JNJ', 55.16), ('JPM', 36.9), ('KFT', 26.11), ('KO', 49.16), ('MCD', 58.99), ('MMM', 57.1), ('MRK', 27.58), ('MSFT', 20.89), ('PFE', 15.19), ('PG', 51.94), ('T', 24.79), ('UTX', 52.61), ('VZ', 29.26), ('WMT', 49.74), ('XOM', 69.35)]
 &gt;&gt;&gt;
 </code></pre>
-<p>Para realizar este cambio, deberá modificar el código para que la primera línea de datos no se interprete como una línea de encabezado. Además, deberá asegurarse de no crear diccionarios, ya que ya no hay nombres de columna para usar como claves.</p>
+<p>Para realizar este cambio, deberá modificar el código para que la primera línea 
+de datos no se interprete como una línea de encabezado. Además, deberá 
+asegurarse de no crear diccionarios, ya que ya no hay nombres de columna para 
+usar como claves.</p>
 <h3 id="ejercicio-37-elegir-un-delimitador-de-columna-diferente">Ejercicio 3.7: elegir un delimitador de columna diferente</h3>
-<p>Aunque los archivos CSV son bastante comunes, también es posible que encuentre un archivo que use un separador de columna diferente, como una sangría (tab) o un espacio. Por ejemplo, el archivo se Data/portfolio.datve así:</p>
+<p>Aunque los archivos CSV son bastante comunes, también es posible que encuentre 
+un archivo que use un separador de columna diferente, como una sangría (tab) o 
+un espacio. Por ejemplo, el archivo se Data/portfolio.datve así:</p>
 <pre><code class="language-csv">name shares price
 &quot;AA&quot; 100 32.20
 &quot;IBM&quot; 50 91.10
@@ -804,9 +930,12 @@ if types:
 &quot;MSFT&quot; 50 65.10
 &quot;IBM&quot; 100 70.44
 </code></pre>
-<p>La función <code>csv.reader()</code> permite dar un delimitador de columna diferente de la siguiente manera:</p>
-<p>rows = csv.reader(f, delimiter=' ')</p>
-<p>Modifique su función <code>parse_csv()</code> para que también permita cambiar el delimitador.</p>
+<p>La función <code>csv.reader()</code> permite dar un delimitador de columna diferente de la 
+siguiente manera:</p>
+<pre><code class="language-python">rows = csv.reader(f, delimiter=' ')
+</code></pre>
+<p>Modifique su función <code>parse_csv()</code> para que también permita cambiar el 
+delimitador.</p>
 <p>Por ejemplo:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.dat', types=[str, int, float], delimiter=' ')
 &gt;&gt;&gt; portfolio
@@ -814,11 +943,19 @@ if types:
 &gt;&gt;&gt;
 </code></pre>
 <h3 id="comentario_1">Comentario</h3>
-<p>Si ha llegado hasta aquí, ha creado una agradable función de biblioteca que es realmente útil. Puede usarla para analizar archivos CSV arbitrarios, seleccionar columnas de interés, realizar conversiones de tipos, sin tener que preocuparse demasiado por el funcionamiento interno de los archivos o el csvmódulo.</p>
+<p>Si ha llegado hasta aquí, ha creado una agradable función de biblioteca que es 
+realmente útil. Puede usarla para analizar archivos CSV arbitrarios, 
+seleccionar columnas de interés, realizar conversiones de tipos, sin tener que 
+preocuparse demasiado por el funcionamiento interno de los archivos o el módulo 
+csv.</p>
 <h2 id="33-comprobacion-de-errores">3.3 Comprobación de errores</h2>
-<p>Aunque las excepciones se introdujeron anteriormente, esta sección incluye algunos detalles adicionales sobre la verificación de errores y el manejo de excepciones.</p>
+<p>Aunque las excepciones se introdujeron anteriormente, esta sección incluye 
+algunos detalles adicionales sobre la verificación de errores y el manejo de 
+excepciones.</p>
 <h3 id="331-como-fallan-los-programas">3.3.1 Cómo fallan los programas</h3>
-<p>Python no realiza ninguna verificación ni validación de los tipos o valores de los argumentos de la función. Una función funcionará con cualquier dato que sea compatible con las declaraciones de la función.</p>
+<p>Python no realiza ninguna verificación ni validación de los tipos o valores de 
+los argumentos de la función. Una función funcionará con cualquier dato que sea 
+compatible con las declaraciones de la función.</p>
 <pre><code class="language-python">def add(x, y):
     return x + y
 
@@ -837,9 +974,11 @@ TypeError: unsupported operand type(s) for +:
     'int' and 'str'
 &gt;&gt;&gt;
 </code></pre>
-<p>Para verificar el código, hay un fuerte énfasis en las pruebas (se tratará más adelante).</p>
+<p>Para verificar el código, hay un fuerte énfasis en las pruebas (se tratará más 
+adelante).</p>
 <h3 id="332-excepciones">3.3.2 Excepciones</h3>
-<p>Las excepciones se utilizan para señalar errores. Para plantear una excepción usted mismo, haga uso de la declaración raise.</p>
+<p>Las excepciones se utilizan para señalar errores. Para plantear una excepción 
+usted mismo, haga uso de la declaración raise.</p>
 <pre><code class="language-python">if name not in authorized:
     raise RuntimeError(f'{name} not authorized')
 </code></pre>
@@ -1407,17 +1546,17 @@ importación de biblioteca:</p>
 import prog   # Running as library import 
 </code></pre>
 <p>En ambos casos, <code>__name__</code> es el nombre del módulo. Sin embargo, solo se 
-establecerá en __main__si se ejecuta como main. Por lo general, no desea que 
+establecerá en <code>__main__</code> si se ejecuta como main. Por lo general, no desea que 
 las instrucciones que forman parte del programa principal se ejecuten en una 
 importación de biblioteca. Por lo tanto, es común tener un if-código de 
 verificación que se puede usar de cualquier manera.</p>
-<pre><code>if __name__ == '__main__':
+<pre><code class="language-python">if __name__ == '__main__':
     # Does not execute if loaded with import ... 
 </code></pre>
 <h3 id="353-plantilla-de-programa">3.5.3 Plantilla de programa</h3>
 <p>Aquí hay una plantilla de programa común para escribir un programa Python:</p>
-<pre><code># prog.py 
-# Import statements (libraries) 
+<pre><code class="language-python"># prog.py 
+# declaracioens import (librerias) 
 import modules
 
 # Functions 
@@ -1436,15 +1575,15 @@ if __name__ == '__main__':
 </code></pre>
 <h3 id="354-herramientas-de-linea-de-comandos">3.5.4 Herramientas de línea de comandos</h3>
 <p>Python se usa a menudo para herramientas de línea de comandos</p>
-<pre><code class="language-shell">python report.py portfolio.csv prices.csv
+<pre><code class="language-shell">$ python report.py portfolio.csv prices.csv
 </code></pre>
 <p>Significa que los scripts se ejecutan desde el shell / terminal. Los casos de uso comunes son para automatización, tareas en segundo plano, etc.</p>
 <h3 id="355-argumentos-de-linea-de-comando">3.5.5 Argumentos de línea de comando</h3>
 <p>La línea de comando es una lista de cadenas de texto.</p>
-<pre><code class="language-python">python report.py portfolio.csv prices.csv
+<pre><code class="language-python">$ python report.py portfolio.csv prices.csv
 </code></pre>
 <p>Esta lista de cadenas de texto se encuentra en <code>sys.argv</code>.</p>
-<pre><code class="language-python"># In the previous bash command 
+<pre><code class="language-python"># en el comando de terminal previo
 sys.argv # ['report.py, 'portfolio.csv', 'prices.csv'] 
 </code></pre>
 <p>Aquí hay un ejemplo simple de procesamiento de argumentos:</p>
@@ -1514,7 +1653,7 @@ versión del idioma.</p>
 que se ejecutan como scripts de línea de comandos:</p>
 <pre><code class="language-python">#!/usr/bin/env python3 
 # prog.py 
-# Import statements (libraries) 
+# declaraciones import (libraries) 
 
 import modules
 
@@ -1525,9 +1664,9 @@ def spam():
 def blah():
     ...
 
-# Main function 
+# función main]
 def main(argv):
-    # Parse command line args, environment, etc.
+    # analice linea de argumentos, ambiente, etc.
     ...
 
 if __name__ == '__main__':
@@ -1575,6 +1714,112 @@ como un script en la línea de comando:</p>
 <pre><code class="language-shell">$ python pcost.py Data/portfolio.csv
 Total cost: 44671.15
 </code></pre>
+<h2 id="36-discusion-del-diseno">3.6 Discusión del diseño</h2>
+<p>En esta sección, reconsideramos una decisión de diseño tomada anteriormente.</p>
+<h3 id="361-nombres-de-archivo-versus-iterables">3.6.1 Nombres de archivo versus iterables</h3>
+<p>Compare estos dos programas que devuelven el mismo resultado.</p>
+<pre><code class="language-python"># proporcione un nombre de archivo 
+def read_data(filename):
+    records = []
+    with open(filename) as f:
+        for line in f:
+            ...
+            records.append(r)
+    return records
+
+d = read_data('file.csv')
+</code></pre>
+<pre><code class="language-python"># proporcione lineas
+def read_data(lines):
+    records = []
+    for line in lines:
+        ...
+        records.append(r)
+    return records
+
+with open('file.csv') as f:
+    d = read_data(f)
+</code></pre>
+<ul>
+<li>¿Cuál de estas funciones prefieres? ¿Por qué?</li>
+<li>¿Cuál de estas funciones es más flexible?</li>
+</ul>
+<h3 id="362-idea-profunda-duck-typing">3.6.2  Idea profunda: "Duck Typing"</h3>
+<p>Duck Typing es un concepto de programación de computadoras para determinar si 
+un objeto se puede usar para un propósito particular. Es una aplicación de la 
+prueba del pato .</p>
+<blockquote>
+<p>Si parece un pato, nada como un pato y grazna como un pato, entonces 
+probablemente sea un pato.</p>
+</blockquote>
+<p>En la segunda versión de <code>read_data()</code> arriba, la función espera cualquier 
+objeto iterable. No solo las líneas de un archivo.</p>
+<pre><code class="language-python">def read_data(lines):
+    records = []
+    for line in lines:
+        ...
+        records.append(r)
+    return records
+</code></pre>
+<p>Esto significa que podemos usarlo con otras líneas.</p>
+<pre><code class="language-python"># archivo CSV 
+lines = open('data.csv')
+data = read_data(lines)
+
+# archivo zipped
+lines = gzip.open('data.csv.gz','rt')
+data = read_data(lines)
+
+# entrada estándar
+lines = sys.stdin
+data = read_data(lines)
+
+# lista de cadenas 
+lines = ['ACME,50,91.1','IBM,75,123.45', ... ]
+data = read_data(lines)
+</code></pre>
+<p>Hay una considerable flexibilidad con este diseño.</p>
+<p><em>Pregunta: ¿Debemos aceptar o rechazar esta flexibilidad?</em> Piense en los pros y
+cons y llegue a una conclusíón a base de los mismos. Considere que distintos
+tipos de requerimentos le impulsarian hacia más o menos flexibilidad.</p>
+<h3 id="363-mejores-practicas-de-diseno-de-bibliotecas">3.6.3 Mejores prácticas de diseño de bibliotecas</h3>
+<p>Las bibliotecas de códigos a menudo se sirven mejor adoptando la flexibilidad. 
+No restrinja sus opciones. Una gran flexibilidad conlleva un gran poder.</p>
+<h3 id="364-ejercicio">3.6.4 Ejercicio</h3>
+<h4 id="ejercicio-317-de-nombres-de-archivo-a-objetos-similares-a-archivos">Ejercicio 3.17: De nombres de archivo a objetos similares a archivos</h4>
+<p>Ahora ha creado un archivo <code>fileparse.py</code> que contiene una función 
+<code>parse_csv()</code>. La función funcionó así:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import fileparse
+&gt;&gt;&gt; portfolio = fileparse.parse_csv('Data/portfolio.csv', types=[str,int,float])
+&gt;&gt;&gt;
+</code></pre>
+<p>En este momento, la función espera que se le pase un nombre de archivo. 
+Sin embargo, puede hacer que el código sea más flexible. Modifique la función 
+para que funcione con cualquier objeto similar a un archivo / iterable. 
+Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import fileparse
+&gt;&gt;&gt; import gzip
+&gt;&gt;&gt; with gzip.open('Data/portfolio.csv.gz', 'rt') as file:
+...      port = fileparse.parse_csv(file, types=[str,int,float])
+...
+&gt;&gt;&gt; lines = ['name,shares,price', 'AA,100,34.23', 'IBM,50,91.1', 'HPE,75,45.1']
+&gt;&gt;&gt; port = fileparse.parse_csv(lines, types=[str,int,float])
+&gt;&gt;&gt;
+</code></pre>
+<p>En este nuevo código, ¿qué sucede si pasa un nombre de archivo como antes?</p>
+<pre><code class="language-python">&gt;&gt;&gt; port = fileparse.parse_csv('Data/portfolio.csv', types=[str,int,float])
+&gt;&gt;&gt; port
+... mire la salida (debería estar algo alocada) ...
+&gt;&gt;&gt;
+</code></pre>
+<p>Sí, debe tener cuidado. ¿Podría agregar un control de seguridad para evitar 
+esto?</p>
+<h4 id="ejercicio-318-arreglar-funciones-existentes">Ejercicio 3.18: Arreglar funciones existentes</h4>
+<p>Corrija las funciones <code>read_portfolio()</code> y <code>read_prices()</code> en el archivo 
+<code>report.py</code> para que funcionen con la versión modificada de <code>parse_csv()</code>. 
+Esto solo debería implicar una pequeña modificación. Posteriormente, sus 
+programas <code>report.py</code> y <code>pcost.py</code> deberían funcionar de la misma manera que 
+siempre.</p>
               
             </div>
           </div>
