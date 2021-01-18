@@ -1540,10 +1540,9 @@ programa principal .</p>
 <h3 id="353-programas-principales-frente-a-importaciones-de-bibliotecas">3.5.3 Programas principales frente a importaciones de bibliotecas</h3>
 <p>Cualquier archivo de Python puede ejecutarse como principal o como una 
 importación de biblioteca:</p>
-<pre><code class="language-shell">$ python prog.py 
-# Running as main
-
-import prog   # Running as library import 
+<pre><code class="language-shell">$ python prog.py # Running as main
+</code></pre>
+<pre><code class="language-python">import prog   # Running as library import 
 </code></pre>
 <p>En ambos casos, <code>__name__</code> es el nombre del módulo. Sin embargo, solo se 
 establecerá en <code>__main__</code> si se ejecuta como main. Por lo general, no desea que 
