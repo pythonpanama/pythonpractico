@@ -235,6 +235,40 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#35-modulo-principal">3.5 Módulo principal</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#351-funciones-principales">3.5.1 Funciones principales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#352-modulo-principal-de-python">3.5.2 Módulo principal de Python</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#352-main">3.5.2 main</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#353-programas-principales-frente-a-importaciones-de-bibliotecas">3.5.3 Programas principales frente a importaciones de bibliotecas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#353-plantilla-de-programa">3.5.3 Plantilla de programa</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#354-herramientas-de-linea-de-comandos">3.5.4 Herramientas de línea de comandos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#355-argumentos-de-linea-de-comando">3.5.5 Argumentos de línea de comando</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#356-estandar-io-entradasalida">3.5.6  Estándar I/O (Entrada/Salida)</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#357-variables-de-entorno">3.5.7 Variables de entorno</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#358-saliendo-del-programa">3.5.8 Saliendo del programa</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#359-la-linea">3.5.9 La #!linea</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3510-plantilla-de-script">3.5.10 Plantilla de script</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3511-ejercicios">3.5.11 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-315-funciones-main">Ejercicio 3.15: funciones main()</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -838,7 +872,8 @@ def foo():
 
 foo()
 </code></pre>
-<p>Para manejar la excepción, coloque declaraciones en el exceptbloque. Puede agregar cualquier declaración que desee para manejar el error.</p>
+<p>Para manejar la excepción, coloque declaraciones en el exceptbloque. Puede 
+agregar cualquier declaración que desee para manejar el error.</p>
 <pre><code class="language-python">def grok(): 
     ...
     raise RuntimeError('Whoa!')
@@ -853,7 +888,8 @@ def bar():
 
 bar()
 </code></pre>
-<p>Después del manejo, la ejecución se reanuda con la primera declaración después de try-except.</p>
+<p>Después del manejo, la ejecución se reanuda con la primera declaración después 
+de try-except.</p>
 <pre><code class="language-python">def grok(): ...
     raise RuntimeError('Whoa!')
 
@@ -871,7 +907,10 @@ def bar():
 bar()
 </code></pre>
 <h3 id="334-excepciones-integradas">3.3.4 Excepciones integradas</h3>
-<p>Hay alrededor de dos docenas de excepciones integradas. Por lo general, el nombre de la excepción es indicativo de lo que está mal (por ejemplo, <code>ValueError</code> se genera a porque proporcionó un valor incorrecto). Esta no es una lista exhaustiva. Consulte la documentación para obtener más información.</p>
+<p>Hay alrededor de dos docenas de excepciones integradas. Por lo general, 
+el nombre de la excepción es indicativo de lo que está mal (por ejemplo, 
+<code>ValueError</code> se genera a porque proporcionó un valor incorrecto). Esta no es 
+una lista exhaustiva. Consulte la documentación para obtener más información.</p>
 <pre><code class="language-code">ArithmeticError
 AssertionError
 EnvironmentError
@@ -890,16 +929,19 @@ TypeError
 ValueError
 </code></pre>
 <h3 id="335-valores-de-excepcion">3.3.5 Valores de excepción</h3>
-<p>Las excepciones tienen un valor asociado. Contiene información más específica sobre lo que está mal.</p>
+<p>Las excepciones tienen un valor asociado. Contiene información más específica 
+sobre lo que está mal.</p>
 <pre><code class="language-python">raise RuntimeError('Invalid user name')
 </code></pre>
-<p>Este valor es parte de la instancia de excepción que se coloca en la variable proporcionada a except.</p>
+<p>Este valor es parte de la instancia de excepción que se coloca en la variable 
+proporcionada a except.</p>
 <pre><code class="language-python">try:
     ...
 except RuntimeError as e:   # `e` holds the exception raised
     ...
 </code></pre>
-<p><code>e</code> es una instancia del tipo de excepción. Sin embargo, a menudo parece una cadena cuando se imprime.</p>
+<p><code>e</code> es una instancia del tipo de excepción. Sin embargo, a menudo parece una 
+cadena cuando se imprime.</p>
 <pre><code class="language-python">except RuntimeError as e:
     print('Failed : Reason', e)
 </code></pre>
@@ -957,7 +999,7 @@ detecta todas las posibles excepciones.</p>
 posible. Solo detecte los errores que realmente pueda manejar. Deje pasar otros 
 errores, tal vez algún otro código pueda manejarlos.</p>
 <h3 id="337-volver-a-plantear-una-excepcion">3.3.7 Volver a plantear una excepción</h3>
-<p>Úselo raisepara propagar un error detectado.</p>
+<p>Úse <code>raise</code> para propagar un error detectado.</p>
 <pre><code class="language-python">try:
     go_do_something()
 except Exception as e:
@@ -988,7 +1030,8 @@ bloqueos (locks), archivos, etc.).</p>
 <code>with</code>.</p>
 <pre><code class="language-python">candado = Candado()
 with candado:
-    # candado adquirido     ...
+    # candado adquirido     
+    ...
 # candado liberado 
 </code></pre>
 <p>Un ejemplo más familiar:</p>
@@ -1319,6 +1362,219 @@ su costo.</p>
 <code>read_portfolio()</code> y <code>read_prices()</code>. 
 3. Y finalmente, <code>pcost.py</code> que calcula el costo de la cartera, pero hace uso 
 de la <code>read_portfolio()</code> función escrita para el <code>report.py</code> programa.</p>
+<h2 id="35-modulo-principal">3.5 Módulo principal</h2>
+<p>Esta sección presenta el concepto de programa principal o módulo principal.</p>
+<h3 id="351-funciones-principales">3.5.1 Funciones principales</h3>
+<p>En muchos lenguajes de programación, hay un concepto de principal función o método.</p>
+<pre><code class="language-c">// c / c++
+int main(int argc, char *argv[]) {
+    ...
+}
+</code></pre>
+<pre><code class="language-java">// java
+class myprog {
+    public static void main(String args[]) {
+        ...
+    }
+}
+</code></pre>
+<p>Esta es la primera función que se ejecuta cuando se inicia una aplicación.</p>
+<h3 id="352-modulo-principal-de-python">3.5.2 Módulo principal de Python</h3>
+<p>Python no tiene principal función o método. En cambio, hay un módulo principal. 
+El módulo principal es el archivo fuente que se ejecuta primero.</p>
+<pre><code class="language-shell">$ python3 prog.py
+...
+</code></pre>
+<p>Cualquier archivo que le dé al intérprete al inicio se convierte en principal. 
+No importa el nombre.</p>
+<h3 id="352-main">3.5.2 <strong>main</strong></h3>
+<p>Es una práctica estándar para los módulos que se ejecutan como un script 
+principal utilizar esta convención:</p>
+<pre><code class="language-python"># prog.py ...
+if __name__ == '__main__':
+    # Ejecutando el programa principal ...     
+    declaraciones
+    ...
+</code></pre>
+<p>Las declaraciones incluidas dentro de la declaración <code>if</code> se convierten en el 
+programa principal .</p>
+<h3 id="353-programas-principales-frente-a-importaciones-de-bibliotecas">3.5.3 Programas principales frente a importaciones de bibliotecas</h3>
+<p>Cualquier archivo de Python puede ejecutarse como principal o como una 
+importación de biblioteca:</p>
+<pre><code class="language-shell">$ python prog.py 
+# Running as main
+
+import prog   # Running as library import 
+</code></pre>
+<p>En ambos casos, <code>__name__</code> es el nombre del módulo. Sin embargo, solo se 
+establecerá en __main__si se ejecuta como main. Por lo general, no desea que 
+las instrucciones que forman parte del programa principal se ejecuten en una 
+importación de biblioteca. Por lo tanto, es común tener un if-código de 
+verificación que se puede usar de cualquier manera.</p>
+<pre><code>if __name__ == '__main__':
+    # Does not execute if loaded with import ... 
+</code></pre>
+<h3 id="353-plantilla-de-programa">3.5.3 Plantilla de programa</h3>
+<p>Aquí hay una plantilla de programa común para escribir un programa Python:</p>
+<pre><code># prog.py 
+# Import statements (libraries) 
+import modules
+
+# Functions 
+def spam():
+    ...
+
+def blah():
+    ...
+
+# Main function 
+def main():
+    ...
+
+if __name__ == '__main__':
+    main()
+</code></pre>
+<h3 id="354-herramientas-de-linea-de-comandos">3.5.4 Herramientas de línea de comandos</h3>
+<p>Python se usa a menudo para herramientas de línea de comandos</p>
+<pre><code class="language-shell">python report.py portfolio.csv prices.csv
+</code></pre>
+<p>Significa que los scripts se ejecutan desde el shell / terminal. Los casos de uso comunes son para automatización, tareas en segundo plano, etc.</p>
+<h3 id="355-argumentos-de-linea-de-comando">3.5.5 Argumentos de línea de comando</h3>
+<p>La línea de comando es una lista de cadenas de texto.</p>
+<pre><code class="language-python">python report.py portfolio.csv prices.csv
+</code></pre>
+<p>Esta lista de cadenas de texto se encuentra en <code>sys.argv</code>.</p>
+<pre><code class="language-python"># In the previous bash command 
+sys.argv # ['report.py, 'portfolio.csv', 'prices.csv'] 
+</code></pre>
+<p>Aquí hay un ejemplo simple de procesamiento de argumentos:</p>
+<pre><code class="language-python">import sys
+
+if len(sys.argv) != 3:
+    raise SystemExit(f'Usage: {sys.argv[0]} ' 'portfile pricefile')
+portfile = sys.argv[1]
+pricefile = sys.argv[2]
+...
+</code></pre>
+<h3 id="356-estandar-io-entradasalida">3.5.6  Estándar I/O (Entrada/Salida)</h3>
+<p>La entrada / salida estándar (o <code>stdio</code>) son archivos que funcionan igual que 
+los archivos normales.</p>
+<pre><code class="language-python">sys.stdout
+sys.stderr
+sys.stdin
+</code></pre>
+<p>De forma predeterminada, la impresión está dirigida a sys.stdout. Se lee la 
+entrada <code>sys.stdin</code>. Los rastreos y errores están dirigidos a <code>sys.stderr</code>.</p>
+<p>Tenga en cuenta que stdio podría estar conectado a terminales, archivos, 
+tuberías, etc.</p>
+<pre><code class="language-shell">$ python prog.py &gt; results.txt
+# o
+$ cmd1 | python3 prog.py | cmd2
+</code></pre>
+<h3 id="357-variables-de-entorno">3.5.7 Variables de entorno</h3>
+<p>Las variables de entorno se establecen en el shell.</p>
+<pre><code class="language-shell">$ setenv NAME dave
+$ setenv RSH ssh
+$ python prog.py
+</code></pre>
+<p><code>os.environ</code> es un diccionario que contiene estos valores.</p>
+<pre><code class="language-python">import os
+name = os.environ['NAME'] # 'dave' 
+</code></pre>
+<p>Los cambios se reflejan en cualquier subproceso que el programa inicie 
+posteriormente.</p>
+<h3 id="358-saliendo-del-programa">3.5.8 Saliendo del programa</h3>
+<p>La salida de un programa se maneja mediante excepciones.</p>
+<pre><code class="language-shell">raise SystemExit
+raise SystemExit(exitcode)
+raise SystemExit('Informative message')
+</code></pre>
+<p>Una alternativa.</p>
+<pre><code class="language-python">import sys
+sys.exit(exitcode)
+</code></pre>
+<p>Un código de salida distinto de cero indica un error.</p>
+<h3 id="359-la-linea">3.5.9 La #!linea</h3>
+<p>En Unix, la <code>#!línea</code> puede lanzar un script como Python. Agregue lo siguiente 
+a la primera línea de su archivo de secuencia de comandos.</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+# prog.py
+...
+</code></pre>
+<p>Requiere el permiso ejecutable.</p>
+<pre><code>bash % chmod +x prog.py
+# Then you can execute
+bash % prog.py
+... output ...
+</code></pre>
+<p>Nota: Python Launcher en Windows también busca la #!línea para indicar la 
+versión del idioma.</p>
+<h3 id="3510-plantilla-de-script">3.5.10 Plantilla de script</h3>
+<p>Finalmente, aquí hay una plantilla de código común para los programas de Python 
+que se ejecutan como scripts de línea de comandos:</p>
+<pre><code class="language-python">#!/usr/bin/env python3 
+# prog.py 
+# Import statements (libraries) 
+
+import modules
+
+# Functions 
+def spam():
+    ...
+
+def blah():
+    ...
+
+# Main function 
+def main(argv):
+    # Parse command line args, environment, etc.
+    ...
+
+if __name__ == '__main__':
+    import sys
+    main(sys.argv)
+</code></pre>
+<h3 id="3511-ejercicios">3.5.11 Ejercicios</h3>
+<h4 id="ejercicio-315-funciones-main">Ejercicio 3.15: funciones <code>main()</code></h4>
+<p>En el archivo, report.pyagregue una función <code>main()</code> que acepte una lista de 
+opciones de línea de comando y produzca el mismo resultado que antes. Debería 
+poder ejecutarlo de forma interactiva así:</p>
+<pre><code>&gt;&gt;&gt; import report
+&gt;&gt;&gt; report.main(['report.py', 'Data/portfolio.csv', 'Data/prices.csv'])
+      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+&gt;&gt;&gt;
+</code></pre>
+<p>Modifique el <code>pcost.py</code> archivo para que tenga una <code>main()</code> función similar:</p>
+<pre><code>&gt;&gt;&gt; import pcost
+&gt;&gt;&gt; pcost.main(['pcost.py', 'Data/portfolio.csv'])
+Total cost: 44671.15
+&gt;&gt;&gt;
+</code></pre>
+<p>Ejercicio 3.16: Creación de guiones</p>
+<p>Modifique los programas <code>report.py</code> y <code>pcost.py</code> para que puedan ejecutarse 
+como un script en la línea de comando:</p>
+<p><code>$ python3 report.py Data/portfolio.csv Data/prices.csv</code></p>
+<pre><code class="language-code">      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+</code></pre>
+<pre><code class="language-shell">$ python pcost.py Data/portfolio.csv
+Total cost: 44671.15
+</code></pre>
               
             </div>
           </div>
