@@ -197,6 +197,44 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#34-modulos">3.4 Módulos</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#341-modulos-e-importacion">3.4.1 Módulos e importación</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#342-ambito-o-espacio-de-nombres">3.4.2 Ámbito o espacio de nombres</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#343-definiciones-globales">3.4.3 Definiciones globales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#344-modulos-como-entornos">3.4.4 Módulos como entornos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#345-ejecucion-del-modulo">3.4.5 Ejecución del módulo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#346-declaracion-import-as">3.4.6 declaración import as</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#347-importacion-de-modulo-con-from">3.4.7 importación de módulo con from</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#348-comentarios-sobre-la-importacion">3.4.8 Comentarios sobre la importación</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#349-carga-del-modulo">3.4.9 Carga del módulo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3410-localizacion-de-modulos">3.4.10 Localización de módulos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#3411-ruta-de-busqueda-del-modulo">3.4.11 Ruta de búsqueda del módulo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicios">Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-311-importaciones-de-modulos">Ejercicio 3.11: Importaciones de módulos</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-312-uso-de-su-modulo-de-biblioteca">Ejercicio 3.12: Uso de su módulo de biblioteca</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-314-uso-de-mas-importaciones-de-bibliotecas">Ejercicio 3.14: Uso de más importaciones de bibliotecas</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#comentario_2">Comentario</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -336,7 +374,8 @@ def foo(x):
 <p>Estilísticamente, probablemente sea más común ver las funciones definidas de abajo hacia arriba.</p>
 <h3 id="317-estilo-de-abajo-hacia-arriba">3.1.7 Estilo de abajo hacia arriba</h3>
 <p>Las funciones se tratan como bloques de construcción. Los bloques más pequeños / simples van primero.</p>
-<pre><code class="language-python"># myprogram.py def foo(x):
+<pre><code class="language-python"># myprogram.py 
+def foo(x):
     ...
 
 def bar(x):
@@ -357,7 +396,7 @@ spam(42)            # Código que utiliza las funciones esta definido anteriorme
 <h3 id="319-documentacion-en-cadenas">3.1.9 Documentación en cadenas</h3>
 <p>La documentación en cadenas, comunmente conocida en inglés como <em>doc strings</em>, es una buena práctica que incluye un breve resumen de una oración de lo que hace la función. Si se necesita más información, se incluye un breve ejemplo de uso junto con una descripción más detallada de los argumentos. Las mismas se escriben inmediatamente después del nombre de la función y alimentan a <code>help()</code>, el IDE (ambiente integrado de desarrollo) y otras herramientas.</p>
 <pre><code class="language-python">def read_prices(filename):
-    ''' Read prices from a CSV file of name,price data '''
+    '''Lee precios de un archivo CSV file de nombre, precio, y data'''
     prices = {}
     with open(filename) as f:
         f_csv = csv.reader(f)
@@ -383,7 +422,8 @@ spam(42)            # Código que utiliza las funciones esta definido anteriorme
 import csv
 
 def read_portfolio(filename):
-    '''Lee un archivo de cartera de acciones en una lista de diccionarios con la clave siendo nombre, acciones y precio.'''
+    '''Lee un archivo de cartera de acciones en una lista de diccionarios con 
+    la clave siendo nombre, acciones y precio.'''
     portfolio = []
     with open(filename) as f:
         rows = csv.reader(f)
@@ -400,7 +440,9 @@ def read_portfolio(filename):
     return portfolio
 ...
 </code></pre>
-<p>Sin embargo, también hubo partes del programa que solo realizaron una serie de cálculos con guión. Este código apareció cerca del final del programa. Por ejemplo:</p>
+<p>Sin embargo, también hubo partes del programa que solo realizaron una serie de 
+cálculos con guión. Este código apareció cerca del final del programa. 
+Por ejemplo:</p>
 <pre><code class="language-python">...
 
 # Salida/output del reporte
@@ -432,7 +474,7 @@ for row in report:
         portfolio_report(name, 'Data/prices.csv')
         print()
 
-&gt;&gt;&gt; # mire del ciclo anterior
+&gt;&gt;&gt; # mire la salida del ciclo anterior
 &gt;&gt;&gt;
 </code></pre>
 <h3 id="comentario">Comentario</h3>
@@ -486,7 +528,7 @@ parse_data(data, debug=True, ignore_errors=True)
 
 a = bar(4)      # a = None 
 
-# Oe
+# O
 def foo(x):
     ...declaraciones  # Sin `return` 
 
@@ -552,7 +594,7 @@ print(name) # prints 'Dave'
 
 def spam():
     global name
-    name = 'Guido' # Changes the global name above 
+    name = 'Guido' # cambia el nombre global anterior
 </code></pre>
 <p>La declaración <code>global</code> debe aparecer antes de su uso y la variable correspondiente debe existir en el mismo archivo que la función. Habiendo visto esto, sepa que se considera de mala forma. De hecho, trate de evitarlo <code>global</code> completo si puede. Si necesita una función para modificar algún tipo de estado fuera de la función, es mejor usar una clase en su lugar (más sobre esto más adelante).</p>
 <h3 id="3211-transferencia-de-argumentos">3.2.11 Transferencia de argumentos</h3>
@@ -624,7 +666,8 @@ def parse_csv(filename):
 &gt;&gt;&gt; portfolio
 [{'price': '32.20', 'name': 'AA', 'shares': '100'}, {'price': '91.10', 'name': 'IBM', 'shares': '50'}, {'price': '83.44', 'name': 'CAT', 'shares': '150'}, {'price': '51.23', 'name': 'MSFT', 'shares': '200'}, {'price': '40.37', 'name': 'GE', 'shares': '95'}, {'price': '65.10', 'name': 'MSFT', 'shares': '50'}, {'price': '70.44', 'name': 'IBM', 'shares': '100'}]
 
-&gt;&gt;&gt; # Read only some of the data &gt;&gt;&gt; shares_held = parse_csv('Data/portfolio.csv', select=['name','shares'])
+&gt;&gt;&gt; # Lee solo parte de la data 
+&gt;&gt;&gt; shares_held = parse_csv('Data/portfolio.csv', select=['name','shares'])
 &gt;&gt;&gt; shares_held
 [{'name': 'AA', 'shares': '100'}, {'name': 'IBM', 'shares': '50'}, {'name': 'CAT', 'shares': '150'}, {'name': 'MSFT', 'shares': '200'}, {'name': 'GE', 'shares': '95'}, {'name': 'MSFT', 'shares': '50'}, {'name': 'IBM', 'shares': '100'}]
 &gt;&gt;&gt;
@@ -861,7 +904,8 @@ except RuntimeError as e:   # `e` holds the exception raised
     print('Failed : Reason', e)
 </code></pre>
 <h3 id="336-detectar-varios-errores">3.3.6 Detectar varios errores</h3>
-<p>Puede detectar diferentes tipos de excepciones utilizando varios bloques <code>except</code>.</p>
+<p>Puede detectar diferentes tipos de excepciones utilizando varios bloques 
+<code>except</code>.</p>
 <pre><code class="language-python">try:
   ...
 except LookupError as e:
@@ -873,7 +917,8 @@ except IOError as e:
 except KeyboardInterrupt as e:
   ...
 </code></pre>
-<p>Alternativamente, si las declaraciones para gestionar las excepciones son las mismas, puede agruparlas:</p>
+<p>Alternativamente, si las declaraciones para gestionar las excepciones son las 
+mismas, puede agruparlas:</p>
 <pre><code>try:
   ...
 except (IOError,LookupError,RuntimeError) as e:
@@ -886,7 +931,8 @@ except (IOError,LookupError,RuntimeError) as e:
 except Exception:       # PELIGRO. Mire abajo.     
     print('An error occurred')
 </code></pre>
-<p>En general, escribir código como ese es una mala idea porque no sabrá la razón del fallo, toda vez que está atrapando todos los errores.</p>
+<p>En general, escribir código como ese es una mala idea porque no sabrá la razón 
+del fallo, toda vez que está atrapando todos los errores.</p>
 <h3 id="338-manera-incorrecta-de-detectar-errores">3.3.8 Manera incorrecta de detectar errores</h3>
 <p>Esta es la forma incorrecta de usar las excepciones.</p>
 <pre><code class="language-python">try:
@@ -894,7 +940,9 @@ except Exception:       # PELIGRO. Mire abajo.
 except Exception:
     print('Computer says no')
 </code></pre>
-<p>Esto detecta todos los errores posibles y puede hacer que sea imposible depurar cuando el código falla por alguna razón que no esperaba (por ejemplo, módulo Python desinstalado, etc.).</p>
+<p>Esto detecta todos los errores posibles y puede hacer que sea imposible depurar 
+cuando el código falla por alguna razón que no esperaba (por ejemplo, módulo 
+Python desinstalado, etc.).</p>
 <h3 id="339-otro-enfoque">3.3.9 Otro enfoque</h3>
 <p>Si va a detectar todos los errores, este es un enfoque más sensato.</p>
 <pre><code class="language-python">try:
@@ -902,8 +950,12 @@ except Exception:
 except Exception as e:
     print('Computer says no. Reason :', e)
 </code></pre>
-<p>Informe sobre el motivo específico de la falla. Casi siempre es una buena idea tener algún mecanismo para ver / informar errores cuando escribe código que detecta todas las posibles excepciones.</p>
-<p>Sin embargo, en general, es mejor detectar el error de la forma más precisa posible. Solo detecte los errores que realmente pueda manejar. Deje pasar otros errores, tal vez algún otro código pueda manejarlos.</p>
+<p>Informe sobre el motivo específico de la falla. Casi siempre es una buena idea 
+tener algún mecanismo para ver / informar errores cuando escribe código que 
+detecta todas las posibles excepciones.</p>
+<p>Sin embargo, en general, es mejor detectar el error de la forma más precisa 
+posible. Solo detecte los errores que realmente pueda manejar. Deje pasar otros 
+errores, tal vez algún otro código pueda manejarlos.</p>
 <h3 id="337-volver-a-plantear-una-excepcion">3.3.7 Volver a plantear una excepción</h3>
 <p>Úselo raisepara propagar un error detectado.</p>
 <pre><code class="language-python">try:
@@ -912,11 +964,15 @@ except Exception as e:
     print('Computer says no. Reason :', e)
     raise
 </code></pre>
-<p>Esto le permite tomar medidas (por ejemplo, reportería) y transmitir el error al objeto que llama la función.</p>
+<p>Esto le permite tomar medidas (por ejemplo, reportería) y transmitir el error al 
+objeto que llama la función.</p>
 <h3 id="338-mejores-practicas-de-excepcion">3.3.8 Mejores prácticas de excepción</h3>
-<p>No atrapes excepciones. Falle rápido y fuerte. Si es importante, alguien más se ocupará del problema. Solo capture una excepción si se puede recuperar y seguir adelante con el programa.</p>
+<p>No atrapes excepciones. Falle rápido y fuerte. Si es importante, alguien más se 
+ocupará del problema. Solo capture una excepción si se puede recuperar y seguir 
+adelante con el programa.</p>
 <h3 id="339-declaracion-finally">3.3.9 declaración <code>finally</code></h3>
-<p>Especifique el código que debe ejecutarse independientemente de si se produce una excepción o no.</p>
+<p>Especifique el código que debe ejecutarse independientemente de si se produce 
+una excepción o no.</p>
 <pre><code class="language-python">candado = Candado()
 ...
 candado.acquire()
@@ -925,9 +981,11 @@ try:
 finally:
     candado.release()  # esto SIEMPRE se ejecutará. Con y sin excepción.
 </code></pre>
-<p>Se usa comúnmente para administrar recursos de manera segura (especialmente bloqueos (locks), archivos, etc.).</p>
+<p>Se usa comúnmente para administrar recursos de manera segura (especialmente 
+bloqueos (locks), archivos, etc.).</p>
 <h3 id="3310-declaracion-with">3.3.10 declaración <code>with</code></h3>
-<p>En código de hoy en día, un try-finally a menudo se reemplaza con la declaración <code>with</code>.</p>
+<p>En código de hoy en día, un try-finally a menudo se reemplaza con la declaración 
+<code>with</code>.</p>
 <pre><code class="language-python">candado = Candado()
 with candado:
     # candado adquirido     ...
@@ -939,11 +997,16 @@ with candado:
     ...
 # Archivo cerrado 
 </code></pre>
-<p><code>with</code> define un contexto de uso para un recurso. Cuando la ejecución sale de ese contexto, se liberan los recursos. <code>with</code> solo funciona con ciertos objetos que han sido programados específicamente para soportarlo.</p>
+<p><code>with</code> define un contexto de uso para un recurso. Cuando la ejecución sale de 
+ese contexto, se liberan los recursos. <code>with</code> solo funciona con ciertos objetos 
+que han sido programados específicamente para soportarlo.</p>
 <h3 id="339-ejercicios">3.3.9 Ejercicios</h3>
 <h4 id="ejercicio-38-generacion-de-excepciones">Ejercicio 3.8: Generación de excepciones</h4>
-<p>La función <code>parse_csv()</code> que escribió en la última sección permite seleccionar columnas especificadas por el usuario, pero eso solo funciona si el archivo de datos de entrada tiene encabezados de columna.</p>
-<p>Modifique el código para que se genere una excepción si se pasan los argumentos <code>select</code> y <code>has_headers=False</code>. Por ejemplo:</p>
+<p>La función <code>parse_csv()</code> que escribió en la última sección permite seleccionar 
+columnas especificadas por el usuario, pero eso solo funciona si el archivo de 
+datos de entrada tiene encabezados de columna.</p>
+<p>Modifique el código para que se genere una excepción si se pasan los argumentos 
+<code>select</code> y <code>has_headers=False</code>. Por ejemplo:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; parse_csv('Data/prices.csv', select=['name','price'], has_headers=False)
 Traceback (most recent call last):
   File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
@@ -952,12 +1015,23 @@ Traceback (most recent call last):
 RuntimeError: select argument requires column headers
 &gt;&gt;&gt;
 </code></pre>
-<p>Una vez haya agregado esta comprobación, puede preguntarse si debería realizar otros tipos de comprobaciones en la función. Por ejemplo, ¿debería comprobar que el nombre del archivo es una cadena, que los tipos son una lista o algo por el estilo?</p>
-<p>Como regla general, es mejor omitir tales pruebas y dejar que el programa falle en entradas incorrectas. El mensaje de rastreo señalará la fuente del problema y puede ayudar en la depuración.</p>
-<p>La razón principal para agregar la verificación anterior es evitar ejecutar el código en un modo sin sentido (por ejemplo, usando una función que requiere encabezados de columna, pero especificando simultáneamente que no hay encabezados).</p>
-<p>Esto indica un error de programación por parte del código de llamada. A menudo, es una buena idea verificar los casos que "no se supone que sucedan".</p>
+<p>Una vez haya agregado esta comprobación, puede preguntarse si debería realizar 
+otros tipos de comprobaciones en la función. Por ejemplo, ¿debería comprobar 
+que el nombre del archivo es una cadena, que los tipos son una lista o algo por 
+el estilo?</p>
+<p>Como regla general, es mejor omitir tales pruebas y dejar que el programa falle 
+en entradas incorrectas. El mensaje de rastreo señalará la fuente del problema 
+y puede ayudar en la depuración.</p>
+<p>La razón principal para agregar la verificación anterior es evitar ejecutar el 
+código en un modo sin sentido (por ejemplo, usando una función que requiere 
+encabezados de columna, pero especificando simultáneamente que no hay 
+encabezados).</p>
+<p>Esto indica un error de programación por parte del código de llamada. A menudo, 
+es una buena idea verificar los casos que "no se supone que sucedan".</p>
 <h4 id="ejercicio-39-captura-de-excepciones">Ejercicio 3.9: captura de excepciones</h4>
-<p>La función <code>parse_csv()</code> que escribió se utiliza para procesar todo el contenido de un archivo. Sin embargo, en el mundo real, es posible que los archivos de entrada tengan datos dañados, faltantes o sucios. </p>
+<p>La función <code>parse_csv()</code> que escribió se utiliza para procesar todo el 
+contenido de un archivo. Sin embargo, en el mundo real, es posible que los 
+archivos de entrada tengan datos dañados, faltantes o sucios. </p>
 <p>Pruebe este experimento:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/missing.csv', types=[str, int, float])
 Traceback (most recent call last):
@@ -967,10 +1041,15 @@ Traceback (most recent call last):
 ValueError: invalid literal for int() with base 10: ''
 &gt;&gt;&gt;
 </code></pre>
-<p>Modifique la función <code>parse_csv()</code> para detectar todas las excepciones <code>ValueError</code> generadas durante la creación de registros e imprima un mensaje de advertencia para las filas que no se pueden convertir.</p>
-<p>El mensaje debe incluir el número de fila e información sobre la razón por la que falló. Para probar su función, intente leer el archivo de <code>Data/missing.csv</code> arriba. Por ejemplo:</p>
+<p>Modifique la función <code>parse_csv()</code> para detectar todas las excepciones 
+<code>ValueError</code> generadas durante la creación de registros e imprima un mensaje de 
+advertencia para las filas que no se pueden convertir.</p>
+<p>El mensaje debe incluir el número de fila e información sobre la razón por la 
+que falló. Para probar su función, intente leer el archivo de 
+<code>Data/missing.csv</code> arriba. Por ejemplo:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/missing.csv', types=[str, int, float])
-Row 4: Couldn't convert ['MSFT', '', '51.23'] Row 4: Reason invalid literal for int() with base 10: '' Row 7: Couldn't convert ['IBM', '', '70.44']
+Row 4: Couldn't convert ['MSFT', '', '51.23'] Row 4: Reason invalid literal for 
+int() with base 10: '' Row 7: Couldn't convert ['IBM', '', '70.44']
 Row 7: Reason invalid literal for int() with base 10: ''
 &gt;&gt;&gt;
 &gt;&gt;&gt; portfolio
@@ -978,13 +1057,268 @@ Row 7: Reason invalid literal for int() with base 10: ''
 &gt;&gt;&gt;
 </code></pre>
 <h4 id="ejercicio-310-silenciar-errores">Ejercicio 3.10: Silenciar errores</h4>
-<p>Modifique la función <code>parse_csv()</code> para que los mensajes de error de análisis puedan silenciarse si el usuario lo desea explícitamente. Por ejemplo:</p>
+<p>Modifique la función <code>parse_csv()</code> para que los mensajes de error de análisis 
+puedan silenciarse si el usuario lo desea explícitamente. Por ejemplo:</p>
 <pre><code class="language-shell">&gt;&gt;&gt; portfolio = parse_csv('Data/missing.csv', types=[str,int,float], silence_errors=True)
 &gt;&gt;&gt; portfolio
 [{'price': 32.2, 'name': 'AA', 'shares': 100}, {'price': 91.1, 'name': 'IBM', 'shares': 50}, {'price': 83.44, 'name': 'CAT', 'shares': 150}, {'price': 40.37, 'name': 'GE', 'shares': 95}, {'price': 65.1, 'name': 'MSFT', 'shares': 50}]
 &gt;&gt;&gt;
 </code></pre>
-<p>El manejo de errores es una de las cosas más difíciles de corregir en la mayoría de los programas. Como regla general, <em>no debe ignorar silenciosamente los errores</em>. En su lugar, <em>es mejor informar problemas y darle al usuario la opción</em> de silenciar el mensaje de error si así lo desea.</p>
+<p>El manejo de errores es una de las cosas más difíciles de corregir en la 
+mayoría de los programas. Como regla general, <em>no debe ignorar silenciosamente 
+los errores</em>. En su lugar, <em>es mejor informar problemas y darle al usuario la 
+opción</em> de silenciar el mensaje de error si así lo desea.</p>
+<h2 id="34-modulos">3.4 Módulos</h2>
+<p>Esta sección presenta el concepto de módulos y el trabajo con funciones que 
+abarcan varios archivos.</p>
+<h3 id="341-modulos-e-importacion">3.4.1 Módulos e importación</h3>
+<p>Cualquier archivo fuente de Python es un módulo.</p>
+<pre><code class="language-python"># foo.py 
+def grok(a):
+    ...
+
+def spam(b):
+    ...
+</code></pre>
+<p>La declaración <code>import</code> carga y ejecuta un módulo.</p>
+<pre><code class="language-python"># program.py import foo
+
+a = foo.grok(2)
+b = foo.spam('Hello')
+...
+</code></pre>
+<h3 id="342-ambito-o-espacio-de-nombres">3.4.2 Ámbito o espacio de nombres</h3>
+<p>Un módulo es una colección de valores con nombre y, a veces, se dice que es un 
+espacio de nombres. Es un contenedor abstracto creado para alojar una 
+agrupación lógica de identificadores únicos. Los nombres son todas las 
+variables y funciones globales definidas en el archivo fuente. Después de la 
+importación, el nombre del módulo se utiliza como prefijo. De ahí es donde 
+viene el concepto de ámbti o espacio de nombres.</p>
+<pre><code class="language-python">import foo
+
+a = foo.grok(2)
+b = foo.spam('Hello')
+...
+</code></pre>
+<p>El nombre del módulo está directamente vinculado al nombre del archivo 
+(foo -&gt; foo.py).</p>
+<h3 id="343-definiciones-globales">3.4.3 Definiciones globales</h3>
+<p>Todo lo definido en el ámbito global es lo que llena el espacio de nombres del 
+módulo. Considere dos módulos que definen la misma variable x.</p>
+<pre><code class="language-python"># foo.py 
+x = 42
+def grok(a):
+    ...
+</code></pre>
+<pre><code class="language-python"># bar.py 
+x = 37
+def spam(a):
+    ...
+</code></pre>
+<p>En este caso, las definiciones <code>x</code> se refieren a diferentes variables. Uno es 
+<code>foo.x</code> y el otro es <code>bar.x</code>. Diferentes módulos pueden usar los mismos nombres 
+y esos nombres no entrarán en conflicto entre sí.</p>
+<p><strong>Los módulos están aislados.</strong></p>
+<h3 id="344-modulos-como-entornos">3.4.4 Módulos como entornos</h3>
+<p>Los módulos forman un entorno envolvente para todo el código definido en el 
+interior.</p>
+<pre><code class="language-python"># foo.py 
+
+x = 42
+def grok(a):
+    print(x)
+</code></pre>
+<p>Las variables globales siempre están vinculadas al módulo adjunto (mismo 
+archivo). Cada archivo fuente es su propio pequeño universo.</p>
+<h3 id="345-ejecucion-del-modulo">3.4.5 Ejecución del módulo</h3>
+<p>Cuando se importa un módulo, todas las declaraciones del módulo se ejecutan una 
+tras otra hasta que se llega al final del archivo. El contenido del espacio de 
+nombres del módulo son todos los nombres globales que aún están definidos al 
+final del proceso de ejecución. Si hay sentencias de scripting que llevan a 
+cabo tareas en el ámbito global (impresión, creación de archivos, etc.) las 
+verá ejecutar en la importación.</p>
+<h3 id="346-declaracion-import-as">3.4.6 declaración <code>import as</code></h3>
+<p>Puede cambiar el nombre de un módulo a medida que lo importa:</p>
+<pre><code class="language-python">import math as m
+
+def rectangular(r, theta):
+    x = r * m.cos(theta)
+    y = r * m.sin(theta)
+    return x, y
+</code></pre>
+<p>Funciona igual que una importación normal. Simplemente cambia el nombre del 
+módulo en ese archivo.</p>
+<h3 id="347-importacion-de-modulo-con-from">3.4.7 importación de módulo con <code>from</code></h3>
+<p>Esto selecciona los símbolos seleccionados de un módulo y los hace disponibles 
+localmente.</p>
+<pre><code class="language-python">from math import sin, cos
+
+def rectangular(r, theta):
+    x = r * cos(theta)
+    y = r * sin(theta)
+    return x, y
+</code></pre>
+<p>Esto permite utilizar partes de un módulo sin tener que escribir el prefijo del 
+módulo. Es útil para nombres de uso frecuente.</p>
+<h3 id="348-comentarios-sobre-la-importacion">3.4.8 Comentarios sobre la importación</h3>
+<p>Las variaciones en la importación no cambian la forma en que funcionan los 
+módulos.</p>
+<pre><code class="language-python">import math
+# vs import math as m
+# vs from math import cos, sin
+...
+</code></pre>
+<p>En concreto, <code>import</code> siempre ejecuta todo el archivo y los módulos siguen 
+siendo entornos aislados.</p>
+<p>La declaración <code>import as</code> solo cambia el nombre localmente. La declaración 
+<code>from math import cos, sin</code> todavía carga todo el módulo de matemáticas detrás 
+de escena. Simplemente copia los nombres <code>cos</code> y <code>sin</code> del módulo en el espacio 
+local una vez hecho.</p>
+<h3 id="349-carga-del-modulo">3.4.9 Carga del módulo</h3>
+<p>Cada módulo se carga y se ejecuta solo una vez. <em>Nota: Las importaciones 
+repetidas solo devuelven una referencia al módulo cargado anteriormente.</em></p>
+<p><code>sys.modules</code> es un dictado de todos los módulos cargados.</p>
+<pre><code class="language-shell">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.modules.keys()
+['copy_reg', '__main__', 'site', '__builtin__', 'encodings', 'encodings.encodings', 'posixpath', ...]
+&gt;&gt;&gt;
+</code></pre>
+<p><strong>Precaución:</strong> surge una común confusión si repite una declaración <code>import</code> 
+después de cambiar el código fuente de un módulo. Debido a la memoria caché del 
+módulo sys.modules, las importaciones repetidas siempre devuelven el módulo 
+cargado anteriormente, incluso si se realizó un cambio. La forma más segura de 
+cargar código modificado en Python es salir y reiniciar el intérprete.</p>
+<h3 id="3410-localizacion-de-modulos">3.4.10 Localización de módulos</h3>
+<p>Python consulta una lista de rutas (<code>sys.path</code>) cuando busca módulos.</p>
+<pre><code class="language-shell">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path
+[
+  '',
+  '/usr/local/lib/python36/python36.zip',
+  '/usr/local/lib/python36',
+  ...
+]
+</code></pre>
+<p>El directorio de trabajo actual suele ser el primero.</p>
+<h3 id="3411-ruta-de-busqueda-del-modulo">3.4.11 Ruta de búsqueda del módulo</h3>
+<p>Como se señaló anteriormente, <code>sys.path</code> contiene las rutas de búsqueda. Puede 
+ajustarlo manualmente si es necesario.</p>
+<pre><code class="language-python">import sys
+sys.path.append('/project/foo/pyfiles')
+</code></pre>
+<p>Las rutas también se pueden agregar mediante variables de entorno.</p>
+<pre><code class="language-shell">$ env PYTHONPATH=/project/foo/pyfiles python3
+Python 3.6.0 (default, Feb 3 2017, 05:53:21)
+[GCC 4.2.1 Compatible Apple LLVM 8.0.0 (clang-800.0.38)]
+&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path
+['','/project/foo/pyfiles', ...]
+</code></pre>
+<p>Como regla general, no debería ser necesario ajustar manualmente la ruta de 
+búsqueda del módulo. Sin embargo, a veces surge si está intentando importar 
+código Python que se encuentra en una ubicación inusual o que no es fácilmente 
+accesible desde el directorio de trabajo actual.</p>
+<h3 id="ejercicios">Ejercicios</h3>
+<p>Para este ejercicio que involucra módulos, es de vital importancia asegurarse 
+de que está ejecutando Python en un entorno adecuado. Los módulos a menudo 
+presentan a los nuevos programadores problemas relacionados con el directorio 
+de trabajo actual o con la configuración de la ruta de Python. Para este curso, 
+se asume que está escribiendo todo su código en el directorio donde están todos 
+sus archivos de trabajo. Para obtener los mejores resultados, debe asegurarse 
+de estar también en ese directorio cuando inicie el intérprete. De lo 
+contrario, debe asegurarse de que su directorio de trabajo se agregue a 
+<code>sys.path</code>.</p>
+<h4 id="ejercicio-311-importaciones-de-modulos">Ejercicio 3.11: Importaciones de módulos</h4>
+<p>En la sección 3, creamos una función de propósito general <code>parse_csv()</code> para 
+analizar el contenido de los archivos de datos CSV.</p>
+<p>Ahora, veremos cómo usar esa función en otros programas. Primero, comience en 
+una nueva ventana de shell. Navega hasta la carpeta donde tienes todos tus 
+archivos. Los vamos a importar.</p>
+<p>Inicie el modo interactivo de Python.</p>
+<pre><code>$ python
+Python 3.6.1 (v3.6.1:69c0db5050, Mar 21 2017, 01:21:04)
+[GCC 4.2.1 (Apple Inc. build 5666) (dot 3)] on darwin
+Type &quot;help&quot;, &quot;copyright&quot;, &quot;credits&quot; or &quot;license&quot; for more information.
+&gt;&gt;&gt;
+</code></pre>
+<p>Una vez que haya hecho eso, intente importar algunos de los programas que 
+escribió anteriormente. Debería ver su salida exactamente como antes. Solo para 
+enfatizar: la importación de un módulo ejecuta su código.</p>
+<pre><code class="language-python">&gt;&gt;&gt; import bounce
+... mire la salida ...
+&gt;&gt;&gt; import mortgage
+... mire la salida ...
+&gt;&gt;&gt; import report
+... mire la salida ...
+&gt;&gt;&gt;
+</code></pre>
+<p>Si nada de esto funciona, probablemente esté ejecutando Python en el directorio 
+incorrecto. Ahora, intente importar su módulo <code>fileparse</code> y obtenga ayuda sobre 
+él.</p>
+<pre><code class="language-python">&gt;&gt;&gt; import fileparse
+&gt;&gt;&gt; help(fileparse)
+... mire la salida ...
+&gt;&gt;&gt; dir(fileparse)
+... mire la salida ...
+&gt;&gt;&gt;
+</code></pre>
+<p>Intente usar el módulo para leer algunos datos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; portfolio = fileparse.parse_csv('Data/portfolio.csv', select=['name','shares','price'], types=[str,int,float])
+&gt;&gt;&gt; portfolio
+... look at the output ...
+&gt;&gt;&gt; pricelist = fileparse.parse_csv('Data/prices.csv', types=[str,float], has_headers=False)
+&gt;&gt;&gt; pricelist
+... look at the output ...
+&gt;&gt;&gt; prices = dict(pricelist)
+&gt;&gt;&gt; prices
+... look at the output ...
+&gt;&gt;&gt; prices['IBM']
+106.11
+&gt;&gt;&gt;
+</code></pre>
+<p>Intente importar una función para que no necesite incluir el nombre del módulo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; from fileparse import parse_csv
+&gt;&gt;&gt; portfolio = parse_csv('Data/portfolio.csv', select=['name','shares','price'], types=[str,int,float])
+&gt;&gt;&gt; portfolio
+... look at the output ...
+&gt;&gt;&gt;
+</code></pre>
+<h4 id="ejercicio-312-uso-de-su-modulo-de-biblioteca">Ejercicio 3.12: Uso de su módulo de biblioteca</h4>
+<p>En la sección 2, escribió un programa <code>report.py</code> que produjo un informe de 
+acciones como este:</p>
+<pre><code class="language-shell">      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+</code></pre>
+<p>Tome ese programa y modifíquelo para que todo el procesamiento del archivo de 
+entrada se realice usando funciones en su módulo <code>fileparse</code>. Para hacer eso, 
+importe <code>fileparse</code> como módulo y cambie las funciones <code>read_portfolio()</code> y 
+<code>read_prices()</code> para usar la función <code>parse_csv()</code>.</p>
+<p>Utilice el ejemplo interactivo al comienzo de este ejercicio como guía. 
+Posteriormente, debería obtener exactamente el mismo resultado que antes.</p>
+<h4 id="ejercicio-314-uso-de-mas-importaciones-de-bibliotecas">Ejercicio 3.14: Uso de más importaciones de bibliotecas</h4>
+<p>En la sección 1, escribió un programa <code>pcost.py</code> que leyó una cartera y calculó 
+su costo.</p>
+<pre><code class="language-python">&gt;&gt;&gt; import pcost
+&gt;&gt;&gt; pcost.portfolio_cost('Data/portfolio.csv')
+44671.15
+&gt;&gt;&gt;
+</code></pre>
+<p>Modifique el archivo <code>pcost.py</code> para que use la función 
+<code>report.read_portfolio()</code>.</p>
+<h3 id="comentario_2">Comentario</h3>
+<p>Cuando haya terminado con este ejercicio, debe tener tres programas. 
+1. <code>fileparse.py</code> que contiene una función <code>parse_csv()</code> de propósito general. 
+2. <code>report.py</code> que produce un informe agradable, pero también contiene 
+<code>read_portfolio()</code> y <code>read_prices()</code>. 
+3. Y finalmente, <code>pcost.py</code> que calcula el costo de la cartera, pero hace uso 
+de la <code>read_portfolio()</code> función escrita para el <code>report.py</code> programa.</p>
               
             </div>
           </div>
