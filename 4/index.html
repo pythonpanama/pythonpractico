@@ -107,6 +107,46 @@
     </li>
         </ul>
     </li>
+    <li class="toctree-l2"><a class="reference internal" href="#42-herencia">4.2 Herencia</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#421-introduccion">4.2.1 Introducción</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#422-extension">4.2.2 Extensión</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#423-ejemplo">4.2.3 Ejemplo</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#424-agregando-un-nuevo-metodo">4.2.4 Agregando un nuevo método</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#425-redefiniendo-un-metodo-existente">4.2.5 Redefiniendo un método existente</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#426-comportamiento-primordial">4.2.6 Comportamiento Primordial</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#427-__init__-y-herencia">4.2.7 __init__ y herencia</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#428-usando-la-herencia">4.2.8 Usando la herencia</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#429-relacion-es-un">4.2.9 Relación "es un"</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4210-clase-base-object">4.2.10 clase base object</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4211-herencia-multiple">4.2.11 Herencia múltiple</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#4212-ejercicios">4.2.12 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-45-un-problema-de-extensibilidad">Ejercicio 4.5: un problema de extensibilidad</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-46-uso-de-la-herencia-para-producir-resultados-diferentes">Ejercicio 4.6: Uso de la herencia para producir resultados diferentes</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-47-polimorfismo-en-accion">Ejercicio 4.7: Polimorfismo en acción</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-48-poniendo-todo-junto">Ejercicio 4.8: Poniendo todo junto</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#discusion">Discusión</a>
+    </li>
+        </ul>
+    </li>
     </ul>
                     </li>
                 </ul>
@@ -402,6 +442,474 @@ código. Principalmente, cambiará el acceso al diccionario, como
        IBM        100     106.28      35.84
 &gt;&gt;&gt;
 </code></pre>
+<h2 id="42-herencia">4.2 Herencia</h2>
+<p>La herencia es una herramienta de uso común para escribir programas 
+extensibles. Esta sección explora esa idea.</p>
+<h3 id="421-introduccion">4.2.1 Introducción</h3>
+<p>La herencia se usa para especializar objetos existentes:</p>
+<pre><code class="language-python">class Parent:
+    ...
+
+class Child(Parent):
+    ...
+</code></pre>
+<p>La nueva clase <code>Child</code> se denomina clase derivada o subclase. 
+La clase <code>Parent</code> se conoce como clase base o superclase. <code>Parent</code> se 
+especifica en <code>()</code> después de que el nombre de la clase, 
+<code>class Child(Parent):</code>.</p>
+<h3 id="422-extension">4.2.2 Extensión</h3>
+<p>Con la herencia, estás tomando una clase existente y:</p>
+<ul>
+<li>Agregando nuevos métodos</li>
+<li>Redefiniendo algunos de los métodos existentes</li>
+<li>Agregando nuevos atributos a las instancias</li>
+</ul>
+<p>Al final, está ampliando el código existente.</p>
+<h3 id="423-ejemplo">4.2.3 Ejemplo</h3>
+<p>Suponga que esta es su clase inicial:</p>
+<pre><code class="language-python">class Stock:
+    def __init__(self, name, shares, price):
+        self.name = name
+        self.shares = shares
+        self.price = price
+
+    def cost(self):
+        return self.shares * self.price
+
+    def sell(self, nshares):
+        self.shares -= nshares
+</code></pre>
+<p>Puede cambiar cualquier parte de esto mediante herencia.</p>
+<h3 id="424-agregando-un-nuevo-metodo">4.2.4 Agregando un nuevo método</h3>
+<pre><code class="language-python">class MyStock(Stock):
+    def panic(self):
+        self.sell(self.shares)
+</code></pre>
+<p>Ejemplo de uso.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = MyStock('GOOG', 100, 490.1)
+&gt;&gt;&gt; s.sell(25)
+&gt;&gt;&gt; s.shares
+75
+&gt;&gt;&gt; s.panic()
+&gt;&gt;&gt; s.shares
+0
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="425-redefiniendo-un-metodo-existente">4.2.5 Redefiniendo un método existente</h3>
+<pre><code class="language-python">class MyStock(Stock):
+    def cost(self):
+        return 1.25 * self.shares * self.price
+</code></pre>
+<p>Ejemplo de uso.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = MyStock('GOOG', 100, 490.1)
+&gt;&gt;&gt; s.cost()
+61262.5
+&gt;&gt;&gt;
+</code></pre>
+<p>El nuevo método reemplaza al antiguo. Los otros métodos no se ven 
+afectados.</p>
+<h3 id="426-comportamiento-primordial">4.2.6 Comportamiento Primordial</h3>
+<p>A veces, una clase extiende un método existente, pero quiere usar 
+la implementación original dentro de la redefinición. Para esto, 
+haga uso de <code>super()</code>:</p>
+<pre><code class="language-python">class Stock:
+    ...
+    def cost(self):
+        return self.shares * self.price
+    ...
+
+class MyStock(Stock):
+    def cost(self):
+        # haga la llamada a `super`         
+        actual_cost = super().cost()
+        return 1.25 * actual_cost
+</code></pre>
+<p>Haga uso de <code>super()</code> para llamar a la versión anterior.</p>
+<p><em>Precaución: en Python 2, la sintaxis era más detallada.</em></p>
+<pre><code class="language-python">actual_cost = super(MyStock, self).cost()
+</code></pre>
+<h3 id="427-__init__-y-herencia">4.2.7 <code>__init__</code> y herencia</h3>
+<p>Si <code>__init__</code> se redefine, es esencial inicializar la clase padre.</p>
+<pre><code class="language-python">class Stock:
+    def __init__(self, name, shares, price):
+        self.name = name
+        self.shares = shares
+        self.price = price
+
+class MyStock(Stock):
+    def __init__(self, name, shares, price, factor):
+        # revise el llamado a `super` y `__init__`         
+        super().__init__(name, shares, price)
+        self.factor = factor
+
+    def cost(self):
+        return self.factor * super().cost()
+</code></pre>
+<p>Debe llamar el método <code>__init__()</code> en <code>super</code> cuál es la forma de 
+llamar a la versión anterior como se mostró anteriormente.</p>
+<h3 id="428-usando-la-herencia">4.2.8 Usando la herencia</h3>
+<p>La herencia se usa a veces para organizar objetos relacionados.</p>
+<pre><code class="language-python">class Shape:
+    ...
+
+class Circle(Shape):
+    ...
+
+class Rectangle(Shape):
+    ...
+</code></pre>
+<p>Piense en una jerarquía lógica o taxonomía. Sin embargo, un uso más 
+común (y práctico) está relacionado con hacer código reutilizable o 
+extensible. Por ejemplo, un marco puede definir una clase base e 
+indicarle que la personalice.</p>
+<pre><code class="language-python">class CustomHandler(TCPHandler):
+    def handle_request(self):
+        ...
+        # Custom processing 
+</code></pre>
+<p>La clase base contiene algún código de propósito general. Tu clase 
+hereda y personaliza partes específicas.</p>
+<h3 id="429-relacion-es-un">4.2.9 Relación "es un"</h3>
+<p>La herencia establece una relación de tipo.</p>
+<pre><code class="language-python">class Shape:
+    ...
+
+class Circle(Shape):
+    ...
+</code></pre>
+<p>Compruebe la instancia del objeto.</p>
+<pre><code class="language-python">&gt;&gt;&gt; c = Circle(4.0)
+&gt;&gt;&gt; isinstance(c, Shape)
+True
+&gt;&gt;&gt;
+</code></pre>
+<p><em>Importante: lo ideal es que cualquier código que funcione con 
+instancias de la clase principal también funcionará con instancias de 
+la clase secundaria.</em></p>
+<h3 id="4210-clase-base-object">4.2.10 clase base <code>object</code></h3>
+<p>Si una clase no tiene padre, a veces se usa <code>object</code>  como base.</p>
+<pre><code class="language-python">class Shape(object):
+    ...
+</code></pre>
+<p><code>object</code> es la raíz de todos los objetos en Python.</p>
+<p><em>Nota: no es técnicamente necesario, pero a menudo se lo ve 
+especificado como una retención de su uso obligatorio en Python 2. 
+Si se omite, la clase aún hereda implícitamente <code>object</code>.</em></p>
+<h3 id="4211-herencia-multiple">4.2.11 Herencia múltiple</h3>
+<p>Puede heredar de varias clases especificándolas en la definición de 
+la clase.</p>
+<pre><code class="language-python">class Mother:
+    ...
+
+class Father:
+    ...
+
+class Child(Mother, Father):
+    ...
+</code></pre>
+<p>La clase <code>Child</code> hereda características de ambos padres. Hay algunos 
+detalles bastante complicados. No lo haga a menos que sepa lo que 
+está haciendo. Se proporcionará más información en la siguiente 
+sección, pero no vamos a utilizar más la herencia múltiple en este 
+curso.</p>
+<h3 id="4212-ejercicios">4.2.12 Ejercicios</h3>
+<p>Un uso importante de la herencia es la escritura de código que debe 
+ampliarse o personalizarse de diversas formas, especialmente en 
+bibliotecas o marcos de trabajo (frameworks). Para ilustrarlo, 
+considere la <code>print_report()</code> función en su programa <code>report.py</code> . 
+Debería verse algo como esto:</p>
+<pre><code class="language-python">def print_report(reportdata):
+    ''' Print a nicely formated table from a list of (name, shares, price, change) tuples. '''
+    headers = ('Name','Shares','Price','Change')
+    print('%10s %10s %10s %10s' % headers)
+    print(('-'*10 + ' ')*len(headers))
+    for row in reportdata:
+        print('%10s %10d %10.2f %10.2f' % row)
+</code></pre>
+<p>Cuando ejecuta su programa de informes, debería obtener un resultado 
+como este:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import report
+&gt;&gt;&gt; report.portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+</code></pre>
+<h4 id="ejercicio-45-un-problema-de-extensibilidad">Ejercicio 4.5: un problema de extensibilidad</h4>
+<p>Suponga que desea modificar la función <code>print_report()</code> para admitir 
+una variedad de formatos de salida diferentes, como texto sin 
+formato, HTML, CSV o XML. Para hacer esto, podría intentar escribir 
+una función gigantesca que lo hiciera todo. Sin embargo, hacerlo 
+probablemente conduciría a un desorden insostenible. En cambio, esta 
+es una oportunidad perfecta para usar la herencia.</p>
+<p>Para comenzar, concéntrese en los pasos involucrados en la creación 
+de una tabla. En la parte superior de la tabla hay un conjunto de 
+encabezados de tabla. Después de eso, aparecen filas de datos de la 
+tabla. Tomemos esos pasos y pongámoslos en su propia clase. Cree un 
+archivo llamado <code>tableformat.py</code> y defina la siguiente clase:</p>
+<pre><code class="language-python"># tableformat.py 
+class TableFormatter:
+    def headings(self, headers):
+        ''' Emite el encabezado de la tabla '''
+    raise NotImplementedError()
+
+    def row(self, rowdata):
+        ''' Emite una fila de data de tabla. '''
+    raise NotImplementedError()
+</code></pre>
+<p>Esta clase no hace nada, pero sirve como una especie de 
+especificación de diseño para clases adicionales que se definirán en 
+breve. Una clase como esta a veces se denomina "clase base abstracta".</p>
+<p>Modifique la función <code>print_report()</code> para que acepte un objeto 
+<code>TableFormatter</code> como entrada e invoque métodos en él para producir 
+la salida. Por ejemplo, así:</p>
+<pre><code class="language-python"># report.py ...
+
+def print_report(reportdata, formatter):
+    ''' Imprima una tabla con un formato agradable a partir de una lista de tuplas (nombre, acciones, precio, cambio). '''
+    formatter.headings(['Name','Shares','Price','Change'])
+    for name, shares, price, change in reportdata:
+        rowdata = [ name, str(shares), f'{price:0.2f}', f'{change:0.2f}' ]
+        formatter.row(rowdata)
+</code></pre>
+<p>Toda vez que agregó un argumento a <code>print_report()</code>, también 
+necesitará modificar la portfolio_report()función. Cámbielo para que 
+cree un aspecto <code>TableFormatter</code> como este:</p>
+<pre><code class="language-python"># report.py 
+import tableformat
+
+...
+def portfolio_report(portfoliofile, pricefile):
+    ''' Make a stock report given portfolio and price data files. '''
+    # Read data files     portfolio = read_portfolio(portfoliofile)
+    prices = read_prices(pricefile)
+
+    # Create the report data     report = make_report_data(portfolio, prices)
+
+    # Print it out     formatter = tableformat.TableFormatter()
+    print_report(report, formatter)
+</code></pre>
+<p>Ejecute este nuevo código:</p>
+<pre><code class="language-python">&gt;&gt;&gt; ================================ RESTART ================================
+&gt;&gt;&gt; import report
+&gt;&gt;&gt; report.portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+... el programa se bloquea ...
+</code></pre>
+<p>Debería bloquearse inmediatamente con una excepción 
+<code>NotImplementedError</code>. Eso no es demasiado emocionante, pero es 
+exactamente lo que esperábamos. Continúe con la siguiente parte.</p>
+<h4 id="ejercicio-46-uso-de-la-herencia-para-producir-resultados-diferentes">Ejercicio 4.6: Uso de la herencia para producir resultados diferentes</h4>
+<p>La clase <code>TableFormatter</code> que definió en la parte (a) está destinada 
+a ampliarse mediante herencia. De hecho, esa es toda la idea. Para 
+ilustrar, defina una clase <code>TextTableFormatter</code> como esta:</p>
+<pre><code class="language-python"># tableformat.py ...
+class TextTableFormatter(TableFormatter):
+    ''' Emite una tabla de texto sin formato '''
+    def headings(self, headers):
+        for h in headers:
+            print(f'{h:&gt;10s}', end=' ')
+        print()
+        print(('-'*10 + ' ')*len(headers))
+
+    def row(self, rowdata):
+        for d in rowdata:
+            print(f'{d:&gt;10s}', end=' ')
+        print()
+</code></pre>
+<p>Modifique la función <code>portfolio_report()</code> así y pruébela:</p>
+<pre><code class="language-python"># report.py ...
+def portfolio_report(portfoliofile, pricefile):
+    ''' Hace un informe de acciones en función de los archivos de datos de precios y cartera. '''
+    # Lee los archivos de data     
+    portfolio = read_portfolio(portfoliofile)
+    prices = read_prices(pricefile)
+
+    # Crea el reporte de data    
+    report = make_report_data(portfolio, prices)
+
+    # Lo imprime   
+    formatter = tableformat.TextTableFormatter()
+    print_report(report, formatter)
+</code></pre>
+<p>Esto debería producir el mismo resultado que antes:</p>
+<pre><code class="language-python">&gt;&gt;&gt; ================================ RESTART ================================
+&gt;&gt;&gt; import report
+&gt;&gt;&gt; report.portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+&gt;&gt;&gt;
+</code></pre>
+<p>Sin embargo, cambiemos la salida a otra cosa. Defina una nueva clase 
+<code>CSVTableFormatter</code> que produzca resultados en formato CSV:</p>
+<pre><code class="language-python"># tableformat.py ...
+class CSVTableFormatter(TableFormatter):
+    ''' Output de data de portfolio en formato CSV. '''
+    def headings(self, headers):
+        print(','.join(headers))
+
+    def row(self, rowdata):
+        print(','.join(rowdata))
+</code></pre>
+<p>Modifique su programa principal de la siguiente manera:</p>
+<pre><code class="language-python">def portfolio_report(portfoliofile, pricefile):
+    ''' Hace un informe de acciones en función de los archivos de datos de precios y cartera. '''  
+    portfolio = read_portfolio(portfoliofile)
+    prices = read_prices(pricefile)
+
+    report = make_report_data(portfolio, prices)
+
+    formatter = tableformat.CSVTableFormatter()
+    print_report(report, formatter)
+</code></pre>
+<p>Ahora debería ver una salida CSV como esta:</p>
+<pre><code class="language-python">&gt;&gt;&gt; ================================ RESTART ================================
+&gt;&gt;&gt; import report
+&gt;&gt;&gt; report.portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+Name,Shares,Price,Change
+AA,100,9.22,-22.98
+IBM,50,106.28,15.18
+CAT,150,35.46,-47.98
+MSFT,200,20.89,-30.34
+GE,95,13.48,-26.89
+MSFT,50,20.89,-44.21
+IBM,100,106.28,35.84
+</code></pre>
+<p>Con una idea similar, defina una clase <code>HTMLTableFormatter</code> que 
+produzca una tabla con el siguiente resultado:</p>
+<pre><code class="language-python">&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Shares&lt;/th&gt;&lt;th&gt;Price&lt;/th&gt;&lt;th&gt;Change&lt;/th&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;AA&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;9.22&lt;/td&gt;&lt;td&gt;-22.98&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;IBM&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;106.28&lt;/td&gt;&lt;td&gt;15.18&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;CAT&lt;/td&gt;&lt;td&gt;150&lt;/td&gt;&lt;td&gt;35.46&lt;/td&gt;&lt;td&gt;-47.98&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;MSFT&lt;/td&gt;&lt;td&gt;200&lt;/td&gt;&lt;td&gt;20.89&lt;/td&gt;&lt;td&gt;-30.34&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;GE&lt;/td&gt;&lt;td&gt;95&lt;/td&gt;&lt;td&gt;13.48&lt;/td&gt;&lt;td&gt;-26.89&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;MSFT&lt;/td&gt;&lt;td&gt;50&lt;/td&gt;&lt;td&gt;20.89&lt;/td&gt;&lt;td&gt;-44.21&lt;/td&gt;&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;IBM&lt;/td&gt;&lt;td&gt;100&lt;/td&gt;&lt;td&gt;106.28&lt;/td&gt;&lt;td&gt;35.84&lt;/td&gt;&lt;/tr&gt;
+</code></pre>
+<p>Pruebe su código modificando el programa principal para crear un 
+objeto <code>HTMLTableFormatter</code> en lugar de un objeto <code>CSVTableFormatter</code>.</p>
+<h4 id="ejercicio-47-polimorfismo-en-accion">Ejercicio 4.7: Polimorfismo en acción</h4>
+<p>Una característica importante de la programación orientada a objetos 
+es que puede conectar un objeto a un programa y funcionará sin tener 
+que cambiar el código existente. Por ejemplo, si escribiera un 
+programa que esperaba usar un objeto <code>TableFormatter</code>, funcionaría sin 
+importar qué tipo de <code>TableFormatter</code> le haya dado. Este comportamiento 
+a veces se denomina "polimorfismo".</p>
+<p>Un problema potencial es averiguar cómo permitir que un usuario 
+elija el formateador que desee. El uso directo de los nombres de las 
+clases <code>TextTableFormatter</code> es a menudo molesto. Por lo tanto, podría 
+considerar algún enfoque simplificado. Quizás incruste una 
+declaración-if en el código como esta:</p>
+<pre><code class="language-python">def portfolio_report(portfoliofile, pricefile, fmt='txt'):
+    ''' Hace un informe de acciones en función de los archivos de datos de precios y cartera. '''
+    # Lea los archivos     
+    portfolio = read_portfolio(portfoliofile)
+    prices = read_prices(pricefile)
+
+    # Crea el reporte   
+    report = make_report_data(portfolio, prices)
+
+    # Lo imprime    
+    if fmt == 'txt':
+        formatter = tableformat.TextTableFormatter()
+    elif fmt == 'csv':
+        formatter = tableformat.CSVTableFormatter()
+    elif fmt == 'html':
+        formatter = tableformat.HTMLTableFormatter()
+    else:
+        raise RuntimeError(f'Unknown format {fmt}')
+    print_report(report, formatter)
+</code></pre>
+<p>En este código, el usuario especifica un nombre simplificado como 
+'txt'o 'csv' para elegir un formato. Sin embargo, ¿es la mejor idea 
+poner una enorme declaración <code>if</code> en la función <code>portfolio_report()</code>? 
+Podría ser mejor mover ese código a una función de propósito general 
+en otro lugar.</p>
+<p>En el archivo <code>tableformat.py</code>, agregar una función 
+<code>create_formatter(name)</code> que permite a un usuario crear un 
+formateador dado un nombre de salida como 'txt', 'csv'o 'html'. 
+Modifique <code>portfolio_report()</code> para que se vea así:</p>
+<pre><code class="language-python">def portfolio_report(portfoliofile, pricefile, fmt='txt'):
+    ''' Hace un informe de acciones en función de los archivos de datos de precios y cartera. '''
+    # Lea los archivos     
+    portfolio = read_portfolio(portfoliofile)
+    prices = read_prices(pricefile)
+
+    # Crea el reporte      
+    report = make_report_data(portfolio, prices)
+
+    # Lo imprime     
+    formatter = tableformat.create_formatter(fmt)
+    print_report(report, formatter)
+</code></pre>
+<p>Intente llamar a la función con diferentes formatos para asegurarse de que esté funcionando.</p>
+<h4 id="ejercicio-48-poniendo-todo-junto">Ejercicio 4.8: Poniendo todo junto</h4>
+<p>Modifique el programa <code>report.py</code> para que la función 
+<code>portfolio_report()</code> tome un argumento opcional que especifique el 
+formato de salida. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; report.portfolio_report('Data/portfolio.csv', 'Data/prices.csv', 'txt')
+      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+&gt;&gt;&gt;
+</code></pre>
+<p>Modifique el programa principal para que se pueda dar un formato en 
+la línea de comando:</p>
+<pre><code class="language-shell">$ python report.py Data/portfolio.csv Data/prices.csv csv
+Name,Shares,Price,Change
+AA,100,9.22,-22.98
+IBM,50,106.28,15.18
+CAT,150,35.46,-47.98
+MSFT,200,20.89,-30.34
+GE,95,13.48,-26.89
+MSFT,50,20.89,-44.21
+IBM,100,106.28,35.84
+bash $
+</code></pre>
+<h3 id="discusion">Discusión</h3>
+<p>Escribir código extensible es uno de los usos más comunes de la 
+herencia en bibliotecas y marcos de desarrollo. Por ejemplo, un marco 
+puede indicarle que defina su propio objeto que hereda de una clase 
+base proporcionada. Luego se le indica que complete varios métodos 
+que implementan varios bits de funcionalidad.</p>
+<p>Otro concepto algo más profundo es la idea de "ser dueño de sus 
+abstracciones". En los ejercicios, definimos nuestra propia clase 
+para formatear una tabla. Puede mirar su código y decirse a sí mismo: 
+"¡Debería usar una biblioteca de formato o algo que ya haya creado 
+otra persona!" No, debe usar AMBOS su clase y una biblioteca. 
+El uso de su propia clase promueve un acoplamiento flexible y es más 
+flexible. Siempre que su aplicación utilice la interfaz de 
+programación de su clase, puede cambiar la implementación interna 
+para que funcione de la forma que desee. Puede escribir código 
+totalmente personalizado. Puede utilizar el paquete de terceros de 
+alguien. Cambie un paquete de terceros por un paquete diferente 
+cuando encuentre uno mejor. No importa, ninguno de los códigos de su 
+aplicación se romperá mientras conserve la interfaz. Esa es una idea 
+poderosa y es una de las razones por las que podría considerar la 
+herencia para algo como esto.</p>
+<p>Dicho esto, diseñar programas orientados a objetos puede ser 
+extremadamente difícil. Para obtener más información, probablemente 
+debería buscar libros sobre el tema de los patrones de diseño 
+(aunque comprender lo que sucedió en este ejercicio lo llevará 
+bastante lejos en términos de usar objetos de una manera 
+práctica e útil).</p>
               
             </div>
           </div>
