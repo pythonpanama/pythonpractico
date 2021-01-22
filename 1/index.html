@@ -823,12 +823,11 @@ abs(x)     Valor absoluto
 b = 4e5 # 4 x 10**5 or 400,000
 c = -1.345e-10
 </code></pre>
-<p>Los flotantes se representan con precisión doble utilizando la representación de CPU nativa [IEEE 754] (https://en.wikipedia.org/wiki/IEEE_754).
-Es lo mismo que el tipo "doble" en el lenguaje de programación C.</p>
-<blockquote>
-<p>17 dígitos de precisión
-Exponente de -308 a 308</p>
-</blockquote>
+<p>Los flotantes se representan con precisión doble utilizando la representación de CPU nativa <a href="https://en.wikipedia.org/wiki/IEEE_754">IEEE 754</a>. Es lo mismo que el tipo "doble" en el lenguaje de programación C.</p>
+<ul>
+<li>17 dígitos de precisión</li>
+<li>Exponente de -308 a 308</li>
+</ul>
 <p>Tenga en cuenta que los números de punto flotante son inexactos cuando representan decimales.</p>
 <pre><code class="language-python">&gt;&gt;&gt; a = 2.1 + 4.2
 &gt;&gt;&gt; a == 6.3
