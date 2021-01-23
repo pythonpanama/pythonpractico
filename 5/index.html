@@ -635,21 +635,237 @@ Yow!
 &gt;&gt;&gt;
 </code></pre>
 <h2 id="52-clases-y-encapsulacion">5.2 Clases y encapsulación</h2>
+<p>Al escribir clases, es común intentar encapsular detalles internos.
+Esta sección presenta algunos modismos de programación de Python para esto, incluyendo
+propiedades y variables privadas.</p>
 <h3 id="521-publico-vs-privado">5.2.1 Público vs Privado</h3>
+<p>Uno de los roles principales de una clase es encapsular datos y
+detalles de implementación de un objeto. Sin embargo, una clase también define un
+Interfaz * pública * que se supone que el mundo exterior debe usar para
+manipular el objeto. Esta distinción entre implementación
+Los detalles y la interfaz pública son importantes.</p>
 <h3 id="522-un-problema">5.2.2 Un problema</h3>
+<p>En Python, casi todo lo relacionado con clases y objetos es <em>abierto</em>.</p>
+<ul>
+<li>Puede inspeccionar fácilmente el interior de los objetos.</li>
+<li>Puedes cambiar las cosas a su antojo.</li>
+<li>No existe una noción fuerte de control de acceso (es decir, miembros de clases privadas)</li>
+</ul>
+<p>Esto es un problema cuando intenta aislar detalles de la <em>implementación interna</em>.</p>
 <h3 id="523-encapsulacion-de-python">5.2.3 Encapsulación de Python</h3>
+<p>Python se basa en convenciones de programación para indicar el uso previsto
+de algo. Estas convenciones se basan en la denominación o nombramiento.
+El lenguaje no impone ciertas reglas, sino que le delega esa responsabilidad
+al programador. El programador debe observar y cumplir ciertas reglas,
+sin que el lenguaje lo obligue hacerlo. En ese sentido, Python se distingue de
+otros lenguajes de programación que tienen reglas estrictas sobre lo que es
+público y lo que es privado.</p>
 <h3 id="524-atributos-privados">5.2.4 Atributos privados</h3>
+<p>Cualquier nombre de atributo con "_" inicial se considera <em>privado</em>.</p>
+<pre><code class="language-python">clase Persona (objeto):
+    def __init__ (self, nombre):
+        self._name = 0
+</code></pre>
+<p>Como se mencionó anteriormente, este es solo un estilo de programación. Todavia puede
+acceder y modificarlo.</p>
+<pre><code class="language-python">&gt;&gt;&gt; p = Persona('Guido')
+&gt;&gt;&gt; p._name
+'Guido'
+&gt;&gt;&gt; p._name = 'Dave'
+&gt;&gt;&gt;
+</code></pre>
+<p>Como regla general, cualquier nombre con un "_" inicial se considera implementación interna
+ya sea una variable, una función o un nombre de módulo. Si se encuentra usando tales
+nombres directamente, probablemente esté haciendo algo mal. Busque una funcionalidad de nivel superior.</p>
 <h3 id="525-atributos-simples">5.2.5 Atributos simples</h3>
+<p>Considere la siguiente clase.</p>
+<pre><code class="language-python">class Stock:
+    def __init__(self, name, shares, price):
+        self.name = name
+        self.shares = shares
+        self.price = price
+</code></pre>
+<p>Una característica sorprendente es que puede establecer los atributos en cualquier valor:</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = Stock('IBM', 50, 91.1)
+&gt;&gt;&gt; s.shares = 100
+&gt;&gt;&gt; s.shares = &quot;hundred&quot;
+&gt;&gt;&gt; s.shares = [1, 0, 0]
+&gt;&gt;&gt;
+</code></pre>
+<p>Puede mirar eso y pensar que quiere algunas verificaciones adicionales.</p>
+<pre><code class="language-python">s.shares = '50'     # Alza un TypeError, esto es una cadena
+</code></pre>
+<p>¿Como lo harias?</p>
 <h3 id="526-atributos-gestionados">5.2.6 Atributos gestionados</h3>
+<p>Un enfoque: introducir métodos de acceso.</p>
+<pre><code class="language-python">class Stock:
+    def __init__(self, name, shares, price):
+        self.name = name
+        self.set_shares(shares)
+        self.price = price
+
+    # Metodo que encapa la operación de acceso al atributo (get)
+    def get_shares(self):
+        return self._shares
+
+    # Metodo que encapa la operacion de definición del atributo (set)
+    def set_shares(self, value):
+        if not isinstance(value, int):
+            raise TypeError('Esperaba un int')
+        self._shares = value
+</code></pre>
+<p>Lástima que esto rompa todo nuestro código existente. <code>s.shares = 50</code> se convierte en <code>s.set_shares(50)</code></p>
 <h3 id="527-propiedades">5.2.7 Propiedades</h3>
+<pre><code class="language-python">class Stock:
+    def __init__(self, name, shares, price):
+        self.name = name
+        self.shares = shares
+        self.price = price
+
+    @property
+    def shares(self):
+        return self._shares
+
+    @shares.setter
+    def shares(self, value):
+        if not isinstance(value, int):
+            raise TypeError('Expected int')
+        self._shares = value
+</code></pre>
+<p>El acceso normal a los atributos ahora activa los métodos getter y setter en @propertyy @shares.setter.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = Stock('IBM', 50, 91.1)
+&gt;&gt;&gt; s.shares         # Provoca @property
+50
+&gt;&gt;&gt; s.shares = 75    # Prooca @shares.setter
+&gt;&gt;&gt;
+</code></pre>
+<p>Con este patrón, no se necesitan cambios en el código fuente. El nuevo setter también se llama cuando hay una asignación dentro de la clase, incluyendo en el interior del <code>__init__()</code> método.</p>
+<pre><code class="language-python">class Stock:
+    def __init__(self, name, shares, price):
+        ...
+        # La asignación usa el método setter de abajo
+        self.shares = shares
+        ...
+
+    ...
+    @shares.setter
+    def shares(self, value):
+        if not isinstance(value, int):
+            raise TypeError('Expected int')
+        self._shares = value
+</code></pre>
+<p>A menudo existe una confusión entre una propiedad y el uso de nombres privados. Aunque una propiedad usa internamente un nombre privado como <code>_shares</code>, el resto de la clase (no la propiedad) puede continuar usando un nombre como <code>shares</code>.</p>
+<p>Las propiedades también son útiles para los atributos de datos calculados.</p>
+<pre><code class="language-python">class Stock:
+    def __init__(self, name, shares, price):
+        self.name = name
+        self.shares = shares
+        self.price = price
+
+    @property
+    def cost(self):
+        return self.shares * self.price
+    ...
+</code></pre>
+<p>Esto le permite eliminar los paréntesis adicionales, ocultando el hecho de que en realidad es un método:</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = Stock('GOOG', 100, 490.1)
+&gt;&gt;&gt; s.shares # Instance variable 100
+&gt;&gt;&gt; s.cost   # Computed Value 49010.0
+&gt;&gt;&gt;
+</code></pre>
 <h3 id="528-acceso-uniforme">5.2.8 Acceso uniforme</h3>
+<p>El último ejemplo muestra cómo poner una interfaz más uniforme en un objeto. Si no hace esto, un objeto puede resultar confuso de usar:</p>
+<pre><code class="language-python">&gt;&gt;&gt; s = Stock('GOOG', 100, 490.1)
+&gt;&gt;&gt; a = s.cost() # Method
+49010.0
+&gt;&gt;&gt; b = s.shares # Data attribute
+100
+&gt;&gt;&gt;
+</code></pre>
+<p>¿Por qué se requiere <code>()</code> para el costo, pero no para las acciones? Una propiedad puede arreglar esto.</p>
 <h3 id="529-sintaxis-del-decorador">5.2.9 Sintaxis del decorador</h3>
+<p>La sintaxis <code>@</code> se conoce como "decoración". Especifica un modificador que se aplica a la definición de función que sigue inmediatamente.</p>
+<pre><code class="language-python">...
+@property
+def cost(self):
+    return self.shares * self.price
+</code></pre>
+<p>More details are given in Section 7.</p>
 <h3 id="5210-slots-atributo">5.2.10 <strong>slots</strong> Atributo</h3>
+<p>Puede restringir el conjunto de nombres de atributos.</p>
+<pre><code class="language-python">class Stock:
+    __slots__ = ('name','_shares','price')
+    def __init__(self, name, shares, price):
+        self.name = name
+        ...
+</code></pre>
+<p>Generará un error para otros atributos.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s.price = 385.15
+&gt;&gt;&gt; s.prices = 410.2
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in ?
+AttributeError: 'Stock' object has no attribute 'prices'
+</code></pre>
+<p>Aunque esto evita errores y restringe el uso de objetos, en realidad se usa para el rendimiento y hace que Python use la memoria de manera más eficiente.</p>
 <h3 id="5211-comentarios-finales-sobre-encapsulacion">5.2.11 Comentarios finales sobre encapsulación</h3>
+<p>No se exceda con atributos privados, propiedades, espacios, etc. Sirven para un propósito específico y es posible que los vea al leer otro código de Python. Sin embargo, no son necesarios para la mayor parte de la codificación diaria.</p>
 <h3 id="5212-ejercicios">5.2.12 Ejercicios</h3>
 <h4 id="ejercicio-56-propiedades-simples">Ejercicio 5.6: Propiedades simples</h4>
+<p>Las propiedades son una forma útil de agregar "atributos calculados" a un objeto. En <code>stock.py</code>, creaste un objeto Stock. Observe que en su objeto hay una ligera inconsistencia en cómo se extraen los diferentes tipos de datos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; from stock import Stock
+&gt;&gt;&gt; s = Stock('GOOG', 100, 490.1)
+&gt;&gt;&gt; s.shares
+100
+&gt;&gt;&gt; s.price
+490.1
+&gt;&gt;&gt; s.cost()
+49010.0
+&gt;&gt;&gt;
+</code></pre>
+<p>Específicamente, observe cómo tiene que agregar extra <code>()</code> a <code>cost</code> porque es un método.</p>
+<p>Puede deshacerse del extra <code>()</code> en <code>cost()</code> si lo convierte en una propiedad. Tome su clase <code>Stock</code> y modifíquela para que el cálculo del costo funcione así:</p>
+<pre><code class="language-python">&gt;&gt;&gt; ================================ RESTART ================================
+&gt;&gt;&gt; from stock import Stock
+&gt;&gt;&gt; s = Stock('GOOG', 100, 490.1)
+&gt;&gt;&gt; s.cost
+49010.0
+&gt;&gt;&gt;
+</code></pre>
+<p>Intente llamar <code>s.cost()</code> como una función y observe que no funciona ahora que cost se ha definido como una propiedad.</p>
+<pre><code class="language-python">&gt;&gt;&gt; s.cost()
+... fracasa ...
+&gt;&gt;&gt;
+</code></pre>
+<p>Hacer este cambio probablemente romperá su programa <code>pcost.py</code> anterior . Es posible que deba volver atrás y deshacerse del método <code>()</code> en <code>cost()</code>.</p>
 <h4 id="ejercicio-57-propiedades-y-establecedores">Ejercicio 5.7: Propiedades y establecedores</h4>
+<p>Modifique el atributo shares para que el valor se almacene en un atributo privado y que se utilicen un par de funciones de propiedad para garantizar que siempre se establezca en un valor entero. A continuación, se muestra un ejemplo del comportamiento esperado:</p>
+<pre><code class="language-python">&gt;&gt;&gt; ================================ RESTART ================================
+&gt;&gt;&gt; from stock import Stock
+&gt;&gt;&gt; s = Stock('GOOG',100,490.10)
+&gt;&gt;&gt; s.shares = 50
+&gt;&gt;&gt; s.shares = 'a lot'
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+TypeError: expected an integer
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-58-agregar-ranuras">Ejercicio 5.8: Agregar ranuras</h4>
+<p>Modifique la clase <code>Stock</code> para que tenga un atributo <code>__slots__</code>. Luego, verifique que no se puedan agregar nuevos atributos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; ================================ RESTART ================================
+&gt;&gt;&gt; from stock import Stock
+&gt;&gt;&gt; s = Stock('GOOG', 100, 490.10)
+&gt;&gt;&gt; s.name
+'GOOG'
+&gt;&gt;&gt; s.blah = 42
+... mire lo que sucede ...
+&gt;&gt;&gt;
+</code></pre>
+<p>Cuando lo usa <code>__slots__</code>, Python usa una representación interna de objetos más eficiente. ¿Qué sucede si intenta inspeccionar el diccionario subyacente de <code>s</code> arriba?</p>
+<pre><code class="language-python">&gt;&gt;&gt; s.__dict__
+... mire lo que sucede ...
+&gt;&gt;&gt;
+</code></pre>
+<p>Cabe señalar que <code>__slots__</code> se usa más comúnmente como optimización en clases que sirven como estructuras de datos. El uso de ranuras hará que dichos programas usen mucha menos memoria y se ejecuten un poco más rápido. Sin embargo , probablemente debería evitar el uso de <code>__slots__</code> en la mayoría de las otras clases.</p>
               
             </div>
           </div>
