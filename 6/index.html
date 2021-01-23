@@ -229,40 +229,718 @@
                 <h1 id="6-generadores">6. Generadores</h1>
 <p>La iteración es uno de los más comunes patrones de programación en Python. Los programas hacen mucha iteración para procesar listas, leer archivos, consultar una base de datos, y más. Una de las características mas poderosas de Python es la habilidad de costumizar y redefinir la iteración en una función generadora. Al final de la sección, escribiremos algunos programas que procesan datos en tiempo real en una manera interesante.</p>
 <h2 id="61-protocolo-de-iteracion">6.1 Protocolo de iteración</h2>
+<p>Esta sección analiza el proceso subyacente de iteración.</p>
 <h3 id="611-iteracion-en-todas-partes">6.1.1 Iteración en todas partes</h3>
+<p>Muchos objetos diferentes admiten la iteración.</p>
+<pre><code class="language-python">a = 'hello'
+for c in a: # cicla sobre los caracteres en a
+    ...
+
+b = { 'name': 'Dave', 'password':'foo'}
+for k in b: # cicla sobre las claves del diccionario
+    ...
+
+c = [1,2,3,4]
+for i in c: # cicla sobre los elementos en una lista/tupla
+    ...
+
+f = open('foo.txt')
+for x in f: # cicla sobre las lineas en un archivo
+    ...
+</code></pre>
 <h3 id="612-iteracion-protocolo">6.1.2 Iteración: Protocolo</h3>
+<p>Considere la forafirmación.</p>
+<pre><code class="language-python">for x in obj:
+    # declaraciones
+</code></pre>
+<p>¿Qué pasa debajo del capó?</p>
+<pre><code class="language-python">_iter = obj.__iter__()        # consigue el objeto iterador
+while True:
+    try:
+        x = _iter.__next__()  # consigue el próximo elemento
+        # statements ...
+    except StopIteration:     # no hay más elementos
+        break
+</code></pre>
+<p>Todos los objetos que trabajan con el for-loopimplementan este protocolo de iteración de bajo nivel.</p>
+<p>Ejemplo: iteración manual sobre una lista.</p>
+<pre><code class="language-python">&gt;&gt;&gt; x = [1,2,3]
+&gt;&gt;&gt; iterador = x.__iter__()
+&gt;&gt;&gt; iterador
+&lt;listiterator object at 0x590b0&gt;
+&gt;&gt;&gt; iterador.__next__()
+1
+&gt;&gt;&gt; iterador.__next__()
+2
+&gt;&gt;&gt; iterador.__next__()
+3
+&gt;&gt;&gt; iterador.__next__()
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in ? StopIteration
+&gt;&gt;&gt;
+</code></pre>
 <h3 id="613-apoyo-a-la-iteracion">6.1.3 Apoyo a la iteración</h3>
+<p>Knowing about iteration is useful if you want to add it to your own objects. For example, making a custom container.</p>
+<pre><code class="language-python">class Portfolio:
+    def __init__(self):
+        self.holdings = []
+
+    def __iter__(self):
+        return self.holdings.__iter__()
+    ...
+
+port = Portfolio()
+for s in port:
+    ...
+</code></pre>
 <h3 id="614-ejercicios">6.1.4 Ejercicios</h3>
 <h4 id="ejercicio-61-iteracion-ilustrada">Ejercicio 6.1: Iteración ilustrada</h4>
+<p>Crea la siguiente lista:</p>
+<p>a = [1,9,4,25,16]</p>
+<p>Repetir manualmente esta lista. Llame <code>__iter__()</code> para obtener un iterador y llame al método <code>__next__()</code> para obtener elementos sucesivos.</p>
+<pre><code class="language-python">&gt;&gt;&gt; i = a.__iter__()
+&gt;&gt;&gt; i
+&lt;listiterator object at 0x64c10&gt;
+&gt;&gt;&gt; i.__next__()
+1
+&gt;&gt;&gt; i.__next__()
+9
+&gt;&gt;&gt; i.__next__()
+4
+&gt;&gt;&gt; i.__next__()
+25
+&gt;&gt;&gt; i.__next__()
+16
+&gt;&gt;&gt; i.__next__()
+Traceback (most recent call last):
+  File &quot;&lt;stdin&gt;&quot;, line 1, in &lt;module&gt;
+StopIteration
+&gt;&gt;&gt;
+</code></pre>
+<p>La función <code>next()</code> incorporada es un atajo para llamar al método <code>__next__()</code> de un iterador. Intente usarlo en un archivo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; f = open('Data/portfolio.csv')
+&gt;&gt;&gt; f.__iter__()  # Nota: Esto retorna el archivo mismo &lt;_io.TextIOWrapper name='Data/portfolio.csv' mode='r' encoding='UTF-8'&gt;
+&gt;&gt;&gt; next(f)
+'name,shares,price\n'
+&gt;&gt;&gt; next(f)
+'&quot;AA&quot;,100,32.20\n'
+&gt;&gt;&gt; next(f)
+'&quot;IBM&quot;,50,91.10\n'
+&gt;&gt;&gt;
+</code></pre>
+<p>Sigue llamando <code>next(f)</code> hasta que llegues al final del archivo. Mira lo que pasa.</p>
 <h4 id="ejercicio-62-apoyo-a-la-iteracion">Ejercicio 6.2: Apoyo a la iteración</h4>
+<p>En ocasiones, es posible que desee hacer que uno de sus propios objetos admita la iteración, especialmente si su objeto se ajusta a una lista existente u otra iterable. En un archivo nuevo <code>portfolio.py</code>, defina la siguiente clase:</p>
+<pre><code class="language-python"># portfolio.py
+class Portfolio:
+
+    def __init__(self, holdings):
+        self._holdings = holdings
+
+    @property
+    def total_cost(self):
+        return sum([s.cost for s in self._holdings])
+
+    def tabulate_shares(self):
+        from collections import Counter
+        total_shares = Counter()
+        for s in self._holdings:
+            total_shares[s.name] += s.shares
+        return total_shares
+</code></pre>
+<p>Esta clase está destinada a ser una capa alrededor de una lista, pero con algunos métodos adicionales como la total_costpropiedad. Modifique la función <code>read_portfolio()</code> en <code>report.py</code> para que cree una instancia de <code>Portfolio</code> como esta:</p>
+<pre><code class="language-python"># report.py
+...
+
+import fileparse
+from stock import Stock
+from portfolio import Portfolio
+
+def read_portfolio(filename):
+    '''
+    Read a stock portfolio file into a list of dictionaries with keys
+    name, shares, and price.
+    '''
+    with open(filename) as file:
+        portdicts = fileparse.parse_csv(file,
+                                        select=['name','shares','price'],
+                                        types=[str,int,float])
+
+    portfolio = [ Stock(d['name'], d['shares'], d['price']) for d in portdicts ]
+    return Portfolio(portfolio)
+...
+</code></pre>
+<p>Intente ejecutar el report.pyprograma. Descubrirá que falla espectacularmente debido al hecho de que las Portfolioinstancias no son iterables.</p>
+<pre><code class="language-python">&gt;&gt;&gt; import report
+&gt;&gt;&gt; report.portfolio_report('Data/portfolio.csv', 'Data/prices.csv')
+... falla ...
+</code></pre>
+<p>Solucione esto modificando la Portfolioclase para admitir la iteración:</p>
+<pre><code class="language-python">class Portfolio:
+
+    def __init__(self, holdings):
+        self._holdings = holdings
+
+    def __iter__(self):
+        return self._holdings.__iter__()
+
+    @property
+    def total_cost(self):
+        return sum([s.shares*s.price for s in self._holdings])
+
+    def tabulate_shares(self):
+        from collections import Counter
+        total_shares = Counter()
+        for s in self._holdings:
+            total_shares[s.name] += s.shares
+        return total_shares
+</code></pre>
+<p>Una vez que haya realizado este cambio, su report.pyprograma debería funcionar nuevamente. Mientras lo hace, arregle su programa <code>pcost.py</code> para usar el nuevo objeto <code>Portfolio</code>. Me gusta esto:</p>
+<pre><code class="language-python"># pcost.py
+import report
+
+def portfolio_cost(filename):
+    ''' Computes the total cost (shares*price) of a portfolio file '''
+    portfolio = report.read_portfolio(filename)
+    return portfolio.total_cost
+</code></pre>
+<p>Pruébelo para asegurarse de que funcione:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import pcost
+&gt;&gt;&gt; pcost.portfolio_cost('Data/portfolio.csv')
+44671.15
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-63-hacer-un-recipiente-mas-adecuado">Ejercicio 6.3: Hacer un recipiente más adecuado</h4>
+<p>Si crea una clase de contenedor, a menudo desea hacer más que solo iterar. Modifique la Portfolioclase para que tenga otros métodos especiales como este:</p>
+<pre><code class="language-python">class Portfolio:
+    def __init__(self, holdings):
+        self._holdings = holdings
+
+    def __iter__(self):
+        return self._holdings.__iter__()
+
+    def __len__(self):
+        return len(self._holdings)
+
+    def __getitem__(self, index):
+        return self._holdings[index]
+
+    def __contains__(self, name):
+        return any([s.name == name for s in self._holdings])
+
+    @property
+    def total_cost(self):
+        return sum([s.shares*s.price for s in self._holdings])
+
+    def tabulate_shares(self):
+        from collections import Counter
+        total_shares = Counter()
+        for s in self._holdings:
+            total_shares[s.name] += s.shares
+        return total_shares
+</code></pre>
+<p>Ahora, pruebe algunos experimentos con esta nueva clase:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import report
+&gt;&gt;&gt; portfolio = report.read_portfolio('Data/portfolio.csv')
+&gt;&gt;&gt; len(portfolio)
+7
+&gt;&gt;&gt; portfolio[0]
+Stock('AA', 100, 32.2)
+&gt;&gt;&gt; portfolio[1]
+Stock('IBM', 50, 91.1)
+&gt;&gt;&gt; portfolio[0:3]
+[Stock('AA', 100, 32.2), Stock('IBM', 50, 91.1), Stock('CAT', 150, 83.44)]
+&gt;&gt;&gt; 'IBM' in portfolio
+True
+&gt;&gt;&gt; 'AAPL' in portfolio
+False
+&gt;&gt;&gt;
+</code></pre>
+<p>Una observación importante acerca de esto: generalmente, el código se considera “Pythonic” si habla el vocabulario común de cómo funcionan normalmente otras partes de Python. Para los objetos de contenedor, el soporte de iteración, indexación, contención y otros tipos de operadores es una parte importante de esto.</p>
 <h2 id="62-personalizacion-de-la-iteracion-con-generadores">6.2 Personalización de la iteración con generadores</h2>
+<p>Esta sección analiza cómo se puede personalizar la iteración utilizando una función de generador.</p>
 <h3 id="621-un-problema">6.2.1 Un problema</h3>
+<p>Suponga que desea crear su propio patrón de iteración personalizado.</p>
+<p>Por ejemplo, una cuenta atrás.</p>
+<pre><code class="language-python">&gt;&gt;&gt; for x in countdown(10):
+...   print(x, end=' ')
+...
+10 9 8 7 6 5 4 3 2 1
+&gt;&gt;&gt;
+</code></pre>
+<p>Hay una forma sencilla de hacer esto.</p>
 <h3 id="622-generadores">6.2.2 Generadores</h3>
+<p>Un generador es una función que define la iteración.</p>
+<pre><code class="language-python">def countdown(n):
+    while n &gt; 0:
+        yield n
+        n -= 1
+</code></pre>
+<p>Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; for x in countdown(10):
+...   print(x, end=' ')
+...
+10 9 8 7 6 5 4 3 2 1
+&gt;&gt;&gt;
+</code></pre>
+<p>Un generador es cualquier función que usa la declaración <code>yield</code>.</p>
+<p>El comportamiento de los generadores es diferente al de una función normal. Llamar a una función generadora crea un objeto generador. No ejecuta la función de inmediato.</p>
+<pre><code class="language-python">def countdown(n):
+    # agregando sdeclaracion de impresion
+    print('Cuenta hacia abajo desde', n)
+    while n &gt; 0:
+        yield n
+        n -= 1
+</code></pre>
+<pre><code class="language-python">&gt;&gt;&gt; x = countdown(10)
+# There is NO PRINT STATEMENT
+&gt;&gt;&gt; x
+# x is a generator object
+&lt;generator object at 0x58490&gt;
+&gt;&gt;&gt;
+</code></pre>
+<p>La función solo se ejecuta en llamada a <code>__next__()</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; x = countdown(10)
+&gt;&gt;&gt; x
+&lt;generator object at 0x58490&gt;
+&gt;&gt;&gt; x.__next__()
+Counting down from 10
+10
+&gt;&gt;&gt;
+</code></pre>
+<p><code>yield</code> produce un valor, pero suspende la ejecución de la función. La función se reanuda en la próxima llamada a <code>__next__()</code>.</p>
+<pre><code class="language-python">&gt;&gt;&gt; x.__next__()
+9
+&gt;&gt;&gt; x.__next__()
+8
+</code></pre>
+<p>Cuando el generador finalmente regresa, la iteración genera un error.</p>
+<pre><code class="language-python">&gt;&gt;&gt; x.__next__()
+1
+&gt;&gt;&gt; x.__next__()
+Traceback (most recent call last):
+File &quot;&lt;stdin&gt;&quot;, line 1, in ? StopIteration
+&gt;&gt;&gt;
+</code></pre>
+<p><em>Observación: Una función generadora implementa el mismo protocolo de bajo nivel que las declaraciones for usan en listas, tuplas, dictados, archivos, etc.</em></p>
 <h3 id="623-ejercicios">6.2.3 Ejercicios</h3>
 <h4 id="ejercicio-64-un-generador-simple">Ejercicio 6.4: Un generador simple</h4>
+<p>Si alguna vez desea personalizar la iteración, siempre debe pensar en las funciones del generador. Son fáciles de escribir: cree una función que lleve a cabo la lógica de iteración deseada y utilíce <code>yield</code> para emitir valores.</p>
+<p>Por ejemplo, pruebe este generador que busca en un archivo líneas que contengan una subcadena coincidente:</p>
+<pre><code class="language-python">&gt;&gt;&gt; def filematch(filename, substr):
+        with open(filename, 'r') as f:
+            for line in f:
+                if substr in line:
+                    yield line
+
+&gt;&gt;&gt; for line in open('Data/portfolio.csv'):
+        print(line, end='')
+
+name,shares,price
+&quot;AA&quot;,100,32.20
+&quot;IBM&quot;,50,91.10
+&quot;CAT&quot;,150,83.44
+&quot;MSFT&quot;,200,51.23
+&quot;GE&quot;,95,40.37
+&quot;MSFT&quot;,50,65.10
+&quot;IBM&quot;,100,70.44
+&gt;&gt;&gt; for line in filematch('Data/portfolio.csv', 'IBM'):
+        print(line, end='')
+
+&quot;IBM&quot;,50,91.10
+&quot;IBM&quot;,100,70.44
+&gt;&gt;&gt;
+</code></pre>
+<p>Esto es algo interesante: la idea de que puede ocultar un montón de procesamiento personalizado en una función y usarlo para alimentar un ciclo <code>for</code>. El siguiente ejemplo analiza un caso más inusual.</p>
 <h4 id="ejercicio-65-supervision-de-una-fuente-de-datos-de-transmision">Ejercicio 6.5: Supervisión de una fuente de datos de transmisión</h4>
+<p>Los generadores pueden ser una forma interesante de monitorear fuentes de datos en tiempo real, como archivos de registro o feeds del mercado de valores. En esta parte, exploraremos esta idea. Para comenzar, siga cuidadosamente las siguientes instrucciones.</p>
+<p>El programa Data/stocksim.pyes un programa que simula datos del mercado de valores. Como salida, el programa escribe constantemente datos en tiempo real en un archivo Data/stocklog.csv. En una ventana de comando separada, vaya al Data/directorio y ejecute este programa:</p>
+<p>bash % python3 stocksim.py</p>
+<p>Si está en Windows, simplemente ubique el stocksim.pyprograma y haga doble clic en él para ejecutarlo. Ahora, olvídese de este programa (déjelo correr). Usando otra ventana, mire el archivo que Data/stocklog.csvestá escribiendo el simulador. Debería ver que se agregan nuevas líneas de texto al archivo cada pocos segundos. Nuevamente, deje que este programa se ejecute en segundo plano; se ejecutará durante varias horas (no debería tener que preocuparse por ello).</p>
+<p>Una vez que el programa anterior se esté ejecutando, escribamos un pequeño programa para abrir el archivo, buscar el final y esperar una nueva salida. Cree un archivo follow.pyy coloque este código en él:</p>
+<pre><code class="language-python"># follow.py
+import os
+import time
+
+f = open('Data/stocklog.csv')
+f.seek(0, os.SEEK_END)   # Move file pointer 0 bytes from end of file
+while True:
+    line = f.readline()
+    if line == '':
+        time.sleep(0.1)   # Sleep briefly and retry
+        continue
+    fields = line.split(',')
+    name = fields[0].strip('&quot;')
+    price = float(fields[1])
+    change = float(fields[4])
+    if change &lt; 0:
+        print(f'{name:&gt;10s} {price:&gt;10.2f} {change:&gt;10.2f}')
+</code></pre>
+<p>Si ejecuta el programa, verá un indicador de cotización en tiempo real. Bajo el capó, este código es como el comando <code>tail -f</code> de Unix que se usa para ver un archivo de registro.</p>
+<p>Nota: El uso del método <code>readline()</code> en este ejemplo es algo inusual en el sentido de que no es la forma habitual de leer líneas de un archivo (normalmente solo usaría un for-loop). Sin embargo, en este caso, lo estamos usando para sondear repetidamente el final del archivo para ver si se han agregado más datos (<code>readline()</code> devolverá nuevos datos o una cadena vacía).</p>
 <h4 id="ejercicio-66-uso-de-un-generador-para-producir-datos">Ejercicio 6.6: uso de un generador para producir datos</h4>
+<p>Si observa el código del ejercicio 6.5, la primera parte del código produce líneas de datos, mientras que las declaraciones al final del whileciclo consumen los datos. Una característica importante de las funciones del generador es que puede mover todo el código de producción de datos a una función reutilizable.</p>
+<p>Modifique el código del ejercicio 6.5 para que la lectura del archivo sea realizada por una función generadora <code>follow(filename)</code>. Haga que funcione el siguiente código:</p>
+<pre><code class="language-python">&gt;&gt;&gt; for line in follow('Data/stocklog.csv'):
+          print(line, end='')
+
+... Debería ver lineas de salida producidas aquí ...
+</code></pre>
+<p>Modifique el código de cotización bursátil para que se vea así:</p>
+<pre><code class="language-python">if __name__ == '__main__':
+    for line in follow('Data/stocklog.csv'):
+        fields = line.split(',')
+        name = fields[0].strip('&quot;')
+        price = float(fields[1])
+        change = float(fields[4])
+        if change &lt; 0:
+            print(f'{name:&gt;10s} {price:&gt;10.2f} {change:&gt;10.2f}')
+</code></pre>
 <h4 id="ejercicio-67-observando-tu-portafolio">Ejercicio 6.7: Observando tu portafolio</h4>
+<p>Modifique el programa <code>follow.py</code> para que observe el flujo de datos de acciones e imprima un ticker que muestre información solo para las acciones de una cartera. Por ejemplo:</p>
+<pre><code class="language-python">
+
+if __name__ == '__main__':
+    import report
+
+    portfolio = report.read_portfolio('Data/portfolio.csv')
+
+    for line in follow('Data/stocklog.csv'):
+        fields = line.split(',')
+        name = fields[0].strip('&quot;')
+        price = float(fields[1])
+        change = float(fields[4])
+        if name in portfolio:
+            print(f'{name:&gt;10s} {price:&gt;10.2f} {change:&gt;10.2f}')
+</code></pre>
+<p>Nota: Para que esto funcione, su Portfolioclase debe ser compatible con el inoperador. Vea el ejercicio 6.3 y asegúrese de implementar el operador <code>__contains__()</code>.</p>
 <h3 id="discusion">Discusión</h3>
+<p>Algo muy poderoso acaba de ocurrir aquí. Movió un patrón de iteración interesante (líneas de lectura al final de un archivo) a su propia pequeña función. La función <code>follow()</code> es ahora esta utilidad de propósito completamente general que puede usar en cualquier programa. Por ejemplo, puede usarlo para ver registros del servidor, registros de depuración y otras fuentes de datos similares. Eso es algo genial.</p>
 <h2 id="63-productores-consumidores-y-oleoductos">6.3 Productores, consumidores y oleoductos</h2>
+<p>Los generadores son una herramienta útil para establecer varios tipos de problemas de productores / consumidores y tuberías de flujo de datos. Esta sección trata sobre eso.</p>
 <h3 id="631-problemas-entre-productores-y-consumidores">6.3.1 Problemas entre productores y consumidores</h3>
+<p>Los generadores están estrechamente relacionados con diversas formas de problemas entre productores y consumidoress.</p>
+<pre><code class="language-python"># Producer
+def follow(f):
+    ...
+    while True:
+        ...
+        yield line        # Produces value in `line` below
+        ...
+
+# Consumer
+for line in follow(f):    # Consumes value from `yield` above
+    ...
+</code></pre>
+<p><code>yield</code> produce valores que <code>for</code> consume.</p>
 <h3 id="632-tuberias-de-generador">6.3.2 Tuberías de generador</h3>
+<p>Puede utilizar este aspecto de los generadores para configurar tuberías de procesamiento (como las tuberías Unix).</p>
+<p>productor → procesamiento → procesamiento → consumidor</p>
+<p>Las tuberías de procesamiento tienen un productor de datos inicial, un conjunto de etapas de procesamiento intermedias y un consumidor final.</p>
+<p>productor → procesamiento → procesamiento → consumidor</p>
+<pre><code class="language-python">def productor():
+    ...
+    yield item
+    ...
+</code></pre>
+<p>El productor suele ser un generador. Aunque también podría ser una lista de alguna otra secuencia. <code>yield</code> alimenta datos en la canalización.</p>
+<p>productor → procesamiento → procesamiento → consumidor</p>
+<pre><code class="language-python">def consumidor(s):
+    for item in s:
+        ...
+</code></pre>
+<p>El consumidor es un bucle for-loop. Obtiene artículos y hace algo con ellos.</p>
+<p>productor → procesamiento → procesamiento → consumidor</p>
+<pre><code class="language-python">def procesando(s):
+    for item in s:
+        ...
+        yield newitem
+        ...
+</code></pre>
+<p>Las etapas intermedias de procesamiento consumen y producen artículos simultáneamente. Pueden modificar el flujo de datos. También pueden filtrar (descartar elementos).</p>
+<p>productor → procesamiento → procesamiento → consumidor</p>
+<pre><code class="language-python">def productor():
+    ...
+    yield item  # entrega el elemento que es recibido por `procesando`
+    ...
+
+def procesando(s):
+    for item in s:      # Viene del `productor`
+        ...
+        yield newitem   # entrega el nuevo elemento
+        ...
+
+def consumidor(s):
+    for item in s:      # Viene del `procesando`
+        ...
+</code></pre>
+<p>Código para configurar la canalización</p>
+<pre><code>a = productor()
+b = procesando(a)
+c = consumidor(b)
+</code></pre>
+<p>Notará que los datos fluyen gradualmente a través de las diferentes funciones.</p>
 <h3 id="634-ejercicios">6.3.4 Ejercicios</h3>
+<p>Para este ejercicio, el programa <code>stocksim.py</code> debe seguir ejecutándose en segundo plano. Utilizará la función <code>follow()</code> que escribió en el ejercicio anterior.</p>
 <h4 id="ejercicio-68-configurar-una-canalizacion-simple">Ejercicio 6.8: Configurar una canalización simple</h4>
+<p>Veamos la idea de la canalización en acción. Escribe la siguiente función:</p>
+<pre><code class="language-python">&gt;&gt;&gt; def filematch(lines, substr):
+        for line in lines:
+            if substr in line:
+                yield line
+
+&gt;&gt;&gt;
+</code></pre>
+<p>Esta función es casi exactamente la misma que en el primer ejemplo de generador del ejercicio anterior, excepto que ya no abre un archivo, simplemente opera en una secuencia de líneas que se le da como argumento. Ahora, intente esto:</p>
+<pre><code class="language-python">&gt;&gt;&gt; from follow import follow
+&gt;&gt;&gt; lines = follow('Data/stocklog.csv')
+&gt;&gt;&gt; ibm = filematch(lines, 'IBM')
+&gt;&gt;&gt; for line in ibm:
+        print(line)
+
+... espera por la salida ...
+</code></pre>
+<p>La salida puede tardar un poco en aparecer, pero eventualmente debería ver algunas líneas que contienen datos para IBM.</p>
 <h4 id="ejercicio-69-configurar-una-canalizacion-mas-compleja">Ejercicio 6.9: configurar una canalización más compleja</h4>
+<p>Lleve la idea de canalización unos pasos más allá realizando más acciones.</p>
+<pre><code class="language-python">&gt;&gt;&gt; from follow import follow
+&gt;&gt;&gt; import csv
+&gt;&gt;&gt; lines = follow('Data/stocklog.csv')
+&gt;&gt;&gt; rows = csv.reader(lines)
+&gt;&gt;&gt; for row in rows:
+        print(row)
+
+['BA', '98.35', '6/11/2007', '09:41.07', '0.16', '98.25', '98.35', '98.31', '158148']
+['AA', '39.63', '6/11/2007', '09:41.07', '-0.03', '39.67', '39.63', '39.31', '270224']
+['XOM', '82.45', '6/11/2007', '09:41.07', '-0.23', '82.68', '82.64', '82.41', '748062']
+['PG', '62.95', '6/11/2007', '09:41.08', '-0.12', '62.80', '62.97', '62.61', '454327']
+...
+</code></pre>
+<p>Bueno, eso es interesante. Lo que está viendo aquí es que la salida de la función <code>follow()</code> se ha canalizado a la función <code>csv.reader()</code> y ahora estamos obteniendo una secuencia de filas divididas.</p>
 <h4 id="ejercicio-610-creacion-de-mas-componentes-de-canalizacion">Ejercicio 6.10: creación de más componentes de canalización</h4>
+<p>Extendamos toda la idea a una tubería más amplia. En un archivo separado <code>ticker.py</code>, comience creando una función que lea un archivo CSV como lo hizo anteriormente:</p>
+<pre><code class="language-python"># ticker.py
+from follow import follow
+import csv
+
+def parse_stock_data(lines):
+    rows = csv.reader(lines)
+    return rows
+
+if __name__ == '__main__':
+    lines = follow('Data/stocklog.csv')
+    rows = parse_stock_data(lines)
+    for row in rows:
+        print(row)
+</code></pre>
+<p>Escribe una nueva función que seleccione columnas específicas:</p>
+<pre><code class="language-python"># ticker.py
+...
+def select_columns(rows, indices):
+    for row in rows:
+        yield [row[index] for index in indices]
+...
+def parse_stock_data(lines):
+    rows = csv.reader(lines)
+    rows = select_columns(rows, [0, 1, 4])
+    return rows
+</code></pre>
+<p>Ejecute su programa nuevamente. Debería ver la salida reducida así:</p>
+<pre><code class="language-python">['BA', '98.35', '0.16']
+['AA', '39.63', '-0.03']
+['XOM', '82.45','-0.23']
+['PG', '62.95', '-0.12']
+...
+
+Escriba funciones generadoras que conviertan tipos de datos y cree diccionarios. Por ejemplo:
+
+```python
+# ticker.py ...
+
+def convert_types(rows, types):
+    for row in rows:
+        yield [func(val) for func, val in zip(types, row)]
+
+def make_dicts(rows, headers):
+    for row in rows:
+        yield dict(zip(headers, row))
+...
+def parse_stock_data(lines):
+    rows = csv.reader(lines)
+    rows = select_columns(rows, [0, 1, 4])
+    rows = convert_types(rows, [str, float, float])
+    rows = make_dicts(rows, ['name', 'price', 'change'])
+    return rows
+...
+</code></pre>
+<p>Ejecute su programa nuevamente. Ahora debería tener un flujo de diccionarios como este:</p>
+<pre><code class="language-python">{ 'name':'BA', 'price':98.35, 'change':0.16 }
+{ 'name':'AA', 'price':39.63, 'change':-0.03 }
+{ 'name':'XOM', 'price':82.45, 'change': -0.23 }
+{ 'name':'PG', 'price':62.95, 'change':-0.12 }
+...
+</code></pre>
 <h4 id="ejercicio-611-filtrado-de-datos">Ejercicio 6.11: filtrado de datos</h4>
+<p>Escribe una función que filtre datos. Por ejemplo:</p>
+<pre><code class="language-python"># ticker.py ...
+
+def filter_symbols(rows, names):
+    for row in rows:
+        if row['name'] in names:
+            yield row
+</code></pre>
+<p>Use esto para filtrar acciones solo para aquellas en su cartera:</p>
+<pre><code class="language-python">import report
+portfolio = report.read_portfolio('Data/portfolio.csv')
+rows = parse_stock_data(follow('Data/stocklog.csv'))
+rows = filter_symbols(rows, portfolio)
+for row in rows:
+    print(row)
+</code></pre>
 <h4 id="ejercicio-612-poniendolo-todo-junto">Ejercicio 6.12: Poniéndolo todo junto</h4>
+<p>En el programa <code>ticker.py</code>, escriba una función <code>ticker(portfile, logfile, fmt)</code> que cree un ticker de acciones en tiempo real a partir de un portafolio, archivo de registro y formato de tabla determinados. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; from ticker import ticker
+&gt;&gt;&gt; ticker('Data/portfolio.csv', 'Data/stocklog.csv', 'txt')
+      Name      Price     Change
+---------- ---------- ----------
+        GE      37.14      -0.18
+      MSFT      29.96      -0.09
+       CAT      78.03      -0.49
+        AA      39.34      -0.32
+...
+
+&gt;&gt;&gt; ticker('Data/portfolio.csv', 'Data/stocklog.csv', 'csv')
+Name,Price,Change
+IBM,102.79,-0.28
+CAT,78.04,-0.48
+AA,39.35,-0.31
+CAT,78.05,-0.47
+...
+</code></pre>
 <h3 id="discusion_1">Discusión</h3>
+<p>Algunas lecciones aprendidas: puede crear varias funciones de generador y encadenarlas para realizar el procesamiento que involucre tuberías de flujo de datos. Además, puede crear funciones que empaqueten una serie de etapas de canalización en una sola llamada de función (por ejemplo, la función <code>parse_stock_data()</code>).</p>
 <h2 id="64-expresiones-generadoras">6.4 Expresiones generadoras</h2>
+<p>Esta sección presenta algunos temas adicionales relacionados con el generador, incluidas las expresiones del generador y el módulo itertools.</p>
 <h3 id="641-expresiones-generadoras">6.4.1 Expresiones generadoras</h3>
+<p>Una versión generadora de una lista de comprensión.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3,4]
+&gt;&gt;&gt; b = (2*x for x in a)
+&gt;&gt;&gt; b
+&lt;generator object at 0x58760&gt;
+&gt;&gt;&gt; for i in b:
+...   print(i, end=' ')
+...
+2 4 6 8
+&gt;&gt;&gt;
+</code></pre>
+<p>Diferencias con las comprensiones de listas.</p>
+<ul>
+<li>No construye una lista.</li>
+<li>El único propósito útil es la iteración.</li>
+<li>Una vez consumido, no se puede reutilizar.</li>
+</ul>
+<p>Sintaxis general.</p>
+<pre><code class="language-code">(&lt;expression&gt; for i in s if &lt;conditional&gt;)
+</code></pre>
+<p>También puede servir como argumento de función.</p>
+<pre><code class="language-python">sum(x*x for x in a)
+</code></pre>
+<p>Se puede aplicar a cualquier iterable.</p>
+<pre><code class="language-python">&gt;&gt;&gt; a = [1,2,3,4]
+&gt;&gt;&gt; b = (x*x for x in a)
+&gt;&gt;&gt; c = (-x for x in b)
+&gt;&gt;&gt; for i in c:
+...   print(i, end=' ')
+...
+-1 -4 -9 -16
+&gt;&gt;&gt;
+</code></pre>
+<p>El uso principal de las expresiones generadoras es el código que realiza algunos cálculos en una secuencia, pero solo usa el resultado una vez. Por ejemplo, elimine todos los comentarios de un archivo.</p>
+<pre><code class="language-python">f = open('somefile.txt')
+lines = (line for line in f if not line.startswith('#'))
+for line in lines:
+    ...
+f.close()
+</code></pre>
+<p>Con los generadores, el código se ejecuta más rápido y usa poca memoria. Es como un filtro aplicado a una corriente.</p>
 <h3 id="642-por-que-generadores">6.4.2 ¿Por qué generadores?</h3>
+<ul>
+<li>Muchos problemas se expresan mucho más claramente en términos de iteración.<ul>
+<li>Recorrer una colección de elementos y realizar algún tipo de operación (buscar, reemplazar, modificar, etc.).</li>
+<li>Las canalizaciones de procesamiento se pueden aplicar a una amplia gama de problemas de procesamiento de datos.</li>
+</ul>
+</li>
+<li>Mejor eficiencia de la memoria.<ul>
+<li>Produzca valores solo cuando sea necesario.</li>
+<li>Contraste con la construcción de listas gigantes.</li>
+<li>Puede operar en transmisión de datos</li>
+</ul>
+</li>
+<li>Los generadores fomentan la reutilización del código<ul>
+<li>Separa la iteración del código que usa la iteración</li>
+<li>Puede crear una caja de herramientas de funciones de iteración interesantes y mezclar y combinar .</li>
+</ul>
+</li>
+</ul>
 <h3 id="643-el-modulo-itertools">6.4.3 El módulo <code>itertools</code></h3>
+<p>El itertoolses un módulo de biblioteca con varias funciones diseñadas para ayudar con iteradores / generadores.</p>
+<p>itertools.chain(s1,s2)
+itertools.count(n)
+itertools.cycle(s)
+itertools.dropwhile(predicate, s)
+itertools.groupby(s)
+itertools.ifilter(predicate, s)
+itertools.imap(function, s1, ... sN)
+itertools.repeat(s, n)
+itertools.tee(s, ncopies)
+itertools.izip(s1, ... , sN)</p>
+<p>Todas las funciones procesan datos de forma iterativa. Implementan varios tipos de patrones de iteración.</p>
+<p>Más información en el tutorial de <a href="https://translate.google.com/website?sl=auto&amp;tl=es&amp;u=http://www.dabeaz.com/generators/">Trucos de generador para programadores de sistemas</a> de PyCon '08.</p>
 <h3 id="644-ejercicios">6.4.4 Ejercicios</h3>
+<p>En los ejercicios anteriores, escribió un código que siguió a las líneas que se escribieron en un archivo de registro y las analizó en una secuencia de filas. Este ejercicio continúa basándose en eso. Asegúrese de que <code>Data/stocksim.py</code> aún se esté ejecutando.</p>
 <h4 id="ejercicio-613-expresiones-generadoras">Ejercicio 6.13: Expresiones generadoras</h4>
+<p>Las expresiones generadoras son una versión generadora de una lista de comprensión. Por ejemplo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; nums = [1, 2, 3, 4, 5]
+&gt;&gt;&gt; squares = (x*x for x in nums)
+&gt;&gt;&gt; squares
+&lt;generator object &lt;genexpr&gt; at 0x109207e60&gt;
+&gt;&gt;&gt; for n in squares:
+...     print(n)
+...
+1
+4
+9
+16
+25
+</code></pre>
+<p>A diferencia de una lista de comprensión, una expresión generadora solo se puede usar una vez. Por lo tanto, si prueba otro ciclo for, no obtiene nada:</p>
+<pre><code class="language-python">&gt;&gt;&gt; for n in squares:
+...     print(n)
+...
+&gt;&gt;&gt;
+</code></pre>
 <h4 id="ejercicio-614-expresiones-generadoras-en-argumentos-de-funciones">Ejercicio 6.14: Expresiones generadoras en argumentos de funciones</h4>
+<p>Las expresiones generadoras a veces se colocan en argumentos de función. Parece un poco extraño al principio, pero prueba este experimento:</p>
+<pre><code class="language-python">&gt;&gt;&gt; nums = [1,2,3,4,5]
+&gt;&gt;&gt; sum([x*x for x in nums])  # comprension de lista
+55
+&gt;&gt;&gt; sum(x*x for x in nums)  # una expresión generadora
+55
+&gt;&gt;&gt;
+</code></pre>
+<p>En el ejemplo anterior, la segunda versión que usa generadores usaría significativamente menos memoria si se manipulara una lista grande.</p>
+<p>En su portfolio.pyarchivo, realizó algunos cálculos relacionados con listas por comprensión. Intente reemplazarlos con expresiones generadoras.</p>
 <h4 id="ejercicio-615-simplificacion-de-codigo">Ejercicio 6.15: simplificación de código</h4>
+<p>Las expresiones de generadores son a menudo un reemplazo útil para las funciones de pequeños generadores. Por ejemplo, en lugar de escribir una función como esta:</p>
+<pre><code class="language-python">def filter_symbols(rows, names):
+    for row in rows:
+        if row['name'] in names:
+            yield row
+</code></pre>
+<p>Podrías escribir algo como esto:</p>
+<pre><code class="language-python">rows = (row for row in rows if row['name'] in names)
+</code></pre>
+<p>Modifique el programa <code>ticker.py</code> para usar expresiones generadoras según corresponda.</p>
               
             </div>
           </div>
