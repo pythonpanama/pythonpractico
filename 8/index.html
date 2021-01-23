@@ -98,10 +98,80 @@
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">8 Prueba y Depuración</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#81-prueba">8.1 Prueba</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#811-probando-rocas-la-depuracion-apesta">8.1.1 Probando rocas, la depuración apesta</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#812-afirmaciones">8.1.2 Afirmaciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#813-programacion-por-contrato">8.1.3 Programación por contrato</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#814-pruebas-en-linea">8.1.4 Pruebas en línea</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#815-modulo-unittest">8.1.5 Módulo unittest</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#816-utilizando-unittest">8.1.6 Utilizando unittest</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#817-corriendo-unittest">8.1.7 Corriendo unittest</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#818-comentario">8.1.8 Comentario</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#819-herramientas-de-prueba-de-terceros">8.1.9 Herramientas de prueba de terceros</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#8110-ejercicios">8.1.10 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-81-escritura-de-pruebas-unitarias">Ejercicio 8.1: Escritura de pruebas unitarias</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#82-registro-manejo-de-errores-y-diagnostico">8.2 Registro, manejo de errores y diagnóstico</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#modulo-de-registro">módulo de registro</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#excepciones-revisadas">Excepciones revisadas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#usando-el-registro">Usando el registro</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#conceptos-basicos-de-registro">Conceptos básicos de registro</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#configuracion-de-registro">Configuración de registro</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#comentarios">Comentarios</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicios">Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-82-agregar-registro-a-un-modulo">Ejercicio 8.2: Agregar registro a un módulo</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-83-agregar-registro-a-un-programa">Ejercicio 8.3: Agregar registro a un programa</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#83-depuracion">8.3 Depuración</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#831-sugerencias-de-depuracion">8.3.1 Sugerencias de depuración</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#832-lectura-de-trazas">8.3.2 Lectura de trazas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#833-usando-el-repl">8.3.3 Usando el REPL</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#834-depurar-con-impresion">8.3.4 Depurar con impresión</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#835-el-depurador-de-python">8.3.5 El depurador de Python</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#836-ejecutar-bajo-depurador">8.3.6 Ejecutar bajo depurador</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#837-ejercicios">8.3.7 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-84-errores-que-errores">Ejercicio 8.4: ¿Errores? ¿Qué errores?</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -150,8 +220,501 @@
 <p>Esta sección introduce unos temás básicas en relación a pruebas, reportería y depuración.</p>
 <p><em>Nota: estaremos publicando el contenido de este módulo próximamente a más tardar el 1 de febrero.</em></p>
 <h2 id="81-prueba">8.1 Prueba</h2>
+<h3 id="811-probando-rocas-la-depuracion-apesta">8.1.1 Probando rocas, la depuración apesta</h3>
+<p>La naturaleza dinámica de Python hace que las pruebas sean de vital importancia para la mayoría de las aplicaciones. No hay un compilador para encontrar sus errores. La única forma de encontrar errores es ejecutar el código y asegurarse de probar todas sus funciones.</p>
+<h3 id="812-afirmaciones">8.1.2 Afirmaciones</h3>
+<p>La assertdeclaración es una verificación interna del programa. Si una expresión no es verdadera, genera una AssertionErrorexcepción.</p>
+<p><code>assert</code> sintaxis de declaración.</p>
+<pre><code class="language-python">assert &lt;expression&gt; [, 'Diagnostic message']
+</code></pre>
+<p>Por ejemplo.</p>
+<pre><code class="language-python">assert isinstance(10, int), 'Expected int'
+</code></pre>
+<p>No debe usarse para verificar la entrada del usuario (es decir, datos ingresados ​​en un formulario web o algo así). Su propósito es más para controles internos e invariantes (condiciones que siempre deben ser verdaderas).</p>
+<h3 id="813-programacion-por-contrato">8.1.3 Programación por contrato</h3>
+<p>También conocido como Diseño por contrato, el uso liberal de afirmaciones es un enfoque para diseñar software. Prescribe que los diseñadores de software deben definir especificaciones de interfaz precisas para los componentes del software.</p>
+<p>Por ejemplo, puede poner aserciones en todas las entradas de una función.</p>
+<pre><code class="language-python">def add(x, y):
+    assert isinstance(x, int), 'Expected int'
+    assert isinstance(y, int), 'Expected int'
+    return x + y
+</code></pre>
+<p>La verificación de las entradas detectará inmediatamente a las personas que llaman que no estén usando los argumentos adecuados.</p>
+<pre><code class="language-python">&gt;&gt;&gt; add(2, 3)
+5
+&gt;&gt;&gt; add('2', '3')
+Traceback (most recent call last):
+...
+AssertionError: Expected int
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="814-pruebas-en-linea">8.1.4 Pruebas en línea</h3>
+<p>Las afirmaciones también se pueden utilizar para pruebas sencillas.</p>
+<pre><code class="language-python">def add(x, y):
+    return x + y
+
+assert add(2,2) == 4
+</code></pre>
+<p>De esta manera, está incluyendo la prueba en el mismo módulo que su código.</p>
+<p>Beneficio: si el código está claramente roto, los intentos de importar el módulo fallarán.</p>
+<p>Esto no se recomienda para pruebas exhaustivas. Es más una "prueba de humo" básica. ¿La función funciona en algún ejemplo? Si no es así, definitivamente algo está roto.</p>
+<h3 id="815-modulo-unittest">8.1.5 Módulo <code>unittest</code></h3>
+<p>Suponga que tiene algún código.</p>
+<pre><code class="language-python"># simple.py
+def add(x, y):
+    return x + y
+</code></pre>
+<p>Ahora, suponga que quiere probarlo. Cree un archivo de prueba separado como este.</p>
+<pre><code class="language-python"># test_simple.py
+import simple
+import unittest
+</code></pre>
+<p>Luego defina una clase de prueba.</p>
+<pre><code class="language-python"># test_simple.py
+import simple
+import unittest
+
+# Notice that it inherits from unittest.TestCase
+class TestAdd(unittest.TestCase):
+    ...
+</code></pre>
+<p>La clase de prueba debe heredar <code>unittest.TestCase</code>.</p>
+<p>En la clase de prueba, define los métodos de prueba.</p>
+<pre><code class="language-python"># test_simple.py
+import simple
+import unittest
+
+# Notice that it inherits from unittest.TestCase
+class TestAdd(unittest.TestCase):
+    def test_simple(self):
+        # Test with simple integer arguments         r = simple.add(2, 2)
+        self.assertEqual(r, 5)
+    def test_str(self):
+        # Test with strings         r = simple.add('hello', 'world')
+        self.assertEqual(r, 'helloworld')
+</code></pre>
+<p><em>Importante: Cada método debe comenzar con test</em>.</p>
+<h3 id="816-utilizando-unittest">8.1.6 Utilizando unittest</h3>
+<p>Hay varias afirmaciones integradas que vienen con unittest. Cada uno de ellos afirma algo diferente.</p>
+<pre><code class="language-python"># Assert that expr is True self.assertTrue(expr)
+
+# Assert that x == y self.assertEqual(x,y)
+
+# Assert that x != y self.assertNotEqual(x,y)
+
+# Assert that x is near y self.assertAlmostEqual(x,y,places)
+
+# Assert that callable(arg1,arg2,...) raises exc self.assertRaises(exc, callable, arg1, arg2, ...)
+</code></pre>
+<p>Esta no es una lista exhaustiva. Hay otras afirmaciones en el módulo.</p>
+<h3 id="817-corriendo-unittest">8.1.7 Corriendo unittest</h3>
+<p>Para ejecutar las pruebas, convierta el código en un script.</p>
+<pre><code class="language-python"># test_simple.py
+...
+
+if __name__ == '__main__':
+    unittest.main()
+</code></pre>
+<p>Luego, ejecute Python en el archivo de prueba.</p>
+<pre><code class="language-code">bash % python3 test_simple.py
+F.
+========================================================
+FAIL: test_simple (__main__.TestAdd)
+--------------------------------------------------------
+Traceback (most recent call last):
+  File &quot;testsimple.py&quot;, line 8, in test_simple
+    self.assertEqual(r, 5)
+AssertionError: 4 != 5
+--------------------------------------------------------
+Ran 2 tests in 0.000s
+FAILED (failures=1)
+</code></pre>
+<h3 id="818-comentario">8.1.8 Comentario</h3>
+<p>Las pruebas unitarias efectivas son un arte y pueden volverse bastante complicadas para aplicaciones grandes.</p>
+<p>El <code>unittest</code> módulo tiene una gran cantidad de opciones relacionadas con los corredores de pruebas, la recopilación de resultados y otros aspectos de las pruebas. Consulte la documentación para obtener más detalles.</p>
+<h3 id="819-herramientas-de-prueba-de-terceros">8.1.9 Herramientas de prueba de terceros</h3>
+<p>El <code>unittest</code> módulo integrado tiene la ventaja de estar disponible en todas partes: es parte de Python. Sin embargo, a muchos programadores también les parece bastante detallado. Una alternativa popular es <code>pytest</code>. Con <code>pytest</code>, su archivo de prueba se simplifica a algo como lo siguiente:</p>
+<pre><code class="language-python"># test_simple.py import simple
+
+def test_simple():
+    assert simple.add(2,2) == 4
+
+def test_str():
+    assert simple.add('hello','world') == 'helloworld'
+</code></pre>
+<p>Para ejecutar las pruebas, simplemente escriba un comando como python -m pytest. Descubrirá todas las pruebas y las ejecutará.</p>
+<p>Hay mucho más pytestque este ejemplo, pero por lo general es bastante fácil comenzar si decides probarlo.</p>
+<h3 id="8110-ejercicios">8.1.10 Ejercicios</h3>
+<p>En este ejercicio, explorará la mecánica básica del uso del unittestmódulo de Python .</p>
+<p>En ejercicios anteriores, escribió un archivo <code>stock.py</code> que contenía una clase <code>Stock</code>. Para este ejercicio, asumió que está usando el código escrito para el Ejercicio 7.9 que involucra propiedades con tipo. Si, por alguna razón, eso no funciona, es posible que desee copiar la solución desde <code>Solutions/7_9</code> su directorio de trabajo.</p>
+<h4 id="ejercicio-81-escritura-de-pruebas-unitarias">Ejercicio 8.1: Escritura de pruebas unitarias</h4>
+<p>En un archivo separado <code>test_stock.py</code>, escriba un conjunto de pruebas unitarias para la clase <code>Stock</code>. Para comenzar, aquí hay un pequeño fragmento de código que prueba la creación de instancias:</p>
+<pre><code class="language-python"># test_stock.py
+import unittest
+import stock
+
+class TestStock(unittest.TestCase):
+    def test_create(self):
+        s = stock.Stock('GOOG', 100, 490.1)
+        self.assertEqual(s.name, 'GOOG')
+        self.assertEqual(s.shares, 100)
+        self.assertEqual(s.price, 490.1)
+
+if __name__ == '__main__':
+    unittest.main()
+</code></pre>
+<p>Ejecute sus pruebas unitarias. Debería obtener una salida que se ve así:</p>
+<pre><code class="language-code">.
+----------------------------------------------------------------------
+Ran 1 tests in 0.000s
+
+OK
+</code></pre>
+<p>Una vez que esté satisfecho de que funciona, escriba pruebas unitarias adicionales que verifiquen lo siguiente:</p>
+<ul>
+<li>Asegúrese de que la <code>s.cost</code> propiedad devuelva el valor correcto (<code>49010.0</code>)</li>
+<li>Asegúrese de que el <code>s.sell()</code> método funcione correctamente. Debería disminuir el valor de en <code>s.shares</code> consecuencia.</li>
+<li>Asegúrese de que el s.sharesatributo no se pueda establecer en un valor que no sea entero.</li>
+</ul>
+<p>Para la última parte, deberá verificar que se genere una excepción. Una forma fácil de hacerlo es con un código como este:</p>
+<pre><code class="language-python">class TestStock(unittest.TestCase):
+    ...
+    def test_bad_shares(self):
+         s = stock.Stock('GOOG', 100, 490.1)
+         with self.assertRaises(TypeError):
+             s.shares = '100'
+</code></pre>
 <h2 id="82-registro-manejo-de-errores-y-diagnostico">8.2 Registro, manejo de errores y diagnóstico</h2>
+<p>Esta sección presenta brevemente el módulo de registro.</p>
+<h3 id="modulo-de-registro">módulo de registro</h3>
+<p>El módulo <code>logging</code> es un módulo de biblioteca estándar para registrar información de diagnóstico. También es un módulo muy grande con muchas funciones sofisticadas. Mostraremos un ejemplo sencillo para ilustrar su utilidad.</p>
+<h3 id="excepciones-revisadas">Excepciones revisadas</h3>
+<p>En los ejercicios, escribimos una función <code>parse()</code> que se parecía a esto:</p>
+<pre><code class="language-python"># fileparse.py
+def parse(f, types=None, names=None, delimiter=None):
+    records = []
+    for line in f:
+        line = line.strip()
+        if not line: continue
+        try:
+            records.append(split(line,types,names,delimiter))
+        except ValueError as e:
+            print(&quot;Couldn't parse :&quot;, line)
+            print(&quot;Reason :&quot;, e)
+    return records
+</code></pre>
+<p>Concéntrese en la try-exceptdeclaración. ¿Qué debes hacer en el bloque <code>except</code>?</p>
+<p>¿Debería imprimir un mensaje de advertencia?</p>
+<pre><code class="language-python">try:
+    records.append(split(line,types,names,delimiter))
+except ValueError as e:
+    print(&quot;Couldn't parse :&quot;, line)
+    print(&quot;Reason :&quot;, e)
+
+¿O lo ignoras en silencio?
+
+try:
+    records.append(split(line,types,names,delimiter))
+except ValueError as e:
+    pass
+</code></pre>
+<p>Ninguna solución es satisfactoria porque a menudo desea ambos comportamientos (seleccionables por el usuario).</p>
+<h3 id="usando-el-registro">Usando el registro</h3>
+<p>El módulo <code>logging</code> puede abordar esto.</p>
+<pre><code class="language-python"># fileparse.py
+import logging
+log = logging.getLogger(__name__)
+
+def parse(f,types=None,names=None,delimiter=None):
+    ...
+    try:
+        records.append(split(line,types,names,delimiter))
+    except ValueError as e:
+        log.warning(&quot;Couldn't parse : %s&quot;, line)
+        log.debug(&quot;Reason : %s&quot;, e)
+</code></pre>
+<p>El código se modifica para emitir mensajes de advertencia o un objeto <code>Logger</code> especial. El creado con <code>logging.getLogger(__name__)</code>.</p>
+<h3 id="conceptos-basicos-de-registro">Conceptos básicos de registro</h3>
+<p>Crea un objeto de registrador.</p>
+<pre><code class="language-python">log = logging.getLogger(name)   # name is a string
+</code></pre>
+<p>Emitir mensajes de registro.</p>
+<pre><code class="language-python">log.critical(message [, args])
+log.error(message [, args])
+log.warning(message [, args])
+log.info(message [, args])
+log.debug(message [, args])
+</code></pre>
+<p>Cada método representa un nivel de gravedad diferente.</p>
+<p>Todos ellos crean un mensaje de registro formateado. <code>args</code> se utiliza con el %operador para crear el mensaje.</p>
+<pre><code class="language-python">logmsg = message % args # Written to the log
+</code></pre>
+<h3 id="configuracion-de-registro">Configuración de registro</h3>
+<p>El comportamiento de registro se configura por separado.</p>
+<pre><code class="language-python"># main.py
+...
+
+if __name__ == '__main__':
+    import logging
+    logging.basicConfig(
+        filename  = 'app.log',      # Log output file
+        level     = logging.INFO,   # Output level
+    )
+</code></pre>
+<p>Por lo general, esta es una configuración única al inicio del programa. La configuración es independiente del código que realiza las llamadas de registro.</p>
+<h4 id="comentarios">Comentarios</h4>
+<p>El registro es altamente configurable. Puede ajustar todos los aspectos: archivos de salida, niveles, formatos de mensajes, etc. Sin embargo, el código que usa el registro no tiene que preocuparse por eso.</p>
+<h3 id="ejercicios">Ejercicios</h3>
+<h4 id="ejercicio-82-agregar-registro-a-un-modulo">Ejercicio 8.2: Agregar registro a un módulo</h4>
+<p>En <code>fileparse.py</code>, hay algún manejo de errores relacionado con las excepciones causadas por una entrada incorrecta. Se parece a esto:</p>
+<pre><code class="language-python"># fileparse.py
+import csv
+
+def parse_csv(lines, select=None, types=None, has_headers=True, delimiter=',', silence_errors=False):
+    '''
+    Parse a CSV file into a list of records with type conversion.
+    '''
+    if select and not has_headers:
+        raise RuntimeError('select requires column headers')
+
+    rows = csv.reader(lines, delimiter=delimiter)
+
+    # lee el encabezado (si es que existe)
+    headers = next(rows) if has_headers else []
+
+    # si columnas especificas fueron seleccionadas, haga indices para filtrar y defina las columnas de salida
+    if select:
+        indices = [ headers.index(colname) for colname in select ]
+        headers = select
+
+    records = []
+    for rowno, row in enumerate(rows, 1):
+        if not row:     # salte las columnas sin data
+            continue
+
+        # si columnas especificas son seleccionadas, seleccionelas
+        if select:
+            row = [ row[index] for index in indices]
+
+        # aplique la conversión de tipo a la fila
+        if types:
+            try:
+                row = [func(val) for func, val in zip(types, row)]
+            except ValueError as e:
+                if not silence_errors:
+                    print(f&quot;Row {rowno}: Couldn't convert {row}&quot;)
+                    print(f&quot;Row {rowno}: Reason {e}&quot;)
+                continue
+
+        # haga un diccionario o una tupla
+        if headers:
+            record = dict(zip(headers, row))
+        else:
+            record = tuple(row)
+        records.append(record)
+
+    return records
+</code></pre>
+<p>Observe las declaraciones impresas que emiten mensajes de diagnóstico. Reemplazar esas impresiones con operaciones de registro es relativamente simple. Cambie el código así:</p>
+<pre><code class="language-python"># fileparse.py
+import csv
+import logging
+log = logging.getLogger(__name__)
+
+def parse_csv(lines, select=None, types=None, has_headers=True, delimiter=',', silence_errors=False):
+    '''
+    Parse a CSV file into a list of records with type conversion.
+    '''
+    if select and not has_headers:
+        raise RuntimeError('select requires column headers')
+
+    rows = csv.reader(lines, delimiter=delimiter)
+
+    # lee el encabezado (si es que existe)
+    headers = next(rows) if has_headers else []
+
+    # si columnas especificas fueron seleccionadas, haga indices para filtrar y defina las columnas de salida
+    if select:
+        indices = [ headers.index(colname) for colname in select ]
+        headers = select
+
+    records = []
+    for rowno, row in enumerate(rows, 1):
+        if not row:     # salte las columnas sin data
+            continue
+
+        # si columnas especificas son seleccionadas, seleccionelas
+        if select:
+            row = [ row[index] for index in indices]
+
+        # aplique la conversión de tipo a la fila
+        if types:
+            try:
+                row = [func(val) for func, val in zip(types, row)]
+            except ValueError as e:
+                if not silence_errors:
+                    log.warning(&quot;Row %d: Couldn't convert %s&quot;, rowno, row)
+                    log.debug(&quot;Row %d: Reason %s&quot;, rowno, e)
+                continue
+
+        # haga un diccionario o una tupla
+        if headers:
+            record = dict(zip(headers, row))
+        else:
+            record = tuple(row)
+        records.append(record)
+
+    return records
+</code></pre>
+<p>Ahora que ha realizado estos cambios, intente utilizar parte de su código en datos incorrectos.</p>
+<pre><code class="language-python">&gt;&gt;&gt; import report
+&gt;&gt;&gt; a = report.read_portfolio('Data/missing.csv')
+Row 4: Bad row: ['MSFT', '', '51.23']
+Row 7: Bad row: ['IBM', '', '70.44']
+&gt;&gt;&gt;
+</code></pre>
+<p>Si no hace nada, solo recibirá mensajes de registro para el <code>WARNING</code> nivel y superior. La salida se verá como simples declaraciones impresas. Sin embargo, si configura el módulo de registro, obtendrá información adicional sobre los niveles de registro, el módulo y más. Escriba estos pasos para ver que:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import logging
+&gt;&gt;&gt; logging.basicConfig()
+&gt;&gt;&gt; a = report.read_portfolio('Data/missing.csv')
+WARNING:fileparse:Row 4: Bad row: ['MSFT', '', '51.23']
+WARNING:fileparse:Row 7: Bad row: ['IBM', '', '70.44']
+&gt;&gt;&gt;
+</code></pre>
+<p>Notará que no ve el resultado de la operación <code>log.debug()</code>. Escriba esto para cambiar el nivel.</p>
+<pre><code class="language-python">&gt;&gt;&gt; logging.getLogger('fileparse').level = logging.DEBUG
+&gt;&gt;&gt; a = report.read_portfolio('Data/missing.csv')
+WARNING:fileparse:Row 4: Bad row: ['MSFT', '', '51.23']
+DEBUG:fileparse:Row 4: Reason: invalid literal for int() with base 10: ''
+WARNING:fileparse:Row 7: Bad row: ['IBM', '', '70.44']
+DEBUG:fileparse:Row 7: Reason: invalid literal for int() with base 10: ''
+&gt;&gt;&gt;
+</code></pre>
+<p>Apague todos, excepto los mensajes de registro más críticos:</p>
+<pre><code class="language-python">&gt;&gt;&gt; logging.getLogger('fileparse').level=logging.CRITICAL
+&gt;&gt;&gt; a = report.read_portfolio('Data/missing.csv')
+&gt;&gt;&gt;
+</code></pre>
+<h4 id="ejercicio-83-agregar-registro-a-un-programa">Ejercicio 8.3: Agregar registro a un programa</h4>
+<p>Para agregar registro a una aplicación, necesita tener algún mecanismo para inicializar el módulo de registro en el módulo principal. Una forma de hacerlo es incluir un código de configuración que se parezca a esto:</p>
+<pre><code class="language-python"># Este archivo crea configuración basica del modulo logging
+# Cambie la configuracion aqui para ajustar la salida de logging
+import logging
+logging.basicConfig(
+    filename = 'app.log',            # Nombre del archivo (omita para usar stderr)
+    filemode = 'w',                  # Modo de archivo (use 'a' para adjuntar)
+    level    = logging.WARNING,      # Nivel de logging (DEBUG, INFO, WARNING, ERROR, or CRITICAL)
+)
+</code></pre>
+<p>Nuevamente, necesitaría poner esto en algún lugar en los pasos de inicio de su programa. Por ejemplo, ¿dónde pondría esto en su programa <code>report.py</code>?</p>
 <h2 id="83-depuracion">8.3 Depuración</h2>
+<h3 id="831-sugerencias-de-depuracion">8.3.1 Sugerencias de depuración</h3>
+<p>Entonces, su programa se bloqueó...</p>
+<pre><code class="language-code">bash % python3 blah.py
+Traceback (most recent call last):
+  File &quot;blah.py&quot;, line 13, in ?
+    foo()
+  File &quot;blah.py&quot;, line 10, in foo
+    bar()
+  File &quot;blah.py&quot;, line 7, in bar
+    spam()
+  File &quot;blah.py&quot;, 4, in spam
+    line x.append(3)
+AttributeError: 'int' object has no attribute 'append'
+</code></pre>
+<p>¡¿Ahora que?!</p>
+<h3 id="832-lectura-de-trazas">8.3.2 Lectura de trazas</h3>
+<p>La última línea es la causa específica del accidente.</p>
+<pre><code class="language-code">bash % python3 blah.py
+Traceback (most recent call last):
+  File &quot;blah.py&quot;, line 13, in ?
+    foo()
+  File &quot;blah.py&quot;, line 10, in foo
+    bar()
+  File &quot;blah.py&quot;, line 7, in bar
+    spam()
+  File &quot;blah.py&quot;, 4, in spam
+    line x.append(3)
+
+# Cause of the crash
+AttributeError: 'int' object has no attribute 'append'
+</code></pre>
+<p>Sin embargo, no siempre es fácil de leer o comprender.</p>
+<p>SUGERENCIA PRO: Pegue todo el rastreo en Google.</p>
+<h3 id="833-usando-el-repl">8.3.3 Usando el REPL</h3>
+<p>Utilice la opción -ipara mantener activo Python al ejecutar un script.</p>
+<pre><code class="language-code">bash % python3 -i blah.py
+Traceback (most recent call last):
+  File &quot;blah.py&quot;, line 13, in ?
+    foo()
+  File &quot;blah.py&quot;, line 10, in foo
+    bar()
+  File &quot;blah.py&quot;, line 7, in bar
+    spam()
+  File &quot;blah.py&quot;, 4, in spam
+    line x.append(3)
+AttributeError: 'int' object has no attribute 'append'
+&gt;&gt;&gt;
+</code></pre>
+<p>Conserva el estado de intérprete. Eso significa que puedes andar hurgando después del accidente. Comprobación de valores de variables y otros estados.</p>
+<h3 id="834-depurar-con-impresion">8.3.4 Depurar con impresión</h3>
+<pre><code class="language-python">print() la depuración es bastante común.
+</code></pre>
+<p>Consejo: asegúrese de utilizar repr()</p>
+<pre><code class="language-python">def spam(x):
+    print('DEBUG:', repr(x))
+    ...
+</code></pre>
+<p><code>repr()</code> le muestra una representación precisa de un valor. No es el resultado de impresión agradable.</p>
+<pre><code class="language-python">&gt;&gt;&gt; from decimal import Decimal
+&gt;&gt;&gt; x = Decimal('3.4')
+# NO `repr`
+&gt;&gt;&gt; print(x)
+3.4
+# WITH `repr`
+&gt;&gt;&gt; print(repr(x))
+Decimal('3.4')
+&gt;&gt;&gt;
+</code></pre>
+<h3 id="835-el-depurador-de-python">8.3.5 El depurador de Python</h3>
+<p>Puede iniciar manualmente el depurador dentro de un programa.</p>
+<pre><code class="language-python">def some_function():
+    ...
+    breakpoint()      # Enter the debugger (Python 3.7+)
+    ...
+</code></pre>
+<p>Esto inicia el depurador en la llamada <code>breakpoint()</code>.</p>
+<p>En versiones anteriores de Python, hiciste esto. A veces verá esto mencionado en otras guías de depuración.</p>
+<pre><code class="language-python">import pdb
+...
+pdb.set_trace()       # Instead of `breakpoint()`...
+</code></pre>
+<h3 id="836-ejecutar-bajo-depurador">8.3.6 Ejecutar bajo depurador</h3>
+<p>También puede ejecutar un programa completo en el depurador.</p>
+<pre><code class="language-code">bash % python3 -m pdb someprogram.py
+</code></pre>
+<p>Automáticamente ingresará al depurador antes de la primera declaración. Permitiéndole establecer puntos de interrupción y cambiar la configuración.</p>
+<p>Comandos habituales del depurador:</p>
+<pre><code class="language-code">(Pdb) help            # ayuda
+(Pdb) w(here)         # imprima el rastreo
+(Pdb) d(own)          # hacia arriba
+(Pdb) u(p)            # hacia abajo
+(Pdb) b(reak) loc     # fije un breakpoint
+(Pdb) s(tep)          # ejecute una instruccion
+(Pdb) c(ontinue)      # continue la ejecucion
+(Pdb) l(ist)          # liste el codigo fuente
+(Pdb) a(rgs)          # imprima los argumentos de la funcion
+(Pdb) !statement      # ejectue la declaracion
+</code></pre>
+<p>La ubicación de los puntos de interrupción es una de las siguientes.</p>
+<pre><code class="language-code">(Pdb) b 45            # linea 45 en el archivo actual
+(Pdb) b file.py:45    # linea 34 en file.py
+(Pdb) b foo           # funcion foo() en el archivo actual
+(Pdb) b module.foo    # funcion foo() en el modulo
+</code></pre>
+<h3 id="837-ejercicios">8.3.7 Ejercicios</h3>
+<h4 id="ejercicio-84-errores-que-errores">Ejercicio 8.4: ¿Errores? ¿Qué errores?</h4>
+<p>Corre. ¡Envíalo!</p>
               
             </div>
           </div>
