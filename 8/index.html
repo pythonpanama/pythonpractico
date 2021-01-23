@@ -99,7 +99,7 @@
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#81-prueba">8.1 Prueba</a>
         <ul>
-    <li class="toctree-l3"><a class="reference internal" href="#811-probando-rocas-la-depuracion-apesta">8.1.1 Probando rocas, la depuración apesta</a>
+    <li class="toctree-l3"><a class="reference internal" href="#811-las-pruebas-son-buenas-la-depuracion-apesta">8.1.1 Las pruebas son buenas, la depuración apesta</a>
     </li>
     <li class="toctree-l3"><a class="reference internal" href="#812-afirmaciones">8.1.2 Afirmaciones</a>
     </li>
@@ -218,25 +218,24 @@
               
                 <h1 id="8-prueba-y-depuracion">8. Prueba y Depuración</h1>
 <p>Esta sección introduce unos temás básicas en relación a pruebas, reportería y depuración.</p>
-<p><em>Nota: estaremos publicando el contenido de este módulo próximamente a más tardar el 1 de febrero.</em></p>
 <h2 id="81-prueba">8.1 Prueba</h2>
-<h3 id="811-probando-rocas-la-depuracion-apesta">8.1.1 Probando rocas, la depuración apesta</h3>
+<h3 id="811-las-pruebas-son-buenas-la-depuracion-apesta">8.1.1 Las pruebas son buenas, la depuración apesta</h3>
 <p>La naturaleza dinámica de Python hace que las pruebas sean de vital importancia para la mayoría de las aplicaciones. No hay un compilador para encontrar sus errores. La única forma de encontrar errores es ejecutar el código y asegurarse de probar todas sus funciones.</p>
 <h3 id="812-afirmaciones">8.1.2 Afirmaciones</h3>
 <p>La assertdeclaración es una verificación interna del programa. Si una expresión no es verdadera, genera una AssertionErrorexcepción.</p>
 <p><code>assert</code> sintaxis de declaración.</p>
-<pre><code class="language-python">assert &lt;expression&gt; [, 'Diagnostic message']
+<pre><code class="language-python">assert &lt;expression&gt; [, 'Mensaje de diagnostico']
 </code></pre>
 <p>Por ejemplo.</p>
-<pre><code class="language-python">assert isinstance(10, int), 'Expected int'
+<pre><code class="language-python">assert isinstance(10, int), 'Esperaba int'
 </code></pre>
 <p>No debe usarse para verificar la entrada del usuario (es decir, datos ingresados ​​en un formulario web o algo así). Su propósito es más para controles internos e invariantes (condiciones que siempre deben ser verdaderas).</p>
 <h3 id="813-programacion-por-contrato">8.1.3 Programación por contrato</h3>
 <p>También conocido como Diseño por contrato, el uso liberal de afirmaciones es un enfoque para diseñar software. Prescribe que los diseñadores de software deben definir especificaciones de interfaz precisas para los componentes del software.</p>
 <p>Por ejemplo, puede poner aserciones en todas las entradas de una función.</p>
 <pre><code class="language-python">def add(x, y):
-    assert isinstance(x, int), 'Expected int'
-    assert isinstance(y, int), 'Expected int'
+    assert isinstance(x, int), 'Esperaba int'
+    assert isinstance(y, int), 'Esperaba int'
     return x + y
 </code></pre>
 <p>La verificación de las entradas detectará inmediatamente a las personas que llaman que no estén usando los argumentos adecuados.</p>
@@ -287,24 +286,31 @@ import unittest
 # Notice that it inherits from unittest.TestCase
 class TestAdd(unittest.TestCase):
     def test_simple(self):
-        # Test with simple integer arguments         r = simple.add(2, 2)
+        # Test with simple integer arguments
+        r = simple.add(2, 2)
         self.assertEqual(r, 5)
     def test_str(self):
-        # Test with strings         r = simple.add('hello', 'world')
+        # Test with strings
+        r = simple.add('hello', 'world')
         self.assertEqual(r, 'helloworld')
 </code></pre>
 <p><em>Importante: Cada método debe comenzar con test</em>.</p>
 <h3 id="816-utilizando-unittest">8.1.6 Utilizando unittest</h3>
 <p>Hay varias afirmaciones integradas que vienen con unittest. Cada uno de ellos afirma algo diferente.</p>
-<pre><code class="language-python"># Assert that expr is True self.assertTrue(expr)
+<pre><code class="language-python"># Afirme que expr es True
+self.assertTrue(expr)
 
-# Assert that x == y self.assertEqual(x,y)
+# Afirme que x == y
+self.assertEqual(x,y)
 
-# Assert that x != y self.assertNotEqual(x,y)
+# Afirme que x != y
+self.assertNotEqual(x,y)
 
-# Assert that x is near y self.assertAlmostEqual(x,y,places)
+# Afirme que x está cerca de y
+self.assertAlmostEqual(x,y,places)
 
-# Assert that callable(arg1,arg2,...) raises exc self.assertRaises(exc, callable, arg1, arg2, ...)
+# Afirme que callable(arg1,arg2,...) alza una excepcion
+self.assertRaises(exc, callable, arg1, arg2, ...)
 </code></pre>
 <p>Esta no es una lista exhaustiva. Hay otras afirmaciones en el módulo.</p>
 <h3 id="817-corriendo-unittest">8.1.7 Corriendo unittest</h3>
@@ -447,7 +453,7 @@ log.debug(message [, args])
 </code></pre>
 <p>Cada método representa un nivel de gravedad diferente.</p>
 <p>Todos ellos crean un mensaje de registro formateado. <code>args</code> se utiliza con el %operador para crear el mensaje.</p>
-<pre><code class="language-python">logmsg = message % args # Written to the log
+<pre><code class="language-python">logmsg = message % args # Escrito al log
 </code></pre>
 <h3 id="configuracion-de-registro">Configuración de registro</h3>
 <p>El comportamiento de registro se configura por separado.</p>
@@ -457,8 +463,8 @@ log.debug(message [, args])
 if __name__ == '__main__':
     import logging
     logging.basicConfig(
-        filename  = 'app.log',      # Log output file
-        level     = logging.INFO,   # Output level
+        filename  = 'app.log',      # archivo de salida
+        level     = logging.INFO,   # nivel de salida
     )
 </code></pre>
 <p>Por lo general, esta es una configuración única al inicio del programa. La configuración es independiente del código que realiza las llamadas de registro.</p>
@@ -642,7 +648,7 @@ AttributeError: 'int' object has no attribute 'append'
 <p>Sin embargo, no siempre es fácil de leer o comprender.</p>
 <p>SUGERENCIA PRO: Pegue todo el rastreo en Google.</p>
 <h3 id="833-usando-el-repl">8.3.3 Usando el REPL</h3>
-<p>Utilice la opción -ipara mantener activo Python al ejecutar un script.</p>
+<p>Utilice la opción <code>-i</code> para mantener activo Python al ejecutar un script.</p>
 <pre><code class="language-code">bash % python3 -i blah.py
 Traceback (most recent call last):
   File &quot;blah.py&quot;, line 13, in ?
@@ -660,7 +666,7 @@ AttributeError: 'int' object has no attribute 'append'
 <h3 id="834-depurar-con-impresion">8.3.4 Depurar con impresión</h3>
 <pre><code class="language-python">print() la depuración es bastante común.
 </code></pre>
-<p>Consejo: asegúrese de utilizar repr()</p>
+<p>Consejo: asegúrese de utilizar <code>repr()</code></p>
 <pre><code class="language-python">def spam(x):
     print('DEBUG:', repr(x))
     ...
@@ -668,10 +674,10 @@ AttributeError: 'int' object has no attribute 'append'
 <p><code>repr()</code> le muestra una representación precisa de un valor. No es el resultado de impresión agradable.</p>
 <pre><code class="language-python">&gt;&gt;&gt; from decimal import Decimal
 &gt;&gt;&gt; x = Decimal('3.4')
-# NO `repr`
+# SIN `repr`
 &gt;&gt;&gt; print(x)
 3.4
-# WITH `repr`
+# CON `repr`
 &gt;&gt;&gt; print(repr(x))
 Decimal('3.4')
 &gt;&gt;&gt;
@@ -680,14 +686,14 @@ Decimal('3.4')
 <p>Puede iniciar manualmente el depurador dentro de un programa.</p>
 <pre><code class="language-python">def some_function():
     ...
-    breakpoint()      # Enter the debugger (Python 3.7+)
+    breakpoint()  # Ingrese al depurador (Python 3.7+)
     ...
 </code></pre>
 <p>Esto inicia el depurador en la llamada <code>breakpoint()</code>.</p>
 <p>En versiones anteriores de Python, hiciste esto. A veces verá esto mencionado en otras guías de depuración.</p>
 <pre><code class="language-python">import pdb
 ...
-pdb.set_trace()       # Instead of `breakpoint()`...
+pdb.set_trace()  # En vez de `breakpoint()`...
 </code></pre>
 <h3 id="836-ejecutar-bajo-depurador">8.3.6 Ejecutar bajo depurador</h3>
 <p>También puede ejecutar un programa completo en el depurador.</p>
