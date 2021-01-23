@@ -102,10 +102,82 @@
                     <li class="toctree-l1 current"><a class="reference internal current" href="./">9 Paquetes</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#91-paquetes">9.1 Paquetes</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#911-modulos">9.1.1 Módulos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#912-paquetes-vs-modulos">9.1.2 Paquetes vs Módulos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#913-usando-un-paquete">9.1.3 Usando un paquete</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#914-problema-importaciones">9.1.4 Problema: Importaciones</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#915-importaciones-relativas">9.1.5 Importaciones relativas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#916-problema-guiones-principales">9.1.6 Problema: guiones principales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#917-archivos-__init__py">9.1.7 archivos __init__.py</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#918-otra-solucion-para-scripts">9.1.8 Otra solución para scripts</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#919-estructura-de-la-aplicacion">9.1.9 Estructura de la aplicación</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#9110-ejercicios">9.1.10 Ejercicios</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#ejercicio-91-hacer-un-paquete-simple">Ejercicio 9.1: Hacer un paquete simple</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-92-crear-un-directorio-de-aplicaciones">Ejercicio 9.2: Crear un directorio de aplicaciones</a>
+    </li>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-93-scripts-de-nivel-superior">Ejercicio 9.3: Scripts de nivel superior</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#92-modulos-de-terceros">9.2 Módulos de terceros</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#921-la-ruta-de-busqueda-del-modulo">9.2.1 La ruta de búsqueda del módulo</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#93-dar-su-codigo-a-otros">9.3 Dar su código a otros</a>
+    <li class="toctree-l3"><a class="reference internal" href="#922-modulos-de-biblioteca-estandar">9.2.2 Módulos de biblioteca estándar</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#923-modulos-de-terceros">9.2.3 Módulos de terceros</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#924-instalacion-de-modulos">9.2.4 Instalación de módulos</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#925-problemas">9.2.5 Problemas</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#926-ambientes-virtuales">9.2.6 Ambientes virtuales</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#927-manejo-de-dependencias-de-terceros-en-su-aplicacion">9.2.7 Manejo de dependencias de terceros en su aplicación</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#928-ejercicios">9.2.8 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-94-creacion-de-un-entorno-virtual">Ejercicio 9.4: Creación de un entorno virtual</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#93-distribucion">9.3 Distribución</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#931-creando-un-archivo-setuppy">9.3.1 Creando un archivo setup.py</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#932-creando-manifestin">9.3.2 Creando MANIFEST.in</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#932-crear-una-distribucion-de-origen">9.3.2 Crear una distribución de origen</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#933-instalando-su-codigo">9.3.3 Instalando su código</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#comentario">Comentario</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#934-ejercicios">9.3.4 Ejercicios</a>
+        <ul>
+    <li class="toctree-l4"><a class="reference internal" href="#ejercicio-95-hacer-un-paquete">Ejercicio 9.5: hacer un paquete</a>
+    </li>
+        </ul>
+    </li>
+        </ul>
     </li>
     </ul>
                     </li>
@@ -148,10 +220,383 @@
               
                 <h1 id="paquetes">Paquetes</h1>
 <p>Concluiremos el curso con algunos detalles para la organización de código en paquetes. Además, discutiremos sobre la instalación de paquetes de terceros y sobre la preparación necesaria para entregarle nuestro código a otros. El tema de empaquetamiento de código essta en constante evolución y es una parte compleja en el desarrollo de Python. Por tanto, esta sección esta enfocada en compartir algunos principios de organización general de código.</p>
-<p><em>Nota: estaremos publicando el contenido de este módulo a más tardar el 1 de febrero.</em></p>
 <h2 id="91-paquetes">9.1 Paquetes</h2>
+<p>Si está escribiendo un programa más grande, realmente no desea organizarlo como una gran colección de archivos independientes en el nivel superior. Esta sección presenta el concepto de paquete.</p>
+<h3 id="911-modulos">9.1.1 Módulos</h3>
+<p>Cualquier archivo fuente de Python es un módulo.</p>
+<pre><code class="language-python"># foo.py
+def grok(a):
+    ...
+def spam(b):
+    ...
+</code></pre>
+<p>Una declaración import carga y ejecuta un módulo.</p>
+<pre><code class="language-python"># program.py
+import foo
+
+a = foo.grok(2)
+b = foo.spam('Hello')
+...
+</code></pre>
+<h3 id="912-paquetes-vs-modulos">9.1.2 Paquetes vs Módulos</h3>
+<p>Para colecciones más grandes de código, es común organizar los módulos en un paquete.</p>
+<pre><code class="language-code"># From this
+pcost.py
+report.py
+fileparse.py
+</code></pre>
+<pre><code class="language-code"># To this
+porty/
+    __init__.py
+    pcost.py
+    report.py
+    fileparse.py
+</code></pre>
+<p>Elige un nombre y crea un directorio de nivel superior. <code>porty</code> en el ejemplo anterior (claramente elegir este nombre es el primer paso más importante).</p>
+<p>Agregue un archivo <code>__init__.py</code> al directorio. Puede estar vacío.</p>
+<p>Coloque sus archivos de origen en el directorio.</p>
+<h3 id="913-usando-un-paquete">9.1.3 Usando un paquete</h3>
+<p>Un paquete sirve como espacio de nombres para las importaciones.</p>
+<p>Esto significa que ahora hay importaciones multinivel.</p>
+<pre><code class="language-python">import porty.report
+port = porty.report.read_portfolio('port.csv')
+</code></pre>
+<p>Hay otras variaciones de declaraciones de importación.</p>
+<pre><code class="language-python">from porty import report
+port = report.read_portfolio('portfolio.csv')
+
+from porty.report import read_portfolio
+port = read_portfolio('portfolio.csv')
+</code></pre>
+<p>Dos problemas</p>
+<p>Hay dos problemas principales con este enfoque.</p>
+<ul>
+<li>importa entre archivos en el mismo paquete.</li>
+<li>Scripts principales colocados dentro del paquete.</li>
+</ul>
+<p>Entonces, básicamente todo se rompe. Pero, aparte de eso, funciona.</p>
+<h3 id="914-problema-importaciones">9.1.4 Problema: Importaciones</h3>
+<p>Las importaciones entre archivos en el mismo paquete ahora deben incluir el nombre del paquete en la importación . Recuerda la estructura.</p>
+<pre><code>porty/
+    __init__.py
+    pcost.py
+    report.py
+    fileparse.py
+</code></pre>
+<p>Ejemplo de importación modificado.</p>
+<pre><code class="language-python"># report.py
+from porty import fileparse
+
+def read_portfolio(filename):
+    return fileparse.parse_csv(...)
+</code></pre>
+<p>Todas las importaciones son absolutas, no relativas.</p>
+<pre><code># report.py
+import fileparse    # Se ROMPE. fileparse not found
+...
+</code></pre>
+<h3 id="915-importaciones-relativas">9.1.5 Importaciones relativas</h3>
+<p>En lugar de usar directamente el nombre del paquete, puede usar <code>.</code> para hacer referencia al paquete actual.</p>
+<pre><code class="language-python"># report.py
+from . import fileparse
+
+def read_portfolio(filename):
+    return fileparse.parse_csv(...)
+</code></pre>
+<p>Sintaxis:</p>
+<pre><code class="language-python">from . import modname
+</code></pre>
+<p>Esto facilita el cambio de nombre del paquete.</p>
+<h3 id="916-problema-guiones-principales">9.1.6 Problema: guiones principales</h3>
+<p>La ejecución de un submódulo de paquete como un script principal se rompe.</p>
+<pre><code class="language-code">bash $ python porty/pcost.py # BREAKS
+...
+</code></pre>
+<p>Motivo: está ejecutando Python en un solo archivo y Python no ve el resto de la estructura del paquete correctamente (<code>sys.path</code> es incorrecto).</p>
+<p>Todas las importaciones se rompen. Para solucionar este problema, debe ejecutar su programa de una manera diferente, usando la opción <code>-m</code>.</p>
+<pre><code class="language-code">bash $ python -m porty.pcost # WORKS
+...
+</code></pre>
+<h3 id="917-archivos-__init__py">9.1.7 archivos <code>__init__.py</code></h3>
+<p>El propósito principal de estos archivos es unir módulos.</p>
+<p>Ejemplo: consolidar funciones</p>
+<pre><code class="language-python"># porty/__init__.py
+from .pcost import portfolio_cost
+from .report import portfolio_report
+</code></pre>
+<p>Esto hace que los nombres aparezcan en el nivel superior al importar.</p>
+<pre><code class="language-python">from porty import portfolio_cost
+portfolio_cost('portfolio.csv')
+</code></pre>
+<p>En lugar de utilizar las importaciones multinivel.</p>
+<pre><code class="language-python">from porty import pcost
+pcost.portfolio_cost('portfolio.csv')
+</code></pre>
+<h3 id="918-otra-solucion-para-scripts">9.1.8 Otra solución para scripts</h3>
+<p>Como se señaló, ahora debe usar <code>-m paqute.modulo</code> para ejecutar scripts dentro de su paquete.</p>
+<pre><code>bash % python3 -m porty.pcost portfolio.csv
+</code></pre>
+<p>Hay otra alternativa: escriba un nuevo script de nivel superior.</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+# pcost.py
+import porty.pcost
+import sys
+porty.pcost.main(sys.argv)
+</code></pre>
+<p>Este script vive fuera del paquete. Por ejemplo, mirando la estructura del directorio:</p>
+<pre><code>pcost.py       # guion de nviel superior
+porty/         # directorio del paquete
+    __init__.py
+    pcost.py
+    ...
+</code></pre>
+<h3 id="919-estructura-de-la-aplicacion">9.1.9 Estructura de la aplicación</h3>
+<p>La organización del código y la estructura de archivos es clave para el mantenimiento de una aplicación.</p>
+<p>No existe un enfoque de "talla única" para Python. Sin embargo, una estructura que funciona para muchos problemas es algo como esto.</p>
+<pre><code>porty-app/
+  README.txt
+  script.py         # SCRIPT
+  porty/
+    # codigo de la biblioteca / libreria
+    __init__.py
+    pcost.py
+    report.py
+    fileparse.py
+</code></pre>
+<p>El nivel superior <code>porty-app</code> es un contenedor para todo lo demás: documentación, scripts de nivel superior, ejemplos, etc.</p>
+<p>Nuevamente, los scripts de nivel superior (si los hay) deben existir fuera del paquete de código. Un nivel más.</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+# porty-app/script.py
+import sys
+import porty
+
+porty.report.main(sys.argv)
+</code></pre>
+<h3 id="9110-ejercicios">9.1.10 Ejercicios</h3>
+<p>En este punto, tiene un directorio con varios programas:</p>
+<pre><code>pcost.py          # computes portfolio cost
+report.py         # Makes a report
+ticker.py         # Produce a real-time stock ticker
+</code></pre>
+<p>Hay una variedad de módulos de soporte con otras funcionalidades:</p>
+<pre><code>stock.py          # Stock class
+portfolio.py      # Portfolio class
+fileparse.py      # CSV parsing
+tableformat.py    # Formatted tables
+follow.py         # Follow a log file
+typedproperty.py  # Typed class properties
+</code></pre>
+<p>En este ejercicio, vamos a limpiar el código y ponerlo en un paquete común.</p>
+<h3 id="ejercicio-91-hacer-un-paquete-simple">Ejercicio 9.1: Hacer un paquete simple</h3>
+<p>Cree un directorio llamado porty/y coloque todos los archivos de Python anteriores en él. Además, cree un <strong>init</strong>.pyarchivo vacío y colóquelo en el directorio. Debería tener un directorio de archivos como este:</p>
+<pre><code class="language-shell">porty/
+    __init__.py
+    fileparse.py
+    follow.py
+    pcost.py
+    portfolio.py
+    report.py
+    stock.py
+    tableformat.py
+    ticker.py
+    typedproperty.py
+</code></pre>
+<p>Elimina el archivo <code>__pycache__</code> que está en tu directorio. Este contiene módulos de Python precompilados de antes. Queremos empezar de nuevo.</p>
+<p>Intente importar algunos de los módulos del paquete:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import porty.report
+&gt;&gt;&gt; import porty.pcost
+&gt;&gt;&gt; import porty.ticker
+</code></pre>
+<p>Si estas importaciones fallan, vaya al archivo apropiado y corrija las importaciones del módulo para incluir una importación relativa al paquete. Por ejemplo, una declaración como <code>import fileparse</code> podría cambiar a lo siguiente:</p>
+<pre><code class="language-python"># report.py
+from . import fileparse
+...
+</code></pre>
+<p>Si tiene una declaración como from fileparse import parse_csv, cambie el código a lo siguiente:</p>
+<pre><code class="language-python"># report.py
+from .fileparse import parse_csv
+...
+</code></pre>
+<h4 id="ejercicio-92-crear-un-directorio-de-aplicaciones">Ejercicio 9.2: Crear un directorio de aplicaciones</h4>
+<p>Poner todo su código en un "paquete" no suele ser suficiente para una aplicación. A veces hay archivos de apoyo, documentación, scripts y otras cosas. Estos archivos deben existir FUERA del directorio <code>porty/</code> que creó anteriormente.</p>
+<p>Cree un nuevo directorio llamado porty-app. Mueva el portydirectorio que creó en el ejercicio 9.1 a ese directorio. Copie los archivos de prueba <code>Data/portfolio.csv</code> y <code>Data/prices.csv</code> en este directorio. Además, cree un archivo <code>README.txt</code> con información sobre usted. Su código ahora debería estar organizado de la siguiente manera:</p>
+<pre><code class="language-shell">porty-app/
+    portfolio.csv
+    prices.csv
+    README.txt
+    porty/
+        __init__.py
+        fileparse.py
+        follow.py
+        pcost.py
+        portfolio.py
+        report.py
+        stock.py
+        tableformat.py
+        ticker.py
+        typedproperty.py
+</code></pre>
+<p>Para ejecutar su código, debe asegurarse de estar trabajando en el directorio <code>porty-app/</code> de nivel superior . Por ejemplo, desde la terminal:</p>
+<pre><code>shell % cd porty-app
+shell % python3
+&gt;&gt;&gt; import porty.report
+&gt;&gt;&gt;
+</code></pre>
+<p>Intente ejecutar algunos de sus scripts anteriores como programa principal:</p>
+<pre><code class="language-shell">shell % cd porty-app
+shell % python3 -m porty.report portfolio.csv prices.csv txt
+      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+
+shell %
+</code></pre>
+<h4 id="ejercicio-93-scripts-de-nivel-superior">Ejercicio 9.3: Scripts de nivel superior</h4>
+<p>Usar el comando <code>python -m</code> suele ser un poco extraño. Es posible que desee escribir un script de nivel superior que simplemente se ocupe de las rarezas de los paquetes. Cree un script <code>print-report.py</code> que produzca el informe anterior:</p>
+<pre><code class="language-python">#!/usr/bin/env python3
+# print-report.py
+import sys
+from porty.report import main
+main(sys.argv)
+</code></pre>
+<p>Coloque este script en el directorio <code>porty-app/</code> de nivel superior. Asegúrese de poder ejecutarlo en esa ubicación:</p>
+<pre><code class="language-shell">shell % cd porty-app
+shell % python3 print-report.py portfolio.csv prices.csv txt
+      Name     Shares      Price     Change
+---------- ---------- ---------- ----------
+        AA        100       9.22     -22.98
+       IBM         50     106.28      15.18
+       CAT        150      35.46     -47.98
+      MSFT        200      20.89     -30.34
+        GE         95      13.48     -26.89
+      MSFT         50      20.89     -44.21
+       IBM        100     106.28      35.84
+
+shell %
+</code></pre>
+<p>Su código final ahora debería estar estructurado de esta manera:</p>
+<pre><code class="language-shell">porty-app/
+    portfolio.csv
+    prices.csv
+    print-report.py
+    README.txt
+    porty/
+        __init__.py
+        fileparse.py
+        follow.py
+        pcost.py
+        portfolio.py
+        report.py
+        stock.py
+        tableformat.py
+        ticker.py
+        typedproperty.py
+</code></pre>
 <h2 id="92-modulos-de-terceros">9.2 Módulos de terceros</h2>
-<h2 id="93-dar-su-codigo-a-otros">9.3 Dar su código a otros</h2>
+<p>Python tiene una gran biblioteca de módulos integrados (baterías incluidas).</p>
+<p>Incluso hay más módulos de terceros. Compruébelos en el índice de paquetes de Python o PyPi. O simplemente haga una búsqueda en Google de un tema específico.</p>
+<p>Cómo manejar las dependencias de terceros es un tema en constante evolución con Python. Esta sección simplemente cubre los conceptos básicos para ayudarlo a comprender cómo funciona.</p>
+<h3 id="921-la-ruta-de-busqueda-del-modulo">9.2.1 La ruta de búsqueda del módulo</h3>
+<p><code>sys.path</code> es un directorio que contiene la lista de todos los directorios controlados por la declaración <code>import</code>. Míralo:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import sys
+&gt;&gt;&gt; sys.path
+... look at the result ...
+&gt;&gt;&gt;
+</code></pre>
+<p>Si importa algo y no está ubicado en uno de esos directorios, obtendrá una excepción <code>ImportError</code>.</p>
+<h3 id="922-modulos-de-biblioteca-estandar">9.2.2 Módulos de biblioteca estándar</h3>
+<p>Los módulos de la biblioteca estándar de Python generalmente provienen de una ubicación como <code>/usr/local/lib/python3.6</code>. Puede averiguarlo con certeza haciendo una prueba breve:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import re
+&gt;&gt;&gt; re
+&lt;module 're' from '/usr/local/lib/python3.6/re.py'&gt;
+&gt;&gt;&gt;
+</code></pre>
+<p>Simplemente mirar un módulo en el REPL es un buen consejo de depuración que debe conocer. Le mostrará la ubicación del archivo.</p>
+<h3 id="923-modulos-de-terceros">9.2.3 Módulos de terceros</h3>
+<p>Los módulos de terceros generalmente se encuentran en un directorio dedicado <code>site-packages</code>. Lo verá si realiza los mismos pasos que el anterior:</p>
+<pre><code class="language-python">&gt;&gt;&gt; import numpy
+&gt;&gt;&gt; numpy
+&lt;module 'numpy' from '/usr/local/lib/python3.6/site-packages/numpy/__init__.py'&gt;
+&gt;&gt;&gt;
+</code></pre>
+<p>Nuevamente, mirar un módulo es un buen consejo de depuración si está tratando de averiguar por qué algo relacionado con <code>import</code> no está funcionando como se esperaba.</p>
+<h3 id="924-instalacion-de-modulos">9.2.4 Instalación de módulos</h3>
+<p>La técnica más común para instalar un módulo de terceros es usar <code>pip</code>. Por ejemplo:</p>
+<pre><code class="language-python">bash % python3 -m pip install packagename
+</code></pre>
+<p>Este comando descargará el paquete y lo instalará en el directorio <code>site-packages</code>.</p>
+<h3 id="925-problemas">9.2.5 Problemas</h3>
+<ul>
+<li>Es posible que esté utilizando una instalación de Python que no controla directamente.<ul>
+<li>Una instalación aprobada por la empresa</li>
+<li>Estás usando la versión de Python que viene con el sistema operativo.</li>
+</ul>
+</li>
+<li>Es posible que no tenga permiso para instalar paquetes globales en la computadora.</li>
+<li>Puede haber otras dependencias.</li>
+</ul>
+<h3 id="926-ambientes-virtuales">9.2.6 Ambientes virtuales</h3>
+<p>Una solución común para los problemas de instalación de paquetes es crear un "entorno virtual" para usted. Naturalmente, no hay "una manera" de hacer esto; de hecho, existen varias herramientas y técnicas en competencia. Sin embargo, si está utilizando una instalación estándar de Python, puede intentar escribir esto:</p>
+<pre><code>bash % python -m venv mypython
+bash %
+</code></pre>
+<p>Después de unos momentos de espera, tendrá un nuevo directorio <code>mypython</code> que es su propia instalación de Python. Dentro de ese directorio encontrará un directorio <code>bin/</code> (Unix) o un directorio <code>Scripts/</code> (Windows). Si ejecuta el script <code>activate</code> que se encuentra allí, “activará” esta versión de Python, convirtiéndola en el comando <code>python</code>  predeterminado para el shell. Por ejemplo:</p>
+<pre><code class="language-code">bash % source mypython/bin/activate
+(mypython) bash %
+</code></pre>
+<p>Desde aquí, ahora puede comenzar a instalar paquetes de Python usted mismo. Por ejemplo:</p>
+<pre><code class="language-code">(mypython) bash % python -m pip install pandas
+...
+</code></pre>
+<p>Con el fin de experimentar y probar diferentes paquetes, un entorno virtual normalmente funcionará bien. Si, por otro lado, está creando una aplicación y tiene dependencias de paquetes específicas, ese es un problema ligeramente diferente.</p>
+<h3 id="927-manejo-de-dependencias-de-terceros-en-su-aplicacion">9.2.7 Manejo de dependencias de terceros en su aplicación</h3>
+<p>Si ha escrito una aplicación y tiene dependencias específicas de terceros, un desafío se refiere a la creación y preservación del entorno que incluye su código y las dependencias. Lamentablemente, esta ha sido un área de gran confusión y cambios frecuentes durante la vida de Python. Continúa evolucionando incluso ahora.</p>
+<p>En lugar de proporcionar información que seguramente estará desactualizada pronto, le recomiendo la Guía del usuario de Python Packaging.</p>
+<h3 id="928-ejercicios">9.2.8 Ejercicios</h3>
+<h4 id="ejercicio-94-creacion-de-un-entorno-virtual">Ejercicio 9.4: Creación de un entorno virtual</h4>
+<p>Vea si puede recrear los pasos para crear un entorno virtual e instalar pandas en él como se muestra arriba.</p>
+<h2 id="93-distribucion">9.3 Distribución</h2>
+<p>En algún momento, es posible que desee dar su código a otra persona, posiblemente solo a un compañero de trabajo. Esta sección brinda la técnica más básica para hacerlo. Para obtener información más detallada, deberá consultar la Guía del usuario de empaquetado de Python.</p>
+<h3 id="931-creando-un-archivo-setuppy">9.3.1 Creando un archivo setup.py</h3>
+<p>Agregue un archivo <code>setup.py</code> al nivel superior del directorio de su proyecto.</p>
+<pre><code class="language-python"># setup.py import setuptools
+
+setuptools.setup(
+    name=&quot;porty&quot;,
+    version=&quot;0.0.1&quot;,
+    author=&quot;Your Name&quot;,
+    author_email=&quot;you@example.com&quot;,
+    description=&quot;Practical Python Code&quot;,
+    packages=setuptools.find_packages(),
+)
+</code></pre>
+<h3 id="932-creando-manifestin">9.3.2 Creando MANIFEST.in</h3>
+<p>Si hay archivos adicionales asociados con su proyecto, especifíquelos con un MANIFEST.inarchivo. Por ejemplo:</p>
+<pre><code># MANIFEST.in
+include *.csv
+</code></pre>
+<p>Coloque el archivo <code>MANIFEST.in</code> en el mismo directorio que <code>setup.py</code>.</p>
+<h3 id="932-crear-una-distribucion-de-origen">9.3.2 Crear una distribución de origen</h3>
+<p>Para crear una distribución de su código, use el archivo <code>setup.py</code>. Por ejemplo:</p>
+<pre><code>bash % python setup.py sdist
+</code></pre>
+<p>Esto creará un archivo <code>.tar.gzo.zip</code> en el directorio <code>dist/</code>. Ese archivo es algo que ahora puede regalar a otros.</p>
+<h3 id="933-instalando-su-codigo">9.3.3 Instalando su código</h3>
+<p>Otros pueden instalar su código Python usando <code>pi</code>p de la misma manera que lo hacen con otros paquetes. Simplemente deben proporcionar el archivo creado en el paso anterior. Por ejemplo:</p>
+<pre><code class="language-code">bash % python -m pip install porty-0.0.1.tar.gz
+</code></pre>
+<h4 id="comentario">Comentario</h4>
+<p>Los pasos anteriores describen los conceptos básicos más mínimos para crear un paquete de código Python que puede darle a otra persona. En realidad, puede ser mucho más complicado dependiendo de las dependencias de terceros, si su aplicación incluye o no código externo (es decir, C / C ++), etc. Cubrir eso está fuera del alcance de este curso. Solo hemos dado un pequeño primer paso.</p>
+<h3 id="934-ejercicios">9.3.4 Ejercicios</h3>
+<h4 id="ejercicio-95-hacer-un-paquete">Ejercicio 9.5: hacer un paquete</h4>
+<p>Tome el código <code>porty-app/</code> que creó para el ejercicio 9.3 y vea si puede recrear los pasos descritos aquí. Específicamente, agregue un archivo <code>setup.py</code> y un archivo <code>MANIFEST.in</code> al directorio de nivel superior. Cree un archivo de distribución de origen ejecutando <code>python setup.py sdist</code>.</p>
+<p>Como paso final, vea si puede instalar su paquete en un entorno virtual de Python.</p>
               
             </div>
           </div>
